@@ -282,20 +282,14 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   lacinka: (
-    <Mark>
-      <path
-        d="M10 25V8h4.2c4.6 0 7.3 2.6 7.3 6.8S18.8 21.5 14.2 21.5H10"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M10 21.5 21.5 25"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/lacinka.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
   "pavuk-club": (
     <Mark>
@@ -336,9 +330,15 @@ function FallbackMark({ name }: { name: string }) {
 }
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
+  const isImageLogo = slug === "lacinka";
+
   return (
     <span
-      className={`inline-flex shrink-0 items-center justify-center rounded-xl border border-border bg-[color-mix(in_oklab,#edecec_4%,transparent)] text-foreground ${className}`}
+      className={`inline-flex shrink-0 items-center justify-center overflow-hidden rounded-xl ${
+        isImageLogo
+          ? "border-0 bg-transparent p-0"
+          : "border border-border bg-[color-mix(in_oklab,#edecec_4%,transparent)] text-foreground"
+      } ${className}`}
       aria-hidden
     >
       {icons[slug] ?? <FallbackMark name={name} />}
