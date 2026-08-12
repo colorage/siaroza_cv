@@ -9,6 +9,7 @@ export type Project = {
   stage: ProjectStage;
   status: ProjectStatus;
   url?: string;
+  logo?: string;
   description: Record<Locale, string>;
 };
 
@@ -189,6 +190,7 @@ export const projects: Project[] = [
     stage: "release",
     status: "active",
     url: "https://www.raycast.com/colorage/lacinka",
+    logo: "/projects/lacinka.png",
     description: {
       en: "Raycast extension that converts selected text from Belarusian Cyrillic into Latin (Łacinka).",
       by: "Пашырэнне для Raycast, якое канвертуе вылучаны тэкст з беларускай кірыліцы ў лацінку.",

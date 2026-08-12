@@ -33,6 +33,16 @@ export default async function ProjectPage({ params }: Props) {
 
       <div className="mt-10 animate-fade-up">
         <div className="flex flex-wrap items-center gap-3">
+          {project.logo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={project.logo}
+              alt=""
+              width={56}
+              height={56}
+              className="size-14 shrink-0 rounded-[14px]"
+            />
+          ) : null}
           <h1 className="text-[clamp(2rem,5vw,3rem)] tracking-[-0.03em] text-foreground">
             {project.name}
           </h1>
