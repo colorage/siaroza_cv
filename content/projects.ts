@@ -188,9 +188,10 @@ export const projects: Project[] = [
     name: "lacinka",
     stage: "release",
     status: "active",
+    url: "https://www.raycast.com/colorage/lacinka",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Raycast extension that converts selected text from Belarusian Cyrillic into Latin (Łacinka).",
+      by: "Пашырэнне для Raycast, якое канвертуе вылучаны тэкст з беларускай кірыліцы ў лацінку.",
     },
   },
   {
