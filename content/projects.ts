@@ -137,12 +137,13 @@ export const projects: Project[] = [
   },
   {
     slug: "losque",
-    name: "losque",
+    name: "LOSQUE",
     stage: "release",
     status: "finished",
+    url: "https://www.youtube.com/channel/UCF5GXo8KGXLoTWDSRH1uy6w",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Podcast about Mahilioǔ urban development — city news and conversations with love.",
+      by: "Подкаст пра развіццё Магілёва — гарадскія навіны і размовы з любоўю.",
     },
   },
   {
