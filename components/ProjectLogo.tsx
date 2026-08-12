@@ -93,17 +93,14 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   "kropki-mahiliou": (
-    <Mark>
-      <circle cx="9" cy="9" r="2.2" fill="currentColor" />
-      <circle cx="16" cy="9" r="2.2" fill="currentColor" />
-      <circle cx="23" cy="9" r="2.2" fill="currentColor" />
-      <circle cx="9" cy="16" r="2.2" fill="currentColor" />
-      <circle cx="16" cy="16" r="2.2" fill="currentColor" />
-      <circle cx="23" cy="16" r="2.2" fill="currentColor" />
-      <circle cx="9" cy="23" r="2.2" fill="currentColor" />
-      <circle cx="16" cy="23" r="2.2" fill="currentColor" />
-      <circle cx="23" cy="23" r="2.2" fill="currentColor" />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/kropki-mahiliou.svg"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
   "radar-rockets": (
     <Mark>
@@ -329,7 +326,7 @@ function FallbackMark({ name }: { name: string }) {
   );
 }
 
-const imageLogos = new Set(["lacinka"]);
+const imageLogos = new Set(["lacinka", "kropki-mahiliou"]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
   const isImageLogo = imageLogos.has(slug);

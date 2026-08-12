@@ -68,9 +68,10 @@ export const projects: Project[] = [
     name: "кропкі / mahiliou",
     stage: "release",
     status: "active",
+    url: "https://mahiliou.space/",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Interactive map of historical buildings in Mahilioǔ — 180 landmarks with status filters, photos, and stories.",
+      by: "Інтэрактыўная карта гістарычных будынкаў Магілёва — 180 аб'ектаў з фільтрамі статусу, фота і гісторыямі.",
     },
   },
   {
