@@ -56,6 +56,17 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "pah-bot",
+    name: "пах бот",
+    stage: "release",
+    status: "finished",
+    url: "https://t.me/pah_pavetra_bot",
+    description: {
+      en: "Telegram bot for reporting unusual smells across Belarus — crowd-sourced odor map paired with pavetra air-quality data.",
+      by: "Telegram-бот для паведамленняў пра нязвыклыя пахі па Беларусі — народная мапа пахаў у звязцы з данымі pavetra.",
+    },
+  },
+  {
     slug: "dc",
     name: "dc",
     stage: "nda",
