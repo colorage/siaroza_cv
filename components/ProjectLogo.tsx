@@ -1,0 +1,347 @@
+import type { ReactNode } from "react";
+
+type Props = {
+  slug: string;
+  name: string;
+  className?: string;
+};
+
+const markClass = "h-full w-full";
+
+function Mark({ children }: { children: ReactNode }) {
+  return (
+    <svg
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={markClass}
+      aria-hidden
+    >
+      {children}
+    </svg>
+  );
+}
+
+const icons: Record<string, ReactNode> = {
+  "yadoma-bel": (
+    <Mark>
+      <path
+        d="M6 14.5 16 6l10 8.5V26a1 1 0 0 1-1 1h-6v-7h-6v7H7a1 1 0 0 1-1-1V14.5Z"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinejoin="round"
+      />
+    </Mark>
+  ),
+  yavolonter: (
+    <Mark>
+      <path
+        d="M16 27s-9-5.6-9-12.2A5.4 5.4 0 0 1 16 10a5.4 5.4 0 0 1 9 4.8C25 21.4 16 27 16 27Z"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinejoin="round"
+      />
+    </Mark>
+  ),
+  bloodlabs: (
+    <Mark>
+      <path
+        d="M16 5c3.5 5.2 7 9.4 7 13.2A7 7 0 1 1 9 18.2C9 14.4 12.5 10.2 16 5Z"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinejoin="round"
+      />
+      <circle cx="16" cy="19" r="2" fill="currentColor" />
+    </Mark>
+  ),
+  pavetra: (
+    <Mark>
+      <path
+        d="M5 11h14a3.5 3.5 0 1 0-1.2-6.8"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+      <path
+        d="M5 17h18a3 3 0 1 0-.9-5.8"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+      <path
+        d="M5 23h12a2.5 2.5 0 1 1-.8 4.9"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+    </Mark>
+  ),
+  dc: (
+    <Mark>
+      <path
+        d="M8 8h5.2c3.8 0 6.3 2.4 6.3 8s-2.5 8-6.3 8H8V8Z"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M21 10.5c1.3 1.5 2 3.6 2 5.5s-.7 4-2 5.5"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+    </Mark>
+  ),
+  "kropki-mahiliou": (
+    <Mark>
+      <circle cx="9" cy="9" r="2.2" fill="currentColor" />
+      <circle cx="16" cy="9" r="2.2" fill="currentColor" />
+      <circle cx="23" cy="9" r="2.2" fill="currentColor" />
+      <circle cx="9" cy="16" r="2.2" fill="currentColor" />
+      <circle cx="16" cy="16" r="2.2" fill="currentColor" />
+      <circle cx="23" cy="16" r="2.2" fill="currentColor" />
+      <circle cx="9" cy="23" r="2.2" fill="currentColor" />
+      <circle cx="16" cy="23" r="2.2" fill="currentColor" />
+      <circle cx="23" cy="23" r="2.2" fill="currentColor" />
+    </Mark>
+  ),
+  "radar-rockets": (
+    <Mark>
+      <circle cx="16" cy="16" r="9" stroke="currentColor" strokeWidth="1.75" />
+      <circle cx="16" cy="16" r="4.5" stroke="currentColor" strokeWidth="1.5" />
+      <path
+        d="M16 7v4M16 21v4M7 16h4M21 16h4"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <circle cx="16" cy="16" r="1.5" fill="currentColor" />
+    </Mark>
+  ),
+  "hejka-app": (
+    <Mark>
+      <path
+        d="M7 18c2.2-4.5 5-6.8 9-6.8S22.8 13.5 25 18"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+      <path
+        d="M10 21.5c1.5-2.8 3.3-4.2 6-4.2s4.5 1.4 6 4.2"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+      <circle cx="16" cy="11" r="2" fill="currentColor" />
+    </Mark>
+  ),
+  halasy: (
+    <Mark>
+      <path
+        d="M8 12v8M12.5 9v14M17 11v10M21.5 13.5v5"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </Mark>
+  ),
+  impact: (
+    <Mark>
+      <circle cx="16" cy="16" r="3" fill="currentColor" />
+      <path
+        d="M16 5v4M16 23v4M5 16h4M23 16h4M8.2 8.2l2.8 2.8M21 21l2.8 2.8M23.8 8.2 21 11M11 21l-2.8 2.8"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+    </Mark>
+  ),
+  "polny-trash": (
+    <Mark>
+      <path
+        d="M8 10h16l-1.5 15H9.5L8 10Z"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6 10h20M12 10V7.5a1.5 1.5 0 0 1 1.5-1.5h5A1.5 1.5 0 0 1 20 7.5V10"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Mark>
+  ),
+  cobike: (
+    <Mark>
+      <circle cx="9" cy="21" r="4" stroke="currentColor" strokeWidth="1.75" />
+      <circle cx="23" cy="21" r="4" stroke="currentColor" strokeWidth="1.75" />
+      <path
+        d="M13 21h4.5l3-8H14l-2 5M17.5 13l-2.5-5H12"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Mark>
+  ),
+  losque: (
+    <Mark>
+      <path
+        d="M7 10h12a3 3 0 0 1 0 6H11"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+      <path
+        d="M7 16h10a3 3 0 0 1 0 6H9"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+      <circle cx="7" cy="10" r="1.5" fill="currentColor" />
+      <circle cx="7" cy="16" r="1.5" fill="currentColor" />
+      <circle cx="9" cy="22" r="1.5" fill="currentColor" />
+    </Mark>
+  ),
+  "my-ostalis": (
+    <Mark>
+      <circle cx="11" cy="11" r="3" stroke="currentColor" strokeWidth="1.75" />
+      <circle cx="21" cy="11" r="3" stroke="currentColor" strokeWidth="1.75" />
+      <path
+        d="M5.5 24c.8-3.5 3-5.5 5.5-5.5s4.7 2 5.5 5.5"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+      <path
+        d="M15.5 24c.8-3.5 3-5.5 5.5-5.5s4.7 2 5.5 5.5"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+    </Mark>
+  ),
+  "kulturny-mogilev": (
+    <Mark>
+      <path
+        d="M6 25V11l10-6 10 6v14"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 25v-7h8v7M12 14h8"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Mark>
+  ),
+  akanicy: (
+    <Mark>
+      <rect
+        x="6"
+        y="7"
+        width="20"
+        height="18"
+        rx="2"
+        stroke="currentColor"
+        strokeWidth="1.75"
+      />
+      <path
+        d="M6 13h20M16 13v12"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+    </Mark>
+  ),
+  "sunsethunters-club": (
+    <Mark>
+      <path
+        d="M6 20h20"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+      <path
+        d="M9 20a7 7 0 0 1 14 0"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+      <path
+        d="M16 6v3M8.5 9.5l2 2M23.5 9.5l-2 2"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+    </Mark>
+  ),
+  lacinka: (
+    <Mark>
+      <path
+        d="M10 25V8h4.2c4.6 0 7.3 2.6 7.3 6.8S18.8 21.5 14.2 21.5H10"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10 21.5 21.5 25"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+    </Mark>
+  ),
+  "pavuk-club": (
+    <Mark>
+      <circle cx="16" cy="16" r="4" stroke="currentColor" strokeWidth="1.75" />
+      <path
+        d="M12.5 13.5 7 8M19.5 13.5 25 8M12.5 18.5 7 24M19.5 18.5 25 24M11.5 16H6M20.5 16H26M16 11.5V6M16 20.5V26"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+      />
+    </Mark>
+  ),
+};
+
+function FallbackMark({ name }: { name: string }) {
+  const letter = name.trim().charAt(0).toUpperCase() || "?";
+  return (
+    <svg
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={markClass}
+      aria-hidden
+    >
+      <text
+        x="16"
+        y="21"
+        textAnchor="middle"
+        fill="currentColor"
+        fontSize="14"
+        fontFamily="var(--font-geist-sans), system-ui, sans-serif"
+        fontWeight="500"
+      >
+        {letter}
+      </text>
+    </svg>
+  );
+}
+
+export function ProjectLogo({ slug, name, className = "" }: Props) {
+  return (
+    <span
+      className={`inline-flex shrink-0 items-center justify-center rounded-xl border border-border bg-[color-mix(in_oklab,#edecec_4%,transparent)] text-foreground ${className}`}
+      aria-hidden
+    >
+      {icons[slug] ?? <FallbackMark name={name} />}
+    </span>
+  );
+}
