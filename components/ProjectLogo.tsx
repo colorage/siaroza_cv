@@ -329,8 +329,10 @@ function FallbackMark({ name }: { name: string }) {
   );
 }
 
+const imageLogos = new Set(["lacinka"]);
+
 export function ProjectLogo({ slug, name, className = "" }: Props) {
-  const isImageLogo = slug === "lacinka";
+  const isImageLogo = imageLogos.has(slug);
 
   return (
     <span
