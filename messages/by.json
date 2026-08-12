@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "title": "Siaroža — Design Engineer",
+    "description": "Партфоліа Сяргея Пехцерава — Design Engineer. Досвед, пет-праекты, кантакты."
+  },
+  "nav": {
+    "experience": "Досвед",
+    "projects": "Праекты"
+  },
+  "hero": {
+    "name": "Сяргей Пехцераў",
+    "shortName": "Siaroža",
+    "title": "Design Engineer",
+    "tagline": "Моўшн, візуальныя сістэмы і прадуктовы крафт — з ухілам у яснасць.",
+    "email": "Email",
+    "telegram": "Telegram"
+  },
+  "experience": {
+    "heading": "Досвед",
+    "downloadCv": "Спампаваць CV"
+  },
+  "projects": {
+    "heading": "Пет-праекты",
+    "active": "Актыўны",
+    "stage": {
+      "release": "Release",
+      "mvp": "MVP",
+      "poc": "PoC",
+      "nda": "NDA"
+    },
+    "status": {
+      "finished": "Завершаны",
+      "active": "Актыўны",
+      "prototype": "Прататып"
+    },
+    "back": "Назад",
+    "visit": "Адкрыць праект",
+    "ndaNote": "Дэталі пад NDA.",
+    "placeholder": "Апісанне з'явіцца пазней."
+  }
+}

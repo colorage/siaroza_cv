@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root {
+  --background: #14120b;
+  --foreground: #edecec;
+  --foreground-muted: color-mix(in oklab, #edecec 60%, transparent);
+  --surface: #1b1913;
+  --border: color-mix(in oklab, #edecec 8%, transparent);
+  --border-strong: color-mix(in oklab, #edecec 16%, transparent);
+  --button: #edecec;
+  --button-fg: #14120b;
+  --accent: #f54e00;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--foreground-muted);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-button: var(--button);
+  --color-button-fg: var(--button-fg);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+.animate-fade-up-delay {
+  animation: fade-up 0.7s ease-out 0.12s both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 0.7s ease-out 0.24s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-up-delay,
+  .animate-fade-up-delay-2 {
+    animation: none;
+  }
+}

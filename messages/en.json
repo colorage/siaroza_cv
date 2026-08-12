@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "title": "Siaroža — Design Engineer",
+    "description": "Portfolio of Siarhiej Piechcieraǔ — Design Engineer. Experience, pet projects, contact."
+  },
+  "nav": {
+    "experience": "Experience",
+    "projects": "Projects"
+  },
+  "hero": {
+    "name": "Siarhiej Piechcieraǔ",
+    "shortName": "Siaroža",
+    "title": "Design Engineer",
+    "tagline": "Motion, visual systems, and product craft — with a bias for clarity.",
+    "email": "Email",
+    "telegram": "Telegram"
+  },
+  "experience": {
+    "heading": "Experience",
+    "downloadCv": "Download CV"
+  },
+  "projects": {
+    "heading": "Pet projects",
+    "active": "Active",
+    "stage": {
+      "release": "Release",
+      "mvp": "MVP",
+      "poc": "PoC",
+      "nda": "NDA"
+    },
+    "status": {
+      "finished": "Finished",
+      "active": "Active",
+      "prototype": "Prototype"
+    },
+    "back": "Back",
+    "visit": "Visit project",
+    "ndaNote": "Details under NDA.",
+    "placeholder": "Description coming soon."
+  }
+}

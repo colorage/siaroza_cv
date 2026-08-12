@@ -1,0 +1,59 @@
+import { experience } from "@/content/experience";
+import type { Dictionary, Locale } from "@/lib/i18n";
+
+type Props = {
+  locale: Locale;
+  dict: Dictionary;
+};
+
+export function ExperienceTimeline({ locale, dict }: Props) {
+  return (
+    <section id="experience" className="mx-auto max-w-5xl scroll-mt-20 px-6 py-24">
+      <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+        <h2 className="text-3xl tracking-tight text-foreground md:text-4xl">
+          {dict.experience.heading}
+        </h2>
+        <a
+          href="/cv/siaroza-cv.pdf"
+          download
+          className="inline-flex items-center rounded-full bg-button px-5 py-2.5 text-[14px] font-medium text-button-fg transition-opacity hover:opacity-90"
+        >
+          {dict.experience.downloadCv}
+        </a>
+      </div>
+
+      <ol className="relative space-y-0 border-l border-border-strong pl-0">
+        {experience.map((item, index) => (
+          <li
+            key={item.id}
+            className="group relative border-b border-border py-8 pl-8 last:border-b-0 md:pl-10"
+            style={{ animationDelay: `${Math.min(index, 6) * 40}ms` }}
+          >
+            <span className="absolute top-10 -left-[5px] h-2.5 w-2.5 rounded-full border border-border-strong bg-surface transition-colors group-hover:border-accent group-hover:bg-accent" />
+            <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between">
+              <div>
+                <h3 className="text-lg tracking-tight text-foreground">
+                  {item.role[locale]}
+                </h3>
+                <p className="mt-1 text-[15px] text-muted">{item.company}</p>
+              </div>
+              <p className="font-mono text-[12px] tracking-wide text-muted uppercase">
+                {item.start} — {item.end}
+              </p>
+            </div>
+            <ul className="mt-4 space-y-2">
+              {item.bullets[locale].map((bullet) => (
+                <li
+                  key={bullet}
+                  className="text-[14px] leading-relaxed text-muted before:mr-2 before:text-border-strong before:content-['–']"
+                >
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
