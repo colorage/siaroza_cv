@@ -35,12 +35,13 @@ export const projects: Project[] = [
   },
   {
     slug: "bloodlabs",
-    name: "bloodlabs",
+    name: "Blood Labs",
     stage: "release",
     status: "active",
+    url: "https://apps.apple.com/app/blood-labs/id6774652156",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Private iOS app to import blood lab reports from photo or PDF, track markers on a timeline, and compare results over time.",
+      by: "Прыватны iOS‑дадатак для імпарту аналізаў крыві з фота ці PDF, адсочвання паказчыкаў на шкале часу і параўнання вынікаў.",
     },
   },
   {

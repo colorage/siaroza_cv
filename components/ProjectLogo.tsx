@@ -44,15 +44,14 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   bloodlabs: (
-    <Mark>
-      <path
-        d="M16 5c3.5 5.2 7 9.4 7 13.2A7 7 0 1 1 9 18.2C9 14.4 12.5 10.2 16 5Z"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinejoin="round"
-      />
-      <circle cx="16" cy="19" r="2" fill="currentColor" />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/bloodlabs.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
   pavetra: (
     <Mark>
@@ -326,7 +325,7 @@ function FallbackMark({ name }: { name: string }) {
   );
 }
 
-const imageLogos = new Set(["lacinka", "kropki-mahiliou"]);
+const imageLogos = new Set(["lacinka", "kropki-mahiliou", "bloodlabs"]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
   const isImageLogo = imageLogos.has(slug);
