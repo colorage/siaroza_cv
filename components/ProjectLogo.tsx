@@ -312,6 +312,39 @@ const icons: Record<string, ReactNode> = {
       />
     </Mark>
   ),
+  inx: (
+    <Mark>
+      <path
+        d="M8 24V8h3.2l7.6 10.8V8H22v16h-3.2L11.2 13.2V24H8Z"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinejoin="round"
+      />
+    </Mark>
+  ),
+  photoplay: (
+    <Mark>
+      <rect
+        x="5"
+        y="9"
+        width="22"
+        height="16"
+        rx="3"
+        stroke="currentColor"
+        strokeWidth="1.75"
+      />
+      <path
+        d="M10 9 12.2 6h7.6L22 9"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M13.5 14.2v5.6L19 17l-5.5-2.8Z"
+        fill="currentColor"
+      />
+    </Mark>
+  ),
 };
 
 function FallbackMark({ name }: { name: string }) {
