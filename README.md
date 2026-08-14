@@ -2,6 +2,8 @@
 
 Personal CV / portfolio site for Siarhiej Piechcieraǔ (Siaroža) — Design Engineer.
 
+**Live:** [siaroza.com](https://siaroza.com)
+
 ## Stack
 
 - Next.js (App Router)
