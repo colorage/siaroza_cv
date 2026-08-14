@@ -13,9 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://siaroza.com"),
   title: "Siaroža — Design Engineer",
   description:
     "Portfolio of Siarhiej Piechcieraǔ — Design Engineer. Experience, pet projects, contact.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({
