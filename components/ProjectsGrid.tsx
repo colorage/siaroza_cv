@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AsciiNoise } from "@/components/AsciiNoise";
 import { ProjectLogo } from "@/components/ProjectLogo";
 import { projects } from "@/content/projects";
 import type { Dictionary, Locale } from "@/lib/i18n";
@@ -16,51 +17,85 @@ export function ProjectsGrid({ locale, dict }: Props) {
       </h2>
 
       <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project, index) => (
-          <li
-            key={project.slug}
-            className="animate-fade-up"
-            style={{ animationDelay: `${Math.min(index, 8) * 40}ms` }}
-          >
-            <Link
-              href={`/${locale}/projects/${project.slug}`}
-              className="group flex h-full flex-col gap-4 rounded-2xl border border-border bg-surface p-5 transition-[border-color,background-color,transform] duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:bg-[color-mix(in_oklab,#edecec_3%,var(--surface))]"
+        {projects.map((project, index) => {
+          const isNda = project.stage === "nda";
+          const shellClass =
+            "flex h-full flex-col gap-4 rounded-2xl border border-border bg-surface p-5";
+
+          return (
+            <li
+              key={project.slug}
+              className="animate-fade-up"
+              style={{ animationDelay: `${Math.min(index, 8) * 40}ms` }}
             >
-              <div className="flex items-start justify-between gap-3">
-                <ProjectLogo
-                  slug={project.slug}
-                  name={project.name}
-                  className="h-11 w-11 transition-colors group-hover:border-border-strong group-hover:text-accent"
-                />
-                {project.status === "active" && (
-                  <span className="rounded-full bg-[color-mix(in_oklab,#f54e00_18%,transparent)] px-2 py-0.5 text-[11px] font-medium tracking-wide text-accent uppercase">
-                    {dict.projects.active}
-                  </span>
-                )}
-              </div>
+              {isNda ? (
+                <div className={shellClass} aria-label={`${project.name} — NDA`}>
+                  <AsciiNoise />
 
-              <div className="min-w-0 flex-1">
-                <h3 className="text-[16px] tracking-tight text-foreground transition-opacity group-hover:opacity-90">
-                  {project.name}
-                </h3>
-                <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed text-muted">
-                  {project.description[locale]}
-                </p>
-              </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-[16px] tracking-tight text-foreground">
+                        {project.name}
+                      </h3>
+                      {project.status === "active" && (
+                        <span className="rounded-full bg-[color-mix(in_oklab,#f54e00_18%,transparent)] px-2 py-0.5 text-[11px] font-medium tracking-wide text-accent uppercase">
+                          {dict.projects.active}
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed text-muted">
+                      {project.description[locale]}
+                    </p>
+                  </div>
 
-              <div className="flex items-center justify-between gap-3 border-t border-border pt-3 font-mono text-[11px] tracking-wide text-muted uppercase">
-                <span>
-                  {dict.projects.stage[project.stage]}
-                  <span className="mx-2 text-border-strong">·</span>
-                  {dict.projects.status[project.status]}
-                </span>
-                <span className="text-foreground opacity-0 transition-opacity group-hover:opacity-60">
-                  →
-                </span>
-              </div>
-            </Link>
-          </li>
-        ))}
+                  <div className="border-t border-border pt-3 font-mono text-[11px] tracking-wide text-muted uppercase">
+                    {dict.projects.stage[project.stage]}
+                    <span className="mx-2 text-border-strong">·</span>
+                    {dict.projects.status[project.status]}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  href={`/${locale}/projects/${project.slug}`}
+                  className={`group ${shellClass} transition-[border-color,background-color,transform] duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:bg-[color-mix(in_oklab,#edecec_3%,var(--surface))]`}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <ProjectLogo
+                      slug={project.slug}
+                      name={project.name}
+                      className="h-11 w-11 transition-colors group-hover:border-border-strong group-hover:text-accent"
+                    />
+                    {project.status === "active" && (
+                      <span className="rounded-full bg-[color-mix(in_oklab,#f54e00_18%,transparent)] px-2 py-0.5 text-[11px] font-medium tracking-wide text-accent uppercase">
+                        {dict.projects.active}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-[16px] tracking-tight text-foreground transition-opacity group-hover:opacity-90">
+                      {project.name}
+                    </h3>
+                    <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed text-muted">
+                      {project.description[locale]}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-3 border-t border-border pt-3 font-mono text-[11px] tracking-wide text-muted uppercase">
+                    <span>
+                      {dict.projects.stage[project.stage]}
+                      <span className="mx-2 text-border-strong">·</span>
+                      {dict.projects.status[project.status]}
+                    </span>
+                    <span className="text-foreground opacity-0 transition-opacity group-hover:opacity-60">
+                      →
+                    </span>
+                  </div>
+                </Link>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

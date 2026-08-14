@@ -10,7 +10,9 @@ type Props = {
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
-    projects.map((project) => ({ locale, slug: project.slug })),
+    projects
+      .filter((project) => project.stage !== "nda")
+      .map((project) => ({ locale, slug: project.slug })),
   );
 }
 
@@ -19,7 +21,7 @@ export default async function ProjectPage({ params }: Props) {
   if (!isLocale(localeParam)) notFound();
   const locale = localeParam as Locale;
   const project = getProject(slug);
-  if (!project) notFound();
+  if (!project || project.stage === "nda") notFound();
 
   const dict = await getDictionary(locale);
 
@@ -61,9 +63,7 @@ export default async function ProjectPage({ params }: Props) {
         </div>
 
         <p className="mt-8 max-w-2xl text-[16px] leading-relaxed text-muted">
-          {project.stage === "nda"
-            ? dict.projects.ndaNote
-            : project.description[locale]}
+          {project.description[locale]}
         </p>
 
         {project.url ? (
