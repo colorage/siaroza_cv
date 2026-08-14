@@ -219,6 +219,26 @@ export const projects: Project[] = [
       by: "Апісанне з'явіцца пазней.",
     },
   },
+  {
+    slug: "inx",
+    name: "inx",
+    stage: "poc",
+    status: "active",
+    description: {
+      en: "Description coming soon.",
+      by: "Апісанне з'явіцца пазней.",
+    },
+  },
+  {
+    slug: "photoplay",
+    name: "photoplay",
+    stage: "poc",
+    status: "active",
+    description: {
+      en: "Description coming soon.",
+      by: "Апісанне з'явіцца пазней.",
+    },
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {
