@@ -49,9 +49,21 @@ export const projects: Project[] = [
     name: "pavetra",
     stage: "release",
     status: "finished",
+    url: "https://github.com/colorage/pavetra",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Citizen air-quality network for Mahilioŭ — DIY ESP/PMS sensors posting PM2.5/PM10 every 20 minutes to an open map (Social Weekend 13 finalist).",
+      by: "Народны маніторынг паветра ў Магілёве — DIY ESP/PMS датчыкі з публікацыяй PM2.5/PM10 кожныя 20 хвілін на адкрытую карту (фіналіст Social Weekend 13).",
+    },
+  },
+  {
+    slug: "pah-bot",
+    name: "пах бот",
+    stage: "release",
+    status: "finished",
+    url: "https://t.me/pah_pavetra_bot",
+    description: {
+      en: "Telegram bot for reporting unusual smells across Belarus — crowd-sourced odor map paired with pavetra air-quality data.",
+      by: "Telegram-бот для паведамленняў пра нязвыклыя пахі па Беларусі — народная мапа пахаў у звязцы з данымі pavetra.",
     },
   },
   {
