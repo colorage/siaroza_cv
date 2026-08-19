@@ -36,6 +36,7 @@
     "back": "Back",
     "visit": "Visit project",
     "ndaNote": "Details under NDA.",
+    "ndaPrivateTitle": "Project {name} is not public",
     "placeholder": "Description coming soon."
   }
 }

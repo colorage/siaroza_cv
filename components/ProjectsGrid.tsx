@@ -21,6 +21,7 @@ export function ProjectsGrid({ locale, dict }: Props) {
           const isNda = project.stage === "nda";
           const shellClass =
             "flex h-full flex-col gap-4 rounded-2xl border border-border bg-surface p-5";
+          const ndaTitle = dict.projects.ndaPrivateTitle.replace("{name}", project.name);
 
           return (
             <li
@@ -29,30 +30,15 @@ export function ProjectsGrid({ locale, dict }: Props) {
               style={{ animationDelay: `${Math.min(index, 8) * 40}ms` }}
             >
               {isNda ? (
-                <div className={shellClass} aria-label={`${project.name} — NDA`}>
+                <div
+                  className="relative flex h-full min-h-52 items-center justify-center overflow-hidden rounded-2xl bg-surface"
+                  aria-label={ndaTitle}
+                >
                   <AsciiNoise />
-
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-start justify-between gap-3">
-                      <h3 className="text-[16px] tracking-tight text-foreground">
-                        {project.name}
-                      </h3>
-                      {project.status === "active" && (
-                        <span className="rounded-full bg-[color-mix(in_oklab,#f54e00_18%,transparent)] px-2 py-0.5 text-[11px] font-medium tracking-wide text-accent uppercase">
-                          {dict.projects.active}
-                        </span>
-                      )}
-                    </div>
-                    <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed text-muted">
-                      {project.description[locale]}
-                    </p>
-                  </div>
-
-                  <div className="border-t border-border pt-3 font-mono text-[11px] tracking-wide text-muted uppercase">
-                    {dict.projects.stage[project.stage]}
-                    <span className="mx-2 text-border-strong">·</span>
-                    {dict.projects.status[project.status]}
-                  </div>
+                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,color-mix(in_oklab,var(--background)_8%,transparent)_0%,transparent_72%)]" />
+                  <h3 className="relative z-10 max-w-[16ch] px-6 text-center text-[22px] leading-tight tracking-tight text-foreground sm:text-[24px]">
+                    {ndaTitle}
+                  </h3>
                 </div>
               ) : (
                 <Link
