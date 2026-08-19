@@ -35,6 +35,7 @@ export type Dictionary = {
     back: string;
     visit: string;
     ndaNote: string;
+    ndaPrivateTitle: string;
     placeholder: string;
   };
 };

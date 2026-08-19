@@ -89,12 +89,13 @@ export const projects: Project[] = [
   },
   {
     slug: "radar-rockets",
-    name: "Radar&Rockets",
+    name: "Radar N Rockets",
     stage: "release",
     status: "finished",
+    url: "https://kotka.itch.io/radar-n-rockets",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Playdate action game — crank to scan the radar, then switch to a rocket gun and defend your base from kamikaze enemies.",
+      by: "Экшан-гульня для Playdate — круціце рычажок, каб сканаваць радар, потым пераключайцеся на ракетную гармату і абараняйце базу ад камікадзэ.",
     },
   },
   {
