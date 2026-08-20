@@ -333,10 +333,14 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   "belarus-bw": (
-    <Mark>
-      <circle cx="16" cy="16" r="9" stroke="currentColor" strokeWidth="1.75" />
-      <path d="M16 7a9 9 0 0 0 0 18V7Z" fill="currentColor" />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/belarus-bw.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
   radzima: (
     // eslint-disable-next-line @next/next/no-img-element
@@ -387,6 +391,7 @@ const imageLogos = new Set([
   "mogilev-norm",
   "yadoma-bel",
   "radzima",
+  "belarus-bw",
 ]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
