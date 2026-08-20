@@ -18,7 +18,9 @@
   },
   "experience": {
     "heading": "Experience",
-    "downloadCv": "Download CV"
+    "downloadCv": "Download CV",
+    "caseStudies": "Case studies",
+    "caseStudyBack": "Back to experience"
   },
   "footer": {
     "contact": "Contact me"

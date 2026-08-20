@@ -27,6 +27,8 @@ export type Dictionary = {
   experience: {
     heading: string;
     downloadCv: string;
+    caseStudies: string;
+    caseStudyBack: string;
   };
   footer: {
     contact: string;

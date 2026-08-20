@@ -18,7 +18,9 @@
   },
   "experience": {
     "heading": "Досвед",
-    "downloadCv": "Спампаваць CV"
+    "downloadCv": "Спампаваць CV",
+    "caseStudies": "Кейсы",
+    "caseStudyBack": "Назад да досведу"
   },
   "footer": {
     "contact": "Звязацца"
