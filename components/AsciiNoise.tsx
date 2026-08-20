@@ -32,9 +32,9 @@ type PointerSample = {
 
 const CELL_SIZE = 12;
 const CHARACTERS = " .:+*#@";
-const COLOR_DIM = "#3a2e18";
-const COLOR_AMBER = "#ffb627";
-const COLOR_ACCENT = "#f54e00";
+const COLOR_GREY = "#8a8882";
+const COLOR_YELLOW = "#d7b14a";
+const COLOR_ORANGE = "#f54e00";
 const TARGET_FPS = 30;
 const FRAME_MS = 1000 / TARGET_FPS;
 
@@ -157,9 +157,9 @@ function hexToRgb(hex: string): [number, number, number] {
   return [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)];
 }
 
-const DIM_RGB = hexToRgb(COLOR_DIM);
-const AMBER_RGB = hexToRgb(COLOR_AMBER);
-const ACCENT_RGB = hexToRgb(COLOR_ACCENT);
+const GREY_RGB = hexToRgb(COLOR_GREY);
+const YELLOW_RGB = hexToRgb(COLOR_YELLOW);
+const ORANGE_RGB = hexToRgb(COLOR_ORANGE);
 
 function mixRgb(a: [number, number, number], b: [number, number, number], t: number) {
   const r = Math.round(lerp(a[0], b[0], t));
@@ -169,8 +169,11 @@ function mixRgb(a: [number, number, number], b: [number, number, number], t: num
 }
 
 function colorFor(intensity: number) {
-  if (intensity < 0.5) return mixRgb(DIM_RGB, AMBER_RGB, intensity / 0.5);
-  return mixRgb(AMBER_RGB, ACCENT_RGB, (intensity - 0.5) / 0.5);
+  if (intensity < 0.62) {
+    const t = intensity / 0.62;
+    return mixRgb(GREY_RGB, YELLOW_RGB, t * t);
+  }
+  return mixRgb(YELLOW_RGB, ORANGE_RGB, (intensity - 0.62) / 0.38);
 }
 
 function glyphFor(intensity: number) {
