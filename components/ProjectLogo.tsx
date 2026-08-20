@@ -345,6 +345,12 @@ const icons: Record<string, ReactNode> = {
       />
     </Mark>
   ),
+  "belarus-bw": (
+    <Mark>
+      <circle cx="16" cy="16" r="9" stroke="currentColor" strokeWidth="1.75" />
+      <path d="M16 7a9 9 0 0 0 0 18V7Z" fill="currentColor" />
+    </Mark>
+  ),
 };
 
 function FallbackMark({ name }: { name: string }) {

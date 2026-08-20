@@ -240,6 +240,17 @@ export const projects: Project[] = [
       by: "Апісанне з'явіцца пазней.",
     },
   },
+  {
+    slug: "belarus-bw",
+    name: "Беларусь Чорна Белая",
+    stage: "release",
+    status: "active",
+    url: "https://www.instagram.com/belarus_bw/",
+    description: {
+      en: "Stories of Belarusian resistance — heroes, well-known people, volunteers, and initiatives — against an information war that paints all of Belarus as the enemy.",
+      by: "Гісторыі беларускага супраціву — героі, вядомыя людзі, валанцёры і ініцыятывы — супраць інфармацыйнай вайны, якая малюе ўсю Беларусь як ворага.",
+    },
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {
