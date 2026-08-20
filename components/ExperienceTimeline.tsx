@@ -9,18 +9,9 @@ type Props = {
 export function ExperienceTimeline({ locale, dict }: Props) {
   return (
     <section id="experience" className="mx-auto max-w-5xl scroll-mt-20 px-6 py-24">
-      <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
-        <h2 className="text-3xl tracking-tight text-foreground md:text-4xl">
-          {dict.experience.heading}
-        </h2>
-        <a
-          href="/cv/siaroza-cv.pdf"
-          download
-          className="inline-flex items-center rounded-full bg-button px-5 py-2.5 text-[14px] font-medium text-button-fg transition-opacity hover:opacity-90"
-        >
-          {dict.experience.downloadCv}
-        </a>
-      </div>
+      <h2 className="mb-12 text-3xl tracking-tight text-foreground md:text-4xl">
+        {dict.experience.heading}
+      </h2>
 
       <ol className="relative space-y-0 border-l border-border-strong pl-0">
         {experience.map((item, index) => (

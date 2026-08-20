@@ -1,3 +1,4 @@
+import { ContactActions } from "@/components/ContactActions";
 import type { Dictionary } from "@/lib/i18n";
 
 type Props = {
@@ -19,21 +20,8 @@ export function Hero({ dict }: Props) {
       <p className="animate-fade-up-delay-2 mt-4 max-w-xl text-[15px] leading-relaxed text-muted">
         {dict.hero.tagline}
       </p>
-      <div className="animate-fade-up-delay-2 mt-10 flex flex-wrap gap-3">
-        <a
-          href="mailto:colorage503@gmail.com"
-          className="inline-flex items-center rounded-full bg-button px-5 py-2.5 text-[14px] font-medium text-button-fg transition-opacity hover:opacity-90"
-        >
-          {dict.hero.email}
-        </a>
-        <a
-          href="https://t.me/bardzobardzo"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center rounded-full bg-button px-5 py-2.5 text-[14px] font-medium text-button-fg transition-opacity hover:opacity-90"
-        >
-          {dict.hero.telegram}
-        </a>
+      <div className="animate-fade-up-delay-2 mt-10">
+        <ContactActions dict={dict} />
       </div>
     </section>
   );

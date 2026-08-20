@@ -13,11 +13,15 @@
     "title": "Design Engineer",
     "tagline": "Моўшн, візуальныя сістэмы і прадуктовы крафт — з ухілам у яснасць.",
     "email": "Email",
-    "telegram": "Telegram"
+    "telegram": "Telegram",
+    "linkedin": "LinkedIn"
   },
   "experience": {
     "heading": "Досвед",
     "downloadCv": "Спампаваць CV"
+  },
+  "footer": {
+    "contact": "Звязацца"
   },
   "projects": {
     "heading": "Пет-праекты",

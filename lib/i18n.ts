@@ -22,10 +22,14 @@ export type Dictionary = {
     tagline: string;
     email: string;
     telegram: string;
+    linkedin: string;
   };
   experience: {
     heading: string;
     downloadCv: string;
+  };
+  footer: {
+    contact: string;
   };
   projects: {
     heading: string;
