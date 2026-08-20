@@ -216,22 +216,14 @@ const icons: Record<string, ReactNode> = {
     />
   ),
   "my-ostalis": (
-    <Mark>
-      <circle cx="11" cy="11" r="3" stroke="currentColor" strokeWidth="1.75" />
-      <circle cx="21" cy="11" r="3" stroke="currentColor" strokeWidth="1.75" />
-      <path
-        d="M5.5 24c.8-3.5 3-5.5 5.5-5.5s4.7 2 5.5 5.5"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M15.5 24c.8-3.5 3-5.5 5.5-5.5s4.7 2 5.5 5.5"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/my-ostalis.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
   "kulturny-mogilev": (
     <Mark>
@@ -383,7 +375,13 @@ function FallbackMark({ name }: { name: string }) {
   );
 }
 
-const imageLogos = new Set(["lacinka", "kropki-mahiliou", "bloodlabs", "losque"]);
+const imageLogos = new Set([
+  "lacinka",
+  "kropki-mahiliou",
+  "bloodlabs",
+  "losque",
+  "my-ostalis",
+]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
   const isImageLogo = imageLogos.has(slug);

@@ -170,9 +170,10 @@ export const projects: Project[] = [
     name: "мы остались",
     stage: "release",
     status: "finished",
+    url: "https://www.youtube.com/channel/UCHgkQ6OZ5y-a-yzZt-oBCCQ",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "YouTube series on how to survive in Mahilioǔ — and make the city better.",
+      by: "YouTube-серыя пра тое, як выжыць у Магілёве — і зрабіць горад лепшым.",
     },
   },
   {
