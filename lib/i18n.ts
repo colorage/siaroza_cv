@@ -38,6 +38,8 @@ export type Dictionary = {
     status: Record<string, string>;
     back: string;
     visit: string;
+    instagram: string;
+    telegram: string;
     ndaNote: string;
     ndaPrivateTitle: string;
     placeholder: string;

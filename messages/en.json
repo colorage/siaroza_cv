@@ -39,6 +39,8 @@
     },
     "back": "Back",
     "visit": "Visit project",
+    "instagram": "Instagram",
+    "telegram": "Telegram",
     "ndaNote": "Details under NDA.",
     "ndaPrivateTitle": "Project {name} is not public",
     "placeholder": "Description coming soon."
