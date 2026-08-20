@@ -35,7 +35,7 @@ export function ProjectsGrid({ locale, dict }: Props) {
                   aria-label={ndaTitle}
                 >
                   <AsciiNoise />
-                  <h3 className="relative z-10 text-center text-[16px] tracking-tight text-foreground">
+                  <h3 className="pointer-events-none relative z-10 text-center text-[16px] tracking-tight text-foreground">
                     <span className="inline-block bg-background px-8 py-3">
                       {ndaTitle}
                     </span>

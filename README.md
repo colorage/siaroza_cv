@@ -32,6 +32,7 @@ Open [http://localhost:3000](http://localhost:3000) — redirects to `/en`. Bela
 ## Content
 
 - Experience: `content/experience.ts`
+- Case studies: `content/case-studies.ts` (linked from the experience timeline)
 - Pet projects: `content/projects.ts`
 - UI strings: `messages/en.json`, `messages/by.json`
 - CV PDF: `public/cv/siaroza-cv.pdf`

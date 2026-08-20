@@ -3,12 +3,18 @@ import type { Locale } from "@/lib/i18n";
 export type ProjectStage = "release" | "mvp" | "poc" | "nda";
 export type ProjectStatus = "finished" | "active" | "prototype";
 
+export type ProjectLink = {
+  label: string;
+  href: string;
+};
+
 export type Project = {
   slug: string;
   name: string;
   stage: ProjectStage;
   status: ProjectStatus;
   url?: string;
+  links?: ProjectLink[];
   description: Record<Locale, string>;
 };
 
@@ -19,8 +25,8 @@ export const projects: Project[] = [
     stage: "release",
     status: "finished",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "COVID-19 #StayHome map (March 2020) — people staying home checked in via Telegram bot and appeared on a public map by city, without names or exact location.",
+      by: "Мапа #StayHome часу COVID-19 (сакавік 2020) — хто сядзеў дома, адзначаўся праз Telegram-бота і з'яўляўся на публічнай карце па горадзе, без імені і дакладнай лакацыі.",
     },
   },
   {
@@ -164,9 +170,10 @@ export const projects: Project[] = [
     name: "мы остались",
     stage: "release",
     status: "finished",
+    url: "https://www.youtube.com/channel/UCHgkQ6OZ5y-a-yzZt-oBCCQ",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "YouTube series on how to survive in Mahilioǔ — and make the city better.",
+      by: "YouTube-серыя пра тое, як выжыць у Магілёве — і зрабіць горад лепшым.",
     },
   },
   {
@@ -177,6 +184,20 @@ export const projects: Project[] = [
     description: {
       en: "Description coming soon.",
       by: "Апісанне з'явіцца пазней.",
+    },
+  },
+  {
+    slug: "mogilev-norm",
+    name: "могилев нормальный",
+    stage: "release",
+    status: "finished",
+    links: [
+      { label: "instagram", href: "https://www.instagram.com/mogilev_norm/" },
+      { label: "telegram", href: "https://t.me/mogilev_norm" },
+    ],
+    description: {
+      en: "City guide for Mahilioǔ — where to go so you don’t regret the time: local events, venues, and culture.",
+      by: "Гід па Магілёве — куды схадзіць і не пашкадаваць пра час: мясцовыя падзеі, месцы і культура.",
     },
   },
   {
@@ -191,12 +212,13 @@ export const projects: Project[] = [
   },
   {
     slug: "sunsethunters-club",
-    name: "sunsethunters club",
+    name: "Sunset Hunters Club",
     stage: "poc",
     status: "active",
+    url: "https://sunsethunters.club/",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "iOS app for one live sunset a day — camera unlocks only during the local golden hour, with streaks, a live terminator map, and community rays.",
+      by: "iOS‑дадатак для аднаго жывога захаду сонца ў дзень — камера адкрываецца толькі ў мясцовы залаты час, са стрэкамі, жывой мапай тэрмінатара і прамянямі супольнасці.",
     },
   },
   {
