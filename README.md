@@ -12,6 +12,8 @@ Personal CV / portfolio site for Siarhiej Piechcieraǔ (Siaroža) — Design Eng
 
 Push or merge to `preview` to update the preview site. Merge to `main` to update production.
 
+Pet projects are currently published on `preview` only — they stay hidden on production.
+
 ## Stack
 
 - Next.js (App Router)
