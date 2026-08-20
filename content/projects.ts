@@ -19,8 +19,8 @@ export const projects: Project[] = [
     stage: "release",
     status: "finished",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "COVID-19 #StayHome map (March 2020) — people staying home checked in via Telegram bot and appeared on a public map by city, without names or exact location.",
+      by: "Мапа #StayHome часу COVID-19 (сакавік 2020) — хто сядзеў дома, адзначаўся праз Telegram-бота і з'яўляўся на публічнай карце па горадзе, без імені і дакладнай лакацыі.",
     },
   },
   {
