@@ -211,12 +211,13 @@ export const projects: Project[] = [
   },
   {
     slug: "sunsethunters-club",
-    name: "sunsethunters club",
+    name: "Sunset Hunters Club",
     stage: "poc",
     status: "active",
+    url: "https://sunsethunters.club/",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "iOS app for one live sunset a day — camera unlocks only during the local golden hour, with streaks, a live terminator map, and community rays.",
+      by: "iOS‑дадатак для аднаго жывога захаду сонца ў дзень — камера адкрываецца толькі ў мясцовы залаты час, са стрэкамі, жывой мапай тэрмінатара і прамянямі супольнасці.",
     },
   },
   {
