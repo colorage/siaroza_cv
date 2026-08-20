@@ -245,3 +245,12 @@ export const projects: Project[] = [
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
 }
+
+/** Active projects first; original order is kept within each status. */
+export function getSortedProjects(): Project[] {
+  return [...projects].sort((a, b) => {
+    if (a.status === "active" && b.status !== "active") return -1;
+    if (b.status === "active" && a.status !== "active") return 1;
+    return 0;
+  });
+}

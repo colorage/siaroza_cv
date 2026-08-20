@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { AsciiNoise } from "@/components/AsciiNoise";
 import { ProjectLogo } from "@/components/ProjectLogo";
-import { projects } from "@/content/projects";
+import { getSortedProjects } from "@/content/projects";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 type Props = {
@@ -10,6 +10,8 @@ type Props = {
 };
 
 export function ProjectsGrid({ locale, dict }: Props) {
+  const projects = getSortedProjects();
+
   return (
     <section id="projects" className="mx-auto max-w-5xl scroll-mt-20 px-6 py-24">
       <h2 className="mb-12 text-3xl tracking-tight text-foreground md:text-4xl">
