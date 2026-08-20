@@ -125,17 +125,14 @@ const icons: Record<string, ReactNode> = {
     />
   ),
   "radar-rockets": (
-    <Mark>
-      <circle cx="16" cy="16" r="9" stroke="currentColor" strokeWidth="1.75" />
-      <circle cx="16" cy="16" r="4.5" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M16 7v4M16 21v4M7 16h4M21 16h4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <circle cx="16" cy="16" r="1.5" fill="currentColor" />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/radar-rockets.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
   "hejka-app": (
     <Mark>
@@ -372,7 +369,13 @@ function FallbackMark({ name }: { name: string }) {
   );
 }
 
-const imageLogos = new Set(["lacinka", "kropki-mahiliou", "bloodlabs", "losque"]);
+const imageLogos = new Set([
+  "lacinka",
+  "kropki-mahiliou",
+  "bloodlabs",
+  "losque",
+  "radar-rockets",
+]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
   const isImageLogo = imageLogos.has(slug);
