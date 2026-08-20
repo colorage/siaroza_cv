@@ -30,13 +30,14 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "yavolonter",
-    name: "яволонтер",
+    slug: "spasem-bel",
+    name: "спасём.бел",
     stage: "release",
     status: "finished",
+    links: [{ label: "telegram", href: "https://t.me/spasyom_bel_bot" }],
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "COVID-19 volunteer map (2020) — people offered help via Telegram bot for delivery, food, housing, funding, or info; medics posted hospital needs in red on the public map.",
+      by: "Мапа валанцёраў COVID-19 (2020) — праз Telegram-бота людзі прапаноўвалі дастаўку, ежу, жытло, фінансы ці інфармацыю; медыкі пазначалі патрэбы бальніц чырвоным на публічнай карце.",
     },
   },
   {
@@ -120,9 +121,13 @@ export const projects: Project[] = [
     name: "halasy",
     stage: "release",
     status: "finished",
+    links: [
+      { label: "telegram", href: "https://t.me/halasy_belarusi" },
+      { label: "@halasy_bot", href: "https://t.me/halasy_bot" },
+    ],
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Interactive map of Belarusian voices — anonymous, safe statements via Telegram bot, shown on a public map for people inside the country and abroad.",
+      by: "Інтэрактыўная мапа думак беларусаў — ананімныя і бяспечныя выказванні праз Telegram-бота на публічнай карце, знутры краіны і з-за мяжы.",
     },
   },
   {
@@ -130,9 +135,15 @@ export const projects: Project[] = [
     name: "impact",
     stage: "mvp",
     status: "finished",
+    links: [
+      {
+        label: "Figma",
+        href: "https://www.figma.com/design/l3VohC0ZSKnuI6paEifGvh/Impact",
+      },
+    ],
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Solana Hackathon project — a community blockchain-based game on Solana.",
+      by: "Праект для Solana Hackathon — супольная блокчэйн-гульня на Solana.",
     },
   },
   {
@@ -141,8 +152,8 @@ export const projects: Project[] = [
     stage: "mvp",
     status: "finished",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Smart-city hackathon project — QR stickers for city trash cans; scan the code to notify municipal services that a can is full.",
+      by: "Праект смарт-сіці хакатону — QR-наклейкі на гарадскія сметніцы; адскануй код, каб паведаміць камунальнікам, што бак поўны.",
     },
   },
   {
@@ -151,8 +162,8 @@ export const projects: Project[] = [
     stage: "poc",
     status: "prototype",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "GPS bike game — two random riders compete in real life to reach the same location first.",
+      by: "GPS-гульня на роварах — два выпадковыя ўдзельнікі ўжывую спаборнічаюць, хто першы даедзе да адной лакацыі.",
     },
   },
   {
@@ -183,8 +194,8 @@ export const projects: Project[] = [
     stage: "release",
     status: "finished",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "City guide for Mahilioǔ — where to go so you don’t regret the time: local events, venues, and culture.",
+      by: "Гід па Магілёве — куды схадзіць і не пашкадаваць пра час: мясцовыя падзеі, месцы і культура.",
     },
   },
   {
@@ -248,11 +259,11 @@ export const projects: Project[] = [
   {
     slug: "inx",
     name: "inx",
-    stage: "poc",
+    stage: "nda",
     status: "active",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Details under NDA.",
+      by: "Дэталі пад NDA.",
     },
   },
   {
@@ -260,10 +271,9 @@ export const projects: Project[] = [
     name: "photoplay",
     stage: "poc",
     status: "active",
-    url: "https://photoplay.app",
     description: {
-      en: "Share iPhone Live Photos with anyone — a web player and Mac app that syncs albums from Photos and keeps the 1.5-second motion intact on Android, Windows, or any browser.",
-      by: "Дзяліцеся Live Photo з iPhone з кім заўгодна — вэб-плэер і Mac-дадатак сінхранізуюць альбомы з Photos і захоўваюць 1,5 секунды руху на Android, Windows ці ў любым браўзеры.",
+      en: "Generate a music playlist from your photos.",
+      by: "Генерацыя музычнага плэйліста па вашых фота.",
     },
   },
 ];
