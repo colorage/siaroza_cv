@@ -92,7 +92,7 @@ const icons: Record<string, ReactNode> = {
   "kropki-mahiliou": (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src="/projects/kropki-mahiliou.svg"
+      src="/projects/kropki-mahiliou.png"
       alt=""
       width={32}
       height={32}
