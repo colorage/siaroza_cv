@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { getCaseStudiesForExperience } from "@/content/case-studies";
 import { experience } from "@/content/experience";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
@@ -42,6 +44,25 @@ export function ExperienceTimeline({ locale, dict }: Props) {
                 </li>
               ))}
             </ul>
+            {item.caseStudySlugs?.length ? (
+              <div className="mt-5">
+                <p className="mb-2 font-mono text-[11px] tracking-wide text-muted uppercase">
+                  {dict.experience.caseStudies}
+                </p>
+                <ul className="flex flex-wrap gap-2">
+                  {getCaseStudiesForExperience(item.id).map((study) => (
+                    <li key={study.slug}>
+                      <Link
+                        href={`/${locale}/work/${study.slug}`}
+                        className="inline-flex rounded-full border border-border px-3 py-1 text-[13px] text-muted transition-colors hover:border-accent hover:text-foreground"
+                      >
+                        {study.title[locale]}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </li>
         ))}
       </ol>
