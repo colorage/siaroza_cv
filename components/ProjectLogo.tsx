@@ -64,27 +64,14 @@ const icons: Record<string, ReactNode> = {
     />
   ),
   "pah-bot": (
-    <Mark>
-      <path
-        d="M8 20c2.5-3.5 5-5.2 8-5.2S21.5 16.5 24 20"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M10 14c1.8-2.4 3.6-3.6 6-3.6s4.2 1.2 6 3.6"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M12.5 9c1.2-1.5 2.3-2.2 3.5-2.2S18.3 7.5 19.5 9"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <circle cx="16" cy="23.5" r="1.4" fill="currentColor" />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/pah-bot.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
   dc: (
     <Mark>
@@ -392,6 +379,7 @@ const imageLogos = new Set([
   "yadoma-bel",
   "radzima",
   "belarus-bw",
+  "pah-bot",
 ]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
