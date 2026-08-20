@@ -109,9 +109,10 @@ export const projects: Project[] = [
     name: "hejka.app",
     stage: "mvp",
     status: "finished",
+    url: "https://hejka.app",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Personal migration assistant to prepare and manage documents for life in a new city — local-first, private helpers, instructions, and checklists.",
+      by: "Асабісты памочнік па міграцыі: падрыхтоўка і вядзенне дакументаў для жыцця ў новым горадзе — лакальныя прыватныя дапаможнікі, інструкцыі і чэклісты.",
     },
   },
   {
@@ -205,9 +206,10 @@ export const projects: Project[] = [
     name: "akanicy",
     stage: "poc",
     status: "active",
+    url: "https://trip.siaroza.com/",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Personal scroll gallery of trip memories — each Akanica trip opens with a cover and date, then a photo grid.",
+      by: "Асабістая галерэя ўспамінаў з паездак — кожная вандроўка Akanica адкрываецца вокладкай і датай, далей сетка фота.",
     },
   },
   {
@@ -237,9 +239,10 @@ export const projects: Project[] = [
     name: "pavuk.club",
     stage: "release",
     status: "active",
+    url: "https://pavuk.club/",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Browser-based straw mobile (himmeli) designer — build geometric straw structures, tie them with thread, and watch live physics hang and balance each piece.",
+      by: "Браўзерны канструктар саломавых мабіляў (гімелі) — збірайце геаметрычныя канструкцыі з саломінак, звязвайце ніткай і глядзіце, як жывая фізіка падвешвае і балансуе кожную дэталь.",
     },
   },
   {
@@ -257,9 +260,10 @@ export const projects: Project[] = [
     name: "photoplay",
     stage: "poc",
     status: "active",
+    url: "https://photoplay.app",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Share iPhone Live Photos with anyone — a web player and Mac app that syncs albums from Photos and keeps the 1.5-second motion intact on Android, Windows, or any browser.",
+      by: "Дзяліцеся Live Photo з iPhone з кім заўгодна — вэб-плэер і Mac-дадатак сінхранізуюць альбомы з Photos і захоўваюць 1,5 секунды руху на Android, Windows ці ў любым браўзеры.",
     },
   },
 ];
