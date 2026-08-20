@@ -54,26 +54,14 @@ const icons: Record<string, ReactNode> = {
     />
   ),
   pavetra: (
-    <Mark>
-      <path
-        d="M5 11h14a3.5 3.5 0 1 0-1.2-6.8"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M5 17h18a3 3 0 1 0-.9-5.8"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M5 23h12a2.5 2.5 0 1 1-.8 4.9"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/pavetra.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
   "pah-bot": (
     <Mark>
@@ -372,7 +360,7 @@ function FallbackMark({ name }: { name: string }) {
   );
 }
 
-const imageLogos = new Set(["lacinka", "kropki-mahiliou", "bloodlabs", "losque"]);
+const imageLogos = new Set(["lacinka", "kropki-mahiliou", "bloodlabs", "losque", "pavetra"]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
   const isImageLogo = imageLogos.has(slug);

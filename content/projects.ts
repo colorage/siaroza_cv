@@ -49,7 +49,7 @@ export const projects: Project[] = [
     name: "pavetra",
     stage: "release",
     status: "finished",
-    url: "https://github.com/colorage/pavetra",
+    url: "https://www.youtube.com/@pavetra3574",
     description: {
       en: "Citizen air-quality network for Mahilioŭ — DIY ESP/PMS sensors posting PM2.5/PM10 every 20 minutes to an open map (Social Weekend 13 finalist).",
       by: "Народны маніторынг паветра ў Магілёве — DIY ESP/PMS датчыкі з публікацыяй PM2.5/PM10 кожныя 20 хвілін на адкрытую карту (фіналіст Social Weekend 13).",
