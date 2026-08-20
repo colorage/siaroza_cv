@@ -33,7 +33,7 @@ const icons: Record<string, ReactNode> = {
       />
     </Mark>
   ),
-  yavolonter: (
+  "spasem-bel": (
     <Mark>
       <path
         d="M16 27s-9-5.6-9-12.2A5.4 5.4 0 0 1 16 10a5.4 5.4 0 0 1 9 4.8C25 21.4 16 27 16 27Z"
