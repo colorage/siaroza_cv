@@ -7,6 +7,7 @@ export type ExperienceItem = {
   company: string;
   role: Record<Locale, string>;
   bullets: Record<Locale, string[]>;
+  caseStudySlugs?: string[];
 };
 
 export const experience: ExperienceItem[] = [
@@ -37,6 +38,13 @@ export const experience: ExperienceItem[] = [
         "Дызайн і падтрымка прадуктовага сайта ў адпаведнасці з брэндам і UI платформы",
       ],
     },
+    caseStudySlugs: [
+      "game-thumbnails",
+      "icons-pack",
+      "chameleon-illustrations",
+      "site-customization-dashboard",
+      "local-llm-qa-agents",
+    ],
   },
   {
     id: "ptchr",
@@ -61,6 +69,7 @@ export const experience: ExperienceItem[] = [
         "Пачатковая брэндавая ідэнтычнасць як візуальная аснова",
       ],
     },
+    caseStudySlugs: ["pitchdeck-app-design"],
   },
   {
     id: "kotka",
@@ -107,6 +116,7 @@ export const experience: ExperienceItem[] = [
         "Маркетынгавая графіка для сацсетак і друк для тэхвыстаў",
       ],
     },
+    caseStudySlugs: ["brandbook"],
   },
   {
     id: "adviqo",
@@ -219,5 +229,10 @@ export const experience: ExperienceItem[] = [
         "Аўтаматызацыя Photoshop → game engine",
       ],
     },
+    caseStudySlugs: ["psd-parser"],
   },
 ];
+
+export function getExperience(id: string): ExperienceItem | undefined {
+  return experience.find((item) => item.id === id);
+}
