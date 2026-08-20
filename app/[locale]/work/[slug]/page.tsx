@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CaseStudyBody } from "@/components/CaseStudyBody";
 import { caseStudies, getCaseStudy } from "@/content/case-studies";
 import { getExperience } from "@/content/experience";
 import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
@@ -14,7 +16,7 @@ export function generateStaticParams() {
   );
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: localeParam, slug } = await params;
   if (!isLocale(localeParam)) return {};
   const locale = localeParam as Locale;
@@ -57,9 +59,22 @@ export default async function CaseStudyPage({ params }: Props) {
             {job.start} — {job.end}
           </span>
         </div>
+        {study.stack?.length ? (
+          <ul className="mt-5 flex flex-wrap gap-2">
+            {study.stack.map((item) => (
+              <li
+                key={item}
+                className="rounded-full border border-border px-3 py-1 font-mono text-[12px] tracking-wide text-muted uppercase"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        ) : null}
         <p className="mt-8 max-w-2xl text-[16px] leading-relaxed text-muted">
           {study.summary[locale]}
         </p>
+        <CaseStudyBody study={study} locale={locale} dict={dict} />
       </div>
     </article>
   );

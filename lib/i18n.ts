@@ -29,6 +29,11 @@ export type Dictionary = {
     downloadCv: string;
     caseStudies: string;
     caseStudyBack: string;
+    caseStudyContext: string;
+    caseStudyProcess: string;
+    caseStudySolution: string;
+    caseStudyImpact: string;
+    caseStudyRelated: string;
   };
   footer: {
     contact: string;

@@ -20,7 +20,12 @@
     "heading": "Досвед",
     "downloadCv": "Спампаваць CV",
     "caseStudies": "Кейсы",
-    "caseStudyBack": "Назад да досведу"
+    "caseStudyBack": "Назад да досведу",
+    "caseStudyContext": "Кантекст",
+    "caseStudyProcess": "Працэс",
+    "caseStudySolution": "Рашэнне",
+    "caseStudyImpact": "Вынік",
+    "caseStudyRelated": "Таксама"
   },
   "footer": {
     "contact": "Звязацца"
