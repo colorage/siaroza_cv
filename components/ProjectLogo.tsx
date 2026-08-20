@@ -228,15 +228,14 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   "mogilev-norm": (
-    <Mark>
-      <path
-        d="M16 27s-8-6.4-8-13a8 8 0 1 1 16 0c0 6.6-8 13-8 13Z"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinejoin="round"
-      />
-      <circle cx="16" cy="14" r="2.75" stroke="currentColor" strokeWidth="1.75" />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/mogilev-norm.svg"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
   akanicy: (
     <Mark>
@@ -375,6 +374,7 @@ const imageLogos = new Set([
   "pavetra",
   "radar-rockets",
   "spasem-bel",
+  "mogilev-norm",
 ]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
