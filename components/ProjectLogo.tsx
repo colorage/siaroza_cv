@@ -345,6 +345,16 @@ const icons: Record<string, ReactNode> = {
       />
     </Mark>
   ),
+  radzima: (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/radzima.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
+  ),
 };
 
 function FallbackMark({ name }: { name: string }) {
@@ -372,7 +382,13 @@ function FallbackMark({ name }: { name: string }) {
   );
 }
 
-const imageLogos = new Set(["lacinka", "kropki-mahiliou", "bloodlabs", "losque"]);
+const imageLogos = new Set([
+  "lacinka",
+  "kropki-mahiliou",
+  "bloodlabs",
+  "losque",
+  "radzima",
+]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
   const isImageLogo = imageLogos.has(slug);
