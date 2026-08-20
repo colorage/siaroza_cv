@@ -20,7 +20,12 @@
     "heading": "Experience",
     "downloadCv": "Download CV",
     "caseStudies": "Case studies",
-    "caseStudyBack": "Back to experience"
+    "caseStudyBack": "Back to experience",
+    "caseStudyContext": "Context",
+    "caseStudyProcess": "Process",
+    "caseStudySolution": "Solution",
+    "caseStudyImpact": "Impact",
+    "caseStudyRelated": "Related"
   },
   "footer": {
     "contact": "Contact me"
