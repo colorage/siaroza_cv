@@ -220,26 +220,14 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   "sunsethunters-club": (
-    <Mark>
-      <path
-        d="M6 20h20"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M9 20a7 7 0 0 1 14 0"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M16 6v3M8.5 9.5l2 2M23.5 9.5l-2 2"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/sunsethunters-club.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
   lacinka: (
     // eslint-disable-next-line @next/next/no-img-element
@@ -357,6 +345,7 @@ const imageLogos = new Set([
   "belarus-bw",
   "pah-bot",
   "polny-trash",
+  "sunsethunters-club",
 ]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
