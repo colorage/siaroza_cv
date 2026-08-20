@@ -34,14 +34,14 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   "spasem-bel": (
-    <Mark>
-      <path
-        d="M16 27s-9-5.6-9-12.2A5.4 5.4 0 0 1 16 10a5.4 5.4 0 0 1 9 4.8C25 21.4 16 27 16 27Z"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinejoin="round"
-      />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/spasem-bel.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
   bloodlabs: (
     // eslint-disable-next-line @next/next/no-img-element
@@ -374,6 +374,7 @@ const imageLogos = new Set([
   "my-ostalis",
   "pavetra",
   "radar-rockets",
+  "spasem-bel",
 ]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
