@@ -35,8 +35,7 @@ export function ProjectsGrid({ locale, dict }: Props) {
                   aria-label={ndaTitle}
                 >
                   <AsciiNoise />
-                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,color-mix(in_oklab,var(--background)_8%,transparent)_0%,transparent_72%)]" />
-                  <h3 className="relative z-10 max-w-[16ch] px-6 text-center text-[22px] leading-tight tracking-tight text-foreground sm:text-[24px]">
+                  <h3 className="relative z-10 inline-block bg-background px-10 py-3 text-center text-[16px] tracking-tight text-foreground">
                     {ndaTitle}
                   </h3>
                 </div>
