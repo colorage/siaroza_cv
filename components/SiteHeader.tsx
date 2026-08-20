@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Dictionary, Locale } from "@/lib/i18n";
+import { isPetProjectsEnabled } from "@/lib/site-url";
 
 type Props = {
   locale: Locale;
@@ -22,9 +23,11 @@ export function SiteHeader({ locale, dict }: Props) {
           <a href="#experience" className="transition-colors hover:text-foreground">
             {dict.nav.experience}
           </a>
-          <a href="#projects" className="transition-colors hover:text-foreground">
-            {dict.nav.projects}
-          </a>
+          {isPetProjectsEnabled() ? (
+            <a href="#projects" className="transition-colors hover:text-foreground">
+              {dict.nav.projects}
+            </a>
+          ) : null}
           <Link
             href={`/${other}`}
             className="rounded-full border border-border-strong px-3 py-1 text-foreground transition-colors hover:bg-surface"

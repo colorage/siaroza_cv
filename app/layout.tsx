@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://siaroza.com"),
+  metadataBase: new URL(getSiteUrl()),
   title: "Siaroža — Design Engineer",
   description:
     "Portfolio of Siarhiej Piechcieraǔ — Design Engineer. Experience, pet projects, contact.",

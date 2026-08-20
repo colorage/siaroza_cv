@@ -3,12 +3,14 @@ import { notFound } from "next/navigation";
 import { ProjectLogo } from "@/components/ProjectLogo";
 import { getProject, projects } from "@/content/projects";
 import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
+import { isPetProjectsEnabled } from "@/lib/site-url";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
 export function generateStaticParams() {
+  if (!isPetProjectsEnabled()) return [];
   return locales.flatMap((locale) =>
     projects
       .filter((project) => project.stage !== "nda")
@@ -17,6 +19,7 @@ export function generateStaticParams() {
 }
 
 export default async function ProjectPage({ params }: Props) {
+  if (!isPetProjectsEnabled()) notFound();
   const { locale: localeParam, slug } = await params;
   if (!isLocale(localeParam)) notFound();
   const locale = localeParam as Locale;
