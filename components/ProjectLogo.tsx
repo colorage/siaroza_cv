@@ -233,23 +233,6 @@ const icons: Record<string, ReactNode> = {
       />
     </Mark>
   ),
-  "kulturny-mogilev": (
-    <Mark>
-      <path
-        d="M6 25V11l10-6 10 6v14"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 25v-7h8v7M12 14h8"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </Mark>
-  ),
   akanicy: (
     <Mark>
       <rect

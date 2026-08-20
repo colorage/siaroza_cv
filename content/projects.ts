@@ -170,16 +170,6 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: "kulturny-mogilev",
-    name: "культурный могилев",
-    stage: "release",
-    status: "finished",
-    description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
-    },
-  },
-  {
     slug: "akanicy",
     name: "akanicy",
     stage: "poc",
