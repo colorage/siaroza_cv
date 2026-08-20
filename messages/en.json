@@ -13,11 +13,15 @@
     "title": "Design Engineer",
     "tagline": "Motion, visual systems, and product craft — with a bias for clarity.",
     "email": "Email",
-    "telegram": "Telegram"
+    "telegram": "Telegram",
+    "linkedin": "LinkedIn"
   },
   "experience": {
     "heading": "Experience",
     "downloadCv": "Download CV"
+  },
+  "footer": {
+    "contact": "Contact me"
   },
   "projects": {
     "heading": "Pet projects",
@@ -35,6 +39,8 @@
     },
     "back": "Back",
     "visit": "Visit project",
+    "instagram": "Instagram",
+    "telegram": "Telegram",
     "ndaNote": "Details under NDA.",
     "ndaPrivateTitle": "Project {name} is not public",
     "placeholder": "Description coming soon."

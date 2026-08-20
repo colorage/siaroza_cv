@@ -250,6 +250,17 @@ const icons: Record<string, ReactNode> = {
       />
     </Mark>
   ),
+  "mogilev-norm": (
+    <Mark>
+      <path
+        d="M16 27s-8-6.4-8-13a8 8 0 1 1 16 0c0 6.6-8 13-8 13Z"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinejoin="round"
+      />
+      <circle cx="16" cy="14" r="2.75" stroke="currentColor" strokeWidth="1.75" />
+    </Mark>
+  ),
   akanicy: (
     <Mark>
       <rect

@@ -3,12 +3,18 @@ import type { Locale } from "@/lib/i18n";
 export type ProjectStage = "release" | "mvp" | "poc" | "nda";
 export type ProjectStatus = "finished" | "active" | "prototype";
 
+export type ProjectLink = {
+  label: string;
+  href: string;
+};
+
 export type Project = {
   slug: string;
   name: string;
   stage: ProjectStage;
   status: ProjectStatus;
   url?: string;
+  links?: ProjectLink[];
   description: Record<Locale, string>;
 };
 
@@ -177,6 +183,20 @@ export const projects: Project[] = [
     description: {
       en: "Description coming soon.",
       by: "Апісанне з'явіцца пазней.",
+    },
+  },
+  {
+    slug: "mogilev-norm",
+    name: "могилев нормальный",
+    stage: "release",
+    status: "finished",
+    links: [
+      { label: "instagram", href: "https://www.instagram.com/mogilev_norm/" },
+      { label: "telegram", href: "https://t.me/mogilev_norm" },
+    ],
+    description: {
+      en: "City guide for Mahilioǔ — where to go so you don’t regret the time: local events, venues, and culture.",
+      by: "Гід па Магілёве — куды схадзіць і не пашкадаваць пра час: мясцовыя падзеі, месцы і культура.",
     },
   },
   {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { ContactActions } from "@/components/ContactActions";
 import { SiteHeader } from "@/components/SiteHeader";
 import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
 
@@ -32,9 +33,17 @@ export default async function LocaleLayout({ children, params }: Props) {
     <div lang={locale === "by" ? "be" : "en"} className="flex min-h-full flex-col">
       <SiteHeader locale={locale} dict={dict} />
       <main className="flex-1">{children}</main>
-      <footer className="border-t border-border py-8">
-        <div className="mx-auto max-w-5xl px-6 text-[13px] text-muted">
-          © {new Date().getFullYear()} {dict.hero.shortName}
+      <footer className="border-t border-border py-16">
+        <div className="mx-auto max-w-5xl px-6">
+          <h2 className="text-3xl tracking-tight text-foreground md:text-4xl">
+            {dict.footer.contact}
+          </h2>
+          <div className="mt-8">
+            <ContactActions dict={dict} />
+          </div>
+          <p className="mt-10 text-[13px] text-muted">
+            © {new Date().getFullYear()} {dict.hero.shortName}
+          </p>
         </div>
       </footer>
     </div>

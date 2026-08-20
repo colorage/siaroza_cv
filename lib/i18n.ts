@@ -22,10 +22,14 @@ export type Dictionary = {
     tagline: string;
     email: string;
     telegram: string;
+    linkedin: string;
   };
   experience: {
     heading: string;
     downloadCv: string;
+  };
+  footer: {
+    contact: string;
   };
   projects: {
     heading: string;
@@ -34,6 +38,8 @@ export type Dictionary = {
     status: Record<string, string>;
     back: string;
     visit: string;
+    instagram: string;
+    telegram: string;
     ndaNote: string;
     ndaPrivateTitle: string;
     placeholder: string;
