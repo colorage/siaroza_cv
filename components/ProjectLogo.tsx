@@ -338,6 +338,16 @@ const icons: Record<string, ReactNode> = {
       <path d="M16 7a9 9 0 0 0 0 18V7Z" fill="currentColor" />
     </Mark>
   ),
+  radzima: (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/radzima.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
+  ),
 };
 
 function FallbackMark({ name }: { name: string }) {
@@ -376,6 +386,7 @@ const imageLogos = new Set([
   "spasem-bel",
   "mogilev-norm",
   "yadoma-bel",
+  "radzima",
 ]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
