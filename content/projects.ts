@@ -34,6 +34,16 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "spasem-bel",
+    name: "спасём бел",
+    stage: "release",
+    status: "finished",
+    description: {
+      en: "Description coming soon.",
+      by: "Апісанне з'явіцца пазней.",
+    },
+  },
+  {
     slug: "bloodlabs",
     name: "Blood Labs",
     stage: "release",
