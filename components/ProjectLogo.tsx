@@ -230,7 +230,7 @@ const icons: Record<string, ReactNode> = {
   "mogilev-norm": (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src="/projects/mogilev-norm.svg"
+      src="/projects/mogilev-norm.png"
       alt=""
       width={32}
       height={32}
