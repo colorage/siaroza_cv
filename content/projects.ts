@@ -287,6 +287,16 @@ export const projects: Project[] = [
       by: "Гісторыі беларускага супраціву — героі, вядомыя людзі, валанцёры і ініцыятывы — супраць інфармацыйнай вайны, якая малюе ўсю Беларусь як ворага.",
     },
   },
+  {
+    slug: "radzima",
+    name: "Радзіма",
+    stage: "poc",
+    status: "active",
+    description: {
+      en: "Latin and Cyrillic typeface.",
+      by: "Лацінскі і кірылічны шрыфт.",
+    },
+  },
 ];
 
 export function getProject(slug: string): Project | undefined {

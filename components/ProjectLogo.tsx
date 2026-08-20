@@ -24,24 +24,24 @@ function Mark({ children }: { children: ReactNode }) {
 
 const icons: Record<string, ReactNode> = {
   "yadoma-bel": (
-    <Mark>
-      <path
-        d="M6 14.5 16 6l10 8.5V26a1 1 0 0 1-1 1h-6v-7h-6v7H7a1 1 0 0 1-1-1V14.5Z"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinejoin="round"
-      />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/yadoma-bel.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
   "spasem-bel": (
-    <Mark>
-      <path
-        d="M16 27s-9-5.6-9-12.2A5.4 5.4 0 0 1 16 10a5.4 5.4 0 0 1 9 4.8C25 21.4 16 27 16 27Z"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinejoin="round"
-      />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/spasem-bel.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
   bloodlabs: (
     // eslint-disable-next-line @next/next/no-img-element
@@ -215,15 +215,14 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   "mogilev-norm": (
-    <Mark>
-      <path
-        d="M16 27s-8-6.4-8-13a8 8 0 1 1 16 0c0 6.6-8 13-8 13Z"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinejoin="round"
-      />
-      <circle cx="16" cy="14" r="2.75" stroke="currentColor" strokeWidth="1.75" />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/mogilev-norm.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
   akanicy: (
     <Mark>
@@ -321,10 +320,24 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   "belarus-bw": (
-    <Mark>
-      <circle cx="16" cy="16" r="9" stroke="currentColor" strokeWidth="1.75" />
-      <path d="M16 7a9 9 0 0 0 0 18V7Z" fill="currentColor" />
-    </Mark>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/belarus-bw.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
+  ),
+  radzima: (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/radzima.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
   ),
 };
 
@@ -361,6 +374,11 @@ const imageLogos = new Set([
   "my-ostalis",
   "pavetra",
   "radar-rockets",
+  "spasem-bel",
+  "mogilev-norm",
+  "yadoma-bel",
+  "radzima",
+  "belarus-bw",
   "pah-bot",
 ]);
 
