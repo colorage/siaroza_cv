@@ -18,7 +18,14 @@
   },
   "experience": {
     "heading": "Досвед",
-    "downloadCv": "Спампаваць CV"
+    "downloadCv": "Спампаваць CV",
+    "caseStudies": "Кейсы",
+    "caseStudyBack": "Назад да досведу",
+    "caseStudyContext": "Кантекст",
+    "caseStudyProcess": "Працэс",
+    "caseStudySolution": "Рашэнне",
+    "caseStudyImpact": "Вынік",
+    "caseStudyRelated": "Таксама"
   },
   "footer": {
     "contact": "Звязацца"
@@ -39,6 +46,8 @@
     },
     "back": "Назад",
     "visit": "Адкрыць праект",
+    "instagram": "Instagram",
+    "telegram": "Telegram",
     "ndaNote": "Дэталі пад NDA.",
     "ndaPrivateTitle": "Праект {name} не публічны",
     "placeholder": "Апісанне з'явіцца пазней."
