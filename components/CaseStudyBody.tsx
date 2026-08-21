@@ -52,7 +52,7 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
   return (
     <div className="max-w-2xl">
       {showContext ? (
-        <Section title={dict.experience.caseStudyContext}>
+        <Section title={dict.caseStudies.context}>
           <div className="space-y-4 text-[16px] leading-relaxed text-muted">
             {hasText(context) ? <p>{context}</p> : null}
             {hasText(problem) ? <p>{problem}</p> : null}
@@ -61,7 +61,7 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
       ) : null}
 
       {hasList(process) ? (
-        <Section title={dict.experience.caseStudyProcess}>
+        <Section title={dict.caseStudies.process}>
           <ol className="list-decimal space-y-3 pl-5 text-[16px] leading-relaxed text-muted">
             {process.map((step) => (
               <li key={step}>{step}</li>
@@ -71,7 +71,7 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
       ) : null}
 
       {showSolution ? (
-        <Section title={dict.experience.caseStudySolution}>
+        <Section title={dict.caseStudies.solution}>
           {hasText(solution) ? (
             <p className="text-[16px] leading-relaxed text-muted">{solution}</p>
           ) : null}
@@ -91,7 +91,7 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
       ) : null}
 
       {hasList(impact) ? (
-        <Section title={dict.experience.caseStudyImpact}>
+        <Section title={dict.caseStudies.impact}>
           <ul className="space-y-2">
             {impact.map((item) => (
               <li
@@ -106,15 +106,15 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
       ) : null}
 
       {related.length ? (
-        <Section title={dict.experience.caseStudyRelated}>
-          <ul className="flex flex-wrap gap-2">
+        <Section title={dict.caseStudies.related}>
+          <ul className="space-y-2">
             {related.map((item) => (
               <li key={item.slug}>
                 <Link
                   href={`/${locale}/work/${item.slug}`}
-                  className="inline-flex rounded-full border border-border px-3 py-1 text-[13px] text-muted transition-colors hover:border-accent hover:text-foreground"
+                  className="text-[16px] text-foreground underline-offset-4 transition-opacity hover:opacity-70"
                 >
-                  {item.title[locale]}
+                  {item.title[locale]} →
                 </Link>
               </li>
             ))}

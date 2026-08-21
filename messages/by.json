@@ -1,11 +1,13 @@
 {
   "meta": {
     "title": "Siaroža — Design Engineer",
-    "description": "Партфоліа Сяргея Пехцерава — Design Engineer. Досвед, пет-праекты, кантакты."
+    "description": "Партфоліа Сяргея Пехцерава — Design Engineer. Досвед, кейсы, пет-праекты, кантакты."
   },
   "nav": {
     "experience": "Досвед",
-    "projects": "Праекты"
+    "portfolio": "Партфоліа",
+    "caseStudies": "Кейсы",
+    "projects": "Пет-праекты"
   },
   "hero": {
     "name": "Сяргей Пехцераў",
@@ -26,6 +28,18 @@
     "caseStudySolution": "Рашэнне",
     "caseStudyImpact": "Вынік",
     "caseStudyRelated": "Таксама"
+  },
+  "portfolio": {
+    "heading": "Партфоліа"
+  },
+  "caseStudies": {
+    "heading": "Кейсы",
+    "back": "Назад да кейсаў",
+    "context": "Кантекст",
+    "process": "Працэс",
+    "solution": "Рашэнне",
+    "impact": "Вынік",
+    "related": "Таксама"
   },
   "footer": {
     "contact": "Звязацца"

@@ -1,11 +1,13 @@
 {
   "meta": {
     "title": "Siaroža — Design Engineer",
-    "description": "Portfolio of Siarhiej Piechcieraǔ — Design Engineer. Experience, pet projects, contact."
+    "description": "Portfolio of Siarhiej Piechcieraǔ — Design Engineer. Experience, case studies, pet projects, contact."
   },
   "nav": {
     "experience": "Experience",
-    "projects": "Projects"
+    "portfolio": "Portfolio",
+    "caseStudies": "Case studies",
+    "projects": "Pet projects"
   },
   "hero": {
     "name": "Siarhiej Piechcieraǔ",
@@ -26,6 +28,18 @@
     "caseStudySolution": "Solution",
     "caseStudyImpact": "Impact",
     "caseStudyRelated": "Related"
+  },
+  "portfolio": {
+    "heading": "Portfolio"
+  },
+  "caseStudies": {
+    "heading": "Case studies",
+    "back": "Back to case studies",
+    "context": "Context",
+    "process": "Process",
+    "solution": "Solution",
+    "impact": "Impact",
+    "related": "Related"
   },
   "footer": {
     "contact": "Contact me"

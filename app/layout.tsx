@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: "Siaroža — Design Engineer",
   description:
-    "Portfolio of Siarhiej Piechcieraǔ — Design Engineer. Experience, pet projects, contact.",
+    "Portfolio of Siarhiej Piechcieraǔ — Design Engineer. Experience, case studies, pet projects, contact.",
   alternates: {
     canonical: "/",
   },

@@ -1,4 +1,3 @@
-import { experience } from "@/content/experience";
 import type { Locale } from "@/lib/i18n";
 
 export type LocalizedString = Record<Locale, string>;
@@ -184,12 +183,21 @@ export function getCaseStudy(slug: string): CaseStudy | undefined {
   return caseStudies.find((study) => study.slug === slug);
 }
 
-export function getCaseStudiesForExperience(experienceId: string): CaseStudy[] {
-  const item = experience.find((entry) => entry.id === experienceId);
-  if (!item?.caseStudySlugs?.length) return [];
-  return item.caseStudySlugs
-    .map((slug) => getCaseStudy(slug))
-    .filter((study): study is CaseStudy => study !== undefined);
+export function hasCaseStudyBody(study: CaseStudy): boolean {
+  return Boolean(
+    study.context ||
+      study.problem ||
+      study.process ||
+      study.solution ||
+      study.solutionItems ||
+      study.impact,
+  );
+}
+
+export function getCaseStudiesForIndex(): CaseStudy[] {
+  return [...caseStudies].sort(
+    (a, b) => Number(hasCaseStudyBody(b)) - Number(hasCaseStudyBody(a)),
+  );
 }
 
 export function getRelatedCaseStudies(study: CaseStudy): CaseStudy[] {

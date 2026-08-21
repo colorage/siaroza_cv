@@ -40,16 +40,16 @@ export default async function CaseStudyPage({ params }: Props) {
   const dict = await getDictionary(locale);
 
   return (
-    <article className="mx-auto max-w-5xl px-6 py-16 md:py-24">
+    <article className="mx-auto max-w-2xl px-6 py-16 md:py-24">
       <Link
-        href={`/${locale}#experience`}
+        href={`/${locale}#case-studies`}
         className="text-[13px] text-muted transition-colors hover:text-foreground"
       >
-        ← {dict.experience.caseStudyBack}
+        ← {dict.caseStudies.back}
       </Link>
 
-      <div className="mt-10 animate-fade-up">
-        <h1 className="max-w-3xl text-[clamp(2rem,5vw,3rem)] leading-[1.1] tracking-[-0.03em] text-foreground">
+      <header className="mt-10 animate-fade-up">
+        <h1 className="text-[clamp(2rem,5vw,3rem)] leading-[1.1] tracking-[-0.03em] text-foreground">
           {study.title[locale]}
         </h1>
         <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[12px] tracking-wide text-muted uppercase">
@@ -71,9 +71,12 @@ export default async function CaseStudyPage({ params }: Props) {
             ))}
           </ul>
         ) : null}
-        <p className="mt-8 max-w-2xl text-[16px] leading-relaxed text-muted">
+        <p className="mt-8 text-[18px] leading-relaxed text-muted">
           {study.summary[locale]}
         </p>
+      </header>
+
+      <div className="animate-fade-up">
         <CaseStudyBody study={study} locale={locale} dict={dict} />
       </div>
     </article>
