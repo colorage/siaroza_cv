@@ -3,6 +3,13 @@ import type { Locale } from "@/lib/i18n";
 export type ProjectStage = "release" | "mvp" | "poc" | "nda";
 export type ProjectStatus = "finished" | "active" | "prototype";
 
+export type ProjectGalleryImage = {
+  src: string;
+  width: number;
+  height: number;
+  alt: Record<Locale, string>;
+};
+
 export type Project = {
   slug: string;
   name: string;
@@ -10,6 +17,7 @@ export type Project = {
   status: ProjectStatus;
   url?: string;
   description: Record<Locale, string>;
+  gallery?: ProjectGalleryImage[];
 };
 
 export const projects: Project[] = [
@@ -43,6 +51,53 @@ export const projects: Project[] = [
       en: "Private iOS app to import blood lab reports from photo or PDF, track markers on a timeline, and compare results over time.",
       by: "Прыватны iOS‑дадатак для імпарту аналізаў крыві з фота ці PDF, адсочвання паказчыкаў на шкале часу і параўнання вынікаў.",
     },
+    gallery: [
+      {
+        src: "/projects/bloodlabs/import.jpg",
+        width: 1242,
+        height: 2688,
+        alt: {
+          en: "Blood Labs import screen — add lab results from a photo or PDF",
+          by: "Экран імпарту Blood Labs — дадаць аналізы з фота ці PDF",
+        },
+      },
+      {
+        src: "/projects/bloodlabs/store.jpg",
+        width: 1242,
+        height: 2688,
+        alt: {
+          en: "Blood Labs analysis overview — store results securely on the device",
+          by: "Агляд аналізу ў Blood Labs — вынікі захоўваюцца на прыладзе",
+        },
+      },
+      {
+        src: "/projects/bloodlabs/track.jpg",
+        width: 1242,
+        height: 2688,
+        alt: {
+          en: "Blood Labs marker timeline — track LDL cholesterol over time",
+          by: "Шкала часу паказчыка ў Blood Labs — адсочванне LDL халестэрыну",
+        },
+      },
+      {
+        src: "/projects/bloodlabs/compare.jpg",
+        width: 1242,
+        height: 2688,
+        alt: {
+          en: "Blood Labs home — compare current and previous lab results",
+          by: "Галоўны экран Blood Labs — параўнанне бягучых і папярэдніх аналізаў",
+        },
+      },
+      {
+        src: "/projects/bloodlabs/family.jpg",
+        width: 1242,
+        height: 2688,
+        alt: {
+          en: "Blood Labs settings — manage family profiles on one device",
+          by: "Налады Blood Labs — кіраванне сямейнымі профілямі на адной прыладзе",
+        },
+      },
+    ],
   },
   {
     slug: "pavetra",

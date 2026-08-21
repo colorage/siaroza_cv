@@ -38,6 +38,7 @@ export type Dictionary = {
     status: Record<string, string>;
     back: string;
     visit: string;
+    gallery: string;
     ndaNote: string;
     ndaPrivateTitle: string;
     placeholder: string;

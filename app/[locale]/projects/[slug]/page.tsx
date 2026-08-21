@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ProjectGallery } from "@/components/ProjectGallery";
 import { ProjectLogo } from "@/components/ProjectLogo";
 import { getProject, projects } from "@/content/projects";
 import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
@@ -27,49 +28,62 @@ export default async function ProjectPage({ params }: Props) {
   if (!project || project.stage === "nda") notFound();
 
   const dict = await getDictionary(locale);
+  const gallery = project.gallery;
 
   return (
-    <article className="mx-auto max-w-5xl px-6 py-16 md:py-24">
-      <Link
-        href={`/${locale}#projects`}
-        className="text-[13px] text-muted transition-colors hover:text-foreground"
-      >
-        ← {dict.projects.back}
-      </Link>
+    <article className="py-16 md:py-24">
+      <div className="mx-auto max-w-5xl px-6">
+        <Link
+          href={`/${locale}#projects`}
+          className="text-[13px] text-muted transition-colors hover:text-foreground"
+        >
+          ← {dict.projects.back}
+        </Link>
 
-      <div className="mt-10 animate-fade-up">
-        <div className="flex flex-wrap items-center gap-4">
-          <ProjectLogo
-            slug={project.slug}
-            name={project.name}
-            className="h-14 w-14"
-          />
-          <div className="flex min-w-0 flex-wrap items-center gap-3">
-            <h1 className="text-[clamp(2rem,5vw,3rem)] tracking-[-0.03em] text-foreground">
-              {project.name}
-            </h1>
-            {project.status === "active" && (
-              <span className="rounded-full bg-[color-mix(in_oklab,#f54e00_18%,transparent)] px-2.5 py-1 text-[11px] font-medium tracking-wide text-accent uppercase">
-                {dict.projects.active}
-              </span>
-            )}
+        <div className="mt-10 animate-fade-up">
+          <div className="flex flex-wrap items-center gap-4">
+            <ProjectLogo
+              slug={project.slug}
+              name={project.name}
+              className="h-14 w-14"
+            />
+            <div className="flex min-w-0 flex-wrap items-center gap-3">
+              <h1 className="text-[clamp(2rem,5vw,3rem)] tracking-[-0.03em] text-foreground">
+                {project.name}
+              </h1>
+              {project.status === "active" && (
+                <span className="rounded-full bg-[color-mix(in_oklab,#f54e00_18%,transparent)] px-2.5 py-1 text-[11px] font-medium tracking-wide text-accent uppercase">
+                  {dict.projects.active}
+                </span>
+              )}
+            </div>
           </div>
+
+          <div className="mt-4 flex flex-wrap gap-3 font-mono text-[12px] tracking-wide text-muted uppercase">
+            <span className="rounded-full border border-border px-3 py-1">
+              {dict.projects.stage[project.stage]}
+            </span>
+            <span className="rounded-full border border-border px-3 py-1">
+              {dict.projects.status[project.status]}
+            </span>
+          </div>
+
+          <p className="mt-8 max-w-2xl text-[16px] leading-relaxed text-muted">
+            {project.description[locale]}
+          </p>
         </div>
+      </div>
 
-        <div className="mt-4 flex flex-wrap gap-3 font-mono text-[12px] tracking-wide text-muted uppercase">
-          <span className="rounded-full border border-border px-3 py-1">
-            {dict.projects.stage[project.stage]}
-          </span>
-          <span className="rounded-full border border-border px-3 py-1">
-            {dict.projects.status[project.status]}
-          </span>
-        </div>
+      {gallery?.length ? (
+        <ProjectGallery
+          images={gallery}
+          locale={locale}
+          label={dict.projects.gallery}
+        />
+      ) : null}
 
-        <p className="mt-8 max-w-2xl text-[16px] leading-relaxed text-muted">
-          {project.description[locale]}
-        </p>
-
-        {project.url ? (
+      {project.url ? (
+        <div className="mx-auto max-w-5xl px-6">
           <a
             href={project.url}
             target="_blank"
@@ -78,8 +92,8 @@ export default async function ProjectPage({ params }: Props) {
           >
             {dict.projects.visit} →
           </a>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
     </article>
   );
 }
