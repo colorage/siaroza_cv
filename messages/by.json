@@ -9,6 +9,9 @@
     "caseStudies": "Кейсы",
     "projects": "Пет-праекты"
   },
+  "a11y": {
+    "skipToContent": "Перайсці да зместу"
+  },
   "hero": {
     "name": "Сяргей Пехцераў",
     "shortName": "Siaroža",
@@ -69,7 +72,6 @@
     "telegram": "Telegram",
     "dribbble": "Глядзець на Dribbble",
     "ndaNote": "Дэталі пад NDA.",
-    "ndaPrivateTitle": "Праект {name} не публічны",
-    "placeholder": "Апісанне з'явіцца пазней."
+    "ndaPrivateTitle": "Праект {name} не публічны"
   }
 }

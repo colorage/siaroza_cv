@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -14,6 +15,7 @@ import {
   type Locale,
 } from "@/lib/i18n";
 import { isPetProjectsEnabled } from "@/lib/site-url";
+import { pageMetadata } from "@/lib/metadata";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -106,6 +108,21 @@ export function generateStaticParams() {
       .filter((project) => project.stage !== "nda")
       .map((project) => ({ locale, slug: project.slug })),
   );
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  if (!isPetProjectsEnabled()) return {};
+  const { locale: localeParam, slug } = await params;
+  if (!isLocale(localeParam)) return {};
+  const locale = localeParam as Locale;
+  const project = getProject(slug);
+  if (!project || project.stage === "nda") return {};
+  return pageMetadata({
+    locale,
+    title: `${project.name} — Siaroža`,
+    description: project.description[locale],
+    path: `/projects/${project.slug}`,
+  });
 }
 
 export default async function ProjectPage({ params }: Props) {
