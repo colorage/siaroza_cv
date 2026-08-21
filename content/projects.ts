@@ -181,6 +181,20 @@ export const projects: Project[] = [
       en: "Solana Hackathon project — a community blockchain-based game on Solana.",
       by: "Праект для Solana Hackathon — супольная блокчэйн-гульня на Solana.",
     },
+    media: [
+      {
+        type: "youtube",
+        id: "9m_1mo-vgD8",
+        title: {
+          en: "Impact Game — Pitch",
+          by: "Impact Game — пітч",
+        },
+        caption: {
+          en: "Hackathon pitch — weekly Solana community game of capturing, upgrading, and burning grid cells.",
+          by: "Пітч для хакатону — штотыднёвая Solana-гульня супольнасці: захоп, паляпшэнне і спальванне клетак сеткі.",
+        },
+      },
+    ],
   },
   {
     slug: "polny-trash",
