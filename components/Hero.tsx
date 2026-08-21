@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ContactActions } from "@/components/ContactActions";
 import { SkillCursorTrail } from "@/components/SkillCursorTrail";
 import type { Dictionary } from "@/lib/i18n";
@@ -9,7 +10,23 @@ type Props = {
 export function Hero({ dict }: Props) {
   return (
     <SkillCursorTrail>
-      <div className="mx-auto flex min-h-[calc(100vh-3.5rem)] max-w-5xl flex-col justify-center px-6 py-24">
+      <Image
+        src="/hero_bg.jpg"
+        alt=""
+        fill
+        preload
+        sizes="100vw"
+        className="pointer-events-none object-cover object-right"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background from-[18%] via-background/80 via-50% to-transparent"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent"
+      />
+      <div className="relative z-[1] mx-auto flex min-h-[calc(100vh-3.5rem)] max-w-5xl flex-col justify-center px-6 py-24">
         <p className="animate-fade-up mb-4 text-[13px] tracking-[0.08em] text-muted uppercase">
           {dict.hero.shortName}
         </p>
