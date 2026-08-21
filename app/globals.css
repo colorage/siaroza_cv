@@ -59,10 +59,63 @@ body {
   animation: fade-up 0.7s ease-out 0.24s both;
 }
 
+.skill-cursor-bubble {
+  position: fixed;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.65rem 0.38rem 0.7rem;
+  border-radius: 0 14px 14px 14px;
+  color: #14120b;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px color-mix(in oklab, #000 32%, transparent);
+  animation: skill-bubble-life 6s ease-out forwards;
+  will-change: opacity;
+}
+
+.skill-cursor-caret {
+  display: inline-block;
+  width: 1.5px;
+  height: 0.85em;
+  margin-left: 0.2em;
+  background: #14120b;
+  animation: skill-caret-blink 1s steps(1) infinite;
+}
+
+@keyframes skill-bubble-life {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes skill-caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-up-delay,
   .animate-fade-up-delay-2 {
+    animation: none;
+  }
+
+  .skill-cursor-bubble,
+  .skill-cursor-caret {
     animation: none;
   }
 }
