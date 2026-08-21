@@ -41,6 +41,7 @@ export type Dictionary = {
     heading: string;
     back: string;
     viewOnDribbble: string;
+    slide: string;
   };
   caseStudies: {
     heading: string;

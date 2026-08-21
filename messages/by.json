@@ -32,7 +32,8 @@
   "portfolio": {
     "heading": "Партфоліа",
     "back": "Назад",
-    "viewOnDribbble": "Адкрыць на Dribbble"
+    "viewOnDribbble": "Адкрыць на Dribbble",
+    "slide": "{current} / {total}"
   },
   "caseStudies": {
     "heading": "Кейсы",

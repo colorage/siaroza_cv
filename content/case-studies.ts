@@ -142,18 +142,6 @@ export const caseStudies: CaseStudy[] = [
     relatedSlugs: ["game-thumbnails"],
   },
   {
-    slug: "pitchdeck-app-design",
-    experienceId: "ptchr",
-    title: {
-      en: "Pitchdeck + App Design",
-      by: "Пітчдэк + дызайн дадатка",
-    },
-    summary: {
-      en: "Pitch decks for investor presentations and UX/UI for the mobile app from early concept through MVP, with brand identity as the visual foundation.",
-      by: "Пітч-дэкі для інвестараў і UX/UI мабільнага дадатка ад канцэпту да MVP, з брэндавай ідэнтычнасцю як візуальнай асновай.",
-    },
-  },
-  {
     slug: "brandbook",
     experienceId: "hiveon",
     title: {
