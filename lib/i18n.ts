@@ -61,6 +61,7 @@ export type Dictionary = {
     visit: string;
     instagram: string;
     telegram: string;
+    dribbble: string;
     ndaNote: string;
     ndaPrivateTitle: string;
     placeholder: string;

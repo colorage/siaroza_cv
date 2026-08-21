@@ -8,6 +8,19 @@ export type ProjectLink = {
   href: string;
 };
 
+export type ProjectMedia =
+  | {
+      type: "image";
+      src: string;
+      width: number;
+      height: number;
+      alt: Record<Locale, string>;
+      caption?: Record<Locale, string>;
+      href?: string;
+    }
+  | { type: "youtube"; id: string; caption?: Record<Locale, string> }
+  | { type: "pdf-pages"; dir: string; count: number };
+
 export type Project = {
   slug: string;
   name: string;
@@ -15,6 +28,7 @@ export type Project = {
   status: ProjectStatus;
   url?: string;
   links?: ProjectLink[];
+  media?: ProjectMedia[];
   description: Record<Locale, string>;
 };
 
@@ -212,6 +226,24 @@ export const projects: Project[] = [
       {
         label: "Flickr",
         href: "https://www.flickr.com/photos/187970690@N08/albums/72157713847203666",
+      },
+      { label: "dribbble", href: "https://dribbble.com/shots/2848906-oXana" },
+    ],
+    media: [
+      {
+        type: "image",
+        src: "/projects/tedxmahilyow/oxana.png",
+        width: 800,
+        height: 600,
+        alt: {
+          en: "oXana — TEDxMahilyow logo, a red x wrapped in pale blue ribbons",
+          by: "oXana — лагатып TEDxMahilyow, чырвоны x у блакітных стужках",
+        },
+        caption: {
+          en: "Logo for TEDxMahilyow — a red x wrapped in pale blue ribbons, after Yoga Perdana.",
+          by: "Лагатып TEDxMahilyow — чырвоны x у блакітных стужках, пасля работ Yoga Perdana.",
+        },
+        href: "https://dribbble.com/shots/2848906-oXana",
       },
     ],
     description: {
