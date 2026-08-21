@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ContactActions } from "@/components/ContactActions";
 import { SiteHeader } from "@/components/SiteHeader";
-import { SkillCursorTrail } from "@/components/SkillCursorTrail";
 import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
 
 export function generateStaticParams() {
@@ -33,7 +32,6 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <div lang={locale === "by" ? "be" : "en"} className="flex min-h-full flex-col">
       <SiteHeader locale={locale} dict={dict} />
-      <SkillCursorTrail />
       <main className="flex-1">{children}</main>
       <footer className="border-t border-border py-16">
         <div className="mx-auto max-w-5xl px-6">

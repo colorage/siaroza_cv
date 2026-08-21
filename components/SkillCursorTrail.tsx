@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { skills } from "@/content/skills";
 
 const COLORS = [
@@ -27,6 +27,10 @@ type Bubble = {
   color: string;
 };
 
+type Props = {
+  children: ReactNode;
+};
+
 function pick<T>(items: readonly T[]): T {
   return items[Math.floor(Math.random() * items.length)]!;
 }
@@ -36,11 +40,15 @@ function pickSkill(exclude: string | null): string {
   return pick(pool);
 }
 
-export function SkillCursorTrail() {
+export function SkillCursorTrail({ children }: Props) {
+  const hostRef = useRef<HTMLElement>(null);
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
   const lastSkillRef = useRef<string | null>(null);
 
   useEffect(() => {
+    const host = hostRef.current;
+    if (!host) return;
+
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const coarsePointer = window.matchMedia("(pointer: coarse)");
     if (reducedMotion.matches || coarsePointer.matches) return;
@@ -77,7 +85,9 @@ export function SkillCursorTrail() {
     };
 
     const onMove = (event: PointerEvent) => {
-      const { clientX: x, clientY: y } = event;
+      const rect = host.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
       const now = performance.now();
 
       if (!hasSpawned) {
@@ -98,33 +108,37 @@ export function SkillCursorTrail() {
       spawn(x, y);
     };
 
-    window.addEventListener("pointermove", onMove, { passive: true });
+    host.addEventListener("pointermove", onMove, { passive: true });
 
     return () => {
-      window.removeEventListener("pointermove", onMove);
+      host.removeEventListener("pointermove", onMove);
       for (const timeout of timeouts) {
         window.clearTimeout(timeout);
       }
     };
   }, []);
 
-  if (bubbles.length === 0) return null;
-
   return (
-    <div aria-hidden className="pointer-events-none">
-      {bubbles.map((bubble) => (
-        <span
-          key={bubble.id}
-          className="skill-cursor-bubble"
-          style={{
-            left: bubble.x,
-            top: bubble.y,
-            backgroundColor: bubble.color,
-          }}
-        >
-          {bubble.skill}
-        </span>
-      ))}
-    </div>
+    <section
+      ref={hostRef}
+      className="relative isolate min-h-[calc(100vh-3.5rem)] overflow-hidden"
+    >
+      {children}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
+        {bubbles.map((bubble) => (
+          <span
+            key={bubble.id}
+            className="skill-cursor-bubble"
+            style={{
+              left: bubble.x,
+              top: bubble.y,
+              backgroundColor: bubble.color,
+            }}
+          >
+            {bubble.skill}
+          </span>
+        ))}
+      </div>
+    </section>
   );
 }
