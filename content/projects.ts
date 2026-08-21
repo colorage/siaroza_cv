@@ -203,6 +203,23 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "tedxmahilyow",
+    name: "TEDxMahilyow",
+    stage: "release",
+    status: "finished",
+    links: [
+      { label: "TED", href: "https://www.ted.com/search?q=TEDxMahilyow" },
+      {
+        label: "Flickr",
+        href: "https://www.flickr.com/photos/187970690@N08/albums/72157713847203666",
+      },
+    ],
+    description: {
+      en: "Independently organized TED conference in Mahilioǔ (2016–2019) — volunteer-run talks by local speakers, published on TED.com.",
+      by: "Незалежная канферэнцыя TED у Магілёве (2016–2019) — валанцёрскія выступы мясцовых спікераў, апублікаваныя на TED.com.",
+    },
+  },
+  {
     slug: "akanicy",
     name: "akanicy",
     stage: "poc",
