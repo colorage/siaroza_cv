@@ -154,15 +154,22 @@ export default async function ProjectPage({ params }: Props) {
               name={project.name}
               className="h-14 w-14"
             />
-            <div className="flex min-w-0 flex-wrap items-center gap-3">
-              <h1 className="text-[clamp(2rem,5vw,3rem)] tracking-[-0.03em] text-foreground">
-                {project.name}
-              </h1>
-              {project.status === "active" && (
-                <span className="rounded-full bg-[color-mix(in_oklab,#f54e00_18%,transparent)] px-2.5 py-1 text-[11px] font-medium tracking-wide text-accent uppercase">
-                  {dict.projects.active}
-                </span>
-              )}
+            <div className="min-w-0">
+              <div className="flex min-w-0 flex-wrap items-center gap-3">
+                <h1 className="text-[clamp(2rem,5vw,3rem)] tracking-[-0.03em] text-foreground">
+                  {project.name}
+                </h1>
+                {project.status === "active" && (
+                  <span className="rounded-full bg-[color-mix(in_oklab,#f54e00_18%,transparent)] px-2.5 py-1 text-[11px] font-medium tracking-wide text-accent uppercase">
+                    {dict.projects.active}
+                  </span>
+                )}
+              </div>
+              {project.role ? (
+                <p className="mt-2 text-[15px] text-muted">
+                  {project.role[locale]}
+                </p>
+              ) : null}
             </div>
           </div>
 
