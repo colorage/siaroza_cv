@@ -16,7 +16,7 @@ const COLORS = [
 
 const SPAWN_DISTANCE = 70;
 const SPAWN_INTERVAL_MS = 100;
-const MAX_BUBBLES = 12;
+const MAX_BUBBLES = 24;
 const LIFETIME_MS = 6000;
 
 type Bubble = {
