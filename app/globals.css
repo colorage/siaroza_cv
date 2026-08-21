@@ -5,6 +5,7 @@
   --foreground: #c8d4d0;
   --foreground-muted: color-mix(in oklab, #c8d4d0 60%, transparent);
   --surface: #1a2b28;
+  --card: #0d1918;
   --border: color-mix(in oklab, #c8d4d0 8%, transparent);
   --border-strong: color-mix(in oklab, #c8d4d0 16%, transparent);
   --button: #c8d4d0;
@@ -17,6 +18,7 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--foreground-muted);
   --color-surface: var(--surface);
+  --color-card: var(--card);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
   --color-button: var(--button);

@@ -20,7 +20,7 @@ export function ProjectsGrid({ locale, dict }: Props) {
         {projects.map((project, index) => {
           const isNda = project.stage === "nda";
           const shellClass =
-            "flex h-full flex-col gap-4 rounded-2xl border border-border bg-surface p-5";
+            "flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-5";
           const ndaTitle = dict.projects.ndaPrivateTitle.replace("{name}", project.name);
 
           return (
@@ -31,7 +31,7 @@ export function ProjectsGrid({ locale, dict }: Props) {
             >
               {isNda ? (
                 <div
-                  className="relative flex h-full min-h-52 items-center justify-center overflow-hidden rounded-2xl bg-surface"
+                  className="relative flex h-full min-h-52 items-center justify-center overflow-hidden rounded-2xl bg-card"
                   aria-label={ndaTitle}
                 >
                   <AsciiNoise />
@@ -44,7 +44,7 @@ export function ProjectsGrid({ locale, dict }: Props) {
               ) : (
                 <Link
                   href={`/${locale}/projects/${project.slug}`}
-                  className={`group ${shellClass} transition-[border-color,background-color,transform] duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:bg-[color-mix(in_oklab,#edecec_3%,var(--surface))]`}
+                  className={`group ${shellClass} transition-[border-color,background-color,transform] duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:bg-[color-mix(in_oklab,var(--foreground)_4%,var(--card))]`}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <ProjectLogo
