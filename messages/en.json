@@ -5,6 +5,7 @@
   },
   "nav": {
     "experience": "Experience",
+    "portfolio": "Portfolio",
     "projects": "Projects"
   },
   "hero": {
@@ -19,6 +20,13 @@
   "experience": {
     "heading": "Experience",
     "downloadCv": "Download CV"
+  },
+  "portfolio": {
+    "heading": "Portfolio",
+    "back": "Back",
+    "viewOnDribbble": "View on Dribbble",
+    "previous": "Previous",
+    "next": "Next"
   },
   "footer": {
     "contact": "Contact me"

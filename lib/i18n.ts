@@ -13,6 +13,7 @@ export type Dictionary = {
   };
   nav: {
     experience: string;
+    portfolio: string;
     projects: string;
   };
   hero: {
@@ -27,6 +28,13 @@ export type Dictionary = {
   experience: {
     heading: string;
     downloadCv: string;
+  };
+  portfolio: {
+    heading: string;
+    back: string;
+    viewOnDribbble: string;
+    previous: string;
+    next: string;
   };
   footer: {
     contact: string;

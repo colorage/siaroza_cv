@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { Hero } from "@/components/Hero";
+import { PortfolioGrid } from "@/components/PortfolioGrid";
 import { ProjectsGrid } from "@/components/ProjectsGrid";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 import { isPetProjectsEnabled } from "@/lib/site-url";
@@ -19,6 +20,7 @@ export default async function HomePage({ params }: Props) {
     <>
       <Hero dict={dict} />
       <ExperienceTimeline locale={locale} dict={dict} />
+      <PortfolioGrid locale={locale} dict={dict} />
       {isPetProjectsEnabled() ? (
         <ProjectsGrid locale={locale} dict={dict} />
       ) : null}

@@ -5,6 +5,7 @@
   },
   "nav": {
     "experience": "Досвед",
+    "portfolio": "Партфоліа",
     "projects": "Праекты"
   },
   "hero": {
@@ -19,6 +20,13 @@
   "experience": {
     "heading": "Досвед",
     "downloadCv": "Спампаваць CV"
+  },
+  "portfolio": {
+    "heading": "Партфоліа",
+    "back": "Назад",
+    "viewOnDribbble": "Адкрыць на Dribbble",
+    "previous": "Папярэдні",
+    "next": "Наступны"
   },
   "footer": {
     "contact": "Звязацца"
