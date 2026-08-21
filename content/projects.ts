@@ -8,6 +8,16 @@ export type ProjectLink = {
   href: string;
 };
 
+export type ProjectMedia =
+  | { type: "image"; src: string; alt: Record<Locale, string> }
+  | {
+      type: "youtube";
+      id: string;
+      title: Record<Locale, string>;
+      caption?: Record<Locale, string>;
+    }
+  | { type: "pdf-pages"; dir: string; count: number };
+
 export type Project = {
   slug: string;
   name: string;
@@ -16,6 +26,7 @@ export type Project = {
   url?: string;
   links?: ProjectLink[];
   description: Record<Locale, string>;
+  media?: ProjectMedia[];
 };
 
 export const projects: Project[] = [
@@ -276,6 +287,20 @@ export const projects: Project[] = [
       en: "Stories of Belarusian resistance — heroes, well-known people, volunteers, and initiatives — against an information war that paints all of Belarus as the enemy.",
       by: "Гісторыі беларускага супраціву — героі, вядомыя людзі, валанцёры і ініцыятывы — супраць інфармацыйнай вайны, якая малюе ўсю Беларусь як ворага.",
     },
+    media: [
+      {
+        type: "youtube",
+        id: "2Prl_IhufQM",
+        title: {
+          en: "Belarus Black and White — Belarusian resistance in stories and numbers",
+          by: "Беларусь Чорна Белая — Беларускі супраціў у гісторыях і лічбах",
+        },
+        caption: {
+          en: "Short film on Belarusian resistance — people, actions, and the numbers behind them.",
+          by: "Кароткі фільм пра беларускі супраціў — людзі, учынкі і лічбы за імі.",
+        },
+      },
+    ],
   },
   {
     slug: "radzima",
