@@ -34,7 +34,8 @@
     "back": "Назад",
     "viewOnDribbble": "Адкрыць на Dribbble",
     "viewOnYouTube": "Глядзець на YouTube",
-    "slide": "{current} / {total}"
+    "slide": "{current} / {total}",
+    "goToImage": "Перайсці да выявы {n} з {total}"
   },
   "caseStudies": {
     "heading": "Кейсы",

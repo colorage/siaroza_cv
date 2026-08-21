@@ -34,7 +34,8 @@
     "back": "Back",
     "viewOnDribbble": "View on Dribbble",
     "viewOnYouTube": "Watch on YouTube",
-    "slide": "{current} / {total}"
+    "slide": "{current} / {total}",
+    "goToImage": "Go to image {n} of {total}"
   },
   "caseStudies": {
     "heading": "Case studies",
