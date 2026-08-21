@@ -114,6 +114,27 @@ body {
   }
 }
 
+.project-gallery {
+  padding-inline: max(1.5rem, calc(50% - 32rem + 1.5rem));
+  scroll-padding-inline: max(1.5rem, calc(50% - 32rem + 1.5rem));
+  scroll-behavior: smooth;
+  scrollbar-color: color-mix(in oklab, #edecec 28%, transparent) transparent;
+  scrollbar-width: thin;
+}
+
+.project-gallery::-webkit-scrollbar {
+  height: 8px;
+}
+
+.project-gallery::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.project-gallery::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, #edecec 28%, transparent);
+  border-radius: 999px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-up-delay,
@@ -123,5 +144,9 @@ body {
 
   .skill-cursor-bubble {
     animation: none;
+  }
+
+  .project-gallery {
+    scroll-behavior: auto;
   }
 }
