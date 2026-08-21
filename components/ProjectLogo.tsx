@@ -200,6 +200,16 @@ const icons: Record<string, ReactNode> = {
       className="h-full w-full object-cover"
     />
   ),
+  tedxmahilyow: (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/projects/tedxmahilyow.png"
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
+  ),
   akanicy: (
     <Mark>
       <rect
@@ -346,6 +356,7 @@ const imageLogos = new Set([
   "pah-bot",
   "polny-trash",
   "sunsethunters-club",
+  "tedxmahilyow",
 ]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {

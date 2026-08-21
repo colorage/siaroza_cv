@@ -9,7 +9,15 @@ export type ProjectLink = {
 };
 
 export type ProjectMedia =
-  | { type: "image"; src: string; alt: Record<Locale, string> }
+  | {
+      type: "image";
+      src: string;
+      width: number;
+      height: number;
+      alt: Record<Locale, string>;
+      caption?: Record<Locale, string>;
+      href?: string;
+    }
   | {
       type: "youtube";
       id: string;
@@ -25,8 +33,8 @@ export type Project = {
   status: ProjectStatus;
   url?: string;
   links?: ProjectLink[];
-  description: Record<Locale, string>;
   media?: ProjectMedia[];
+  description: Record<Locale, string>;
 };
 
 export const projects: Project[] = [
@@ -211,6 +219,55 @@ export const projects: Project[] = [
     description: {
       en: "City guide for Mahilioǔ — where to go so you don’t regret the time: local events, venues, and culture.",
       by: "Гід па Магілёве — куды схадзіць і не пашкадаваць пра час: мясцовыя падзеі, месцы і культура.",
+    },
+  },
+  {
+    slug: "tedxmahilyow",
+    name: "TEDxMahilyow",
+    stage: "release",
+    status: "finished",
+    links: [
+      { label: "TED", href: "https://www.ted.com/search?q=TEDxMahilyow" },
+      {
+        label: "Flickr",
+        href: "https://www.flickr.com/photos/187970690@N08/albums/72157713847203666",
+      },
+    ],
+    media: [
+      {
+        type: "image",
+        src: "/projects/tedxmahilyow/oxana.png",
+        width: 800,
+        height: 600,
+        alt: {
+          en: "oXana — TEDxMahilyow logo, a red x wrapped in pale blue ribbons",
+          by: "oXana — лагатып TEDxMahilyow, чырвоны x у блакітных стужках",
+        },
+        caption: {
+          en: "Logo for TEDxMahilyow — a red x wrapped in pale blue ribbons, after Yoga Perdana.",
+          by: "Лагатып TEDxMahilyow — чырвоны x у блакітных стужках, пасля работ Yoga Perdana.",
+        },
+        href: "https://dribbble.com/shots/2848906-oXana",
+      },
+      {
+        type: "image",
+        src: "/projects/tedxmahilyow/tedx-pattern.png",
+        width: 800,
+        height: 600,
+        alt: {
+          en: "TEDxMahilyow 2017 identity pattern — red hangers in a Belarusian ornament over “ideas worth spreading”",
+          by: "Патэрн ідэнтычнасці TEDxMahilyow 2017 — чырвоныя вешалкі ў беларускім арнаменце і радок «ідэі, вартыя распаўсюду»",
+        },
+        caption: {
+          en: "Identity pattern for TEDxMahilyow 2017 — hangers as a Belarusian ornament, with the line “ideas worth spreading.”",
+          by: "Патэрн ідэнтычнасці TEDxMahilyow 2017 — вешалкі як беларускі арнамент і радок «ідэі, вартыя распаўсюду».",
+        },
+        href: "https://dribbble.com/shots/3561776-TEDx-pattern",
+      },
+    ],
+    description: {
+      en: "Independently organized TED conference in Mahilioǔ (2016–2019) — volunteer-run talks by local speakers, published on TED.com.",
+      by: "Незалежная канферэнцыя TED у Магілёве (2016–2019) — валанцёрскія выступы мясцовых спікераў, апублікаваныя на TED.com.",
     },
   },
   {

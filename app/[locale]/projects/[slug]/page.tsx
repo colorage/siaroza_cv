@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { MediaFrame } from "@/components/MediaFrame";
 import { ProjectLogo } from "@/components/ProjectLogo";
 import { YouTubeEmbed } from "@/components/YouTubeEmbed";
-import { getProject, projects } from "@/content/projects";
+import { getProject, projects, type ProjectMedia } from "@/content/projects";
 import {
   getDictionary,
   isLocale,
@@ -19,7 +21,70 @@ type Props = {
 function projectLinkLabel(label: string, dict: Dictionary): string {
   if (label === "instagram") return dict.projects.instagram;
   if (label === "telegram") return dict.projects.telegram;
+  if (label === "dribbble") return dict.projects.dribbble;
   return label;
+}
+
+function ProjectMediaBlock({
+  item,
+  locale,
+  dict,
+}: {
+  item: ProjectMedia;
+  locale: Locale;
+  dict: Dictionary;
+}) {
+  if (item.type === "youtube") {
+    return (
+      <YouTubeEmbed
+        id={item.id}
+        title={item.title[locale]}
+        caption={item.caption?.[locale]}
+      />
+    );
+  }
+
+  if (item.type !== "image") return null;
+
+  const image = (
+    <Image
+      src={item.src}
+      alt={item.alt[locale]}
+      width={item.width}
+      height={item.height}
+      className="h-auto w-full"
+      sizes="(max-width: 64rem) calc(100vw - 3rem), 64rem"
+    />
+  );
+
+  return (
+    <figure>
+      <MediaFrame>
+        {item.href ? (
+          <a href={item.href} target="_blank" rel="noopener noreferrer">
+            {image}
+          </a>
+        ) : (
+          image
+        )}
+      </MediaFrame>
+      {item.caption ? (
+        <figcaption className="mt-3 max-w-2xl text-[14px] leading-relaxed text-muted">
+          {item.caption[locale]}
+        </figcaption>
+      ) : null}
+      {item.href?.includes("dribbble.com") ? (
+        <a
+          href={item.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center text-[13px] text-muted transition-colors hover:text-foreground"
+        >
+          {dict.projects.dribbble} →
+        </a>
+      ) : null}
+    </figure>
+  );
 }
 
 export function generateStaticParams() {
@@ -84,19 +149,20 @@ export default async function ProjectPage({ params }: Props) {
 
         {project.media?.length ? (
           <div className="mt-10 space-y-8">
-            {project.media.map((item) => {
-              if (item.type === "youtube") {
-                return (
-                  <YouTubeEmbed
-                    key={item.id}
-                    id={item.id}
-                    title={item.title[locale]}
-                    caption={item.caption?.[locale]}
-                  />
-                );
-              }
-              return null;
-            })}
+            {project.media.map((item) => (
+              <ProjectMediaBlock
+                key={
+                  item.type === "image"
+                    ? item.src
+                    : item.type === "youtube"
+                      ? item.id
+                      : item.type
+                }
+                item={item}
+                locale={locale}
+                dict={dict}
+              />
+            ))}
           </div>
         ) : null}
 
