@@ -57,8 +57,8 @@ export const projects: Project[] = [
       },
     ],
     description: {
-      en: "COVID-19 #StayHome map (March 2020) — people staying home checked in via Telegram bot and appeared on a public map by city, without names or exact location.",
-      by: "Мапа #StayHome часу COVID-19 (сакавік 2020) — хто сядзеў дома, адзначаўся праз Telegram-бота і з'яўляўся на публічнай карце па горадзе, без імені і дакладнай лакацыі.",
+      en: "COVID-19 #StayHome map (March 2020) — people staying home checked in via Telegram bot; avatars and short notes appeared on a public map, without names or exact location.",
+      by: "Мапа #StayHome часу COVID-19 (сакавік 2020) — хто сядзеў дома, адзначаўся праз Telegram-бота; аватаркі і кароткія нататкі з'яўляліся на публічнай карце, без імён і дакладнай лакацыі.",
     },
     media: [
       {
@@ -71,8 +71,8 @@ export const projects: Project[] = [
           by: "Цёмная мапа Усходняй Еўропы з фігуркамі людзей, сабранымі па Беларусі — найгусцей у Мінску — і разыйшоўшыміся па суседніх краінах.",
         },
         caption: {
-          en: "The public map in March 2020 — check-ins by city, no names or exact location.",
-          by: "Публічная мапа ў сакавіку 2020 — адзнакі па горадзе, без імён і дакладнай лакацыі.",
+          en: "Country view in March 2020 — check-ins as person marks by city, no names or exact location.",
+          by: "Краіна ў сакавіку 2020 — адзнакі людзей па горадзе, без імён і дакладнай лакацыі.",
         },
         href: "https://reform.news/belarusy-sozdali-onlajn-kartu-sidjashhih-doma-iz-za-koronavirusa",
       },
