@@ -1,5 +1,11 @@
 import type { Locale } from "@/lib/i18n";
 
+export type PortfolioYoutube = {
+  id: string;
+  title: Record<Locale, string>;
+  caption?: Record<Locale, string>;
+};
+
 export type PortfolioPages = {
   dir: string;
   count: number;
@@ -15,11 +21,7 @@ export type PortfolioShot = {
   caseStudySlug?: string;
   description?: Record<Locale, string>;
   dribbbleUrl?: string;
-  youtube?: {
-    id: string;
-    title: Record<Locale, string>;
-    caption?: Record<Locale, string>;
-  };
+  youtube?: PortfolioYoutube;
   pages?: PortfolioPages;
 };
 
@@ -47,6 +49,25 @@ export const portfolioShots: PortfolioShot[] = [
       title: {
         en: "Showreel 23",
         by: "Showreel 23",
+      },
+    },
+  },
+  {
+    slug: "splash-of-cash",
+    title: {
+      en: "Splash of Cash",
+      by: "Splash of Cash",
+    },
+    cover: "/work/splash-of-cash/cover.jpg",
+    description: {
+      en: "Casual game motion demo — bubble clusters, cash HUD, and 3D gift drops in a tiled bathroom world.",
+      by: "Моўшн-дэма казуальнай гульні — кластары бурбалак, кэш-HUD і 3D-падарункі ў пліткавай ваннай.",
+    },
+    youtube: {
+      id: "_1lUgXSyUwo",
+      title: {
+        en: "Splash of Cash — demo by Sergey Pekhteerau",
+        by: "Splash of Cash — дэма Сяргея Пехцерава",
       },
     },
   },
