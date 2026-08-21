@@ -1,5 +1,11 @@
 import type { Locale } from "@/lib/i18n";
 
+export type PortfolioYoutube = {
+  id: string;
+  title: Record<Locale, string>;
+  caption?: Record<Locale, string>;
+};
+
 export type PortfolioShot = {
   slug: string;
   title: Record<Locale, string>;
@@ -8,9 +14,33 @@ export type PortfolioShot = {
   caseStudySlug?: string;
   description?: Record<Locale, string>;
   dribbbleUrl?: string;
+  youtube?: PortfolioYoutube;
 };
 
 export const portfolioShots: PortfolioShot[] = [
+  {
+    slug: "ui-test",
+    title: {
+      en: "UI test",
+      by: "UI-тэст",
+    },
+    cover: "/work/ui-test/cover.jpg",
+    description: {
+      en: "Motion test of a console shop screen — pack tabs, 3D item cards with sale prices, and a hold-to-buy CTA.",
+      by: "Моўшн-тэст экрана крамы для кансолі — табы пакаў, 3D-карткі прадметаў са зніжкамі і кнопка «удрымай, каб купіць».",
+    },
+    youtube: {
+      id: "WB-v16caDZQ",
+      title: {
+        en: "UI test",
+        by: "UI-тэст",
+      },
+      caption: {
+        en: "Shop UI motion — grid, 3D preview, controller prompts.",
+        by: "Моўшн UI крамы — сетка, 3D-перагляд, падказкі кантролера.",
+      },
+    },
+  },
   {
     slug: "radzima",
     title: {
