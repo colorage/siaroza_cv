@@ -49,7 +49,7 @@ export default async function ProjectPage({ params }: Props) {
               {project.name}
             </h1>
             {project.status === "active" && (
-              <span className="rounded-full bg-[color-mix(in_oklab,#f54e00_18%,transparent)] px-2.5 py-1 text-[11px] font-medium tracking-wide text-accent uppercase">
+              <span className="rounded-full bg-[color-mix(in_oklab,var(--accent)_18%,transparent)] px-2.5 py-1 text-[11px] font-medium tracking-wide text-accent uppercase">
                 {dict.projects.active}
               </span>
             )}

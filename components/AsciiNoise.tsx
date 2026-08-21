@@ -20,9 +20,9 @@ type DotCell = {
 const CELL_SIZE = 18;
 const MIN_RADIUS = 0.9;
 const MAX_RADIUS = 4.8;
-const SURFACE_COLOR = "#14120b";
-const BRIGHT_DOT = "#ffb627";
-const DIM_DOT = "#d08a19";
+const SURFACE_COLOR = "#0a1414";
+const BRIGHT_DOT = "#00e5bc";
+const DIM_DOT = "#2a6b66";
 
 function buildCells(width: number, height: number, densityScale: number): DotCell[] {
   const cols = Math.max(1, Math.ceil(width / CELL_SIZE));

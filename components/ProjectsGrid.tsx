@@ -52,7 +52,7 @@ export function ProjectsGrid({ locale, dict }: Props) {
                       className="h-11 w-11 transition-colors group-hover:border-border-strong group-hover:text-accent"
                     />
                     {project.status === "active" && (
-                      <span className="rounded-full bg-[color-mix(in_oklab,#f54e00_18%,transparent)] px-2 py-0.5 text-[11px] font-medium tracking-wide text-accent uppercase">
+                      <span className="rounded-full bg-[color-mix(in_oklab,var(--accent)_18%,transparent)] px-2 py-0.5 text-[11px] font-medium tracking-wide text-accent uppercase">
                         {dict.projects.active}
                       </span>
                     )}
