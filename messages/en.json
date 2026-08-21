@@ -32,7 +32,8 @@
   "portfolio": {
     "heading": "Portfolio",
     "back": "Back",
-    "viewOnDribbble": "View on Dribbble"
+    "viewOnDribbble": "View on Dribbble",
+    "slide": "{current} / {total}"
   },
   "caseStudies": {
     "heading": "Case studies",
