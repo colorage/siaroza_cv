@@ -69,7 +69,6 @@ export const experience: ExperienceItem[] = [
         "Пачатковая брэндавая ідэнтычнасць як візуальная аснова",
       ],
     },
-    caseStudySlugs: ["pitchdeck-app-design"],
   },
   {
     id: "kotka",

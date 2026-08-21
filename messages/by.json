@@ -33,7 +33,8 @@
     "heading": "Партфоліа",
     "back": "Назад",
     "viewOnDribbble": "Адкрыць на Dribbble",
-    "viewOnYouTube": "Глядзець на YouTube"
+    "viewOnYouTube": "Глядзець на YouTube",
+    "slide": "{current} / {total}"
   },
   "caseStudies": {
     "heading": "Кейсы",
