@@ -131,6 +131,28 @@ export const experience: ExperienceItem[] = [
     },
   },
   {
+    id: "tedxmahilyow",
+    start: "2016",
+    end: "2019",
+    company: "TEDxMahilyow",
+    role: {
+      en: "Volunteer, Designer, Stage Decorator",
+      by: "Валанцёр, дызайнер, дэкаратар сцэн",
+    },
+    bullets: {
+      en: [
+        "Visual identity for the independently organized TED conference in Mahilioǔ",
+        "Stage decoration for the live talks",
+        "Volunteer support across the 2016–2019 editions",
+      ],
+      by: [
+        "Візуальная ідэнтычнасць незалежнай канферэнцыі TED у Магілёве",
+        "Дэкор сцэны для жывых выступаў",
+        "Валанцёрская падтрымка канферэнцый 2016–2019",
+      ],
+    },
+  },
+  {
     id: "upwork",
     start: "2016",
     end: "2018",

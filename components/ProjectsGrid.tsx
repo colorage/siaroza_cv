@@ -65,6 +65,11 @@ export function ProjectsGrid({ locale, dict }: Props) {
                     <h3 className="text-[16px] tracking-tight text-foreground transition-opacity group-hover:opacity-90">
                       {project.name}
                     </h3>
+                    {project.role ? (
+                      <p className="mt-1 text-[12px] text-muted">
+                        {project.role[locale]}
+                      </p>
+                    ) : null}
                     <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed text-muted">
                       {project.description[locale]}
                     </p>

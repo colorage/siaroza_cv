@@ -47,6 +47,7 @@ export type Project = {
   url?: string;
   links?: ProjectLink[];
   media?: ProjectMedia[];
+  role?: Record<Locale, string>;
   description: Record<Locale, string>;
   gallery?: ProjectGalleryImage[];
 };
@@ -378,6 +379,10 @@ export const projects: Project[] = [
     name: "TEDxMahilyow",
     stage: "release",
     status: "finished",
+    role: {
+      en: "Volunteer, designer, stage decorator",
+      by: "Валанцёр, дызайнер, дэкаратар сцэн",
+    },
     links: [
       { label: "TED", href: "https://www.ted.com/search?q=TEDxMahilyow" },
       {
@@ -418,8 +423,8 @@ export const projects: Project[] = [
       },
     ],
     description: {
-      en: "Independently organized TED conference in Mahilioǔ (2016–2019) — volunteer-run talks by local speakers, published on TED.com.",
-      by: "Незалежная канферэнцыя TED у Магілёве (2016–2019) — валанцёрскія выступы мясцовых спікераў, апублікаваныя на TED.com.",
+      en: "Independently organized TED conference in Mahilioǔ (2016–2019) — talks by local speakers, published on TED.com.",
+      by: "Незалежная канферэнцыя TED у Магілёве (2016–2019) — выступы мясцовых спікераў, апублікаваныя на TED.com.",
     },
   },
   {
