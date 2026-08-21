@@ -57,6 +57,7 @@ export const projects: Project[] = [
     name: "ядома.бел",
     stage: "release",
     status: "finished",
+    url: "https://web.archive.org/web/20200326071645/http://xn--80ahyh7f.xn--90ais/",
     links: [
       {
         label: "Reform.news",
@@ -124,8 +125,8 @@ export const projects: Project[] = [
     status: "active",
     url: "https://apps.apple.com/app/blood-labs/id6774652156",
     description: {
-      en: "Private iOS app to import blood lab reports from photo or PDF, track markers on a timeline, and compare results over time.",
-      by: "Прыватны iOS‑дадатак для імпарту аналізаў крыві з фота ці PDF, адсочвання паказчыкаў на шкале часу і параўнання вынікаў.",
+      en: "Private iOS app to import blood lab reports from photo or PDF, track markers on a timeline, compare tests, and keep family profiles encrypted on-device.",
+      by: "Прыватны iOS‑дадатак для імпарту аналізаў крыві з фота ці PDF, адсочвання паказчыкаў на шкале часу, параўнання тэстаў і сямейных профіляў — даныя шыфруюцца на прыладзе.",
     },
     gallery: [
       {
@@ -214,8 +215,8 @@ export const projects: Project[] = [
     status: "active",
     url: "https://mahiliou.space/",
     description: {
-      en: "Interactive map of historical buildings in Mahilioǔ — 180 landmarks with status filters, photos, and stories.",
-      by: "Інтэрактыўная карта гістарычных будынкаў Магілёва — 180 аб'ектаў з фільтрамі статусу, фота і гісторыямі.",
+      en: "Interactive map of historical buildings in Mahilioǔ — 180 landmarks with status filters, photos, and stories. Started in 2021 with Aliaksei Baciukoŭ and Anton Turko; restored in 2026.",
+      by: "Інтэрактыўная карта гістарычных будынкаў Магілёва — 180 аб'ектаў з фільтрамі статусу, фота і гісторыямі. Створана ў 2021 з Аляксеем Бацюковым і Антонам Турко, адноўлена ў 2026.",
     },
     media: [
       {
@@ -480,6 +481,7 @@ export const projects: Project[] = [
     name: "photoplay",
     stage: "poc",
     status: "active",
+    url: "https://photoplay.app",
     description: {
       en: "Generate a music playlist from your photos.",
       by: "Генерацыя музычнага плэйліста па вашых фота.",
