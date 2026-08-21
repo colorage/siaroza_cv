@@ -32,9 +32,9 @@ type PointerSample = {
 
 const CELL_SIZE = 12;
 const CHARACTERS = " .:+*#@";
-const COLOR_GREY = "#8a8882";
-const COLOR_YELLOW = "#d7b14a";
-const COLOR_ORANGE = "#f54e00";
+const COLOR_GREY = "#5a6e6a";
+const COLOR_YELLOW = "#2a6b66";
+const COLOR_ORANGE = "#00e5bc";
 const TARGET_FPS = 30;
 const FRAME_MS = 1000 / TARGET_FPS;
 

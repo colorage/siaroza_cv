@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #14120b;
-  --foreground: #edecec;
-  --foreground-muted: color-mix(in oklab, #edecec 60%, transparent);
-  --surface: #1b1913;
-  --border: color-mix(in oklab, #edecec 8%, transparent);
-  --border-strong: color-mix(in oklab, #edecec 16%, transparent);
-  --button: #edecec;
-  --button-fg: #14120b;
-  --accent: #f54e00;
+  --background: #0a1414;
+  --foreground: #c8d4d0;
+  --foreground-muted: color-mix(in oklab, #c8d4d0 60%, transparent);
+  --surface: #1a2b28;
+  --border: color-mix(in oklab, #c8d4d0 8%, transparent);
+  --border-strong: color-mix(in oklab, #c8d4d0 16%, transparent);
+  --button: #c8d4d0;
+  --button-fg: #0a1414;
+  --accent: #00d4b8;
 }
 
 @theme inline {
@@ -81,7 +81,7 @@ body {
   align-items: center;
   padding: 0.35rem 0.7rem 0.38rem;
   border-radius: 0 14px 14px 14px;
-  color: #14120b;
+  color: var(--button-fg);
   font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.01em;
@@ -118,7 +118,7 @@ body {
   padding-inline: max(1.5rem, calc(50% - 32rem + 1.5rem));
   scroll-padding-inline: max(1.5rem, calc(50% - 32rem + 1.5rem));
   scroll-behavior: smooth;
-  scrollbar-color: color-mix(in oklab, #edecec 28%, transparent) transparent;
+  scrollbar-color: color-mix(in oklab, var(--foreground) 28%, transparent) transparent;
   scrollbar-width: thin;
 }
 
@@ -131,7 +131,7 @@ body {
 }
 
 .project-gallery::-webkit-scrollbar-thumb {
-  background: color-mix(in oklab, #edecec 28%, transparent);
+  background: color-mix(in oklab, var(--foreground) 28%, transparent);
   border-radius: 999px;
 }
 

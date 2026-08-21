@@ -4,14 +4,14 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { skills } from "@/content/skills";
 
 const COLORS = [
-  "#d9d4c8",
-  "#b8b2a4",
-  "#9a9488",
-  "#f4cf5b",
-  "#e8b84a",
-  "#ff8a3d",
-  "#f54e00",
-  "#e07a2f",
+  "#c8d4d0",
+  "#a3b5b0",
+  "#7a908c",
+  "#4d7a75",
+  "#2a6b66",
+  "#20b2aa",
+  "#00d4b8",
+  "#00e5bc",
 ] as const;
 
 const SPAWN_DISTANCE = 70;

@@ -41,8 +41,8 @@ export default async function Image({
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#14120b",
-          color: "#edecec",
+          background: "#0a1414",
+          color: "#c8d4d0",
           padding: 72,
           fontFamily: "Geist",
         }}
@@ -53,7 +53,7 @@ export default async function Image({
             fontSize: 28,
             letterSpacing: "0.08em",
             textTransform: "uppercase",
-            color: "rgba(237, 236, 236, 0.6)",
+            color: "rgba(200, 212, 208, 0.6)",
           }}
         >
           {dict.hero.shortName}
@@ -73,7 +73,7 @@ export default async function Image({
             style={{
               display: "flex",
               fontSize: 36,
-              color: "rgba(237, 236, 236, 0.6)",
+              color: "rgba(200, 212, 208, 0.6)",
             }}
           >
             {dict.hero.title}
@@ -84,7 +84,7 @@ export default async function Image({
             display: "flex",
             width: 64,
             height: 6,
-            background: "#f54e00",
+            background: "#00d4b8",
           }}
         />
       </div>
