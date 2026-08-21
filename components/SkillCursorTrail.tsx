@@ -123,7 +123,6 @@ export function SkillCursorTrail() {
           }}
         >
           {bubble.skill}
-          <span className="skill-cursor-caret" />
         </span>
       ))}
     </div>
