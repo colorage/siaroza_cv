@@ -60,10 +60,31 @@ export const projects: Project[] = [
     name: "спасём.бел",
     stage: "release",
     status: "finished",
-    links: [{ label: "telegram", href: "https://t.me/spasyom_bel_bot" }],
+    url: "https://web.archive.org/web/20201127023118/http://xn--80ayhhc0h.xn--90ais/",
+    links: [
+      { label: "telegram", href: "https://t.me/spasyom_bel_bot" },
+      { label: "МотолькоПомоги", href: "https://t.me/motolkohelp/8320" },
+    ],
+    media: [
+      {
+        type: "image",
+        src: "/projects/spasem-bel/coverage.jpg",
+        width: 800,
+        height: 418,
+        href: "https://t.me/motolkohelp/8320",
+        alt: {
+          en: "спасём.бел brand still — red plus-bubble on isometric blocks",
+          by: "Брэнд-візуал спасём.бел — чырвоны бабл з плюсам на ізаметрычных блоках",
+        },
+        caption: {
+          en: "Still from the МотолькоПомоги announcement, 6 April 2020.",
+          by: "Візуал з анонсу ў МотолькоПомоги, 6 красавіка 2020.",
+        },
+      },
+    ],
     description: {
-      en: "COVID-19 volunteer map (2020) — people offered help via Telegram bot for delivery, food, housing, funding, or info; medics posted hospital needs in red on the public map.",
-      by: "Мапа валанцёраў COVID-19 (2020) — праз Telegram-бота людзі прапаноўвалі дастаўку, ежу, жытло, фінансы ці інфармацыю; медыкі пазначалі патрэбы бальніц чырвоным на публічнай карце.",
+      en: "Map of medics and volunteers during COVID-19 (April 2020) — offer delivery, food, housing, funding, or info via Telegram bot; hospital requests appeared in red.",
+      by: "Мапа медыкаў і валанцёраў часу COVID-19 (красавік 2020) — праз Telegram-бота людзі прапаноўвалі дастаўку, ежу, жытло, фінансы ці інфармацыю; запыты бальніц з'яўляліся чырвоным.",
     },
   },
   {
