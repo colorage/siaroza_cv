@@ -53,6 +53,29 @@ export const portfolioShots: PortfolioShot[] = [
     },
   },
   {
+    slug: "ice-sculptor",
+    title: {
+      en: "Be the Ice Sculptor",
+      by: "Будзь ледзяным скульптарам",
+    },
+    cover: "/work/ice-sculptor/cover.jpg",
+    description: {
+      en: "Motion film on craft versus tools — the sculptor's concern is not how the chainsaw sparkles, but the form it reveals. The tool is only a gateway; without the craft, it is nothing.",
+      by: "Моўшн-фільм пра крафт і інструмент — клопат скульптара не ў бляску бензапілы, а ў форме, якую яна адкрывае. Інструмент — толькі брама; без майстэрства ён нішто.",
+    },
+    youtube: {
+      id: "0FpEAb--kdI",
+      title: {
+        en: "Be the Ice Sculptor",
+        by: "Будзь ледзяным скульптарам",
+      },
+      caption: {
+        en: "Short motion piece on craft, tools, and imagination.",
+        by: "Кароткі моўшн пра крафт, інструменты і ўяўленне.",
+      },
+    },
+  },
+  {
     slug: "splash-of-cash",
     title: {
       en: "Splash of Cash",
