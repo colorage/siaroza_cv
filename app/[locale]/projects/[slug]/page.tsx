@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProjectLogo } from "@/components/ProjectLogo";
+import { YouTubeEmbed } from "@/components/YouTubeEmbed";
 import { getProject, projects } from "@/content/projects";
 import {
   getDictionary,
@@ -80,6 +81,24 @@ export default async function ProjectPage({ params }: Props) {
         <p className="mt-8 max-w-2xl text-[16px] leading-relaxed text-muted">
           {project.description[locale]}
         </p>
+
+        {project.media?.length ? (
+          <div className="mt-10 space-y-8">
+            {project.media.map((item) => {
+              if (item.type === "youtube") {
+                return (
+                  <YouTubeEmbed
+                    key={item.id}
+                    id={item.id}
+                    title={item.title[locale]}
+                    caption={item.caption?.[locale]}
+                  />
+                );
+              }
+              return null;
+            })}
+          </div>
+        ) : null}
 
         {project.links?.length ? (
           <div className="mt-10 flex flex-wrap gap-3">
