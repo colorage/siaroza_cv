@@ -42,6 +42,7 @@ export type Dictionary = {
     back: string;
     viewOnDribbble: string;
     watchOnYouTube: string;
+    slide: string;
   };
   caseStudies: {
     heading: string;

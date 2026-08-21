@@ -1,7 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
+import { MediaCarousel } from "@/components/MediaCarousel";
 import { MediaFrame } from "@/components/MediaFrame";
 import { YouTubeEmbed } from "@/components/YouTubeEmbed";
-import type { PortfolioShot } from "@/content/portfolio";
+import {
+  getPortfolioPageSrcs,
+  type PortfolioShot,
+} from "@/content/portfolio";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 type Props = {
@@ -12,6 +17,8 @@ type Props = {
 
 export function PortfolioPiece({ shot, locale, dict }: Props) {
   const title = shot.title[locale];
+  const pageMeta = shot.pages;
+  const pages = pageMeta ? getPortfolioPageSrcs(pageMeta) : [];
 
   return (
     <article className="mx-auto max-w-5xl px-6 py-16 md:py-24">
@@ -35,6 +42,16 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
               caption={shot.youtube.caption?.[locale]}
             />
           </div>
+        ) : pageMeta ? (
+          <div className="mt-10">
+            <MediaCarousel
+              pages={pages}
+              alt={title}
+              width={pageMeta.width}
+              height={pageMeta.height}
+              indexTemplate={dict.portfolio.slide}
+            />
+          </div>
         ) : shot.cover ? (
           <figure className="mt-10">
             <MediaFrame>
@@ -54,6 +71,23 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
           <p className="mt-8 max-w-2xl text-[16px] leading-relaxed text-muted">
             {shot.description[locale]}
           </p>
+        ) : null}
+
+        {pageMeta ? (
+          <div className="mt-12 space-y-6">
+            {pages.map((src, i) => (
+              <MediaFrame key={src}>
+                <Image
+                  src={src}
+                  alt={`${title} (${i + 1} / ${pages.length})`}
+                  width={pageMeta.width}
+                  height={pageMeta.height}
+                  className="h-auto w-full"
+                  sizes="(max-width: 64rem) calc(100vw - 3rem), 64rem"
+                />
+              </MediaFrame>
+            ))}
+          </div>
         ) : null}
 
         {shot.dribbbleUrl || shot.youtube ? (
