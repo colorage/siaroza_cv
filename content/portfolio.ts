@@ -8,9 +8,33 @@ export type PortfolioShot = {
   caseStudySlug?: string;
   description?: Record<Locale, string>;
   dribbbleUrl?: string;
+  youtube?: {
+    id: string;
+    title: Record<Locale, string>;
+    caption?: Record<Locale, string>;
+  };
 };
 
 export const portfolioShots: PortfolioShot[] = [
+  {
+    slug: "showreel-23",
+    title: {
+      en: "Showreel 23",
+      by: "Showreel 23",
+    },
+    cover: "/work/showreel-23/cover.jpg",
+    description: {
+      en: "Motion design showreel from 2023 — selected commercial and personal work.",
+      by: "Моўшн-дызайн шоўрыл 2023 — абраныя камерцыйныя і асабістыя работы.",
+    },
+    youtube: {
+      id: "61ppqJvsWR8",
+      title: {
+        en: "Showreel 23",
+        by: "Showreel 23",
+      },
+    },
+  },
   {
     slug: "radzima",
     title: {
