@@ -34,6 +34,24 @@ export function getPortfolioPageSrcs(pages: PortfolioPages): string[] {
 
 export const portfolioShots: PortfolioShot[] = [
   {
+    slug: "hive-os",
+    title: {
+      en: "Hive OS tutorial covers",
+      by: "Вокладкі туторыялаў Hive OS",
+    },
+    cover: "/work/hive-os/page-01.jpg",
+    description: {
+      en: "Title cards for Hive OS how-to videos — multi-user farm access, ASIC firmware, GPU Hub, and a local package mirror. 3D product shots in the Hiveon orange system.",
+      by: "Тытульныя карткі для туторыялаў Hive OS — шматкарыстальніцкі доступ да фермы, прашыўка ASIC, GPU Hub і лакальнае люстэрка пакетаў. 3D-прадуктовыя кадры ў аранжавай сістэме Hiveon.",
+    },
+    pages: {
+      dir: "/work/hive-os",
+      count: 4,
+      width: 1280,
+      height: 720,
+    },
+  },
+  {
     slug: "ui-test",
     title: {
       en: "UI test",
