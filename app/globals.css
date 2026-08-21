@@ -64,7 +64,7 @@ body {
   z-index: 60;
   display: inline-flex;
   align-items: center;
-  padding: 0.35rem 0.65rem 0.38rem 0.7rem;
+  padding: 0.35rem 0.7rem 0.38rem;
   border-radius: 0 14px 14px 14px;
   color: #14120b;
   font-size: 14px;
@@ -73,17 +73,20 @@ body {
   line-height: 1.2;
   white-space: nowrap;
   box-shadow: 0 6px 18px color-mix(in oklab, #000 32%, transparent);
-  animation: skill-bubble-life 6s ease-out forwards;
-  will-change: opacity;
+  transform-origin: top left;
+  animation:
+    skill-bubble-pop 160ms cubic-bezier(0.22, 1.7, 0.36, 1) both,
+    skill-bubble-life 6s ease-out forwards;
+  will-change: opacity, transform;
 }
 
-.skill-cursor-caret {
-  display: inline-block;
-  width: 1.5px;
-  height: 0.85em;
-  margin-left: 0.2em;
-  background: #14120b;
-  animation: skill-caret-blink 1s steps(1) infinite;
+@keyframes skill-bubble-pop {
+  from {
+    transform: scale(0.55);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 @keyframes skill-bubble-life {
@@ -96,17 +99,6 @@ body {
   }
 }
 
-@keyframes skill-caret-blink {
-  0%,
-  49% {
-    opacity: 1;
-  }
-  50%,
-  100% {
-    opacity: 0;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-up-delay,
@@ -114,8 +106,7 @@ body {
     animation: none;
   }
 
-  .skill-cursor-bubble,
-  .skill-cursor-caret {
+  .skill-cursor-bubble {
     animation: none;
   }
 }
