@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { MediaImage } from "@/components/MediaImage";
 import { ProjectLogo } from "@/components/ProjectLogo";
 import { YouTubeEmbed } from "@/components/YouTubeEmbed";
 import { getProject, projects } from "@/content/projects";
@@ -19,6 +20,7 @@ type Props = {
 function projectLinkLabel(label: string, dict: Dictionary): string {
   if (label === "instagram") return dict.projects.instagram;
   if (label === "telegram") return dict.projects.telegram;
+  if (label === "dribbble") return dict.projects.dribbble;
   return label;
 }
 
@@ -95,14 +97,36 @@ export default async function ProjectPage({ params }: Props) {
                   />
                 );
               }
+              if (item.type === "image") {
+                return (
+                  <MediaImage
+                    key={item.src}
+                    src={item.src}
+                    alt={item.alt[locale]}
+                    width={item.width}
+                    height={item.height}
+                    caption={item.caption?.[locale]}
+                  />
+                );
+              }
               return null;
             })}
           </div>
         ) : null}
 
-        {project.links?.length ? (
+        {project.url || project.links?.length ? (
           <div className="mt-10 flex flex-wrap gap-3">
-            {project.links.map((link) => (
+            {project.url ? (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center rounded-full bg-button px-5 py-2.5 text-[14px] font-medium text-button-fg transition-opacity hover:opacity-90"
+              >
+                {dict.projects.visit} →
+              </a>
+            ) : null}
+            {project.links?.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -114,15 +138,6 @@ export default async function ProjectPage({ params }: Props) {
               </a>
             ))}
           </div>
-        ) : project.url ? (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-10 inline-flex items-center rounded-full bg-button px-5 py-2.5 text-[14px] font-medium text-button-fg transition-opacity hover:opacity-90"
-          >
-            {dict.projects.visit} →
-          </a>
         ) : null}
       </div>
     </article>

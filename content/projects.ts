@@ -9,7 +9,14 @@ export type ProjectLink = {
 };
 
 export type ProjectMedia =
-  | { type: "image"; src: string; alt: Record<Locale, string> }
+  | {
+      type: "image";
+      src: string;
+      width: number;
+      height: number;
+      alt: Record<Locale, string>;
+      caption?: Record<Locale, string>;
+    }
   | {
       type: "youtube";
       id: string;
@@ -100,10 +107,32 @@ export const projects: Project[] = [
     stage: "release",
     status: "active",
     url: "https://mahiliou.space/",
+    links: [
+      {
+        label: "dribbble",
+        href: "https://dribbble.com/shots/16269129-kropki-icons",
+      },
+    ],
     description: {
       en: "Interactive map of historical buildings in Mahilioǔ — 180 landmarks with status filters, photos, and stories.",
       by: "Інтэрактыўная карта гістарычных будынкаў Магілёва — 180 аб'ектаў з фільтрамі статусу, фота і гісторыямі.",
     },
+    media: [
+      {
+        type: "image",
+        src: "/projects/kropki-mahiliou/icons.png",
+        width: 1600,
+        height: 1200,
+        alt: {
+          en: "Grid of twenty grayscale geometric icons of Mahilioǔ buildings and landmarks.",
+          by: "Сетка з дваццаці шэрых геаметрычных іконак будынкаў і славутасцяў Магілёва.",
+        },
+        caption: {
+          en: "Map icons for kropki — twenty Mahilioǔ landmarks drawn as compact building marks.",
+          by: "Іконкі для кропак — дваццаць гістарычных будынкаў Магілёва як кампактныя знакі на карце.",
+        },
+      },
+    ],
   },
   {
     slug: "radar-rockets",
