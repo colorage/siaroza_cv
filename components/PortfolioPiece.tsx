@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MediaFrame } from "@/components/MediaFrame";
+import { YouTubeEmbed } from "@/components/YouTubeEmbed";
 import type { PortfolioShot } from "@/content/portfolio";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
@@ -11,6 +12,9 @@ type Props = {
 
 export function PortfolioPiece({ shot, locale, dict }: Props) {
   const title = shot.title[locale];
+  const youtubeWatchUrl = shot.youtube
+    ? `https://www.youtube.com/watch?v=${shot.youtube.id}`
+    : undefined;
 
   return (
     <article className="mx-auto max-w-5xl px-6 py-16 md:py-24">
@@ -26,7 +30,15 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
           {title}
         </h1>
 
-        {shot.cover ? (
+        {shot.youtube ? (
+          <div className="mt-10">
+            <YouTubeEmbed
+              id={shot.youtube.id}
+              title={shot.youtube.title[locale]}
+              caption={shot.youtube.caption?.[locale]}
+            />
+          </div>
+        ) : shot.cover ? (
           <figure className="mt-10">
             <MediaFrame>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -47,15 +59,29 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
           </p>
         ) : null}
 
-        {shot.dribbbleUrl ? (
-          <a
-            href={shot.dribbbleUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-10 inline-flex items-center rounded-full bg-button px-5 py-2.5 text-[14px] font-medium text-button-fg transition-opacity hover:opacity-90"
-          >
-            {dict.portfolio.viewOnDribbble} →
-          </a>
+        {youtubeWatchUrl || shot.dribbbleUrl ? (
+          <div className="mt-10 flex flex-wrap gap-3">
+            {youtubeWatchUrl ? (
+              <a
+                href={youtubeWatchUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center rounded-full bg-button px-5 py-2.5 text-[14px] font-medium text-button-fg transition-opacity hover:opacity-90"
+              >
+                {dict.portfolio.viewOnYouTube} →
+              </a>
+            ) : null}
+            {shot.dribbbleUrl ? (
+              <a
+                href={shot.dribbbleUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center rounded-full bg-button px-5 py-2.5 text-[14px] font-medium text-button-fg transition-opacity hover:opacity-90"
+              >
+                {dict.portfolio.viewOnDribbble} →
+              </a>
+            ) : null}
+          </div>
         ) : null}
       </div>
     </article>
