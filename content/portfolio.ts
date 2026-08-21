@@ -42,6 +42,18 @@ export function getPortfolioPageSrcs(pages: PortfolioPages): string[] {
   });
 }
 
+export type PortfolioThumbnailKind = "image" | "gallery" | "video";
+
+export function getPortfolioThumbnailKind(
+  shot: PortfolioShot,
+): PortfolioThumbnailKind {
+  if (shot.youtube) return "video";
+  if (shot.pages && getPortfolioPageSrcs(shot.pages).length > 1) {
+    return "gallery";
+  }
+  return "image";
+}
+
 export const portfolioShots: PortfolioShot[] = [
   {
     slug: "hive-os",
