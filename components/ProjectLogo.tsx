@@ -91,14 +91,7 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   halasy: (
-    <Mark>
-      <path
-        d="M8 12v8M12.5 9v14M17 11v10M21.5 13.5v5"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </Mark>
+    <RasterMark src="/projects/halasy.png" />
   ),
   impact: (
     <Mark>
@@ -254,6 +247,7 @@ const imageLogos = new Set([
   "polny-trash",
   "sunsethunters-club",
   "tedxmahilyow",
+  "halasy",
 ]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
