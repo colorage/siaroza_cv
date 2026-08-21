@@ -9,6 +9,9 @@
     "caseStudies": "Case studies",
     "projects": "Pet projects"
   },
+  "a11y": {
+    "skipToContent": "Skip to content"
+  },
   "hero": {
     "name": "Siarhiej Piechcieraǔ",
     "shortName": "Siaroža",
@@ -69,7 +72,6 @@
     "telegram": "Telegram",
     "dribbble": "View on Dribbble",
     "ndaNote": "Details under NDA.",
-    "ndaPrivateTitle": "Project {name} is not public",
-    "placeholder": "Description coming soon."
+    "ndaPrivateTitle": "Project {name} is not public"
   }
 }

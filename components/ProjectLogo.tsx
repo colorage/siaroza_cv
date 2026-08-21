@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 type Props = {
@@ -7,6 +8,18 @@ type Props = {
 };
 
 const markClass = "h-full w-full";
+
+function RasterMark({ src }: { src: string }) {
+  return (
+    <Image
+      src={src}
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
+  );
+}
 
 function Mark({ children }: { children: ReactNode }) {
   return (
@@ -24,54 +37,19 @@ function Mark({ children }: { children: ReactNode }) {
 
 const icons: Record<string, ReactNode> = {
   "yadoma-bel": (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/yadoma-bel.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/yadoma-bel.png" />
   ),
   "spasem-bel": (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/spasem-bel.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/spasem-bel.png" />
   ),
   bloodlabs: (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/bloodlabs.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/bloodlabs.png" />
   ),
   pavetra: (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/pavetra.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/pavetra.png" />
   ),
   "pah-bot": (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/pah-bot.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/pah-bot.png" />
   ),
   dc: (
     <Mark>
@@ -90,24 +68,10 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   "kropki-mahiliou": (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/kropki-mahiliou.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/kropki-mahiliou.png" />
   ),
   "radar-rockets": (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/radar-rockets.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/radar-rockets.png" />
   ),
   "hejka-app": (
     <Mark>
@@ -148,14 +112,7 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   "polny-trash": (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/polny-trash.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/polny-trash.png" />
   ),
   cobike: (
     <Mark>
@@ -171,44 +128,16 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   losque: (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/losque.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/losque.png" />
   ),
   "my-ostalis": (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/my-ostalis.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/my-ostalis.png" />
   ),
   "mogilev-norm": (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/mogilev-norm.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/mogilev-norm.png" />
   ),
   tedxmahilyow: (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/tedxmahilyow.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/tedxmahilyow.png" />
   ),
   akanicy: (
     <Mark>
@@ -230,24 +159,10 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   "sunsethunters-club": (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/sunsethunters-club.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/sunsethunters-club.png" />
   ),
   lacinka: (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/lacinka.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/lacinka.png" />
   ),
   "pavuk-club": (
     <Mark>
@@ -294,14 +209,7 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   "belarus-bw": (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/belarus-bw.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/belarus-bw.png" />
   ),
 };
 

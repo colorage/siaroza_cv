@@ -18,7 +18,7 @@ Prefer the type the user named. Otherwise:
 | Deep process, constraints, outcomes, “how we got there” | **Case study** |
 | Personal / side product, existing pet-project slug | **Pet project** |
 
-Home stays Experience + Pet projects until the first Portfolio or Case study item lands. Then add the matching home section and nav.
+Home is five blocks: Hero, Experience, Portfolio, Case studies, Pet projects. Pet projects stay preview-gated.
 
 ```mermaid
 flowchart TD
@@ -26,7 +26,7 @@ flowchart TD
   classify{Classify}
   input --> classify
   classify --> portfolio["/{locale}/work/{slug}"]
-  classify --> cases["/{locale}/case-studies/{slug}"]
+  classify --> cases["/{locale}/work/{slug}"]
   classify --> pets["/{locale}/projects/{slug}"]
   portfolio --> mediaFrame[Shared media well]
   pets --> mediaFrame
@@ -56,8 +56,7 @@ flowchart TD
 | `public/case-studies/{slug}/` | Case study images |
 | `public/projects/{slug}/` | Pet-project media beyond the logo |
 | [`public/projects/`](public/projects/) | Existing project logos |
-| `app/[locale]/work/[slug]/page.tsx` | Portfolio detail |
-| `app/[locale]/case-studies/[slug]/page.tsx` | Case study detail |
+| `app/[locale]/work/[slug]/page.tsx` | Shared portfolio + case-study detail |
 | [`app/[locale]/projects/[slug]/page.tsx`](app/[locale]/projects/[slug]/page.tsx) | Pet-project detail (exists) |
 
 Slugs: lowercase kebab-case, ASCII, stable. Reuse an existing pet-project slug when filling one in.
@@ -116,7 +115,7 @@ Route: `/{locale}/work/{slug}`. Content module: `content/portfolio.ts` (create w
 
 ## Case studies
 
-Route: `/{locale}/case-studies/{slug}`. Content module: `content/case-studies.ts`. Goal: show **effort**, not only polish.
+Route: `/{locale}/work/{slug}` (same article route as portfolio). Content module: `content/case-studies.ts`. Goal: show **effort**, not only polish.
 
 Required bilingual blocks:
 
@@ -192,7 +191,7 @@ Create only when the first content item needs them. Name and role:
 | `VideoEmbed` | Self-hosted `<video>` inside `MediaFrame` |
 | `MermaidDiagram` | Client renderer for case-study diagrams |
 | Work / case-study routes | `generateStaticParams`, locale, `notFound` |
-| Home sections + nav | Grid + hash links, i18n in both message files |
+| Home sections + nav | Grid + `/{locale}#section` links, i18n in both message files |
 
 Match [`ProjectsGrid`](components/ProjectsGrid.tsx) and the pet-project detail page: fade-up, pills for metadata, muted body copy, pill CTA for outbound links.
 

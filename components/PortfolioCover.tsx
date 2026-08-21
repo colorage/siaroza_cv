@@ -10,7 +10,7 @@ export function PortfolioCover({ cover }: Props) {
     <img
       src={cover}
       alt=""
-      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
     />
   );
 }

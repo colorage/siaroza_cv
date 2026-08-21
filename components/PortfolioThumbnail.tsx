@@ -92,7 +92,7 @@ function PlayBadge() {
       className="pointer-events-none absolute inset-0 z-[2] flex items-center justify-center"
       aria-hidden
     >
-      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[color-mix(in_oklab,var(--background)_55%,transparent)] text-foreground shadow-[0_8px_24px_color-mix(in_oklab,#14120b_40%,transparent)] ring-1 ring-foreground/20 backdrop-blur-[2px] transition-transform duration-200 group-hover:scale-105">
+      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[color-mix(in_oklab,var(--background)_55%,transparent)] text-foreground shadow-[0_8px_24px_color-mix(in_oklab,#14120b_40%,transparent)] ring-1 ring-foreground/20 backdrop-blur-[2px] transition-transform duration-200 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100">
         <svg
           viewBox="0 0 24 24"
           className="ml-0.5 h-5 w-5"

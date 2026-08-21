@@ -3,30 +3,20 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CaseStudyBody } from "@/components/CaseStudyBody";
 import { PortfolioPiece } from "@/components/PortfolioPiece";
-import { caseStudies, getCaseStudy } from "@/content/case-studies";
+import { getCaseStudy } from "@/content/case-studies";
 import { getExperience } from "@/content/experience";
-import {
-  getPortfolioShot,
-  isStandaloneShot,
-  portfolioShots,
-} from "@/content/portfolio";
+import { getPortfolioShot, isStandaloneShot } from "@/content/portfolio";
 import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
+import { pageMetadata } from "@/lib/metadata";
+import { getWorkSlugs } from "@/lib/work";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
-function workSlugs(): string[] {
-  const slugs = new Set(caseStudies.map((study) => study.slug));
-  for (const shot of portfolioShots) {
-    if (isStandaloneShot(shot)) slugs.add(shot.slug);
-  }
-  return [...slugs];
-}
-
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
-    workSlugs().map((slug) => ({ locale, slug })),
+    getWorkSlugs().map((slug) => ({ locale, slug })),
   );
 }
 
@@ -34,20 +24,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: localeParam, slug } = await params;
   if (!isLocale(localeParam)) return {};
   const locale = localeParam as Locale;
+  const path = `/work/${slug}`;
   const shot = getPortfolioShot(slug);
   if (shot && isStandaloneShot(shot)) {
-    return {
+    return pageMetadata({
+      locale,
       title: shot.title[locale],
       description: shot.description?.[locale],
-    };
+      path,
+    });
   }
   const study = getCaseStudy(slug);
   const job = study ? getExperience(study.experienceId) : undefined;
   if (!study || !job) return {};
-  return {
+  return pageMetadata({
+    locale,
     title: `${study.title[locale]} — ${job.company}`,
     description: study.summary[locale],
-  };
+    path,
+  });
 }
 
 export default async function WorkPage({ params }: Props) {
