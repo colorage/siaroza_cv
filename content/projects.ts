@@ -112,6 +112,23 @@ export const projects: Project[] = [
       en: "Interactive map of historical buildings in Mahilioǔ — 180 landmarks with status filters, photos, and stories.",
       by: "Інтэрактыўная карта гістарычных будынкаў Магілёва — 180 аб'ектаў з фільтрамі статусу, фота і гісторыямі.",
     },
+    media: [
+      {
+        type: "image",
+        src: "/projects/kropki-mahiliou/icons.png",
+        width: 1600,
+        height: 1200,
+        alt: {
+          en: "Grid of twenty grayscale geometric icons of Mahilioǔ buildings and landmarks.",
+          by: "Сетка з дваццаці шэрых геаметрычных іконак будынкаў і славутасцяў Магілёва.",
+        },
+        caption: {
+          en: "Map icons for kropki — twenty Mahilioǔ landmarks drawn as compact building marks.",
+          by: "Іконкі для кропак — дваццаць гістарычных будынкаў Магілёва як кампактныя знакі на карце.",
+        },
+        href: "https://dribbble.com/shots/16269129-kropki-icons",
+      },
+    ],
   },
   {
     slug: "radar-rockets",

@@ -166,9 +166,19 @@ export default async function ProjectPage({ params }: Props) {
           </div>
         ) : null}
 
-        {project.links?.length ? (
+        {project.url || project.links?.length ? (
           <div className="mt-10 flex flex-wrap gap-3">
-            {project.links.map((link) => (
+            {project.url ? (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center rounded-full bg-button px-5 py-2.5 text-[14px] font-medium text-button-fg transition-opacity hover:opacity-90"
+              >
+                {dict.projects.visit} →
+              </a>
+            ) : null}
+            {project.links?.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -180,15 +190,6 @@ export default async function ProjectPage({ params }: Props) {
               </a>
             ))}
           </div>
-        ) : project.url ? (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-10 inline-flex items-center rounded-full bg-button px-5 py-2.5 text-[14px] font-medium text-button-fg transition-opacity hover:opacity-90"
-          >
-            {dict.projects.visit} →
-          </a>
         ) : null}
       </div>
     </article>
