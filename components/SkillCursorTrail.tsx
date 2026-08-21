@@ -32,12 +32,8 @@ function pick<T>(items: readonly T[]): T {
 }
 
 function pickSkill(exclude: string | null): string {
-  if (skills.length === 1) return skills[0];
-  let next = pick(skills);
-  while (next === exclude) {
-    next = pick(skills);
-  }
-  return next;
+  const pool = exclude ? skills.filter((skill) => skill !== exclude) : skills;
+  return pick(pool);
 }
 
 export function SkillCursorTrail() {
