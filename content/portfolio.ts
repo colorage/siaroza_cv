@@ -6,6 +6,13 @@ export type PortfolioYoutube = {
   caption?: Record<Locale, string>;
 };
 
+export type PortfolioPages = {
+  dir: string;
+  count: number;
+  width: number;
+  height: number;
+};
+
 export type PortfolioShot = {
   slug: string;
   title: Record<Locale, string>;
@@ -15,7 +22,15 @@ export type PortfolioShot = {
   description?: Record<Locale, string>;
   dribbbleUrl?: string;
   youtube?: PortfolioYoutube;
+  pages?: PortfolioPages;
 };
+
+export function getPortfolioPageSrcs(pages: PortfolioPages): string[] {
+  return Array.from({ length: pages.count }, (_, i) => {
+    const n = String(i + 1).padStart(2, "0");
+    return `${pages.dir}/page-${n}.jpg`;
+  });
+}
 
 export const portfolioShots: PortfolioShot[] = [
   {
@@ -51,6 +66,24 @@ export const portfolioShots: PortfolioShot[] = [
     dribbbleUrl: "https://dribbble.com/shots/16330099-RADZIMA-font",
   },
   {
+    slug: "ptchr",
+    title: {
+      en: "PTCHR pitch deck",
+      by: "Пітчдэк PTCHR",
+    },
+    cover: "/work/ptchr/page-01.jpg",
+    description: {
+      en: "Investor pitch for PTCHR — crowd-promotion ads for micro-businesses, driven by nano-influencers in their own customer community. Brand, mobile UI, and a 10-slide deck from concept through pre-seed.",
+      by: "Інвестарскі пітч PTCHR — crowd-promotion рэклама для мікрабізнесу праз нанаінфлюэнсераў з уласнай супольнасці кліентаў. Брэнд, мабільны UI і 10 слайдаў ад канцэпту да pre-seed.",
+    },
+    pages: {
+      dir: "/work/ptchr",
+      count: 10,
+      width: 1920,
+      height: 1080,
+    },
+  },
+  {
     slug: "game-thumbnails",
     title: {
       en: "Game Thumbnails generation",
@@ -73,14 +106,6 @@ export const portfolioShots: PortfolioShot[] = [
       by: "Ілюстрацыі Chameleon",
     },
     caseStudySlug: "chameleon-illustrations",
-  },
-  {
-    slug: "pitchdeck-app-design",
-    title: {
-      en: "Pitchdeck + App Design",
-      by: "Пітчдэк + дызайн дадатка",
-    },
-    caseStudySlug: "pitchdeck-app-design",
   },
   {
     slug: "brandbook",
