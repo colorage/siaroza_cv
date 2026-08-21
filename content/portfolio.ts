@@ -1,5 +1,11 @@
 import type { Locale } from "@/lib/i18n";
 
+export type PortfolioYoutube = {
+  id: string;
+  title: Record<Locale, string>;
+  caption?: Record<Locale, string>;
+};
+
 export type PortfolioPages = {
   dir: string;
   count: number;
@@ -15,11 +21,7 @@ export type PortfolioShot = {
   caseStudySlug?: string;
   description?: Record<Locale, string>;
   dribbbleUrl?: string;
-  youtube?: {
-    id: string;
-    title: Record<Locale, string>;
-    caption?: Record<Locale, string>;
-  };
+  youtube?: PortfolioYoutube;
   pages?: PortfolioPages;
 };
 
@@ -47,6 +49,29 @@ export const portfolioShots: PortfolioShot[] = [
       title: {
         en: "Showreel 23",
         by: "Showreel 23",
+      },
+    },
+  },
+  {
+    slug: "ice-sculptor",
+    title: {
+      en: "Be the Ice Sculptor",
+      by: "Будзь ледзяным скульптарам",
+    },
+    cover: "/work/ice-sculptor/cover.jpg",
+    description: {
+      en: "Motion film on craft versus tools — the sculptor's concern is not how the chainsaw sparkles, but the form it reveals. The tool is only a gateway; without the craft, it is nothing.",
+      by: "Моўшн-фільм пра крафт і інструмент — клопат скульптара не ў бляску бензапілы, а ў форме, якую яна адкрывае. Інструмент — толькі брама; без майстэрства ён нішто.",
+    },
+    youtube: {
+      id: "0FpEAb--kdI",
+      title: {
+        en: "Be the Ice Sculptor",
+        by: "Будзь ледзяным скульптарам",
+      },
+      caption: {
+        en: "Short motion piece on craft, tools, and imagination.",
+        by: "Кароткі моўшн пра крафт, інструменты і ўяўленне.",
       },
     },
   },
