@@ -1,0 +1,10 @@
+---
+description: Fulfill portfolio, case study, and pet project content from files and links
+alwaysApply: true
+---
+
+When the user provides links, PDFs, screenshots, or notes to put on this site, follow [CONTENT.md](CONTENT.md) exactly.
+
+Classify as Portfolio (`/work/{slug}`), Case study (`/case-studies/{slug}`), or Pet project (`/projects/{slug}`). Write bilingual `en` + `by` copy. Download media into `public/` (YouTube embed is the only hotlink). If a carousel, YouTube well, Mermaid renderer, or route is missing, build it in the same change.
+
+Do not edit `AGENTS.md` for these rules — Next.js regenerates it.
