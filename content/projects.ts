@@ -24,6 +24,13 @@ export type ProjectMedia =
       title: Record<Locale, string>;
       caption?: Record<Locale, string>;
     }
+  | {
+      type: "video";
+      src: string;
+      poster?: string;
+      title: Record<Locale, string>;
+      caption?: Record<Locale, string>;
+    }
   | { type: "pdf-pages"; dir: string; count: number };
 
 export type Project = {
@@ -165,6 +172,21 @@ export const projects: Project[] = [
       en: "Interactive map of Belarusian voices — anonymous, safe statements via Telegram bot, shown on a public map for people inside the country and abroad.",
       by: "Інтэрактыўная мапа думак беларусаў — ананімныя і бяспечныя выказванні праз Telegram-бота на публічнай карце, знутры краіны і з-за мяжы.",
     },
+    media: [
+      {
+        type: "video",
+        src: "/projects/halasy/demo.mp4",
+        poster: "/projects/halasy/demo-poster.jpg",
+        title: {
+          en: "halasy — demo",
+          by: "halasy — дэма",
+        },
+        caption: {
+          en: "Motion demo of the voices map — Belarus as a field of anonymous statements.",
+          by: "Моўшн-дэма мапы галасоў — Беларусь як поле ананімных выказванняў.",
+        },
+      },
+    ],
   },
   {
     slug: "impact",

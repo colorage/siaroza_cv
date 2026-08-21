@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MediaFrame } from "@/components/MediaFrame";
 import { ProjectLogo } from "@/components/ProjectLogo";
+import { VideoEmbed } from "@/components/VideoEmbed";
 import { YouTubeEmbed } from "@/components/YouTubeEmbed";
 import { getProject, projects, type ProjectMedia } from "@/content/projects";
 import {
@@ -38,6 +39,17 @@ function ProjectMediaBlock({
     return (
       <YouTubeEmbed
         id={item.id}
+        title={item.title[locale]}
+        caption={item.caption?.[locale]}
+      />
+    );
+  }
+
+  if (item.type === "video") {
+    return (
+      <VideoEmbed
+        src={item.src}
+        poster={item.poster}
         title={item.title[locale]}
         caption={item.caption?.[locale]}
       />
@@ -152,7 +164,7 @@ export default async function ProjectPage({ params }: Props) {
             {project.media.map((item) => (
               <ProjectMediaBlock
                 key={
-                  item.type === "image"
+                  item.type === "image" || item.type === "video"
                     ? item.src
                     : item.type === "youtube"
                       ? item.id

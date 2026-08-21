@@ -69,8 +69,9 @@ Portfolio and pet-project media share one outer frame:
 - Width: content column (`max-w-5xl` on the page, full width of the article)
 - Chrome: `rounded-2xl border border-border overflow-hidden`
 - **YouTube:** iframe fills the well at **16:9**
+- **Local video:** `<video>` in the same well; height follows the file aspect ratio
 - **PDF carousel:** same well; height follows the page aspect ratio
-- First-use components: `MediaFrame`, `MediaCarousel` (scroll-snap), `YouTubeEmbed`
+- First-use components: `MediaFrame`, `MediaCarousel` (scroll-snap), `YouTubeEmbed`, `VideoEmbed`
 
 ---
 
@@ -96,6 +97,13 @@ Route: `/{locale}/work/{slug}`. Content module: `content/portfolio.ts` (create w
 2. Embed `https://www.youtube-nocookie.com/embed/{id}` in the media well at 16:9.
 3. Set `title` on the iframe. No extra player chrome, no related-video clutter (`rel=0` where it still helps).
 4. Short bilingual caption: what the video is, your role if known.
+
+### Local video (mp4 / webm)
+
+1. Save under `public/work/{slug}/` or `public/projects/{slug}/`. Do not hotlink CDNs.
+2. Keep the file small: `+faststart`, H.264, extract a poster JPEG for `preload="none"`.
+3. Play it with `VideoEmbed` (`<video controls playsInline>`) inside `MediaFrame`. Height follows the file, unlike YouTube’s 16:9 well.
+4. Short bilingual caption, same voice as YouTube.
 
 ### Dribbble
 
@@ -154,7 +162,7 @@ When the user gives a **link** (site, App Store, GitHub, YouTube, Telegram, itch
 3. Rewrite the bilingual `description` — a tight summary, not the OG dump. Replace “Description coming soon.”
 4. Set `url` to the primary destination. Add extra links (articles, repos, stores) on the detail page when the type grows to support them.
 5. If the logo is missing, add a mark in `ProjectLogo` (inline SVG in the existing style, or a file in `public/projects/` plus the `imageLogos` set).
-6. YouTube / PDF / Dribbble on a pet project uses the same media-well rules as Portfolio.
+6. YouTube / local video / PDF / Dribbble on a pet project uses the same media-well rules as Portfolio.
 
 Extend `Project` when the first rich page needs it, for example:
 
@@ -162,6 +170,7 @@ Extend `Project` when the first rich page needs it, for example:
 media?: Array<
   | { type: "image"; src: string; alt: Record<Locale, string> }
   | { type: "youtube"; id: string }
+  | { type: "video"; src: string; poster?: string }
   | { type: "pdf-pages"; dir: string; count: number }
 >;
 links?: { href: string; label: Record<Locale, string> }[];
@@ -180,6 +189,7 @@ Create only when the first content item needs them. Name and role:
 | `MediaFrame` | Shared bordered well |
 | `MediaCarousel` | Scroll-snap page/image preview |
 | `YouTubeEmbed` | 16:9 nocookie iframe inside `MediaFrame` |
+| `VideoEmbed` | Self-hosted `<video>` inside `MediaFrame` |
 | `MermaidDiagram` | Client renderer for case-study diagrams |
 | Work / case-study routes | `generateStaticParams`, locale, `notFound` |
 | Home sections + nav | Grid + hash links, i18n in both message files |
