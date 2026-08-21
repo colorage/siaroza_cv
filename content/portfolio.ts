@@ -6,6 +6,13 @@ export type PortfolioYoutube = {
   caption?: Record<Locale, string>;
 };
 
+export type PortfolioPages = {
+  dir: string;
+  count: number;
+  width: number;
+  height: number;
+};
+
 export type PortfolioShot = {
   slug: string;
   title: Record<Locale, string>;
@@ -15,7 +22,15 @@ export type PortfolioShot = {
   description?: Record<Locale, string>;
   dribbbleUrl?: string;
   youtube?: PortfolioYoutube;
+  pages?: PortfolioPages;
 };
+
+export function getPortfolioPageSrcs(pages: PortfolioPages): string[] {
+  return Array.from({ length: pages.count }, (_, i) => {
+    const n = String(i + 1).padStart(2, "0");
+    return `${pages.dir}/page-${n}.jpg`;
+  });
+}
 
 export const portfolioShots: PortfolioShot[] = [
   {
@@ -42,6 +57,67 @@ export const portfolioShots: PortfolioShot[] = [
     },
   },
   {
+    slug: "showreel-23",
+    title: {
+      en: "Showreel 23",
+      by: "Showreel 23",
+    },
+    cover: "/work/showreel-23/cover.jpg",
+    description: {
+      en: "Motion design showreel from 2023 — selected commercial and personal work.",
+      by: "Моўшн-дызайн шоўрыл 2023 — абраныя камерцыйныя і асабістыя работы.",
+    },
+    youtube: {
+      id: "61ppqJvsWR8",
+      title: {
+        en: "Showreel 23",
+        by: "Showreel 23",
+      },
+    },
+  },
+  {
+    slug: "ice-sculptor",
+    title: {
+      en: "Be the Ice Sculptor",
+      by: "Будзь ледзяным скульптарам",
+    },
+    cover: "/work/ice-sculptor/cover.jpg",
+    description: {
+      en: "Motion film on craft versus tools — the sculptor's concern is not how the chainsaw sparkles, but the form it reveals. The tool is only a gateway; without the craft, it is nothing.",
+      by: "Моўшн-фільм пра крафт і інструмент — клопат скульптара не ў бляску бензапілы, а ў форме, якую яна адкрывае. Інструмент — толькі брама; без майстэрства ён нішто.",
+    },
+    youtube: {
+      id: "0FpEAb--kdI",
+      title: {
+        en: "Be the Ice Sculptor",
+        by: "Будзь ледзяным скульптарам",
+      },
+      caption: {
+        en: "Short motion piece on craft, tools, and imagination.",
+        by: "Кароткі моўшн пра крафт, інструменты і ўяўленне.",
+      },
+    },
+  },
+  {
+    slug: "splash-of-cash",
+    title: {
+      en: "Splash of Cash",
+      by: "Splash of Cash",
+    },
+    cover: "/work/splash-of-cash/cover.jpg",
+    description: {
+      en: "Casual game motion demo — bubble clusters, cash HUD, and 3D gift drops in a tiled bathroom world.",
+      by: "Моўшн-дэма казуальнай гульні — кластары бурбалак, кэш-HUD і 3D-падарункі ў пліткавай ваннай.",
+    },
+    youtube: {
+      id: "_1lUgXSyUwo",
+      title: {
+        en: "Splash of Cash — demo by Sergey Pekhteerau",
+        by: "Splash of Cash — дэма Сяргея Пехцерава",
+      },
+    },
+  },
+  {
     slug: "radzima",
     title: {
       en: "RADZIMA font",
@@ -53,6 +129,24 @@ export const portfolioShots: PortfolioShot[] = [
       by: "Лацінскі і кірылічны шрыфт, намаляваны з кінатытра ў Магілёве. Цяжкія геаметрычныя дысплейныя формы з вузкімі контрформамі, у тым ліку беларускія І і Ў.",
     },
     dribbbleUrl: "https://dribbble.com/shots/16330099-RADZIMA-font",
+  },
+  {
+    slug: "ptchr",
+    title: {
+      en: "PTCHR pitch deck",
+      by: "Пітчдэк PTCHR",
+    },
+    cover: "/work/ptchr/page-01.jpg",
+    description: {
+      en: "Investor pitch for PTCHR — crowd-promotion ads for micro-businesses, driven by nano-influencers in their own customer community. Brand, mobile UI, and a 10-slide deck from concept through pre-seed.",
+      by: "Інвестарскі пітч PTCHR — crowd-promotion рэклама для мікрабізнесу праз нанаінфлюэнсераў з уласнай супольнасці кліентаў. Брэнд, мабільны UI і 10 слайдаў ад канцэпту да pre-seed.",
+    },
+    pages: {
+      dir: "/work/ptchr",
+      count: 10,
+      width: 1920,
+      height: 1080,
+    },
   },
   {
     slug: "game-thumbnails",
@@ -77,14 +171,6 @@ export const portfolioShots: PortfolioShot[] = [
       by: "Ілюстрацыі Chameleon",
     },
     caseStudySlug: "chameleon-illustrations",
-  },
-  {
-    slug: "pitchdeck-app-design",
-    title: {
-      en: "Pitchdeck + App Design",
-      by: "Пітчдэк + дызайн дадатка",
-    },
-    caseStudySlug: "pitchdeck-app-design",
   },
   {
     slug: "brandbook",

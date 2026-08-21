@@ -41,7 +41,8 @@ export type Dictionary = {
     heading: string;
     back: string;
     viewOnDribbble: string;
-    watchOnYouTube: string;
+    viewOnYouTube: string;
+    slide: string;
   };
   caseStudies: {
     heading: string;

@@ -48,15 +48,6 @@ const marks: Record<string, ReactNode> = {
       <circle cx="268" cy="132" r="7" fill="currentColor" />
     </Frame>
   ),
-  "pitchdeck-app-design": (
-    <Frame>
-      <rect x="72" y="58" width="168" height="184" rx="12" stroke="currentColor" strokeWidth="2" />
-      <rect x="92" y="84" width="128" height="10" rx="5" fill="currentColor" opacity="0.28" />
-      <rect x="92" y="108" width="96" height="8" rx="4" fill="currentColor" opacity="0.16" />
-      <rect x="220" y="88" width="96" height="154" rx="22" stroke="currentColor" strokeWidth="2" />
-      <rect x="238" y="112" width="60" height="88" rx="8" fill="currentColor" opacity="0.16" />
-    </Frame>
-  ),
   brandbook: (
     <Frame>
       <text
