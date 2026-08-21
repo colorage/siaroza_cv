@@ -50,10 +50,33 @@ export const projects: Project[] = [
     name: "ядома.бел",
     stage: "release",
     status: "finished",
+    links: [
+      {
+        label: "Reform.news",
+        href: "https://reform.news/belarusy-sozdali-onlajn-kartu-sidjashhih-doma-iz-za-koronavirusa",
+      },
+    ],
     description: {
       en: "COVID-19 #StayHome map (March 2020) — people staying home checked in via Telegram bot and appeared on a public map by city, without names or exact location.",
       by: "Мапа #StayHome часу COVID-19 (сакавік 2020) — хто сядзеў дома, адзначаўся праз Telegram-бота і з'яўляўся на публічнай карце па горадзе, без імені і дакладнай лакацыі.",
     },
+    media: [
+      {
+        type: "image",
+        src: "/projects/yadoma-bel/map.jpg",
+        width: 1329,
+        height: 793,
+        alt: {
+          en: "Dark map of Eastern Europe with person markers clustered over Belarus, densest in Minsk, and scattered across neighboring countries.",
+          by: "Цёмная мапа Усходняй Еўропы з фігуркамі людзей, сабранымі па Беларусі — найгусцей у Мінску — і разыйшоўшыміся па суседніх краінах.",
+        },
+        caption: {
+          en: "The public map in March 2020 — check-ins by city, no names or exact location.",
+          by: "Публічная мапа ў сакавіку 2020 — адзнакі па горадзе, без імён і дакладнай лакацыі.",
+        },
+        href: "https://reform.news/belarusy-sozdali-onlajn-kartu-sidjashhih-doma-iz-za-koronavirusa",
+      },
+    ],
   },
   {
     slug: "spasem-bel",
