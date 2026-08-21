@@ -8,7 +8,9 @@ type Props = {
 export function MediaFrame({ children, className = "" }: Props) {
   return (
     <div
-      className={`overflow-hidden rounded-2xl border border-border ${className}`}
+      className={["overflow-hidden rounded-2xl border border-border", className]
+        .filter(Boolean)
+        .join(" ")}
     >
       {children}
     </div>
