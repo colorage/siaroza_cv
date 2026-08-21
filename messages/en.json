@@ -30,7 +30,9 @@
     "caseStudyRelated": "Related"
   },
   "portfolio": {
-    "heading": "Portfolio"
+    "heading": "Portfolio",
+    "back": "Back",
+    "viewOnDribbble": "View on Dribbble"
   },
   "caseStudies": {
     "heading": "Case studies",

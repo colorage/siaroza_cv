@@ -302,16 +302,6 @@ export const projects: Project[] = [
       },
     ],
   },
-  {
-    slug: "radzima",
-    name: "Радзіма",
-    stage: "poc",
-    status: "active",
-    description: {
-      en: "Latin and Cyrillic typeface.",
-      by: "Лацінскі і кірылічны шрыфт.",
-    },
-  },
 ];
 
 export function getProject(slug: string): Project | undefined {

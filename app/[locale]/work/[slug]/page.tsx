@@ -2,17 +2,31 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CaseStudyBody } from "@/components/CaseStudyBody";
+import { PortfolioPiece } from "@/components/PortfolioPiece";
 import { caseStudies, getCaseStudy } from "@/content/case-studies";
 import { getExperience } from "@/content/experience";
+import {
+  getPortfolioShot,
+  isStandaloneShot,
+  portfolioShots,
+} from "@/content/portfolio";
 import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
+function workSlugs(): string[] {
+  const slugs = new Set(caseStudies.map((study) => study.slug));
+  for (const shot of portfolioShots) {
+    if (isStandaloneShot(shot)) slugs.add(shot.slug);
+  }
+  return [...slugs];
+}
+
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
-    caseStudies.map((study) => ({ locale, slug: study.slug })),
+    workSlugs().map((slug) => ({ locale, slug })),
   );
 }
 
@@ -20,6 +34,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: localeParam, slug } = await params;
   if (!isLocale(localeParam)) return {};
   const locale = localeParam as Locale;
+  const shot = getPortfolioShot(slug);
+  if (shot && isStandaloneShot(shot)) {
+    return {
+      title: shot.title[locale],
+      description: shot.description?.[locale],
+    };
+  }
   const study = getCaseStudy(slug);
   const job = study ? getExperience(study.experienceId) : undefined;
   if (!study || !job) return {};
@@ -29,15 +50,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function CaseStudyPage({ params }: Props) {
+export default async function WorkPage({ params }: Props) {
   const { locale: localeParam, slug } = await params;
   if (!isLocale(localeParam)) notFound();
   const locale = localeParam as Locale;
+  const dict = await getDictionary(locale);
+
+  const shot = getPortfolioShot(slug);
+  if (shot && isStandaloneShot(shot)) {
+    return <PortfolioPiece shot={shot} locale={locale} dict={dict} />;
+  }
+
   const study = getCaseStudy(slug);
   const job = study ? getExperience(study.experienceId) : undefined;
   if (!study || !job) notFound();
-
-  const dict = await getDictionary(locale);
 
   return (
     <article className="mx-auto max-w-2xl px-6 py-16 md:py-24">
