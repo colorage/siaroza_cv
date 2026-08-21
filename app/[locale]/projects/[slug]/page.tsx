@@ -27,9 +27,11 @@ function projectLinkLabel(label: string, dict: Dictionary): string {
 function ProjectMediaBlock({
   item,
   locale,
+  dict,
 }: {
   item: ProjectMedia;
   locale: Locale;
+  dict: Dictionary;
 }) {
   if (item.type !== "image") return null;
 
@@ -59,6 +61,16 @@ function ProjectMediaBlock({
         <figcaption className="mt-3 max-w-2xl text-[14px] leading-relaxed text-muted">
           {item.caption[locale]}
         </figcaption>
+      ) : null}
+      {item.href?.includes("dribbble.com") ? (
+        <a
+          href={item.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center text-[13px] text-muted transition-colors hover:text-foreground"
+        >
+          {dict.projects.dribbble} →
+        </a>
       ) : null}
     </figure>
   );
@@ -131,6 +143,7 @@ export default async function ProjectPage({ params }: Props) {
                 key={item.type === "image" ? item.src : item.type}
                 item={item}
                 locale={locale}
+                dict={dict}
               />
             ))}
           </div>

@@ -227,7 +227,6 @@ export const projects: Project[] = [
         label: "Flickr",
         href: "https://www.flickr.com/photos/187970690@N08/albums/72157713847203666",
       },
-      { label: "dribbble", href: "https://dribbble.com/shots/2848906-oXana" },
     ],
     media: [
       {
@@ -244,6 +243,21 @@ export const projects: Project[] = [
           by: "Лагатып TEDxMahilyow — чырвоны x у блакітных стужках, пасля работ Yoga Perdana.",
         },
         href: "https://dribbble.com/shots/2848906-oXana",
+      },
+      {
+        type: "image",
+        src: "/projects/tedxmahilyow/tedx-pattern.png",
+        width: 800,
+        height: 600,
+        alt: {
+          en: "TEDxMahilyow 2017 identity pattern — red hangers in a Belarusian ornament over “ideas worth spreading”",
+          by: "Патэрн ідэнтычнасці TEDxMahilyow 2017 — чырвоныя вешалкі ў беларускім арнаменце і радок «ідэі, вартыя распаўсюду»",
+        },
+        caption: {
+          en: "Identity pattern for TEDxMahilyow 2017 — hangers as a Belarusian ornament, with the line “ideas worth spreading.”",
+          by: "Патэрн ідэнтычнасці TEDxMahilyow 2017 — вешалкі як беларускі арнамент і радок «ідэі, вартыя распаўсюду».",
+        },
+        href: "https://dribbble.com/shots/3561776-TEDx-pattern",
       },
     ],
     description: {
