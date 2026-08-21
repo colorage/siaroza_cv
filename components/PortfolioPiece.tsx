@@ -90,18 +90,30 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
           </div>
         ) : null}
 
-        {shot.dribbbleUrl || shot.youtube ? (
+        {shot.links?.length || shot.dribbbleUrl || shot.youtube ? (
           <div className="mt-10 flex flex-wrap gap-3">
-            {shot.dribbbleUrl ? (
-              <a
-                href={shot.dribbbleUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center rounded-full bg-button px-5 py-2.5 text-[14px] font-medium text-button-fg transition-opacity hover:opacity-90"
-              >
-                {dict.portfolio.viewOnDribbble} →
-              </a>
-            ) : null}
+            {shot.links?.length
+              ? shot.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center rounded-full bg-button px-5 py-2.5 text-[14px] font-medium text-button-fg transition-opacity hover:opacity-90"
+                  >
+                    {link.label[locale]} →
+                  </a>
+                ))
+              : shot.dribbbleUrl ? (
+                  <a
+                    href={shot.dribbbleUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center rounded-full bg-button px-5 py-2.5 text-[14px] font-medium text-button-fg transition-opacity hover:opacity-90"
+                  >
+                    {dict.portfolio.viewOnDribbble} →
+                  </a>
+                ) : null}
             {shot.youtube ? (
               <a
                 href={`https://www.youtube.com/watch?v=${shot.youtube.id}`}

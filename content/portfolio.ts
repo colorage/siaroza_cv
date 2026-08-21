@@ -11,6 +11,12 @@ export type PortfolioPages = {
   count: number;
   width: number;
   height: number;
+  files?: string[];
+};
+
+export type PortfolioLink = {
+  href: string;
+  label: Record<Locale, string>;
 };
 
 export type PortfolioShot = {
@@ -21,11 +27,15 @@ export type PortfolioShot = {
   caseStudySlug?: string;
   description?: Record<Locale, string>;
   dribbbleUrl?: string;
+  links?: PortfolioLink[];
   youtube?: PortfolioYoutube;
   pages?: PortfolioPages;
 };
 
 export function getPortfolioPageSrcs(pages: PortfolioPages): string[] {
+  if (pages.files?.length) {
+    return pages.files.map((file) => `${pages.dir}/${file}`);
+  }
   return Array.from({ length: pages.count }, (_, i) => {
     const n = String(i + 1).padStart(2, "0");
     return `${pages.dir}/page-${n}.jpg`;
@@ -147,6 +157,53 @@ export const portfolioShots: PortfolioShot[] = [
       by: "Лацінскі і кірылічны шрыфт, намаляваны з кінатытра ў Магілёве. Цяжкія геаметрычныя дысплейныя формы з вузкімі контрформамі, у тым ліку беларускія І і Ў.",
     },
     dribbbleUrl: "https://dribbble.com/shots/16330099-RADZIMA-font",
+  },
+  {
+    slug: "lstr",
+    title: {
+      en: "LSTR",
+      by: "LSTR",
+    },
+    cover: "/work/lstr/mahilyow-x-lstr.png",
+    description: {
+      en: "Prints for LSTR streetwear — a Mahilyow city t-shirt with the Rodina cinema, drama theatre, and 1267 mark, plus a Greetings from Belarus postcard of landmarks, bogs, forests, and krambambula.",
+      by: "Прынты для стрытвіру LSTR — магілёўская цішотка з кінатэатрам «Радзіма», драмтэатрам і адзнакай 1267, плюс паштоўка Greetings from Belarus са славутасцямі, балотамі, лясамі і крамбамбуляй.",
+    },
+    dribbbleUrl: "https://dribbble.com/shots/3360732-Mahilyow-x-LSTR",
+    pages: {
+      dir: "/work/lstr",
+      count: 3,
+      width: 800,
+      height: 600,
+      files: [
+        "mahilyow-x-lstr.png",
+        "lstr-shirt.png",
+        "belarus-postcard.png",
+      ],
+    },
+    links: [
+      {
+        href: "https://dribbble.com/shots/3360732-Mahilyow-x-LSTR",
+        label: {
+          en: "Mahilyow × LSTR",
+          by: "Mahilyow × LSTR",
+        },
+      },
+      {
+        href: "https://dribbble.com/shots/3374608-LSTR-Shirt",
+        label: {
+          en: "LSTR Shirt",
+          by: "Цішотка LSTR",
+        },
+      },
+      {
+        href: "https://dribbble.com/shots/3531945-Belarus-postcard",
+        label: {
+          en: "Belarus postcard",
+          by: "Паштоўка Беларусь",
+        },
+      },
+    ],
   },
   {
     slug: "ptchr",
