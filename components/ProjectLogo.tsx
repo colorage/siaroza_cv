@@ -303,16 +303,6 @@ const icons: Record<string, ReactNode> = {
       className="h-full w-full object-cover"
     />
   ),
-  radzima: (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/radzima.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
-  ),
 };
 
 function FallbackMark({ name }: { name: string }) {
@@ -351,7 +341,6 @@ const imageLogos = new Set([
   "spasem-bel",
   "mogilev-norm",
   "yadoma-bel",
-  "radzima",
   "belarus-bw",
   "pah-bot",
   "polny-trash",

@@ -30,7 +30,9 @@
     "caseStudyRelated": "Таксама"
   },
   "portfolio": {
-    "heading": "Партфоліа"
+    "heading": "Партфоліа",
+    "back": "Назад",
+    "viewOnDribbble": "Адкрыць на Dribbble"
   },
   "caseStudies": {
     "heading": "Кейсы",

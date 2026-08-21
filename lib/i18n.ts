@@ -39,6 +39,8 @@ export type Dictionary = {
   };
   portfolio: {
     heading: string;
+    back: string;
+    viewOnDribbble: string;
   };
   caseStudies: {
     heading: string;
