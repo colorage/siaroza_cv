@@ -19,24 +19,24 @@ export function SiteHeader({ locale, dict }: Props) {
         >
           {dict.hero.shortName}
         </Link>
-        <nav className="flex items-center gap-3 text-[12px] text-muted sm:gap-5 sm:text-[13px]">
-          <a href="#experience" className="transition-colors hover:text-foreground">
+        <nav className="flex min-w-0 items-center gap-3 overflow-x-auto text-[12px] text-muted [scrollbar-width:none] sm:gap-5 sm:text-[13px]">
+          <a href="#experience" className="shrink-0 transition-colors hover:text-foreground">
             {dict.nav.experience}
           </a>
-          <a href="#portfolio" className="transition-colors hover:text-foreground">
+          <a href="#portfolio" className="shrink-0 transition-colors hover:text-foreground">
             {dict.nav.portfolio}
           </a>
-          <a href="#case-studies" className="whitespace-nowrap transition-colors hover:text-foreground">
+          <a href="#case-studies" className="shrink-0 whitespace-nowrap transition-colors hover:text-foreground">
             {dict.nav.caseStudies}
           </a>
           {isPetProjectsEnabled() ? (
-            <a href="#projects" className="whitespace-nowrap transition-colors hover:text-foreground">
+            <a href="#projects" className="shrink-0 whitespace-nowrap transition-colors hover:text-foreground">
               {dict.nav.projects}
             </a>
           ) : null}
           <Link
             href={`/${other}`}
-            className="rounded-full border border-border-strong px-3 py-1 text-foreground transition-colors hover:bg-surface"
+            className="shrink-0 rounded-full border border-border-strong px-3 py-1 text-foreground transition-colors hover:bg-surface"
             hrefLang={other}
           >
             {other.toUpperCase()}
