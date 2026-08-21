@@ -18,9 +18,10 @@ export const projects: Project[] = [
     name: "ядома.бел",
     stage: "release",
     status: "finished",
+    url: "https://web.archive.org/web/20200326071645/http://xn--80ahyh7f.xn--90ais/",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Interactive #StayHome map of Belarus, launched in spring 2020 with Anton Turko — a nationwide show of support for people who chose self-isolation in the first COVID-19 wave.",
+      by: "Інтэрактыўная карта #StayHome Беларусі, запушчаная вясной 2020 разам з Антонам Турко — усенародная падтрымка тых, хто абраў самаізаляцыю ў першую хвалю COVID-19.",
     },
   },
   {
@@ -29,8 +30,8 @@ export const projects: Project[] = [
     stage: "release",
     status: "finished",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Volunteer mutual-aid in Mahilioǔ after August 2020 — helping relatives of people held in the detention center with food, information, and support.",
+      by: "Валанцёрская ўзаемадапамога ў Магілёве пасля жніўня 2020 — ежа, інфармацыя і падтрымка для родных людзей, якія трапілі ў ІЧУ.",
     },
   },
   {
@@ -40,8 +41,8 @@ export const projects: Project[] = [
     status: "active",
     url: "https://apps.apple.com/app/blood-labs/id6774652156",
     description: {
-      en: "Private iOS app to import blood lab reports from photo or PDF, track markers on a timeline, and compare results over time.",
-      by: "Прыватны iOS‑дадатак для імпарту аналізаў крыві з фота ці PDF, адсочвання паказчыкаў на шкале часу і параўнання вынікаў.",
+      en: "Private iOS app to import blood lab reports from photo or PDF, track markers on a timeline, compare tests, and keep family profiles encrypted on-device.",
+      by: "Прыватны iOS‑дадатак для імпарту аналізаў крыві з фота ці PDF, адсочвання паказчыкаў на шкале часу, параўнання тэстаў і сямейных профіляў — даныя шыфруюцца на прыладзе.",
     },
   },
   {
@@ -83,8 +84,8 @@ export const projects: Project[] = [
     status: "active",
     url: "https://mahiliou.space/",
     description: {
-      en: "Interactive map of historical buildings in Mahilioǔ — 180 landmarks with status filters, photos, and stories.",
-      by: "Інтэрактыўная карта гістарычных будынкаў Магілёва — 180 аб'ектаў з фільтрамі статусу, фота і гісторыямі.",
+      en: "Interactive map of historical buildings in Mahilioǔ — 180 landmarks with status filters, photos, and stories. Started in 2021 with Aliaksei Baciukoŭ and Anton Turko; restored in 2026.",
+      by: "Інтэрактыўная карта гістарычных будынкаў Магілёва — 180 аб'ектаў з фільтрамі статусу, фота і гісторыямі. Створана ў 2021 з Аляксеем Бацюковым і Антонам Турко, адноўлена ў 2026.",
     },
   },
   {
@@ -103,9 +104,10 @@ export const projects: Project[] = [
     name: "hejka.app",
     stage: "mvp",
     status: "finished",
+    url: "https://hejka.app",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Local-first app to prepare and manage documents for life in a new city — private by default.",
+      by: "Лакальны дадатак для падрыхтоўкі і вядзення дакументаў для жыцця ў новым горадзе — прыватнасць па змаўчанні.",
     },
   },
   {
@@ -184,9 +186,10 @@ export const projects: Project[] = [
     name: "akanicy",
     stage: "poc",
     status: "active",
+    url: "https://trip.siaroza.com/",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Single-page scroll photo galleries for trip memories — a series of Akanica trip pages.",
+      by: "Аднастаронкавыя фотагалерэі падарожжаў са скролам — серыя старонак Akanica.",
     },
   },
   {
@@ -194,9 +197,10 @@ export const projects: Project[] = [
     name: "sunsethunters club",
     stage: "poc",
     status: "active",
+    url: "https://sunsethunters.club/",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Live map of the sunset terminator and golden-hour window — a club PoC for catching the light.",
+      by: "Жывая мапа лініі захаду сонца і акна залатой гадзіны — PoC-клуб для тых, хто ловіць святло.",
     },
   },
   {
@@ -215,9 +219,10 @@ export const projects: Project[] = [
     name: "pavuk.club",
     stage: "release",
     status: "active",
+    url: "https://pavuk.club",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Browser designer for traditional straw mobiles (pavuk / himmeli) with real physics in Three.js.",
+      by: "Браўзерны канструктар традыцыйных саламяных павукоў (pavuk / himmeli) з рэальнай фізікай на Three.js.",
     },
   },
   {
@@ -235,9 +240,10 @@ export const projects: Project[] = [
     name: "photoplay",
     stage: "poc",
     status: "active",
+    url: "https://photoplay.app",
     description: {
-      en: "Description coming soon.",
-      by: "Апісанне з'явіцца пазней.",
+      en: "Share iPhone Live Photos with anyone — a Mac sync app and web player that keeps the motion on Android, Windows, and the browser, private by default.",
+      by: "Падзяліцца iPhone Live Photos з кім заўгодна — Mac-дадатак і вэб-плэер, які захоўвае рух на Android, Windows і ў браўзеры, прыватна па змаўчанні.",
     },
   },
 ];

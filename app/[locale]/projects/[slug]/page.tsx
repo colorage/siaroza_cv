@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProjectLogo } from "@/components/ProjectLogo";
@@ -16,6 +17,21 @@ export function generateStaticParams() {
       .filter((project) => project.stage !== "nda")
       .map((project) => ({ locale, slug: project.slug })),
   );
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  if (!isPetProjectsEnabled()) return {};
+  const { locale: localeParam, slug } = await params;
+  if (!isLocale(localeParam)) return {};
+  const locale = localeParam as Locale;
+  const project = getProject(slug);
+  if (!project || project.stage === "nda") return {};
+
+  const dict = await getDictionary(locale);
+  return {
+    title: `${project.name} — ${dict.hero.shortName}`,
+    description: project.description[locale],
+  };
 }
 
 export default async function ProjectPage({ params }: Props) {
