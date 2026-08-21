@@ -24,7 +24,6 @@ export type PortfolioShot = {
   title: Record<Locale, string>;
   cover?: string;
   href?: string;
-  caseStudySlug?: string;
   description?: Record<Locale, string>;
   dribbbleUrl?: string;
   links?: PortfolioLink[];
@@ -235,38 +234,6 @@ export const portfolioShots: PortfolioShot[] = [
       height: 1080,
     },
   },
-  {
-    slug: "game-thumbnails",
-    title: {
-      en: "Game Thumbnails generation",
-      by: "Генерацыя прэв'ю гульняў",
-    },
-    caseStudySlug: "game-thumbnails",
-  },
-  {
-    slug: "icons-pack",
-    title: {
-      en: "Icons pack",
-      by: "Пакет іконак",
-    },
-    caseStudySlug: "icons-pack",
-  },
-  {
-    slug: "chameleon-illustrations",
-    title: {
-      en: "Chameleon Illustrations",
-      by: "Ілюстрацыі Chameleon",
-    },
-    caseStudySlug: "chameleon-illustrations",
-  },
-  {
-    slug: "brandbook",
-    title: {
-      en: "Brandbook",
-      by: "Брэндбук",
-    },
-    caseStudySlug: "brandbook",
-  },
 ];
 
 export function getPortfolioShot(slug: string): PortfolioShot | undefined {
@@ -274,15 +241,9 @@ export function getPortfolioShot(slug: string): PortfolioShot | undefined {
 }
 
 export function isStandaloneShot(shot: PortfolioShot): boolean {
-  return !shot.caseStudySlug && !shot.href;
+  return !shot.href;
 }
 
-export function getPortfolioHref(
-  shot: PortfolioShot,
-  locale: Locale,
-): string | undefined {
-  if (shot.href) return shot.href;
-  if (shot.caseStudySlug) return `/${locale}/work/${shot.caseStudySlug}`;
-  if (isStandaloneShot(shot)) return `/${locale}/work/${shot.slug}`;
-  return undefined;
+export function getPortfolioHref(shot: PortfolioShot, locale: Locale): string {
+  return shot.href ?? `/${locale}/work/${shot.slug}`;
 }

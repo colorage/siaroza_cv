@@ -213,7 +213,7 @@ export function PortfolioThumbnail({
 
   return (
     <CardLink href={href} external={external} className={shotClass}>
-      <PortfolioCover slug={shot.slug} title={title} cover={shot.cover} />
+      <PortfolioCover cover={shot.cover} />
       {kind === "video" ? <PlayBadge /> : null}
       <TitleBar title={title} />
     </CardLink>
