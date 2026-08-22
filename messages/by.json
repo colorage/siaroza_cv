@@ -1,9 +1,10 @@
 {
   "meta": {
     "title": "Siaroža — Design Engineer",
-    "description": "Партфоліа Сяргея Пехцерава — Design Engineer. Досвед, пет-праекты, кантакты."
+    "description": "Партфоліа Сяргея Пехцерава — Design Engineer. Кейсы, досвед, пет-праекты, кантакты."
   },
   "nav": {
+    "work": "Працы",
     "experience": "Досвед",
     "projects": "Праекты"
   },
@@ -18,7 +19,17 @@
   },
   "experience": {
     "heading": "Досвед",
-    "downloadCv": "Спампаваць CV"
+    "downloadCv": "Спампаваць CV",
+    "relatedWork": "Кейсы"
+  },
+  "work": {
+    "heading": "Кейсы",
+    "back": "Назад",
+    "context": "Кантэкст",
+    "approach": "Падыход",
+    "outcome": "Вынік",
+    "tools": "Інструменты",
+    "present": "Зараз"
   },
   "footer": {
     "contact": "Звязацца"

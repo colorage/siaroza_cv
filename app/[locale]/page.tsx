@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { CaseStudiesGrid } from "@/components/CaseStudiesGrid";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { Hero } from "@/components/Hero";
 import { ProjectsGrid } from "@/components/ProjectsGrid";
@@ -18,6 +19,7 @@ export default async function HomePage({ params }: Props) {
   return (
     <>
       <Hero dict={dict} />
+      <CaseStudiesGrid locale={locale} dict={dict} />
       <ExperienceTimeline locale={locale} dict={dict} />
       {isPetProjectsEnabled() ? (
         <ProjectsGrid locale={locale} dict={dict} />

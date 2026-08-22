@@ -12,6 +12,7 @@ export type Dictionary = {
     description: string;
   };
   nav: {
+    work: string;
     experience: string;
     projects: string;
   };
@@ -27,6 +28,16 @@ export type Dictionary = {
   experience: {
     heading: string;
     downloadCv: string;
+    relatedWork: string;
+  };
+  work: {
+    heading: string;
+    back: string;
+    context: string;
+    approach: string;
+    outcome: string;
+    tools: string;
+    present: string;
   };
   footer: {
     contact: string;

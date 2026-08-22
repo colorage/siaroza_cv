@@ -19,14 +19,26 @@ export function SiteHeader({ locale, dict }: Props) {
         >
           {dict.hero.shortName}
         </Link>
-        <nav className="flex items-center gap-6 text-[13px] text-muted">
-          <a href="#experience" className="transition-colors hover:text-foreground">
+        <nav className="flex items-center gap-4 text-[13px] text-muted sm:gap-6">
+          <Link
+            href={`/${locale}#work`}
+            className="transition-colors hover:text-foreground"
+          >
+            {dict.nav.work}
+          </Link>
+          <Link
+            href={`/${locale}#experience`}
+            className="transition-colors hover:text-foreground"
+          >
             {dict.nav.experience}
-          </a>
+          </Link>
           {isPetProjectsEnabled() ? (
-            <a href="#projects" className="transition-colors hover:text-foreground">
+            <Link
+              href={`/${locale}#projects`}
+              className="transition-colors hover:text-foreground"
+            >
               {dict.nav.projects}
-            </a>
+            </Link>
           ) : null}
           <Link
             href={`/${other}`}
