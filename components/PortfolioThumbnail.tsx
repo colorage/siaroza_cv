@@ -13,6 +13,14 @@ import {
 const CARD_HEIGHT = "15rem";
 const GALLERY_INTERVAL_MS = 3500;
 
+function galleryStaggerMs(key: string): number {
+  let hash = 0;
+  for (let i = 0; i < key.length; i += 1) {
+    hash = (hash * 31 + key.charCodeAt(i)) >>> 0;
+  }
+  return hash % GALLERY_INTERVAL_MS;
+}
+
 const shotClass =
   "group relative block h-60 shrink-0 overflow-hidden rounded-2xl bg-surface text-foreground";
 
@@ -135,8 +143,10 @@ function GalleryThumbnail({
   box: CSSProperties;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const originRef = useRef<number | null>(null);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const startDelayMs = galleryStaggerMs(srcs[0] ?? title);
 
   const onScroll = useCallback(() => {
     const el = scrollerRef.current;
@@ -152,13 +162,14 @@ function GalleryThumbnail({
       const reduced = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
-      const wrap = next <= index && index === srcs.length - 1;
+      const current = Math.round(el.scrollLeft / el.clientWidth);
+      const wrap = next <= current && current === srcs.length - 1;
       el.scrollTo({
         left: next * el.clientWidth,
         behavior: reduced || wrap ? "auto" : "smooth",
       });
     },
-    [index, srcs.length],
+    [srcs.length],
   );
 
   useEffect(() => {
@@ -167,13 +178,36 @@ function GalleryThumbnail({
       return;
     }
 
-    const id = window.setInterval(() => {
-      if (document.hidden) return;
-      goTo((index + 1) % srcs.length);
-    }, GALLERY_INTERVAL_MS);
+    if (originRef.current === null) {
+      originRef.current = Date.now() + GALLERY_INTERVAL_MS + startDelayMs;
+    }
 
-    return () => window.clearInterval(id);
-  }, [goTo, index, paused, srcs.length]);
+    let timeoutId = 0;
+    const waitForNextTick = () => {
+      const origin = originRef.current;
+      if (origin === null) return GALLERY_INTERVAL_MS;
+      const now = Date.now();
+      if (now < origin) return origin - now;
+      const overshoot = (now - origin) % GALLERY_INTERVAL_MS;
+      return overshoot === 0 ? GALLERY_INTERVAL_MS : GALLERY_INTERVAL_MS - overshoot;
+    };
+
+    const schedule = () => {
+      timeoutId = window.setTimeout(() => {
+        if (!document.hidden) {
+          const el = scrollerRef.current;
+          if (el) {
+            const current = Math.round(el.scrollLeft / el.clientWidth);
+            goTo((current + 1) % srcs.length);
+          }
+        }
+        schedule();
+      }, waitForNextTick());
+    };
+
+    schedule();
+    return () => window.clearTimeout(timeoutId);
+  }, [goTo, paused, srcs.length, startDelayMs]);
 
   return (
     <div
