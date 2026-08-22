@@ -59,10 +59,48 @@ body {
   animation: fade-up 0.7s ease-out 0.24s both;
 }
 
+@keyframes marquee-left {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.marquee-track {
+  animation: marquee-left 42s linear infinite;
+}
+
+.marquee-track-reverse {
+  animation-name: marquee-right;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-up-delay,
   .animate-fade-up-delay-2 {
     animation: none;
+  }
+
+  .marquee-track,
+  .marquee-track-reverse {
+    animation: none;
+    transform: none;
+  }
+
+  .marquee-clone {
+    display: none;
   }
 }
