@@ -191,7 +191,7 @@ function GalleryThumbnail({
       <div
         ref={scrollerRef}
         onScroll={onScroll}
-        className="flex h-full w-full snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex h-full min-h-0 w-full snap-x snap-mandatory overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         role="region"
         aria-roledescription="carousel"
         aria-label={title}
@@ -202,10 +202,14 @@ function GalleryThumbnail({
             href={href}
             external={external}
             ariaLabel={title}
-            className="relative block h-full min-w-full shrink-0 snap-center"
+            className="relative block h-full min-h-0 flex-[0_0_100%] snap-center overflow-hidden"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={src} alt="" className="h-full w-full object-contain" />
+            <img
+              src={src}
+              alt=""
+              className="h-full w-full rounded-lg object-contain"
+            />
           </CardLink>
         ))}
       </div>
