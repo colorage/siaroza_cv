@@ -13,14 +13,13 @@ import {
 const CARD_HEIGHT = "15rem";
 
 const shotClass =
-  "group relative block h-60 shrink-0 overflow-hidden rounded-2xl bg-surface text-foreground";
+  "group relative block h-60 shrink-0 overflow-hidden rounded-2xl bg-surface p-2 text-foreground";
 
 function getShotBox(shot: PortfolioShot): CSSProperties {
   const width = shot.pages?.width ?? (shot.youtube ? 16 : 4);
   const height = shot.pages?.height ?? (shot.youtube ? 9 : 3);
   return {
-    aspectRatio: `${width} / ${height}`,
-    width: `calc(${CARD_HEIGHT} * ${width} / ${height})`,
+    width: `calc((${CARD_HEIGHT} - 1rem) * ${width} / ${height} + 1rem)`,
   };
 }
 
@@ -175,7 +174,7 @@ function GalleryThumbnail({
             className="relative block h-full min-w-full shrink-0 snap-center"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={src} alt="" className="h-full w-full object-cover" />
+            <img src={src} alt="" className="h-full w-full object-contain" />
           </CardLink>
         ))}
       </div>
