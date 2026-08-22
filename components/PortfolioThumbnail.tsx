@@ -143,7 +143,7 @@ function GalleryThumbnail({
   box: CSSProperties;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
-  const primedRef = useRef(false);
+  const originRef = useRef<number | null>(null);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const startDelayMs = galleryStaggerMs(srcs[0] ?? title);
@@ -178,28 +178,35 @@ function GalleryThumbnail({
       return;
     }
 
-    const delay = primedRef.current
-      ? GALLERY_INTERVAL_MS
-      : GALLERY_INTERVAL_MS + startDelayMs;
+    if (originRef.current === null) {
+      originRef.current = Date.now() + GALLERY_INTERVAL_MS + startDelayMs;
+    }
 
-    let intervalId = 0;
-    const timeoutId = window.setTimeout(() => {
-      primedRef.current = true;
-      const tick = () => {
-        if (document.hidden) return;
-        const el = scrollerRef.current;
-        if (!el) return;
-        const current = Math.round(el.scrollLeft / el.clientWidth);
-        goTo((current + 1) % srcs.length);
-      };
-      tick();
-      intervalId = window.setInterval(tick, GALLERY_INTERVAL_MS);
-    }, delay);
-
-    return () => {
-      window.clearTimeout(timeoutId);
-      window.clearInterval(intervalId);
+    let timeoutId = 0;
+    const waitForNextTick = () => {
+      const origin = originRef.current;
+      if (origin === null) return GALLERY_INTERVAL_MS;
+      const now = Date.now();
+      if (now < origin) return origin - now;
+      const overshoot = (now - origin) % GALLERY_INTERVAL_MS;
+      return overshoot === 0 ? GALLERY_INTERVAL_MS : GALLERY_INTERVAL_MS - overshoot;
     };
+
+    const schedule = () => {
+      timeoutId = window.setTimeout(() => {
+        if (!document.hidden) {
+          const el = scrollerRef.current;
+          if (el) {
+            const current = Math.round(el.scrollLeft / el.clientWidth);
+            goTo((current + 1) % srcs.length);
+          }
+        }
+        schedule();
+      }, waitForNextTick());
+    };
+
+    schedule();
+    return () => window.clearTimeout(timeoutId);
   }, [goTo, paused, srcs.length, startDelayMs]);
 
   return (
