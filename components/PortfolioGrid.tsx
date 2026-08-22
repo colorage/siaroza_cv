@@ -40,7 +40,7 @@ export function PortfolioGrid({ locale, dict }: Props) {
         {dict.portfolio.heading}
       </h2>
 
-      <Marquee className="marquee relative">
+      <div className="relative">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent sm:w-24"
@@ -62,7 +62,7 @@ export function PortfolioGrid({ locale, dict }: Props) {
             />
           ))}
         </div>
-      </Marquee>
+      </div>
     </section>
   );
 }
@@ -83,7 +83,7 @@ function MarqueeRow({
   duration,
 }: MarqueeRowProps) {
   return (
-    <div className="marquee-row overflow-x-hidden pl-6 motion-reduce:overflow-x-auto">
+    <Marquee className="marquee-row overflow-x-hidden pl-6 motion-reduce:overflow-x-auto">
       <div
         className={`marquee-track flex w-max ${reverse ? "marquee-track-reverse" : ""}`}
         style={{ animationDuration: duration }}
@@ -115,6 +115,6 @@ function MarqueeRow({
           ))}
         </ul>
       </div>
-    </div>
+    </Marquee>
   );
 }
