@@ -10,18 +10,26 @@ type Props = {
 export function Hero({ dict }: Props) {
   return (
     <SkillCursorTrail>
-      <div className="relative h-[min(62svh,34rem)] overflow-hidden md:absolute md:inset-0 md:h-auto">
+      <div className="relative aspect-[4/5] max-h-[72svh] w-full overflow-hidden md:absolute md:inset-0 md:aspect-auto md:max-h-none">
         <Image
-          src="/hero_bg.jpg"
+          src="/hero_portrait.jpg"
           alt={dict.hero.name}
           fill
           preload
           sizes="100vw"
-          className="pointer-events-none object-cover object-[78%_36%] max-md:origin-[78%_36%] max-md:scale-[1.7] md:object-[right_center]"
+          className="pointer-events-none object-cover object-[40%_18%] md:hidden"
+        />
+        <Image
+          src="/hero_bg.jpg"
+          alt=""
+          fill
+          preload
+          sizes="100vw"
+          className="pointer-events-none hidden object-cover object-[right_center] md:block"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/35 to-transparent md:hidden"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent md:hidden"
         />
         <div
           aria-hidden
