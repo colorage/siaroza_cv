@@ -10,36 +10,50 @@ type Props = {
 export function Hero({ dict }: Props) {
   return (
     <SkillCursorTrail>
-      <Image
-        src="/hero_bg.jpg"
-        alt=""
-        fill
-        preload
-        sizes="100vw"
-        className="pointer-events-none object-cover object-right"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background from-[18%] via-background/80 via-50% to-transparent"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent"
-      />
-      <div className="relative z-[1] mx-auto flex min-h-[calc(100vh-3.5rem)] max-w-5xl flex-col justify-center px-6 py-24">
-        <p className="animate-fade-up mb-4 text-[13px] tracking-[0.08em] text-muted uppercase">
+      <div className="relative aspect-[4/5] max-h-[72svh] w-full overflow-hidden md:absolute md:inset-0 md:aspect-auto md:max-h-none">
+        <Image
+          src="/hero_portrait.jpg"
+          alt={dict.hero.name}
+          fill
+          preload
+          sizes="100vw"
+          className="pointer-events-none object-cover object-[40%_18%] md:hidden"
+        />
+        <Image
+          src="/hero_bg.jpg"
+          alt=""
+          fill
+          preload
+          sizes="100vw"
+          className="pointer-events-none hidden object-cover object-[right_center] md:block"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent md:hidden"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-background from-[18%] via-background/80 via-50% to-transparent md:block"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-28 bg-gradient-to-t from-background to-transparent md:block"
+        />
+      </div>
+      <div className="relative z-[1] mx-auto flex max-w-5xl flex-col justify-end px-6 pt-5 pb-14 md:min-h-[calc(100vh-3.5rem)] md:justify-center md:py-24">
+        <p className="animate-fade-up mb-3 text-[13px] tracking-[0.08em] text-muted uppercase md:mb-4">
           {dict.hero.shortName}
         </p>
-        <h1 className="animate-fade-up-delay max-w-3xl text-[clamp(2.5rem,8vw,4.5rem)] leading-[1.05] font-normal tracking-[-0.03em] text-foreground">
+        <h1 className="animate-fade-up-delay max-w-3xl text-[clamp(2.25rem,10vw,4.5rem)] leading-[1.05] font-normal tracking-[-0.03em] text-foreground">
           {dict.hero.name}
         </h1>
-        <p className="animate-fade-up-delay mt-5 text-xl tracking-tight text-foreground md:text-2xl">
+        <p className="animate-fade-up-delay mt-4 text-lg tracking-tight text-foreground md:mt-5 md:text-2xl">
           {dict.hero.title}
         </p>
-        <p className="animate-fade-up-delay-2 mt-4 max-w-xl text-[15px] leading-relaxed text-muted">
+        <p className="animate-fade-up-delay-2 mt-3 max-w-xl text-[15px] leading-relaxed text-muted md:mt-4">
           {dict.hero.tagline}
         </p>
-        <div className="animate-fade-up-delay-2 mt-10">
+        <div className="animate-fade-up-delay-2 mt-8 md:mt-10">
           <ContactActions dict={dict} />
         </div>
       </div>
