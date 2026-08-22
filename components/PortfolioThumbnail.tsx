@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { PortfolioCover } from "@/components/PortfolioCover";
 import {
   getPortfolioPageSrcs,
@@ -11,6 +11,7 @@ import {
 } from "@/content/portfolio";
 
 const CARD_HEIGHT = "15rem";
+const GALLERY_INTERVAL_MS = 3500;
 
 const shotClass =
   "group relative block h-60 shrink-0 overflow-hidden rounded-2xl bg-surface p-2 text-foreground";
@@ -135,6 +136,7 @@ function GalleryThumbnail({
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   const onScroll = useCallback(() => {
     const el = scrollerRef.current;
@@ -143,20 +145,49 @@ function GalleryThumbnail({
     setIndex(Math.min(Math.max(next, 0), srcs.length - 1));
   }, [srcs.length]);
 
-  const goTo = useCallback((next: number) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    el.scrollTo({
-      left: next * el.clientWidth,
-      behavior: reduced ? "auto" : "smooth",
-    });
-  }, []);
+  const goTo = useCallback(
+    (next: number) => {
+      const el = scrollerRef.current;
+      if (!el) return;
+      const reduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      const wrap = next <= index && index === srcs.length - 1;
+      el.scrollTo({
+        left: next * el.clientWidth,
+        behavior: reduced || wrap ? "auto" : "smooth",
+      });
+    },
+    [index, srcs.length],
+  );
+
+  useEffect(() => {
+    if (paused || srcs.length < 2) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const id = window.setInterval(() => {
+      if (document.hidden) return;
+      goTo((index + 1) % srcs.length);
+    }, GALLERY_INTERVAL_MS);
+
+    return () => window.clearInterval(id);
+  }, [goTo, index, paused, srcs.length]);
 
   return (
-    <div className={shotClass} style={box}>
+    <div
+      className={shotClass}
+      style={box}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setPaused(false);
+        }
+      }}
+    >
       <div
         ref={scrollerRef}
         onScroll={onScroll}
