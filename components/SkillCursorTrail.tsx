@@ -121,7 +121,7 @@ export function SkillCursorTrail({ children }: Props) {
   return (
     <section
       ref={hostRef}
-      className="relative isolate min-h-[calc(100vh-3.5rem)] overflow-hidden"
+      className="relative isolate overflow-hidden md:min-h-[calc(100vh-3.5rem)]"
     >
       {children}
       <div aria-hidden className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
