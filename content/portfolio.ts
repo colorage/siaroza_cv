@@ -198,6 +198,19 @@ export const portfolioShots: PortfolioShot[] = [
     },
   },
   {
+    slug: "kropki-icons",
+    title: {
+      en: "kropki icons",
+      by: "Іконкі кропак",
+    },
+    cover: "/work/kropki-icons/cover.png",
+    description: {
+      en: "Twenty grayscale map icons of Mahilioǔ landmarks — theatres, churches, and civic buildings drawn as compact geometric marks for the kropki city map.",
+      by: "Дваццаць шэрых іконак славутасцяў Магілёва для карты кропак — тэатры, цэрквы і грамадскія будынкі як кампактныя геаметрычныя знакі.",
+    },
+    dribbbleUrl: "https://dribbble.com/shots/16269129-kropki-icons",
+  },
+  {
     slug: "radzima",
     title: {
       en: "RADZIMA font",
