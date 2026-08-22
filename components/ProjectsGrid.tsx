@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { AsciiNoise } from "@/components/AsciiNoise";
 import { ProjectLogo } from "@/components/ProjectLogo";
-import { projects } from "@/content/projects";
+import { getSortedProjects } from "@/content/projects";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 type Props = {
@@ -10,6 +10,8 @@ type Props = {
 };
 
 export function ProjectsGrid({ locale, dict }: Props) {
+  const projects = getSortedProjects();
+
   return (
     <section id="projects" className="mx-auto max-w-5xl scroll-mt-20 px-6 py-24">
       <h2 className="mb-12 text-3xl tracking-tight text-foreground md:text-4xl">
@@ -20,7 +22,7 @@ export function ProjectsGrid({ locale, dict }: Props) {
         {projects.map((project, index) => {
           const isNda = project.stage === "nda";
           const shellClass =
-            "flex h-full flex-col gap-4 rounded-2xl border border-border bg-surface p-5";
+            "flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-5";
           const ndaTitle = dict.projects.ndaPrivateTitle.replace("{name}", project.name);
 
           return (
@@ -31,19 +33,20 @@ export function ProjectsGrid({ locale, dict }: Props) {
             >
               {isNda ? (
                 <div
-                  className="relative flex h-full min-h-52 items-center justify-center overflow-hidden rounded-2xl bg-surface"
+                  className="relative flex h-full min-h-52 items-center justify-center overflow-hidden rounded-2xl bg-card"
                   aria-label={ndaTitle}
                 >
                   <AsciiNoise />
-                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,color-mix(in_oklab,var(--background)_8%,transparent)_0%,transparent_72%)]" />
-                  <h3 className="relative z-10 max-w-[16ch] px-6 text-center text-[22px] leading-tight tracking-tight text-foreground sm:text-[24px]">
-                    {ndaTitle}
+                  <h3 className="pointer-events-none relative z-10 text-center text-[16px] tracking-tight text-foreground">
+                    <span className="inline-block bg-background px-8 py-3">
+                      {ndaTitle}
+                    </span>
                   </h3>
                 </div>
               ) : (
                 <Link
                   href={`/${locale}/projects/${project.slug}`}
-                  className={`group ${shellClass} transition-[border-color,background-color,transform] duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:bg-[color-mix(in_oklab,#edecec_3%,var(--surface))]`}
+                  className={`group ${shellClass} transition-[border-color,background-color,transform] duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:bg-[color-mix(in_oklab,var(--foreground)_4%,var(--card))]`}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <ProjectLogo
@@ -52,7 +55,7 @@ export function ProjectsGrid({ locale, dict }: Props) {
                       className="h-11 w-11 transition-colors group-hover:border-border-strong group-hover:text-accent"
                     />
                     {project.status === "active" && (
-                      <span className="rounded-full bg-[color-mix(in_oklab,#f54e00_18%,transparent)] px-2 py-0.5 text-[11px] font-medium tracking-wide text-accent uppercase">
+                      <span className="rounded-full bg-[color-mix(in_oklab,var(--accent)_18%,transparent)] px-2 py-0.5 text-[11px] font-medium tracking-wide text-accent uppercase">
                         {dict.projects.active}
                       </span>
                     )}
@@ -62,6 +65,11 @@ export function ProjectsGrid({ locale, dict }: Props) {
                     <h3 className="text-[16px] tracking-tight text-foreground transition-opacity group-hover:opacity-90">
                       {project.name}
                     </h3>
+                    {project.role ? (
+                      <p className="mt-1 text-[12px] text-muted">
+                        {project.role[locale]}
+                      </p>
+                    ) : null}
                     <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed text-muted">
                       {project.description[locale]}
                     </p>
