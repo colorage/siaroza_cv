@@ -142,18 +142,6 @@ export const caseStudies: CaseStudy[] = [
     relatedSlugs: ["game-thumbnails"],
   },
   {
-    slug: "brandbook",
-    experienceId: "hiveon",
-    title: {
-      en: "Brandbook",
-      by: "Брэндбук",
-    },
-    summary: {
-      en: "Brand identity system for Hiveon — logotypes, product-family visuals, and rules that keep consistency across websites, motion, and marketing.",
-      by: "Брэндавая сістэма Hiveon — лагатыпы, візуал лінейкі прадуктаў і правілы кансістэнтнасці для сайтаў, моўшна і маркетынгу.",
-    },
-  },
-  {
     slug: "psd-parser",
     experienceId: "cybercradle",
     title: {
