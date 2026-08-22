@@ -258,6 +258,33 @@ export const portfolioShots: PortfolioShot[] = [
     ],
   },
   {
+    slug: "mahilyow750",
+    title: {
+      en: "Mahilyow 750",
+      by: "Магілёў 750",
+    },
+    cover: "/work/mahilyow750/page-01.jpg",
+    description: {
+      en: "Identity proposal for Mahilyow's 750th anniversary contest in 2017 — a lion of concentric arcs in the Dnieper / crest blue, the river's current in the pattern. Name and year lock as one mark: #МОГИЛЁВ750.",
+      by: "Прапанова ідэнтычнасці на конкурс да 750-годдзя Магілёва ў 2017 — леў з канцэнтрычных дуг у сінім Дняпра / герба, узор як цячэнне ракі. Назва і юбілей злітыя ў адзін знак: #МОГИЛЁВ750.",
+    },
+    pages: {
+      dir: "/work/mahilyow750",
+      count: 4,
+      width: 1600,
+      height: 1200,
+    },
+    links: [
+      {
+        href: "https://www.behance.net/gallery/47193905/mogilev750",
+        label: {
+          en: "View on Behance",
+          by: "Адкрыць на Behance",
+        },
+      },
+    ],
+  },
+  {
     slug: "ptchr",
     title: {
       en: "PTCHR pitch deck",
