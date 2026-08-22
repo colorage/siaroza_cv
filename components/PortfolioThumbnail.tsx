@@ -12,6 +12,22 @@ import {
 
 const CARD_HEIGHT = "15rem";
 const GALLERY_INTERVAL_MS = 3500;
+const GALLERY_MIN_START_DELAY_MS = 400;
+const GALLERY_INTERVAL_JITTER_MS = 900;
+
+function randomGalleryTiming(): { delayMs: number; intervalMs: number } {
+  return {
+    delayMs:
+      GALLERY_MIN_START_DELAY_MS +
+      Math.floor(
+        Math.random() * (GALLERY_INTERVAL_MS - GALLERY_MIN_START_DELAY_MS),
+      ),
+    intervalMs:
+      GALLERY_INTERVAL_MS +
+      Math.floor(Math.random() * (GALLERY_INTERVAL_JITTER_MS + 1)) -
+      Math.floor(GALLERY_INTERVAL_JITTER_MS / 2),
+  };
+}
 
 const shotClass =
   "group relative block h-60 shrink-0 overflow-hidden bg-surface text-foreground";
@@ -135,8 +151,14 @@ function GalleryThumbnail({
   box: CSSProperties;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const indexRef = useRef(0);
+  const pausedRef = useRef(false);
+  const timingRef = useRef<ReturnType<typeof randomGalleryTiming> | null>(null);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+
+  indexRef.current = index;
+  pausedRef.current = paused;
 
   const onScroll = useCallback(() => {
     const el = scrollerRef.current;
@@ -145,35 +167,44 @@ function GalleryThumbnail({
     setIndex(Math.min(Math.max(next, 0), srcs.length - 1));
   }, [srcs.length]);
 
-  const goTo = useCallback(
-    (next: number) => {
-      const el = scrollerRef.current;
-      if (!el) return;
-      const reduced = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-      const wrap = next <= index && index === srcs.length - 1;
-      el.scrollTo({
-        left: next * el.clientWidth,
-        behavior: reduced || wrap ? "auto" : "smooth",
-      });
-    },
-    [index, srcs.length],
-  );
+  const goTo = useCallback((next: number) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const current = indexRef.current;
+    const wrap = next <= current && current === srcs.length - 1;
+    el.scrollTo({
+      left: next * el.clientWidth,
+      behavior: reduced || wrap ? "auto" : "smooth",
+    });
+  }, [srcs.length]);
 
   useEffect(() => {
-    if (paused || srcs.length < 2) return;
+    if (srcs.length < 2) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
 
-    const id = window.setInterval(() => {
-      if (document.hidden) return;
-      goTo((index + 1) % srcs.length);
-    }, GALLERY_INTERVAL_MS);
+    const tick = () => {
+      if (document.hidden || pausedRef.current) return;
+      goTo((indexRef.current + 1) % srcs.length);
+    };
 
-    return () => window.clearInterval(id);
-  }, [goTo, index, paused, srcs.length]);
+    timingRef.current ??= randomGalleryTiming();
+    const { delayMs, intervalMs } = timingRef.current;
+    let intervalId = 0;
+    const timeoutId = window.setTimeout(() => {
+      tick();
+      intervalId = window.setInterval(tick, intervalMs);
+    }, delayMs);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      window.clearInterval(intervalId);
+    };
+  }, [goTo, srcs.length]);
 
   return (
     <div
