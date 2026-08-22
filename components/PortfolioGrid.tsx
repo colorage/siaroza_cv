@@ -1,3 +1,4 @@
+import { Marquee } from "@/components/Marquee";
 import { PortfolioThumbnail } from "@/components/PortfolioThumbnail";
 import {
   getPortfolioHref,
@@ -39,7 +40,7 @@ export function PortfolioGrid({ locale, dict }: Props) {
         {dict.portfolio.heading}
       </h2>
 
-      <div className="marquee relative">
+      <Marquee className="marquee relative">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent sm:w-24"
@@ -61,7 +62,7 @@ export function PortfolioGrid({ locale, dict }: Props) {
             />
           ))}
         </div>
-      </div>
+      </Marquee>
     </section>
   );
 }
