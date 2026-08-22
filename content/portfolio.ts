@@ -211,6 +211,19 @@ export const portfolioShots: PortfolioShot[] = [
     dribbbleUrl: "https://dribbble.com/shots/16330099-RADZIMA-font",
   },
   {
+    slug: "city-hall",
+    title: {
+      en: "City Hall",
+      by: "Ратуша",
+    },
+    cover: "/work/city-hall/cover.png",
+    description: {
+      en: "Die-cut sticker of Mahilioǔ City Hall — the demolished town hall as a mark of freedom and independence.",
+      by: "Высечаны стыкер магілёўскай ратушы — знесеная ратуша як знак свабоды і незалежнасці.",
+    },
+    dribbbleUrl: "https://dribbble.com/shots/2504124-City-Hall",
+  },
+  {
     slug: "lstr",
     title: {
       en: "LSTR",
