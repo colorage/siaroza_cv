@@ -88,7 +88,7 @@ function MarqueeRow({
         className={`marquee-track flex w-max ${reverse ? "marquee-track-reverse" : ""}`}
         style={{ animationDuration: duration }}
       >
-        <ul className="flex">
+        <ul className="flex gap-3 pr-3">
           {shots.map((shot, index) => (
             <li key={`${shot.slug}-${index}`}>
               <PortfolioThumbnail
@@ -101,7 +101,7 @@ function MarqueeRow({
             </li>
           ))}
         </ul>
-        <ul className="marquee-clone flex" aria-hidden inert>
+        <ul className="marquee-clone flex gap-3 pr-3" aria-hidden inert>
           {shots.map((shot, index) => (
             <li key={`${shot.slug}-clone-${index}`}>
               <PortfolioThumbnail

@@ -14,7 +14,7 @@ const CARD_HEIGHT = "15rem";
 const GALLERY_INTERVAL_MS = 3500;
 
 const shotClass =
-  "group relative block h-60 shrink-0 overflow-hidden bg-surface text-foreground";
+  "group relative block h-60 shrink-0 overflow-hidden rounded-2xl bg-surface text-foreground";
 
 function getShotBox(shot: PortfolioShot): CSSProperties {
   const width = shot.pages?.width ?? (shot.youtube ? 16 : 4);
