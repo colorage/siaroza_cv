@@ -12,15 +12,13 @@ import {
 
 const CARD_HEIGHT = "15rem";
 const GALLERY_INTERVAL_MS = 3500;
-const GALLERY_STAGGER_MS = 2600;
-const GALLERY_JITTER_MS = 400;
 
 function galleryStaggerMs(key: string): number {
   let hash = 0;
   for (let i = 0; i < key.length; i += 1) {
     hash = (hash * 31 + key.charCodeAt(i)) >>> 0;
   }
-  return hash % GALLERY_STAGGER_MS;
+  return hash % GALLERY_INTERVAL_MS;
 }
 
 const shotClass =
@@ -145,16 +143,10 @@ function GalleryThumbnail({
   box: CSSProperties;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
-  const indexRef = useRef(0);
   const primedRef = useRef(false);
-  const startDelayMsRef = useRef(
-    galleryStaggerMs(srcs[0] ?? title) +
-      Math.floor(Math.random() * GALLERY_JITTER_MS),
-  );
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-
-  indexRef.current = index;
+  const startDelayMs = galleryStaggerMs(srcs[0] ?? title);
 
   const onScroll = useCallback(() => {
     const el = scrollerRef.current;
@@ -170,7 +162,7 @@ function GalleryThumbnail({
       const reduced = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
-      const current = indexRef.current;
+      const current = Math.round(el.scrollLeft / el.clientWidth);
       const wrap = next <= current && current === srcs.length - 1;
       el.scrollTo({
         left: next * el.clientWidth,
@@ -188,14 +180,17 @@ function GalleryThumbnail({
 
     const delay = primedRef.current
       ? GALLERY_INTERVAL_MS
-      : GALLERY_INTERVAL_MS + startDelayMsRef.current;
+      : GALLERY_INTERVAL_MS + startDelayMs;
 
     let intervalId = 0;
     const timeoutId = window.setTimeout(() => {
       primedRef.current = true;
       const tick = () => {
         if (document.hidden) return;
-        goTo((indexRef.current + 1) % srcs.length);
+        const el = scrollerRef.current;
+        if (!el) return;
+        const current = Math.round(el.scrollLeft / el.clientWidth);
+        goTo((current + 1) % srcs.length);
       };
       tick();
       intervalId = window.setInterval(tick, GALLERY_INTERVAL_MS);
@@ -205,7 +200,7 @@ function GalleryThumbnail({
       window.clearTimeout(timeoutId);
       window.clearInterval(intervalId);
     };
-  }, [goTo, paused, srcs.length]);
+  }, [goTo, paused, srcs.length, startDelayMs]);
 
   return (
     <div
