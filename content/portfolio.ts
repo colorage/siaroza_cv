@@ -43,10 +43,15 @@ export function getPortfolioPageSrcs(pages: PortfolioPages): string[] {
 
 export type PortfolioThumbnailKind = "image" | "gallery" | "video";
 
+export function isAnimatedCover(shot: PortfolioShot): boolean {
+  return Boolean(shot.cover?.toLowerCase().endsWith(".gif"));
+}
+
 export function getPortfolioThumbnailKind(
   shot: PortfolioShot,
 ): PortfolioThumbnailKind {
   if (shot.youtube) return "video";
+  if (isAnimatedCover(shot)) return "image";
   if (shot.pages && getPortfolioPageSrcs(shot.pages).length > 1) {
     return "gallery";
   }
@@ -112,6 +117,41 @@ export const portfolioShots: PortfolioShot[] = [
         by: "Анімацыя музычнага кліпа — Wonder Spak, знятага ў Магілёве.",
       },
     },
+  },
+  {
+    slug: "papermotion",
+    title: {
+      en: "Papermotion",
+      by: "Papermotion",
+    },
+    cover: "/work/papermotion/cover.gif",
+    description: {
+      en: "Photoshop script for paper animation with a barrier-grid (moiré) overlay — one layer per frame, then print the interleaved portrait and slide copier film over it. Freebie, 2014.",
+      by: "Скрыпт Photoshop для папяровай анімацыі з бар'ернай сеткай (муар) — адзін слой на кадр, потым друк пераплеценага партрэта і ссоўванне плёнкі паверх. Freebie, 2014.",
+    },
+    pages: {
+      dir: "/work/papermotion",
+      count: 3,
+      width: 1400,
+      height: 1400,
+      files: ["face.png", "frames.png", "diagram.png"],
+    },
+    links: [
+      {
+        href: "https://www.behance.net/gallery/16553529/Papermotion-(Freebie)/modules/112860317",
+        label: {
+          en: "View on Behance",
+          by: "Адкрыць на Behance",
+        },
+      },
+      {
+        href: "https://github.com/colorage/photoshop_scripts/blob/master/paper_animator.jsx",
+        label: {
+          en: "Photoshop script",
+          by: "Скрыпт Photoshop",
+        },
+      },
+    ],
   },
   {
     slug: "ui-test",
