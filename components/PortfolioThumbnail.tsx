@@ -155,16 +155,20 @@ function GalleryThumbnail({
   const pausedRef = useRef(false);
   const timingRef = useRef<ReturnType<typeof randomGalleryTiming> | null>(null);
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
 
-  indexRef.current = index;
-  pausedRef.current = paused;
+  const setPaused = useCallback((next: boolean) => {
+    pausedRef.current = next;
+  }, []);
 
   const onScroll = useCallback(() => {
     const el = scrollerRef.current;
     if (!el) return;
-    const next = Math.round(el.scrollLeft / el.clientWidth);
-    setIndex(Math.min(Math.max(next, 0), srcs.length - 1));
+    const next = Math.min(
+      Math.max(Math.round(el.scrollLeft / el.clientWidth), 0),
+      srcs.length - 1,
+    );
+    indexRef.current = next;
+    setIndex(next);
   }, [srcs.length]);
 
   const goTo = useCallback((next: number) => {
