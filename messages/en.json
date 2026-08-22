@@ -1,12 +1,16 @@
 {
   "meta": {
     "title": "Siaroža — Design Engineer",
-    "description": "Portfolio of Siarhiej Piechcieraǔ — Design Engineer. Case studies, experience, pet projects, contact."
+    "description": "Portfolio of Siarhiej Piechcieraǔ — Design Engineer. Experience, case studies, pet projects, contact."
   },
   "nav": {
-    "work": "Work",
     "experience": "Experience",
-    "projects": "Projects"
+    "portfolio": "Portfolio",
+    "caseStudies": "Case studies",
+    "projects": "Pet projects"
+  },
+  "a11y": {
+    "skipToContent": "Skip to content"
   },
   "hero": {
     "name": "Siarhiej Piechcieraǔ",
@@ -20,16 +24,30 @@
   "experience": {
     "heading": "Experience",
     "downloadCv": "Download CV",
-    "relatedWork": "Case studies"
+    "caseStudies": "Case studies",
+    "caseStudyBack": "Back to experience",
+    "caseStudyContext": "Context",
+    "caseStudyProcess": "Process",
+    "caseStudySolution": "Solution",
+    "caseStudyImpact": "Impact",
+    "caseStudyRelated": "Related"
   },
-  "work": {
-    "heading": "Case studies",
+  "portfolio": {
+    "heading": "Portfolio",
     "back": "Back",
+    "viewOnDribbble": "View on Dribbble",
+    "viewOnYouTube": "Watch on YouTube",
+    "slide": "{current} / {total}",
+    "goToImage": "Go to image {n} of {total}"
+  },
+  "caseStudies": {
+    "heading": "Case studies",
+    "back": "Back to case studies",
     "context": "Context",
-    "approach": "Approach",
-    "outcome": "Outcome",
-    "tools": "Tools",
-    "present": "Now"
+    "process": "Process",
+    "solution": "Solution",
+    "impact": "Impact",
+    "related": "Related"
   },
   "footer": {
     "contact": "Contact me"
@@ -50,8 +68,11 @@
     },
     "back": "Back",
     "visit": "Visit project",
+    "gallery": "Screenshots",
+    "instagram": "Instagram",
+    "telegram": "Telegram",
+    "dribbble": "View on Dribbble",
     "ndaNote": "Details under NDA.",
-    "ndaPrivateTitle": "Project {name} is not public",
-    "placeholder": "Description coming soon."
+    "ndaPrivateTitle": "Project {name} is not public"
   }
 }

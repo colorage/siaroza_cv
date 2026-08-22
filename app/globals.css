@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #14120b;
-  --foreground: #edecec;
-  --foreground-muted: color-mix(in oklab, #edecec 60%, transparent);
-  --surface: #1b1913;
-  --border: color-mix(in oklab, #edecec 8%, transparent);
-  --border-strong: color-mix(in oklab, #edecec 16%, transparent);
-  --button: #edecec;
-  --button-fg: #14120b;
-  --accent: #f54e00;
+  --background: #0a1414;
+  --foreground: #c8d4d0;
+  --foreground-muted: color-mix(in oklab, #c8d4d0 60%, transparent);
+  --surface: #1a2b28;
+  --card: #0d1918;
+  --border: color-mix(in oklab, #c8d4d0 8%, transparent);
+  --border-strong: color-mix(in oklab, #c8d4d0 16%, transparent);
+  --button: #c8d4d0;
+  --button-fg: #0a1414;
+  --accent: #00d4b8;
 }
 
 @theme inline {
@@ -17,6 +18,7 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--foreground-muted);
   --color-surface: var(--surface);
+  --color-card: var(--card);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
   --color-button: var(--button);
@@ -28,6 +30,21 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 body {
@@ -57,6 +74,67 @@ body {
 
 .animate-fade-up-delay-2 {
   animation: fade-up 0.7s ease-out 0.24s both;
+}
+
+.skill-cursor-bubble {
+  position: absolute;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem 0.38rem;
+  border-radius: 0 14px 14px 14px;
+  color: var(--button-fg);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px color-mix(in oklab, #000 32%, transparent);
+  transform-origin: top left;
+  animation:
+    skill-bubble-pop 160ms cubic-bezier(0.22, 1.7, 0.36, 1) both,
+    skill-bubble-life 6s ease-out forwards;
+  will-change: opacity, transform;
+}
+
+@keyframes skill-bubble-pop {
+  from {
+    transform: scale(0.55);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes skill-bubble-life {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.project-gallery {
+  padding-inline: max(1.5rem, calc(50% - 32rem + 1.5rem));
+  scroll-padding-inline: max(1.5rem, calc(50% - 32rem + 1.5rem));
+  scroll-behavior: smooth;
+  scrollbar-color: color-mix(in oklab, var(--foreground) 28%, transparent) transparent;
+  scrollbar-width: thin;
+}
+
+.project-gallery::-webkit-scrollbar {
+  height: 8px;
+}
+
+.project-gallery::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.project-gallery::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--foreground) 28%, transparent);
+  border-radius: 999px;
 }
 
 @keyframes marquee-left {
@@ -92,6 +170,14 @@ body {
   .animate-fade-up-delay,
   .animate-fade-up-delay-2 {
     animation: none;
+  }
+
+  .skill-cursor-bubble {
+    animation: none;
+  }
+
+  .project-gallery {
+    scroll-behavior: auto;
   }
 
   .marquee-track,

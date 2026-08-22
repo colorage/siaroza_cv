@@ -31,7 +31,10 @@ Open [http://localhost:3000](http://localhost:3000) — redirects to `/en`. Bela
 
 ## Content
 
+Agent playbook for adding work from files and links: [CONTENT.md](CONTENT.md)
+
 - Experience: `content/experience.ts`
+- Portfolio shots: `content/portfolio.ts`
 - Case studies: `content/case-studies.ts`
 - Pet projects: `content/projects.ts`
 - UI strings: `messages/en.json`, `messages/by.json`

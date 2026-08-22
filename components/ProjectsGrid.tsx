@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { AsciiNoise } from "@/components/AsciiNoise";
 import { ProjectLogo } from "@/components/ProjectLogo";
-import { projects, type Project } from "@/content/projects";
+import { getSortedProjects, type Project } from "@/content/projects";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 type Props = {
@@ -27,7 +27,7 @@ function fillRow<T>(items: T[], minCount: number): T[] {
 }
 
 export function ProjectsGrid({ locale, dict }: Props) {
-  const rows = splitIntoRows(projects, ROW_COUNT).map((row) =>
+  const rows = splitIntoRows(getSortedProjects(), ROW_COUNT).map((row) =>
     fillRow(row, MIN_ROW_SLOTS),
   );
 
@@ -113,18 +113,17 @@ type ProjectCardProps = {
 function ProjectCard({ project, locale, dict }: ProjectCardProps) {
   const isNda = project.stage === "nda";
   const ndaTitle = dict.projects.ndaPrivateTitle.replace("{name}", project.name);
-  const cardWidth = "h-52 w-max min-w-64 max-w-80 shrink-0";
+  const cardWidth = "h-52 w-max min-w-64 max-w-80 shrink-0 overflow-hidden";
 
   if (isNda) {
     return (
       <div
-        className={`relative flex ${cardWidth} items-center justify-center overflow-hidden rounded-2xl bg-surface`}
+        className={`relative flex ${cardWidth} items-center justify-center overflow-hidden rounded-2xl bg-card`}
         aria-label={ndaTitle}
       >
         <AsciiNoise />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,color-mix(in_oklab,var(--background)_8%,transparent)_0%,transparent_72%)]" />
-        <h3 className="relative z-10 max-w-[16ch] px-6 text-center text-[22px] leading-tight tracking-tight text-foreground sm:text-[24px]">
-          {ndaTitle}
+        <h3 className="pointer-events-none relative z-10 text-center text-[16px] tracking-tight text-foreground">
+          <span className="inline-block bg-background px-8 py-3">{ndaTitle}</span>
         </h3>
       </div>
     );
@@ -133,7 +132,7 @@ function ProjectCard({ project, locale, dict }: ProjectCardProps) {
   return (
     <Link
       href={`/${locale}/projects/${project.slug}`}
-      className={`group flex ${cardWidth} flex-col gap-4 rounded-2xl border border-border bg-surface p-5 transition-[border-color,background-color,transform] duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:bg-[color-mix(in_oklab,#edecec_3%,var(--surface))]`}
+      className={`group flex ${cardWidth} flex-col gap-4 rounded-2xl border border-border bg-card p-5 transition-[border-color,background-color,transform] duration-200 hover:-translate-y-0.5 hover:border-border-strong hover:bg-[color-mix(in_oklab,var(--foreground)_4%,var(--card))]`}
     >
       <div className="flex items-start justify-between gap-3">
         <ProjectLogo
@@ -142,16 +141,19 @@ function ProjectCard({ project, locale, dict }: ProjectCardProps) {
           className="h-11 w-11 transition-colors group-hover:border-border-strong group-hover:text-accent"
         />
         {project.status === "active" && (
-          <span className="rounded-full bg-[color-mix(in_oklab,#f54e00_18%,transparent)] px-2 py-0.5 text-[11px] font-medium tracking-wide text-accent uppercase">
+          <span className="rounded-full bg-[color-mix(in_oklab,var(--accent)_18%,transparent)] px-2 py-0.5 text-[11px] font-medium tracking-wide text-accent uppercase">
             {dict.projects.active}
           </span>
         )}
       </div>
 
-      <div className="min-w-0 flex-1">
+      <div className="min-h-0 min-w-0 flex-1 overflow-hidden">
         <h3 className="truncate text-[16px] tracking-tight whitespace-nowrap text-foreground transition-opacity group-hover:opacity-90">
           {project.name}
         </h3>
+        {project.role ? (
+          <p className="mt-1 text-[12px] text-muted">{project.role[locale]}</p>
+        ) : null}
         <p className="mt-1.5 line-clamp-2 text-[13px] leading-relaxed text-muted">
           {project.description[locale]}
         </p>

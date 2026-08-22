@@ -6,15 +6,46 @@ export function isLocale(value: string): value is Locale {
   return locales.includes(value as Locale);
 }
 
+export function htmlLang(locale: Locale): "en" | "be" {
+  return locale === "by" ? "be" : "en";
+}
+
+export function localePath(locale: Locale, path = ""): string {
+  if (!path || path === "/") return `/${locale}`;
+  const suffix = path.startsWith("/") ? path : `/${path}`;
+  return `/${locale}${suffix}`;
+}
+
+export function languageAlternates(path = ""): Record<string, string> {
+  return {
+    en: localePath("en", path),
+    be: localePath("by", path),
+    "x-default": localePath(defaultLocale, path),
+  };
+}
+
+export function swapLocalePath(pathname: string, from: Locale, to: Locale): string {
+  const prefix = `/${from}`;
+  if (pathname === prefix) return `/${to}`;
+  if (pathname.startsWith(`${prefix}/`)) {
+    return `/${to}${pathname.slice(prefix.length)}`;
+  }
+  return `/${to}`;
+}
+
 export type Dictionary = {
   meta: {
     title: string;
     description: string;
   };
   nav: {
-    work: string;
     experience: string;
+    portfolio: string;
+    caseStudies: string;
     projects: string;
+  };
+  a11y: {
+    skipToContent: string;
   };
   hero: {
     name: string;
@@ -28,16 +59,30 @@ export type Dictionary = {
   experience: {
     heading: string;
     downloadCv: string;
-    relatedWork: string;
+    caseStudies: string;
+    caseStudyBack: string;
+    caseStudyContext: string;
+    caseStudyProcess: string;
+    caseStudySolution: string;
+    caseStudyImpact: string;
+    caseStudyRelated: string;
   };
-  work: {
+  portfolio: {
+    heading: string;
+    back: string;
+    viewOnDribbble: string;
+    viewOnYouTube: string;
+    slide: string;
+    goToImage: string;
+  };
+  caseStudies: {
     heading: string;
     back: string;
     context: string;
-    approach: string;
-    outcome: string;
-    tools: string;
-    present: string;
+    process: string;
+    solution: string;
+    impact: string;
+    related: string;
   };
   footer: {
     contact: string;
@@ -49,9 +94,12 @@ export type Dictionary = {
     status: Record<string, string>;
     back: string;
     visit: string;
+    gallery: string;
+    instagram: string;
+    telegram: string;
+    dribbble: string;
     ndaNote: string;
     ndaPrivateTitle: string;
-    placeholder: string;
   };
 };
 

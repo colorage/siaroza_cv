@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 type Props = {
@@ -7,6 +8,18 @@ type Props = {
 };
 
 const markClass = "h-full w-full";
+
+function RasterMark({ src }: { src: string }) {
+  return (
+    <Image
+      src={src}
+      alt=""
+      width={32}
+      height={32}
+      className="h-full w-full object-cover"
+    />
+  );
+}
 
 function Mark({ children }: { children: ReactNode }) {
   return (
@@ -24,79 +37,19 @@ function Mark({ children }: { children: ReactNode }) {
 
 const icons: Record<string, ReactNode> = {
   "yadoma-bel": (
-    <Mark>
-      <path
-        d="M6 14.5 16 6l10 8.5V26a1 1 0 0 1-1 1h-6v-7h-6v7H7a1 1 0 0 1-1-1V14.5Z"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinejoin="round"
-      />
-    </Mark>
+    <RasterMark src="/projects/yadoma-bel.png" />
   ),
-  yavolonter: (
-    <Mark>
-      <path
-        d="M16 27s-9-5.6-9-12.2A5.4 5.4 0 0 1 16 10a5.4 5.4 0 0 1 9 4.8C25 21.4 16 27 16 27Z"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinejoin="round"
-      />
-    </Mark>
+  "spasem-bel": (
+    <RasterMark src="/projects/spasem-bel.png" />
   ),
   bloodlabs: (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/bloodlabs.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/bloodlabs.png" />
   ),
   pavetra: (
-    <Mark>
-      <path
-        d="M5 11h14a3.5 3.5 0 1 0-1.2-6.8"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M5 17h18a3 3 0 1 0-.9-5.8"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M5 23h12a2.5 2.5 0 1 1-.8 4.9"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-    </Mark>
+    <RasterMark src="/projects/pavetra.png" />
   ),
   "pah-bot": (
-    <Mark>
-      <path
-        d="M8 20c2.5-3.5 5-5.2 8-5.2S21.5 16.5 24 20"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M10 14c1.8-2.4 3.6-3.6 6-3.6s4.2 1.2 6 3.6"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M12.5 9c1.2-1.5 2.3-2.2 3.5-2.2S18.3 7.5 19.5 9"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <circle cx="16" cy="23.5" r="1.4" fill="currentColor" />
-    </Mark>
+    <RasterMark src="/projects/pah-bot.png" />
   ),
   dc: (
     <Mark>
@@ -115,27 +68,10 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   "kropki-mahiliou": (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/kropki-mahiliou.svg"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/kropki-mahiliou.png" />
   ),
   "radar-rockets": (
-    <Mark>
-      <circle cx="16" cy="16" r="9" stroke="currentColor" strokeWidth="1.75" />
-      <circle cx="16" cy="16" r="4.5" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M16 7v4M16 21v4M7 16h4M21 16h4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <circle cx="16" cy="16" r="1.5" fill="currentColor" />
-    </Mark>
+    <RasterMark src="/projects/radar-rockets.png" />
   ),
   "hejka-app": (
     <Mark>
@@ -155,14 +91,7 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   halasy: (
-    <Mark>
-      <path
-        d="M8 12v8M12.5 9v14M17 11v10M21.5 13.5v5"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </Mark>
+    <RasterMark src="/projects/halasy.png" />
   ),
   impact: (
     <Mark>
@@ -176,21 +105,7 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   "polny-trash": (
-    <Mark>
-      <path
-        d="M8 10h16l-1.5 15H9.5L8 10Z"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M6 10h20M12 10V7.5a1.5 1.5 0 0 1 1.5-1.5h5A1.5 1.5 0 0 1 20 7.5V10"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </Mark>
+    <RasterMark src="/projects/polny-trash.png" />
   ),
   cobike: (
     <Mark>
@@ -206,49 +121,16 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   losque: (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/losque.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/losque.png" />
   ),
   "my-ostalis": (
-    <Mark>
-      <circle cx="11" cy="11" r="3" stroke="currentColor" strokeWidth="1.75" />
-      <circle cx="21" cy="11" r="3" stroke="currentColor" strokeWidth="1.75" />
-      <path
-        d="M5.5 24c.8-3.5 3-5.5 5.5-5.5s4.7 2 5.5 5.5"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M15.5 24c.8-3.5 3-5.5 5.5-5.5s4.7 2 5.5 5.5"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-    </Mark>
+    <RasterMark src="/projects/my-ostalis.png" />
   ),
-  "kulturny-mogilev": (
-    <Mark>
-      <path
-        d="M6 25V11l10-6 10 6v14"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 25v-7h8v7M12 14h8"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </Mark>
+  "mogilev-norm": (
+    <RasterMark src="/projects/mogilev-norm.png" />
+  ),
+  tedxmahilyow: (
+    <RasterMark src="/projects/tedxmahilyow.png" />
   ),
   akanicy: (
     <Mark>
@@ -270,36 +152,10 @@ const icons: Record<string, ReactNode> = {
     </Mark>
   ),
   "sunsethunters-club": (
-    <Mark>
-      <path
-        d="M6 20h20"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M9 20a7 7 0 0 1 14 0"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M16 6v3M8.5 9.5l2 2M23.5 9.5l-2 2"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-    </Mark>
+    <RasterMark src="/projects/sunsethunters-club.png" />
   ),
   lacinka: (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/projects/lacinka.png"
-      alt=""
-      width={32}
-      height={32}
-      className="h-full w-full object-cover"
-    />
+    <RasterMark src="/projects/lacinka.png" />
   ),
   "pavuk-club": (
     <Mark>
@@ -345,6 +201,9 @@ const icons: Record<string, ReactNode> = {
       />
     </Mark>
   ),
+  "belarus-bw": (
+    <RasterMark src="/projects/belarus-bw.png" />
+  ),
 };
 
 function FallbackMark({ name }: { name: string }) {
@@ -372,7 +231,24 @@ function FallbackMark({ name }: { name: string }) {
   );
 }
 
-const imageLogos = new Set(["lacinka", "kropki-mahiliou", "bloodlabs", "losque"]);
+const imageLogos = new Set([
+  "lacinka",
+  "kropki-mahiliou",
+  "bloodlabs",
+  "losque",
+  "my-ostalis",
+  "pavetra",
+  "radar-rockets",
+  "spasem-bel",
+  "mogilev-norm",
+  "yadoma-bel",
+  "belarus-bw",
+  "pah-bot",
+  "polny-trash",
+  "sunsethunters-club",
+  "tedxmahilyow",
+  "halasy",
+]);
 
 export function ProjectLogo({ slug, name, className = "" }: Props) {
   const isImageLogo = imageLogos.has(slug);

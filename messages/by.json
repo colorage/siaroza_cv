@@ -1,12 +1,16 @@
 {
   "meta": {
     "title": "Siaroža — Design Engineer",
-    "description": "Партфоліа Сяргея Пехцерава — Design Engineer. Кейсы, досвед, пет-праекты, кантакты."
+    "description": "Партфоліа Сяргея Пехцерава — Design Engineer. Досвед, кейсы, пет-праекты, кантакты."
   },
   "nav": {
-    "work": "Працы",
     "experience": "Досвед",
-    "projects": "Праекты"
+    "portfolio": "Партфоліа",
+    "caseStudies": "Кейсы",
+    "projects": "Пет-праекты"
+  },
+  "a11y": {
+    "skipToContent": "Перайсці да зместу"
   },
   "hero": {
     "name": "Сяргей Пехцераў",
@@ -20,16 +24,30 @@
   "experience": {
     "heading": "Досвед",
     "downloadCv": "Спампаваць CV",
-    "relatedWork": "Кейсы"
+    "caseStudies": "Кейсы",
+    "caseStudyBack": "Назад да досведу",
+    "caseStudyContext": "Кантекст",
+    "caseStudyProcess": "Працэс",
+    "caseStudySolution": "Рашэнне",
+    "caseStudyImpact": "Вынік",
+    "caseStudyRelated": "Таксама"
   },
-  "work": {
-    "heading": "Кейсы",
+  "portfolio": {
+    "heading": "Партфоліа",
     "back": "Назад",
-    "context": "Кантэкст",
-    "approach": "Падыход",
-    "outcome": "Вынік",
-    "tools": "Інструменты",
-    "present": "Зараз"
+    "viewOnDribbble": "Адкрыць на Dribbble",
+    "viewOnYouTube": "Глядзець на YouTube",
+    "slide": "{current} / {total}",
+    "goToImage": "Перайсці да выявы {n} з {total}"
+  },
+  "caseStudies": {
+    "heading": "Кейсы",
+    "back": "Назад да кейсаў",
+    "context": "Кантекст",
+    "process": "Працэс",
+    "solution": "Рашэнне",
+    "impact": "Вынік",
+    "related": "Таксама"
   },
   "footer": {
     "contact": "Звязацца"
@@ -50,8 +68,11 @@
     },
     "back": "Назад",
     "visit": "Адкрыць праект",
+    "gallery": "Скрыншоты",
+    "instagram": "Instagram",
+    "telegram": "Telegram",
+    "dribbble": "Глядзець на Dribbble",
     "ndaNote": "Дэталі пад NDA.",
-    "ndaPrivateTitle": "Праект {name} не публічны",
-    "placeholder": "Апісанне з'явіцца пазней."
+    "ndaPrivateTitle": "Праект {name} не публічны"
   }
 }
