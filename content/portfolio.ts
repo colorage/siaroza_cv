@@ -55,6 +55,24 @@ export function getPortfolioThumbnailKind(
 
 export const portfolioShots: PortfolioShot[] = [
   {
+    slug: "brandbook",
+    title: {
+      en: "Hiveon brand book",
+      by: "Брэндбук Hiveon",
+    },
+    cover: "/work/brandbook/page-01.jpg",
+    description: {
+      en: "13-slide Hiveon identity — name (hive + switch on), mission, values, and audience across mining / Web3 / energy, then the H mark, product logo family, Gilroy type, and the orange–amber–yellow palette.",
+      by: "13 слайдаў ідэнтычнасці Hiveon — назва (hive + switch on), місія, каштоўнасці і аўдыторыя mining / Web3 / energy, потым знак H, сямейства лагатыпаў прадуктаў, шрыфт Gilroy і палітра orange–amber–yellow.",
+    },
+    pages: {
+      dir: "/work/brandbook",
+      count: 13,
+      width: 1920,
+      height: 1080,
+    },
+  },
+  {
     slug: "hive-os",
     title: {
       en: "Hive OS tutorial covers",
