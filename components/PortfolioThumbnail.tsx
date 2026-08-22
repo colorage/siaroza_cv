@@ -10,14 +10,18 @@ import {
   type PortfolioShot,
 } from "@/content/portfolio";
 
-const shotClass =
-  "group relative block h-60 w-max shrink-0 overflow-hidden rounded-2xl bg-surface text-foreground";
+const CARD_HEIGHT = "15rem";
 
-function getShotAspect(shot: PortfolioShot): string {
-  if (shot.pages) {
-    return `${shot.pages.width} / ${shot.pages.height}`;
-  }
-  return "4 / 3";
+const shotClass =
+  "group relative block h-60 shrink-0 overflow-hidden rounded-2xl bg-surface text-foreground";
+
+function getShotBox(shot: PortfolioShot): CSSProperties {
+  const width = shot.pages?.width ?? (shot.youtube ? 16 : 4);
+  const height = shot.pages?.height ?? (shot.youtube ? 9 : 3);
+  return {
+    aspectRatio: `${width} / ${height}`,
+    width: `calc(${CARD_HEIGHT} * ${width} / ${height})`,
+  };
 }
 
 type Props = {
@@ -121,14 +125,14 @@ function GalleryThumbnail({
   href,
   external,
   goToImageLabel,
-  aspectRatio,
+  box,
 }: {
   srcs: string[];
   title: string;
   href?: string;
   external?: boolean;
   goToImageLabel: string;
-  aspectRatio: string;
+  box: CSSProperties;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
@@ -153,7 +157,7 @@ function GalleryThumbnail({
   }, []);
 
   return (
-    <div className={shotClass} style={{ aspectRatio }}>
+    <div className={shotClass} style={box}>
       <div
         ref={scrollerRef}
         onScroll={onScroll}
@@ -211,7 +215,7 @@ export function PortfolioThumbnail({
 }: Props) {
   const kind = getPortfolioThumbnailKind(shot);
 
-  const aspectRatio = getShotAspect(shot);
+  const box = getShotBox(shot);
 
   if (kind === "gallery" && shot.pages) {
     return (
@@ -221,7 +225,7 @@ export function PortfolioThumbnail({
         href={href}
         external={external}
         goToImageLabel={goToImageLabel}
-        aspectRatio={aspectRatio}
+        box={box}
       />
     );
   }
@@ -231,7 +235,7 @@ export function PortfolioThumbnail({
       href={href}
       external={external}
       className={shotClass}
-      style={{ aspectRatio }}
+      style={box}
     >
       <PortfolioCover cover={shot.cover} />
       {kind === "video" ? <PlayBadge /> : null}
