@@ -91,6 +91,29 @@ export const portfolioShots: PortfolioShot[] = [
     },
   },
   {
+    slug: "paliavnichy",
+    title: {
+      en: "Paliaŭničy",
+      by: "Паляўнічы",
+    },
+    cover: "/work/paliavnichy/cover.jpg",
+    description: {
+      en: "Animation for Wonder Spak's music video Paliaŭničy (The Hunter) — a postcard from Mahilioǔ and other places close to home, for those here and those afar.",
+      by: "Анімацыя да кліпа Wonder Spak «Паляўнічы» — паштоўка з Магілёва і іншых блізкіх сэрцу мясцін, для тых, хто тут, і для тых, хто там.",
+    },
+    youtube: {
+      id: "FzuAH3P5Hzo",
+      title: {
+        en: "Paliaŭničy — Wonder Spak",
+        by: "Паляўнічы — Wonder Spak",
+      },
+      caption: {
+        en: "Music video animation — Wonder Spak, filmed in Mahilioǔ.",
+        by: "Анімацыя музычнага кліпа — Wonder Spak, знятага ў Магілёве.",
+      },
+    },
+  },
+  {
     slug: "ui-test",
     title: {
       en: "UI test",
