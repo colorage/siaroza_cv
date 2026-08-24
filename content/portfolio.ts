@@ -79,22 +79,22 @@ export const portfolioShots: PortfolioShot[] = [
     },
     cover: "/work/spribe-logo/poster.jpg",
     description: {
-      en: "Logo loop for SPRIBE — the red ribbon S and wordmark on black, with a light sweep across the mark.",
-      by: "Лугатыпны луп для SPRIBE — чырвоная стужка S і лагатып на чорным, са светлавым праходам па знаку.",
+      en: "Logo loop for SPRIBE — a pixel S assembling from a grid of squares on black, then dissolving.",
+      by: "Лагатыпны луп для SPRIBE — піксельная S збіраецца з сеткі квадратаў на чорным і знікае.",
     },
     video: {
       src: "/work/spribe-logo/loop.mp4",
       poster: "/work/spribe-logo/poster.jpg",
-      width: 1080,
-      height: 1080,
+      width: 960,
+      height: 960,
       loop: true,
       title: {
         en: "SPRIBE logo loop",
-        by: "Лугатыпны луп SPRIBE",
+        by: "Лагатыпны луп SPRIBE",
       },
       caption: {
-        en: "Seamless identity loop — light across the S, wordmark locked.",
-        by: "Бесшвовы лагатыпны луп — святло па S, лагатып на месцы.",
+        en: "Seamless identity loop — squares gather into the S, hold, then fade.",
+        by: "Бесшвовы лагатыпны луп — квадраты збіраюцца ў S, трымаюць форму і знікаюць.",
       },
     },
     links: [
