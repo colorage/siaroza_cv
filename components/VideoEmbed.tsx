@@ -5,9 +5,10 @@ type Props = {
   title: string;
   poster?: string;
   caption?: string;
+  loop?: boolean;
 };
 
-export function VideoEmbed({ src, title, poster, caption }: Props) {
+export function VideoEmbed({ src, title, poster, caption, loop }: Props) {
   return (
     <figure className="w-full">
       <MediaFrame className="bg-surface">
@@ -15,7 +16,10 @@ export function VideoEmbed({ src, title, poster, caption }: Props) {
           className="h-auto w-full"
           controls
           playsInline
-          preload="none"
+          autoPlay={loop}
+          muted={loop}
+          loop={loop}
+          preload={loop ? "metadata" : "none"}
           poster={poster}
           title={title}
           aria-label={title}

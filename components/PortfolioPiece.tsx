@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MediaCarousel } from "@/components/MediaCarousel";
 import { MediaFrame } from "@/components/MediaFrame";
+import { VideoEmbed } from "@/components/VideoEmbed";
 import { YouTubeEmbed } from "@/components/YouTubeEmbed";
 import {
   getPortfolioPageSrcs,
@@ -23,8 +24,10 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
   const coverIsHero =
     Boolean(shot.cover) &&
     !shot.youtube &&
+    !shot.video &&
     (!pageMeta || !pages.includes(shot.cover ?? ""));
-  const showCarousel = Boolean(pageMeta) && !shot.youtube && !coverIsHero;
+  const showCarousel =
+    Boolean(pageMeta) && !shot.youtube && !shot.video && !coverIsHero;
 
   return (
     <article className="mx-auto max-w-5xl px-6 py-16 md:py-24">
@@ -40,7 +43,17 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
           {title}
         </h1>
 
-        {shot.youtube ? (
+        {shot.video ? (
+          <div className="mt-10">
+            <VideoEmbed
+              src={shot.video.src}
+              poster={shot.video.poster}
+              title={shot.video.title[locale]}
+              caption={shot.video.caption?.[locale]}
+              loop={shot.video.loop}
+            />
+          </div>
+        ) : shot.youtube ? (
           <div className="mt-10">
             <YouTubeEmbed
               id={shot.youtube.id}
