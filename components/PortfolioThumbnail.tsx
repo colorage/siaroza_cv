@@ -137,15 +137,39 @@ function GalleryThumbnail({
   box: CSSProperties;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const loopingRef = useRef(false);
+  const loopTimerRef = useRef<number>(0);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+
+  const settleLoop = useCallback(() => {
+    const el = scrollerRef.current;
+    if (!el || srcs.length < 2) return;
+    const width = el.clientWidth;
+    if (!width) return;
+    if (el.scrollLeft + 2 < srcs.length * width) return;
+
+    loopingRef.current = false;
+    window.clearTimeout(loopTimerRef.current);
+    el.scrollTo({ left: 0, behavior: "auto" });
+    setIndex(0);
+  }, [srcs.length]);
 
   const onScroll = useCallback(() => {
     const el = scrollerRef.current;
     if (!el) return;
-    const next = Math.round(el.scrollLeft / el.clientWidth);
+    const width = el.clientWidth;
+    if (!width) return;
+
+    if (el.scrollLeft + 2 >= srcs.length * width) {
+      settleLoop();
+      return;
+    }
+
+    if (loopingRef.current) return;
+    const next = Math.round(el.scrollLeft / width);
     setIndex(Math.min(Math.max(next, 0), srcs.length - 1));
-  }, [srcs.length]);
+  }, [settleLoop, srcs.length]);
 
   const goTo = useCallback(
     (next: number) => {
@@ -154,14 +178,45 @@ function GalleryThumbnail({
       const reduced = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
-      const wrap = next <= index && index === srcs.length - 1;
+      const wrapForward =
+        !reduced && next === 0 && index === srcs.length - 1;
+
+      window.clearTimeout(loopTimerRef.current);
+
+      if (wrapForward) {
+        loopingRef.current = true;
+        el.scrollTo({
+          left: srcs.length * el.clientWidth,
+          behavior: "smooth",
+        });
+        loopTimerRef.current = window.setTimeout(() => {
+          if (!loopingRef.current) return;
+          loopingRef.current = false;
+          el.scrollTo({ left: 0, behavior: "auto" });
+          setIndex(0);
+        }, 1200);
+        return;
+      }
+
+      loopingRef.current = false;
       el.scrollTo({
         left: next * el.clientWidth,
-        behavior: reduced || wrap ? "auto" : "smooth",
+        behavior: reduced ? "auto" : "smooth",
       });
     },
     [index, srcs.length],
   );
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const onScrollEnd = () => settleLoop();
+    el.addEventListener("scrollend", onScrollEnd);
+    return () => {
+      el.removeEventListener("scrollend", onScrollEnd);
+      window.clearTimeout(loopTimerRef.current);
+    };
+  }, [settleLoop]);
 
   useEffect(() => {
     if (paused || srcs.length < 2) return;
@@ -176,6 +231,8 @@ function GalleryThumbnail({
 
     return () => window.clearInterval(id);
   }, [goTo, index, paused, srcs.length]);
+
+  const slides = srcs.length > 1 ? [...srcs, srcs[0]] : srcs;
 
   return (
     <div
@@ -198,22 +255,39 @@ function GalleryThumbnail({
         aria-roledescription="carousel"
         aria-label={title}
       >
-        {srcs.map((src) => (
-          <CardLink
-            key={src}
-            href={href}
-            external={external}
-            ariaLabel={title}
-            className="relative block h-full min-h-0 flex-[0_0_100%] snap-center overflow-hidden"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+        {slides.map((src, i) => {
+          const clone = i >= srcs.length;
+          const frameClass =
+            "relative block h-full min-h-0 flex-[0_0_100%] snap-center overflow-hidden";
+          const image = (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={src}
               alt=""
               className="h-full w-full rounded-lg object-contain"
             />
-          </CardLink>
-        ))}
+          );
+
+          if (clone) {
+            return (
+              <div key={`${src}-clone`} className={frameClass} aria-hidden>
+                {image}
+              </div>
+            );
+          }
+
+          return (
+            <CardLink
+              key={src}
+              href={href}
+              external={external}
+              ariaLabel={title}
+              className={frameClass}
+            >
+              {image}
+            </CardLink>
+          );
+        })}
       </div>
       <TitleBar
         title={title}
