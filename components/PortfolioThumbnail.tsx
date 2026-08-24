@@ -156,12 +156,17 @@ function GalleryThumbnail({
   }, [srcs.length]);
 
   const onScroll = useCallback(() => {
-    settleLoop();
-    if (loopingRef.current) return;
     const el = scrollerRef.current;
     if (!el) return;
     const width = el.clientWidth;
     if (!width) return;
+
+    if (el.scrollLeft + 2 >= srcs.length * width) {
+      settleLoop();
+      return;
+    }
+
+    if (loopingRef.current) return;
     const next = Math.round(el.scrollLeft / width);
     setIndex(Math.min(Math.max(next, 0), srcs.length - 1));
   }, [settleLoop, srcs.length]);
