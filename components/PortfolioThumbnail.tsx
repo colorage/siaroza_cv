@@ -17,8 +17,8 @@ const shotClass =
   "group relative block h-60 shrink-0 overflow-hidden rounded-2xl bg-surface text-foreground";
 
 function getShotBox(shot: PortfolioShot): CSSProperties {
-  const width = shot.pages?.width ?? (shot.youtube ? 16 : 4);
-  const height = shot.pages?.height ?? (shot.youtube ? 9 : 3);
+  const width = shot.pages?.width ?? shot.width ?? (shot.youtube ? 16 : 4);
+  const height = shot.pages?.height ?? shot.height ?? (shot.youtube ? 9 : 3);
   return {
     width: `calc(${CARD_HEIGHT} * ${width} / ${height})`,
   };

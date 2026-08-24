@@ -23,6 +23,9 @@ export type PortfolioShot = {
   slug: string;
   title: Record<Locale, string>;
   cover?: string;
+  /** Intrinsic cover size; used for the card box and hero <img> aspect. */
+  width?: number;
+  height?: number;
   href?: string;
   description?: Record<Locale, string>;
   dribbbleUrl?: string;
@@ -152,6 +155,21 @@ export const portfolioShots: PortfolioShot[] = [
         },
       },
     ],
+  },
+  {
+    slug: "soundfloat",
+    title: {
+      en: "Soundfloat",
+      by: "Soundfloat",
+    },
+    cover: "/work/soundfloat/cover.gif",
+    width: 800,
+    height: 600,
+    description: {
+      en: "Logo animation for Soundfloat — the wordmark as a liquid ripple.",
+      by: "Анімацыя лагатыпа Soundfloat — словазнак як вадкая хваля.",
+    },
+    dribbbleUrl: "https://dribbble.com/shots/3468617-Soundfloat",
   },
   {
     slug: "ui-test",

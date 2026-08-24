@@ -55,8 +55,16 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
               <img
                 src={shot.cover}
                 alt={title}
-                width={isAnimatedCover(shot) ? 400 : 1600}
-                height={isAnimatedCover(shot) ? 400 : 1200}
+                width={
+                  shot.width ??
+                  shot.pages?.width ??
+                  (isAnimatedCover(shot) ? 400 : 1600)
+                }
+                height={
+                  shot.height ??
+                  shot.pages?.height ??
+                  (isAnimatedCover(shot) ? 400 : 1200)
+                }
                 className="mx-auto h-auto w-full"
               />
             </MediaFrame>
