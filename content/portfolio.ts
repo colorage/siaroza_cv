@@ -6,6 +6,16 @@ export type PortfolioYoutube = {
   caption?: Record<Locale, string>;
 };
 
+export type PortfolioVideo = {
+  src: string;
+  poster?: string;
+  width: number;
+  height: number;
+  title: Record<Locale, string>;
+  caption?: Record<Locale, string>;
+  loop?: boolean;
+};
+
 export type PortfolioPages = {
   dir: string;
   count: number;
@@ -28,6 +38,7 @@ export type PortfolioShot = {
   dribbbleUrl?: string;
   links?: PortfolioLink[];
   youtube?: PortfolioYoutube;
+  video?: PortfolioVideo;
   pages?: PortfolioPages;
 };
 
@@ -51,6 +62,7 @@ export function getPortfolioThumbnailKind(
   shot: PortfolioShot,
 ): PortfolioThumbnailKind {
   if (shot.youtube) return "video";
+  if (shot.video) return "image";
   if (isAnimatedCover(shot)) return "image";
   if (shot.pages && getPortfolioPageSrcs(shot.pages).length > 1) {
     return "gallery";
@@ -59,6 +71,42 @@ export function getPortfolioThumbnailKind(
 }
 
 export const portfolioShots: PortfolioShot[] = [
+  {
+    slug: "spribe-logo",
+    title: {
+      en: "SPRIBE logo",
+      by: "Лагатып SPRIBE",
+    },
+    cover: "/work/spribe-logo/poster.jpg",
+    description: {
+      en: "Logo loop for SPRIBE — the red ribbon S and wordmark on black, with a light sweep across the mark.",
+      by: "Лугатыпны луп для SPRIBE — чырвоная стужка S і лагатып на чорным, са светлавым праходам па знаку.",
+    },
+    video: {
+      src: "/work/spribe-logo/loop.mp4",
+      poster: "/work/spribe-logo/poster.jpg",
+      width: 1080,
+      height: 1080,
+      loop: true,
+      title: {
+        en: "SPRIBE logo loop",
+        by: "Лугатыпны луп SPRIBE",
+      },
+      caption: {
+        en: "Seamless identity loop — light across the S, wordmark locked.",
+        by: "Бесшвовы лагатыпны луп — святло па S, лагатып на месцы.",
+      },
+    },
+    links: [
+      {
+        href: "https://www.spribe.co/",
+        label: {
+          en: "SPRIBE",
+          by: "SPRIBE",
+        },
+      },
+    ],
+  },
   {
     slug: "brandbook",
     title: {
