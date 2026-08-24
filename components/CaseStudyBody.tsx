@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { MermaidDiagram } from "@/components/MermaidDiagram";
 import {
   getRelatedCaseStudies,
   type CaseStudy,
@@ -37,6 +38,21 @@ function Section({
   );
 }
 
+function BulletList({ items }: { items: string[] }) {
+  return (
+    <ul className="space-y-2">
+      {items.map((item) => (
+        <li
+          key={item}
+          className="text-[16px] leading-relaxed text-muted before:mr-2 before:text-border-strong before:content-['–']"
+        >
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function CaseStudyBody({ study, locale, dict }: Props) {
   const context = study.context?.[locale];
   const problem = study.problem?.[locale];
@@ -44,10 +60,14 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
   const solution = study.solution?.[locale];
   const solutionItems = study.solutionItems?.[locale];
   const impact = study.impact?.[locale];
+  const effort = study.effort;
+  const sections = study.sections;
+  const diagrams = study.diagrams;
   const related = getRelatedCaseStudies(study);
 
   const showContext = hasText(context) || hasText(problem);
   const showSolution = hasText(solution) || hasList(solutionItems);
+  const showProcess = hasList(process) || Boolean(sections?.length);
 
   return (
     <div className="max-w-2xl">
@@ -60,13 +80,99 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
         </Section>
       ) : null}
 
-      {hasList(process) ? (
+      {effort ? (
+        <Section title={dict.caseStudies.effort}>
+          <dl className="space-y-4">
+            <div>
+              <dt className="font-mono text-[11px] tracking-wide text-muted uppercase">
+                {dict.caseStudies.duration}
+              </dt>
+              <dd className="mt-1 text-[16px] leading-relaxed text-foreground">
+                {effort.duration[locale]}
+              </dd>
+            </div>
+            <div>
+              <dt className="font-mono text-[11px] tracking-wide text-muted uppercase">
+                {dict.caseStudies.role}
+              </dt>
+              <dd className="mt-1 text-[16px] leading-relaxed text-foreground">
+                {effort.role[locale]}
+              </dd>
+            </div>
+            <div>
+              <dt className="font-mono text-[11px] tracking-wide text-muted uppercase">
+                {dict.caseStudies.team}
+              </dt>
+              <dd className="mt-1 text-[16px] leading-relaxed text-foreground">
+                {effort.team[locale]}
+              </dd>
+            </div>
+          </dl>
+          {hasList(effort.constraints[locale]) ? (
+            <div className="mt-8">
+              <h3 className="mb-3 font-mono text-[11px] tracking-wide text-muted uppercase">
+                {dict.caseStudies.constraints}
+              </h3>
+              <BulletList items={effort.constraints[locale]} />
+            </div>
+          ) : null}
+          {hasList(effort.hard[locale]) ? (
+            <div className="mt-8">
+              <h3 className="mb-3 font-mono text-[11px] tracking-wide text-muted uppercase">
+                {dict.caseStudies.hard}
+              </h3>
+              <BulletList items={effort.hard[locale]} />
+            </div>
+          ) : null}
+        </Section>
+      ) : null}
+
+      {diagrams?.length ? (
+        <div className="mt-14 space-y-10">
+          {diagrams.map((diagram) => (
+            <MermaidDiagram
+              key={diagram.source}
+              source={diagram.source}
+              title={diagram.title?.[locale]}
+            />
+          ))}
+        </div>
+      ) : null}
+
+      {showProcess ? (
         <Section title={dict.caseStudies.process}>
-          <ol className="list-decimal space-y-3 pl-5 text-[16px] leading-relaxed text-muted">
-            {process.map((step) => (
-              <li key={step}>{step}</li>
-            ))}
-          </ol>
+          {hasList(process) ? (
+            <ol className="list-decimal space-y-3 pl-5 text-[16px] leading-relaxed text-muted">
+              {process.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+          ) : null}
+          {sections?.length ? (
+            <div className={hasList(process) ? "mt-10 space-y-10" : "space-y-10"}>
+              {sections.map((section) => {
+                const body = section.body?.[locale];
+                const items = section.items?.[locale];
+                return (
+                  <div key={section.title.en}>
+                    <h3 className="text-lg tracking-tight text-foreground">
+                      {section.title[locale]}
+                    </h3>
+                    {hasText(body) ? (
+                      <p className="mt-3 text-[16px] leading-relaxed text-muted">
+                        {body}
+                      </p>
+                    ) : null}
+                    {hasList(items) ? (
+                      <div className="mt-4">
+                        <BulletList items={items} />
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              })}
+            </div>
+          ) : null}
         </Section>
       ) : null}
 
@@ -76,32 +182,16 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
             <p className="text-[16px] leading-relaxed text-muted">{solution}</p>
           ) : null}
           {hasList(solutionItems) ? (
-            <ul className="mt-4 space-y-2">
-              {solutionItems.map((item) => (
-                <li
-                  key={item}
-                  className="text-[16px] leading-relaxed text-muted before:mr-2 before:text-border-strong before:content-['–']"
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
+            <div className={hasText(solution) ? "mt-4" : undefined}>
+              <BulletList items={solutionItems} />
+            </div>
           ) : null}
         </Section>
       ) : null}
 
       {hasList(impact) ? (
         <Section title={dict.caseStudies.impact}>
-          <ul className="space-y-2">
-            {impact.map((item) => (
-              <li
-                key={item}
-                className="text-[16px] leading-relaxed text-muted before:mr-2 before:text-border-strong before:content-['–']"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
+          <BulletList items={impact} />
         </Section>
       ) : null}
 
