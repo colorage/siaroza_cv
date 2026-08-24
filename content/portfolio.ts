@@ -94,7 +94,7 @@ export const portfolioShots: PortfolioShot[] = [
       },
       caption: {
         en: "Seamless identity loop — light across the S, wordmark locked.",
-        by: "Бесшвовы ідэнтычны луп — святло па S, лагатып на месцы.",
+        by: "Бесшвовы лагатыпны луп — святло па S, лагатып на месцы.",
       },
     },
     links: [
