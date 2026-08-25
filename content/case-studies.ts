@@ -15,6 +15,7 @@ export type CaseStudy = {
   solution?: LocalizedString;
   solutionItems?: LocalizedList;
   impact?: LocalizedList;
+  diagram?: LocalizedString;
   relatedSlugs?: string[];
 };
 
@@ -29,6 +30,38 @@ export const caseStudies: CaseStudy[] = [
     summary: {
       en: "Automated generation of game thumbnails with Python and AI image-editing workflows — scaling asset production for the product platform.",
       by: "Аўтаматычная генерацыя прэв'ю гульняў з дапамогай Python і AI-рэдагавання выяў — маштабаванне вытворчасці асетаў для прадуктовай платформы.",
+    },
+    diagram: {
+      en: `flowchart TD
+  fetch["Fetch new games in database"]
+  parse["Parse catalogs to get reference"]
+  generate["Generate assets"]
+  edit["Edit assets"]
+  visual["Visual check"]
+  render["Render assets"]
+  upload["Upload to database"]
+  notifyMe["Notify me in Slack"]:::notify
+  qa["QA tests"]
+  notifyTeam["Notify team in Slack"]:::notify
+  fetch --> parse --> generate --> edit --> visual --> render --> upload
+  edit --> notifyMe
+  render --> qa
+  upload --> notifyTeam`,
+      by: `flowchart TD
+  fetch["Атрымаць новыя гульні з базы"]
+  parse["Разабраць каталогі для рэферэнсу"]
+  generate["Згенераваць ассеты"]
+  edit["Рэдагаваць ассеты"]
+  visual["Візуальная праверка"]
+  render["Адрэндэрыць ассеты"]
+  upload["Заліць у базу"]
+  notifyMe["Паведаміць мне ў Slack"]:::notify
+  qa["QA-тэсты"]
+  notifyTeam["Паведаміць каманду ў Slack"]:::notify
+  fetch --> parse --> generate --> edit --> visual --> render --> upload
+  edit --> notifyMe
+  render --> qa
+  upload --> notifyTeam`,
     },
   },
   {
@@ -68,7 +101,8 @@ export function hasCaseStudyBody(study: CaseStudy): boolean {
       study.process ||
       study.solution ||
       study.solutionItems ||
-      study.impact,
+      study.impact ||
+      study.diagram,
   );
 }
 

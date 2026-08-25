@@ -137,6 +137,20 @@ body {
   border-radius: 999px;
 }
 
+.mermaid-diagram svg {
+  display: block;
+  height: auto;
+  margin-inline: auto;
+  max-width: none;
+}
+
+.mermaid-diagram .node.notify rect,
+.mermaid-diagram .node.notify polygon,
+.mermaid-diagram .node.notify circle,
+.mermaid-diagram .node.notify path {
+  stroke: var(--accent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-up-delay,
