@@ -61,7 +61,7 @@ export default async function WorkPage({ params }: Props) {
   if (!study || !job) notFound();
 
   return (
-    <article className="mx-auto max-w-2xl px-6 py-16 md:py-24">
+    <article className="mx-auto max-w-5xl px-6 py-16 md:py-24">
       <Link
         href={`/${locale}#case-studies`}
         className="text-[13px] text-muted transition-colors hover:text-foreground"
@@ -69,7 +69,7 @@ export default async function WorkPage({ params }: Props) {
         ← {dict.caseStudies.back}
       </Link>
 
-      <header className="mt-10 animate-fade-up">
+      <header className="mt-10 max-w-2xl animate-fade-up">
         <h1 className="text-[clamp(2rem,5vw,3rem)] leading-[1.1] tracking-[-0.03em] text-foreground">
           {study.title[locale]}
         </h1>

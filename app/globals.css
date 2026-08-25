@@ -116,6 +116,19 @@ body {
   }
 }
 
+.mermaid-diagram svg {
+  display: block;
+  margin-inline: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.mermaid-diagram .nodeLabel,
+.mermaid-diagram .edgeLabel,
+.mermaid-diagram .label {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
 .project-gallery {
   padding-inline: max(1.5rem, calc(50% - 32rem + 1.5rem));
   scroll-padding-inline: max(1.5rem, calc(50% - 32rem + 1.5rem));

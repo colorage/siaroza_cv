@@ -79,6 +79,9 @@ export type Dictionary = {
     heading: string;
     back: string;
     context: string;
+    effort: string;
+    constraints: string;
+    hard: string;
     process: string;
     solution: string;
     impact: string;
