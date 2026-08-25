@@ -111,7 +111,7 @@ export function MermaidDiagram({ source, title }: Props) {
           diagramPadding: 8,
           nodeSpacing: 28,
           rankSpacing: 40,
-          wrappingWidth: 200,
+          wrappingWidth: 220,
           useMaxWidth: true,
         },
       });

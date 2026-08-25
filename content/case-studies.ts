@@ -63,8 +63,8 @@ function enChart(source: string, title: LocalizedString): CaseStudyDiagram {
 
 const streamingPipeline: LocalizedString = {
   en: `flowchart TD
-  fetch["Fetch new movies in database"]
-  parse["Parse catalogs to get reference"]
+  fetch["Fetch new movies<br/>in database"]
+  parse["Parse catalogs<br/>for reference"]
   generate["Generate assets"]
   edit["Edit assets"]
   visual["Visual check"]
@@ -78,8 +78,8 @@ const streamingPipeline: LocalizedString = {
   render --> qa
   upload --> notifyTeam`,
   by: `flowchart TD
-  fetch["Атрымаць новыя фільмы з базы"]
-  parse["Разабраць каталогі для рэферэнсу"]
+  fetch["Атрымаць новыя<br/>фільмы з базы"]
+  parse["Разабраць каталогі<br/>для рэферэнсу"]
   generate["Згенераваць ассеты"]
   edit["Рэдагаваць ассеты"]
   visual["Візуальная праверка"]
@@ -87,7 +87,7 @@ const streamingPipeline: LocalizedString = {
   upload["Заліць у базу"]
   notifyMe["Паведаміць мне ў Slack"]:::notify
   qa["QA-тэсты"]
-  notifyTeam["Паведаміць каманду ў Slack"]:::notify
+  notifyTeam["Паведаміць каманду<br/>ў Slack"]:::notify
   fetch --> parse --> generate --> edit --> visual --> render --> upload
   edit --> notifyMe
   render --> qa
