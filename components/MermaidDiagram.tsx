@@ -8,6 +8,8 @@ type Props = {
   title?: string;
 };
 
+const CHART_STROKE = "#7c8785";
+
 function toHex(channel: number): string {
   return Math.max(0, Math.min(255, Math.round(channel)))
     .toString(16)
@@ -32,6 +34,10 @@ function cssColorHex(variable: string, fallback: string): string {
   const computed = getComputedStyle(probe).color;
   probe.remove();
 
+  // color-mix / oklab serialize as "oklab(L a b / a)". Parsing those numbers as
+  // RGB turns lightness into a dark-red channel (what the charts were using).
+  if (!computed.startsWith("rgb")) return fallback;
+
   const parsed = parseRgb(computed);
   if (!parsed) return fallback;
   const [r, g, b, a] = parsed;
@@ -44,11 +50,25 @@ function cssColorHex(variable: string, fallback: string): string {
   return `#${toHex(r * a + br * (1 - a))}${toHex(g * a + bg * (1 - a))}${toHex(b * a + bb * (1 - a))}`;
 }
 
+function chartStrokeCss(stroke: string): string {
+  return [
+    `.node rect,.node circle,.node ellipse,.node polygon,.node path,.cluster rect{stroke:${stroke}!important}`,
+    `.flowchart-link,.edgePath .path,.edgePaths .path,.edgePath path{stroke:${stroke}!important;fill:none!important}`,
+    `.arrowheadPath,.root .anchor path,marker path{fill:${stroke}!important;stroke:${stroke}!important}`,
+  ].join("");
+}
+
+function applyChartStroke(svg: string, stroke: string): string {
+  return svg
+    .replace(/(?<![-\w])stroke:\s*(?!none\b)[^;}"']+/gi, `stroke: ${stroke}`)
+    .replace(/\bstroke="(?!none")[^"]*"/gi, `stroke="${stroke}"`);
+}
+
 function mermaidTheme() {
   const background = cssColorHex("--background", "#0a1414");
   const surface = cssColorHex("--surface", "#1a2b28");
   const foreground = cssColorHex("--foreground", "#c8d4d0");
-  const muted = cssColorHex("--foreground-muted", "#78807d");
+  const muted = cssColorHex("--chart-stroke", CHART_STROKE);
   const fontFamily =
     getComputedStyle(document.body).fontFamily ||
     "ui-sans-serif, system-ui, sans-serif";
@@ -106,6 +126,7 @@ export function MermaidDiagram({ source, title }: Props) {
         fontFamily,
         htmlLabels: true,
         themeVariables,
+        themeCSS: chartStrokeCss(themeVariables.lineColor),
         flowchart: {
           curve: "basis",
           diagramPadding: 8,
@@ -119,7 +140,7 @@ export function MermaidDiagram({ source, title }: Props) {
       const { svg: next } = await mermaid.render(renderId, themedChart);
       if (!cancelled) {
         setFailed(false);
-        setSvg(next);
+        setSvg(applyChartStroke(next, themeVariables.lineColor));
       }
     }
 

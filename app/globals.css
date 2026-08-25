@@ -11,6 +11,8 @@
   --button: #c8d4d0;
   --button-fg: #0a1414;
   --accent: #00d4b8;
+  /* Resolved 60% --foreground over --background. Mermaid cannot consume color-mix. */
+  --chart-stroke: #7c8785;
 }
 
 @theme inline {
@@ -83,17 +85,20 @@ body {
   max-width: none;
 }
 
-.mermaid-diagram .node.notify rect,
-.mermaid-diagram .node.notify polygon,
-.mermaid-diagram .node.notify circle,
-.mermaid-diagram .node.notify path {
-  stroke: var(--foreground-muted);
+.mermaid-diagram :is(.node rect, .node circle, .node ellipse, .node polygon, .node path, .cluster rect) {
+  stroke: var(--chart-stroke) !important;
+}
+
+.mermaid-diagram :is(.edgePath .path, .edgePaths .path, .flowchart-link, .edgePath path) {
+  stroke: var(--chart-stroke) !important;
+  fill: none;
 }
 
 .mermaid-diagram .arrowheadPath,
+.mermaid-diagram .root .anchor path,
 .mermaid-diagram marker path {
-  fill: var(--foreground-muted);
-  stroke: var(--foreground-muted);
+  fill: var(--chart-stroke) !important;
+  stroke: var(--chart-stroke) !important;
 }
 
 .skill-cursor-bubble {
