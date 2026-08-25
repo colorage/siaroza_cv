@@ -88,6 +88,7 @@ export type Dictionary = {
     process: string;
     solution: string;
     impact: string;
+    diagram: string;
     related: string;
   };
   footer: {

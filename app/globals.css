@@ -78,9 +78,16 @@ body {
 
 .mermaid-diagram svg {
   display: block;
-  margin-inline: auto;
-  max-width: 100%;
   height: auto;
+  margin-inline: auto;
+  max-width: none;
+}
+
+.mermaid-diagram .node.notify rect,
+.mermaid-diagram .node.notify polygon,
+.mermaid-diagram .node.notify circle,
+.mermaid-diagram .node.notify path {
+  stroke: var(--accent);
 }
 
 .skill-cursor-bubble {

@@ -18,7 +18,7 @@ export type CaseStudySection = {
 };
 
 export type CaseStudyDiagram = {
-  source: string;
+  source: LocalizedString;
   title?: LocalizedString;
 };
 
@@ -40,32 +40,38 @@ export type CaseStudy = {
   relatedSlugs?: string[];
 };
 
-const streamingPipeline = `flowchart TD
-  change[Catalog change]
-  n8n[n8n trigger]
-  prod[Production DB]
-  raw[Pre-release DB]
-  todo["Diff: missing posters"]
-  refs[Public references]
-  layers[AI layers]
-  titles[Title layout]
-  crop[POI crop]
-  render[Composite]
-  qa[Local QA]
-  ship[Watchfolder]
-  change --> n8n
-  n8n --> prod
-  n8n --> raw
-  prod --> todo
-  raw --> todo
-  todo --> refs
-  refs --> layers
-  layers --> titles
-  layers --> crop
-  titles --> render
-  crop --> render
+const streamingPipeline: LocalizedString = {
+  en: `flowchart TD
+  fetch["Fetch new movies in database"]
+  parse["Parse catalogs to get reference"]
+  generate["Generate assets"]
+  edit["Edit assets"]
+  visual["Visual check"]
+  render["Render assets"]
+  upload["Upload to database"]
+  notifyMe["Notify me in Slack"]:::notify
+  qa["QA tests"]
+  notifyTeam["Notify team in Slack"]:::notify
+  fetch --> parse --> generate --> edit --> visual --> render --> upload
+  edit --> notifyMe
   render --> qa
-  qa --> ship`;
+  upload --> notifyTeam`,
+  by: `flowchart TD
+  fetch["Атрымаць новыя фільмы з базы"]
+  parse["Разабраць каталогі для рэферэнсу"]
+  generate["Згенераваць ассеты"]
+  edit["Рэдагаваць ассеты"]
+  visual["Візуальная праверка"]
+  render["Адрэндэрыць ассеты"]
+  upload["Заліць у базу"]
+  notifyMe["Паведаміць мне ў Slack"]:::notify
+  qa["QA-тэсты"]
+  notifyTeam["Паведаміць каманду ў Slack"]:::notify
+  fetch --> parse --> generate --> edit --> visual --> render --> upload
+  edit --> notifyMe
+  render --> qa
+  upload --> notifyTeam`,
+};
 
 export const caseStudies: CaseStudy[] = [
   {
