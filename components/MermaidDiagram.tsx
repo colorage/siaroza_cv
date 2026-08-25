@@ -8,41 +8,72 @@ type Props = {
   title: string;
 };
 
-function cssVar(name: string, fallback: string): string {
-  const value = getComputedStyle(document.documentElement)
-    .getPropertyValue(name)
-    .trim();
-  return value || fallback;
+function toHex(channel: number): string {
+  return Math.max(0, Math.min(255, Math.round(channel)))
+    .toString(16)
+    .padStart(2, "0");
+}
+
+function parseRgb(value: string): [number, number, number, number] | null {
+  const parts = value.match(/[\d.]+/g);
+  if (!parts || parts.length < 3) return null;
+  const r = Number(parts[0]);
+  const g = Number(parts[1]);
+  const b = Number(parts[2]);
+  const a = parts[3] === undefined ? 1 : Number(parts[3]);
+  if ([r, g, b, a].some((n) => Number.isNaN(n))) return null;
+  return [r, g, b, a > 1 ? a / 100 : a];
+}
+
+function cssColorHex(variable: string, fallback: string): string {
+  const probe = document.createElement("span");
+  probe.style.color = `var(${variable})`;
+  document.body.append(probe);
+  const computed = getComputedStyle(probe).color;
+  probe.remove();
+
+  const parsed = parseRgb(computed);
+  if (!parsed) return fallback;
+  const [r, g, b, a] = parsed;
+  if (a >= 1) return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+
+  const background = cssColorHex("--background", "#0a1414");
+  const br = Number.parseInt(background.slice(1, 3), 16);
+  const bg = Number.parseInt(background.slice(3, 5), 16);
+  const bb = Number.parseInt(background.slice(5, 7), 16);
+  return `#${toHex(r * a + br * (1 - a))}${toHex(g * a + bg * (1 - a))}${toHex(b * a + bb * (1 - a))}`;
 }
 
 function mermaidTheme() {
-  const background = cssVar("--background", "#0a1414");
-  const surface = cssVar("--surface", "#1a2b28");
-  const foreground = cssVar("--foreground", "#c8d4d0");
-  const border = cssVar("--border-strong", "#c8d4d0");
+  const background = cssColorHex("--background", "#0a1414");
+  const surface = cssColorHex("--surface", "#1a2b28");
+  const foreground = cssColorHex("--foreground", "#c8d4d0");
+  const muted = cssColorHex("--foreground-muted", "#78807d");
+  const accent = cssColorHex("--accent", "#00d4b8");
   const fontFamily =
-    cssVar("--font-geist-sans", "") ||
+    getComputedStyle(document.body).fontFamily ||
     "ui-sans-serif, system-ui, sans-serif";
 
   return {
     fontFamily,
+    accent,
     themeVariables: {
       darkMode: true,
       background,
       primaryColor: surface,
       primaryTextColor: foreground,
-      primaryBorderColor: border,
+      primaryBorderColor: muted,
       secondaryColor: surface,
       secondaryTextColor: foreground,
-      secondaryBorderColor: border,
+      secondaryBorderColor: muted,
       tertiaryColor: background,
       tertiaryTextColor: foreground,
-      tertiaryBorderColor: border,
-      lineColor: border,
+      tertiaryBorderColor: muted,
+      lineColor: muted,
       textColor: foreground,
       nodeTextColor: foreground,
       mainBkg: surface,
-      nodeBorder: border,
+      nodeBorder: muted,
       clusterBkg: background,
       titleColor: foreground,
       edgeLabelBackground: background,
@@ -64,7 +95,8 @@ export function MermaidDiagram({ chart, title }: Props) {
 
     async function draw() {
       const mermaid = (await import("mermaid")).default;
-      const { fontFamily, themeVariables } = mermaidTheme();
+      const { fontFamily, accent, themeVariables } = mermaidTheme();
+      const themedChart = `${chart.trim()}\n  classDef notify fill:${themeVariables.primaryColor},stroke:${accent},color:${themeVariables.primaryTextColor}`;
 
       mermaid.initialize({
         startOnLoad: false,
@@ -82,7 +114,7 @@ export function MermaidDiagram({ chart, title }: Props) {
         },
       });
 
-      const { svg: next } = await mermaid.render(renderId, chart);
+      const { svg: next } = await mermaid.render(renderId, themedChart);
       if (!cancelled) {
         setFailed(false);
         setSvg(next);
