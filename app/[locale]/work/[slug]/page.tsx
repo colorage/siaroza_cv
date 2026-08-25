@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!study || !job) return {};
   return pageMetadata({
     locale,
-    title: `${study.title[locale]} — ${job.company}`,
+    title: study.title[locale],
     description: study.summary[locale],
     path,
   });
@@ -73,13 +73,9 @@ export default async function WorkPage({ params }: Props) {
         <h1 className="text-[clamp(2rem,5vw,3rem)] leading-[1.1] tracking-[-0.03em] text-foreground">
           {study.title[locale]}
         </h1>
-        <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[12px] tracking-wide text-muted uppercase">
-          <span>{job.company}</span>
-          <span className="text-border-strong">·</span>
-          <span>
-            {job.start} — {job.end}
-          </span>
-        </div>
+        <p className="mt-4 font-mono text-[12px] tracking-wide text-muted uppercase">
+          {job.start} — {job.end}
+        </p>
         {study.stack?.length ? (
           <ul className="mt-5 flex flex-wrap gap-2">
             {study.stack.map((item) => (

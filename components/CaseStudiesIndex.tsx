@@ -45,8 +45,6 @@ export function CaseStudiesIndex({ locale, dict }: Props) {
                 </h3>
                 {job ? (
                   <p className="mt-2 font-mono text-[12px] tracking-wide text-muted uppercase">
-                    {job.company}
-                    <span className="mx-2 text-border-strong">·</span>
                     {job.start} — {job.end}
                   </p>
                 ) : null}
