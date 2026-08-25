@@ -19,9 +19,10 @@ async function getMermaid() {
       theme: "dark",
       fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
       flowchart: {
-        htmlLabels: false,
+        htmlLabels: true,
+        wrappingWidth: 240,
         curve: "basis",
-        padding: 12,
+        padding: 16,
       },
       themeVariables: {
         darkMode: true,

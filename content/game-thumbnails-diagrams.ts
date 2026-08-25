@@ -36,7 +36,7 @@ export const collectReferencesDiagram = `flowchart TD
 
 export const generateAssetsDiagram = `flowchart TD
   refs["Workspace / References"]
-  gpt[Process via OpenAI GPT images]
+  gpt["Process via OpenAI<br/>GPT images"]
   bg[Generate background]
   character[Generate character]
   uniqueTitle[Generate unique title]
@@ -97,10 +97,11 @@ export const composeRenderDiagram = `flowchart TD
     formats[Formats]
     sizes[Sizes]
     skins[Skins]
+    ratios ~~~ formats ~~~ sizes ~~~ skins
   end
   canvas[Create empty canvas]
   fill[Fill with background]
-  addChar["Add character. Center aligned. Do not resize"]
+  addChar["Add character. Center aligned.<br/>Do not resize"]
   underlayQ{Underlay required?}
   blackQ{Black underlay?}
   colored[Add colored underlay]
@@ -129,7 +130,7 @@ export const composeRenderDiagram = `flowchart TD
 export const qaCompareDiagram = `flowchart TD
   rendered[Rendered Poster]
   reference[Reference Poster]
-  compare[Compare two images via Gemma4]
+  compare["Compare two images<br/>via Gemma4"]
   db[(Database)]
 
   rendered --> compare
@@ -147,34 +148,35 @@ export const qaTransparencyDiagram = `flowchart TD
 
 export const workspaceDiagram = `flowchart TD
   workspace[Workspace]
-  raw[Raw]
-  movieId[Movie ID]
-  bg[background.png]
-  fg[foreground]
-  unique[unique_title.png]
-  common[common_title.png]
-  vault[Obsidian Vault]
-  render[Render]
-  renderFile["movie_id_#91;skin#93;_#91;aspect_ratio#93;_#91;size#93;_.png"]
-  reference[Reference]
-  refFile[movie_id.png]
-  subgraph database [Database]
-    direction TB
-    name[Name]
-    splitTitle[Split title]
-    renderedPoster[Rendered Poster]
-    refField[Reference]
-    qaTitle[QA Title Score]
-    qaMatch[QA Match Score]
+  subgraph rawFolder [Raw]
+    movieId[Movie ID]
+    bg[background.png]
+    fg[foreground]
+    unique[unique_title.png]
+    common[common_title.png]
+  end
+  subgraph vault [Obsidian Vault]
+    subgraph renderFolder [Render]
+      renderFile["movie_id_#91;skin#93;_<br/>#91;aspect_ratio#93;_#91;size#93;_.png"]
+    end
+    subgraph referenceFolder [Reference]
+      refFile[movie_id.png]
+    end
+    subgraph database [Database]
+      direction TB
+      name[Name]
+      splitTitle[Split title]
+      renderedPoster[Rendered Poster]
+      refField[Reference]
+      qaTitle[QA Title Score]
+      qaMatch[QA Match Score]
+    end
   end
 
-  workspace --> raw --> movieId
+  workspace --> rawFolder
   movieId --> bg
   movieId --> fg
   movieId --> unique
   movieId --> common
   workspace --> vault
-  vault --> render --> renderFile
-  vault --> reference --> refFile
-  vault --> database
 `;
