@@ -36,19 +36,16 @@ export const collectReferencesDiagram = `flowchart TD
 
 export const generateAssetsDiagram = `flowchart TD
   refs["Workspace / References"]
-  gpt["Process via OpenAI<br/>GPT images"]
-  bg[Generate background]
-  character[Generate character]
-  uniqueTitle[Generate unique title]
+  gpt["GPT images"]
+  bg[Background]
+  character[Character]
+  uniqueTitle[Unique title]
   raw["Workspace / Raw"]
 
   refs --> gpt
-  gpt --> bg
-  gpt --> character
-  gpt --> uniqueTitle
-  bg --> raw
-  character --> raw
-  uniqueTitle --> raw
+  gpt --> bg --> raw
+  gpt --> character --> raw
+  gpt --> uniqueTitle --> raw
 `;
 
 export const commonTitleDiagram = `flowchart TD
@@ -72,32 +69,35 @@ export const commonTitleDiagram = `flowchart TD
   common --> raw
 `;
 
-export const prepareLayersDiagram = `flowchart TD
-  bg["Background"]
-  character["Character"]
-  titleNode["Title"]
+export const prepareBackgroundTitleDiagram = `flowchart TD
+  bg[Background]
+  titleNode[Title]
   resizeBg[Resize]
-  face[Detect Face bounds]
-  body[Detect Body bounds]
-  crop[Crop to zone of interest]
   resizeTitle[Resize]
   raw["Workspace / Raw"]
 
   bg --> resizeBg --> raw
-  character --> face --> crop
-  character --> body --> crop
-  crop --> raw
   titleNode --> resizeTitle --> raw
 `;
 
+export const prepareCharacterDiagram = `flowchart TD
+  character[Character]
+  face[Face bounds]
+  body[Body bounds]
+  crop[Crop]
+  raw["Workspace / Raw"]
+
+  character --> face --> crop
+  character --> body --> crop
+  crop --> raw
+`;
+
 export const composeConfigDiagram = `flowchart TD
-  subgraph config [Config]
-    ratios[Aspect ratios]
-    formats[Formats]
-    sizes[Sizes]
-    skins[Skins]
-    ratios --> formats --> sizes --> skins
-  end
+  ratios[Aspect ratios]
+  formats[Formats]
+  sizes[Sizes]
+  skins[Skins]
+  ratios --> formats --> sizes --> skins
 `;
 
 export const composeRenderDiagram = `flowchart TD
@@ -149,37 +149,28 @@ export const qaTransparencyDiagram = `flowchart TD
 
 export const workspaceRawDiagram = `flowchart TD
   workspace[Workspace]
-  subgraph rawFolder [Raw]
-    movieId[Movie ID]
-    bg[background.png]
-    fg[foreground]
-    unique[unique_title.png]
-    common[common_title.png]
-    movieId --> bg --> fg --> unique --> common
-  end
-  workspace --> rawFolder
+  rawFolder[Raw]
+  movieId[Movie ID]
+  bg[background.png]
+  fg[foreground]
+  unique[unique_title.png]
+  common[common_title.png]
+  workspace --> rawFolder --> movieId --> bg --> fg --> unique --> common
 `;
 
 export const workspaceVaultDiagram = `flowchart TD
-  subgraph vault [Obsidian Vault]
-    subgraph renderFolder [Render]
-      renderFile["skin_ratio_size.png"]
-    end
-    subgraph referenceFolder [Reference]
-      refFile[movie_id.png]
-    end
-    renderFolder --> referenceFolder
-  end
+  vault[Obsidian Vault]
+  renderFile["skin_ratio_size.png"]
+  refFile[movie_id.png]
+  vault --> renderFile --> refFile
 `;
 
 export const workspaceDatabaseDiagram = `flowchart TD
-  subgraph database [Database]
-    name[Name]
-    splitTitle[Split title]
-    renderedPoster[Rendered poster]
-    refField[Reference]
-    qaTitle[QA title score]
-    qaMatch[QA match score]
-    name --> splitTitle --> renderedPoster --> refField --> qaTitle --> qaMatch
-  end
+  name[Name]
+  splitTitle[Split title]
+  renderedPoster[Rendered poster]
+  refField[Reference]
+  qaTitle[QA title score]
+  qaMatch[QA match score]
+  name --> splitTitle --> renderedPoster --> refField --> qaTitle --> qaMatch
 `;

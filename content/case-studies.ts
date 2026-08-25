@@ -6,7 +6,8 @@ import {
   composeRenderDiagram,
   generateAssetsDiagram,
   ingestTitlesDiagram,
-  prepareLayersDiagram,
+  prepareBackgroundTitleDiagram,
+  prepareCharacterDiagram,
   qaCompareDiagram,
   qaTransparencyDiagram,
   workspaceDatabaseDiagram,
@@ -231,9 +232,13 @@ export const caseStudies: CaseStudy[] = [
           by: "Фон і тытр — лёгкая праца: кроп (мадэлі часам пакідаюць белую рамку), водступ для тытра, рэсайз. Пярэдні план патрабуе кропкі цікавасці. Дэтэкт твару і сілуэту. Усе твары на адной гарызанталі; сілуэты ў цэнтры кадра. Кроп ад гэтых кропак з мінімальнай стратай. Пераменная мінімальнага памеру твару кантралюе, наколькі буйны герой.",
         },
         diagrams: [
-          enChart(prepareLayersDiagram, {
-            en: "Resize background and title; crop the character to face and body bounds.",
-            by: "Рэсайз фону і тытра; кроп персанажа па межах твару і цела.",
+          enChart(prepareBackgroundTitleDiagram, {
+            en: "Resize background and title into Workspace / Raw.",
+            by: "Рэсайз фону і тытра ў Workspace / Raw.",
+          }),
+          enChart(prepareCharacterDiagram, {
+            en: "Crop the character to face and body bounds.",
+            by: "Кроп персанажа па межах твару і цела.",
           }),
         ],
       },
