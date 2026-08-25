@@ -2,13 +2,17 @@ import type { Locale } from "@/lib/i18n";
 import {
   collectReferencesDiagram,
   commonTitleDiagram,
+  composeConfigDiagram,
   composeRenderDiagram,
   generateAssetsDiagram,
   ingestTitlesDiagram,
-  prepareLayersDiagram,
+  prepareBackgroundTitleDiagram,
+  prepareCharacterDiagram,
   qaCompareDiagram,
   qaTransparencyDiagram,
-  workspaceDiagram,
+  workspaceDatabaseDiagram,
+  workspaceRawDiagram,
+  workspaceVaultDiagram,
 } from "@/content/game-thumbnails-diagrams";
 
 export type LocalizedString = Record<Locale, string>;
@@ -59,8 +63,8 @@ function enChart(source: string, title: LocalizedString): CaseStudyDiagram {
 
 const streamingPipeline: LocalizedString = {
   en: `flowchart TD
-  fetch["Fetch new movies in database"]
-  parse["Parse catalogs to get reference"]
+  fetch["Fetch new movies<br/>in database"]
+  parse["Parse catalogs<br/>for reference"]
   generate["Generate assets"]
   edit["Edit assets"]
   visual["Visual check"]
@@ -74,8 +78,8 @@ const streamingPipeline: LocalizedString = {
   render --> qa
   upload --> notifyTeam`,
   by: `flowchart TD
-  fetch["Атрымаць новыя фільмы з базы"]
-  parse["Разабраць каталогі для рэферэнсу"]
+  fetch["Атрымаць новыя<br/>фільмы з базы"]
+  parse["Разабраць каталогі<br/>для рэферэнсу"]
   generate["Згенераваць ассеты"]
   edit["Рэдагаваць ассеты"]
   visual["Візуальная праверка"]
@@ -83,7 +87,7 @@ const streamingPipeline: LocalizedString = {
   upload["Заліць у базу"]
   notifyMe["Паведаміць мне ў Slack"]:::notify
   qa["QA-тэсты"]
-  notifyTeam["Паведаміць каманду ў Slack"]:::notify
+  notifyTeam["Паведаміць каманду<br/>ў Slack"]:::notify
   fetch --> parse --> generate --> edit --> visual --> render --> upload
   edit --> notifyMe
   render --> qa
@@ -228,9 +232,13 @@ export const caseStudies: CaseStudy[] = [
           by: "Фон і тытр — лёгкая праца: кроп (мадэлі часам пакідаюць белую рамку), водступ для тытра, рэсайз. Пярэдні план патрабуе кропкі цікавасці. Дэтэкт твару і сілуэту. Усе твары на адной гарызанталі; сілуэты ў цэнтры кадра. Кроп ад гэтых кропак з мінімальнай стратай. Пераменная мінімальнага памеру твару кантралюе, наколькі буйны герой.",
         },
         diagrams: [
-          enChart(prepareLayersDiagram, {
-            en: "Resize background and title; crop the character to face and body bounds.",
-            by: "Рэсайз фону і тытра; кроп персанажа па межах твару і цела.",
+          enChart(prepareBackgroundTitleDiagram, {
+            en: "Resize background and title into Workspace / Raw.",
+            by: "Рэсайз фону і тытра ў Workspace / Raw.",
+          }),
+          enChart(prepareCharacterDiagram, {
+            en: "Crop the character to face and body bounds.",
+            by: "Кроп персанажа па межах твару і цела.",
           }),
         ],
       },
@@ -244,9 +252,13 @@ export const caseStudies: CaseStudy[] = [
           by: "Складае кожную патрэбную прапорцыю, памер, фармат, скін і імя файла. Фон заўсёды запаўняе кадр. Герой у цэнтры, без рэсайзу. Унікальны або агульны тытр — унізе па цэнтры; памяншаецца, калі кадр вузейшы за 1:1. Некаторыя скіны маюць падкладку — каляровы або чорны градыент для кантрасту тытра. Адценне з фону: маштаб да 9×9 і колер цэнтральнага пікселя. На светлым арце белае ўсё роўна правальваецца, таму пайплайн выбірае з 16 адценняў поўнага кола з тым жа кантрастам белага на колеры. Астатняе — Pillow.",
         },
         diagrams: [
+          enChart(composeConfigDiagram, {
+            en: "Each render walks aspect ratio, format, size, and skin.",
+            by: "Кожны рэндэр праходзіць прапорцыю, фармат, памер і скін.",
+          }),
           enChart(composeRenderDiagram, {
-            en: "Canvas compose across configs, with underlay, title, and branding branches.",
-            by: "Кампазіцыя на палатне па канфігах, з галінамі падкладкі, тытра і брэндынгу.",
+            en: "Canvas compose with underlay, title, and branding branches. Character stays centered and is never resized.",
+            by: "Кампазіцыя на палатне з галінамі падкладкі, тытра і брэндынгу. Персанаж застаецца па цэнтры і без рэсайзу.",
           }),
         ],
       },
@@ -286,9 +298,17 @@ export const caseStudies: CaseStudy[] = [
       by: "Слаі RAW па movie ID. Рэндэры з імем скін, прапорцыя і памер. Рэферэнсы і QA-балы — у сховішчы Obsidian.",
     },
     solutionDiagrams: [
-      enChart(workspaceDiagram, {
-        en: "Workspace layout: Raw assets per movie ID, Obsidian vault for renders, references, and QA fields.",
-        by: "Макет прасторы: Raw-асеты па movie ID, сховішча Obsidian для рэндэраў, рэферэнсаў і QA-палёў.",
+      enChart(workspaceRawDiagram, {
+        en: "Raw layers keyed by movie ID.",
+        by: "Слаі RAW па movie ID.",
+      }),
+      enChart(workspaceVaultDiagram, {
+        en: "Obsidian vault: renders named by skin, ratio, and size; references by movie ID.",
+        by: "Сховішча Obsidian: рэндэры з імем скін, прапорцыя і памер; рэферэнсы па movie ID.",
+      }),
+      enChart(workspaceDatabaseDiagram, {
+        en: "Vault database fields for titles, posters, and QA scores.",
+        by: "Палі базы ў сховішчы: тытры, постары і QA-балы.",
       }),
     ],
     impact: {

@@ -80,9 +80,8 @@ body {
 
 .mermaid-diagram svg {
   display: block;
+  width: 100%;
   height: auto;
-  margin-inline: auto;
-  max-width: none;
 }
 
 .mermaid-diagram :is(.node rect, .node circle, .node ellipse, .node polygon, .node path, .cluster rect) {
@@ -139,13 +138,6 @@ body {
   100% {
     opacity: 0;
   }
-}
-
-.mermaid-diagram svg {
-  display: block;
-  margin-inline: auto;
-  max-width: 100%;
-  height: auto;
 }
 
 .mermaid-diagram .nodeLabel,

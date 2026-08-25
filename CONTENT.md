@@ -40,7 +40,7 @@ flowchart TD
 - **Media lives in `public/`.** Download images. Do not hotlink Dribbble, OG images, or CDNs. YouTube is the only embed exception (privacy-enhanced iframe).
 - **NDA:** if `stage === "nda"` (or the user says it is confidential), no public detail route, no extracted media, no quotes from the source. Grid card stays private (ASCII noise pattern).
 - **Pet projects** stay preview-only until [`lib/site-url.ts`](lib/site-url.ts) changes. Do not leak them onto production.
-- **Visual language:** `max-w-5xl`, `rounded-2xl`, `border-border`, Geist, `text-muted` / `text-foreground`. Prefer scroll-snap over a carousel library.
+- **Visual language:** `max-w-5xl` for site chrome and portfolio media; `max-w-2xl` for case-study prose and Mermaid wells. `rounded-2xl`, `border-border`, Geist, `text-muted` / `text-foreground`. Prefer scroll-snap over a carousel library.
 - **Missing UI:** implement the primitive in the same PR. Do not leave “TODO: add carousel later.”
 
 ## File map (create on first use)
@@ -143,6 +143,8 @@ Mermaid:
 
 - Store diagram source as strings on the case-study record.
 - Render with a small client `MermaidDiagram` component. Add the `mermaid` package the first time it is needed.
+- Case-study diagrams share the **text column** (`max-w-2xl`). Do not widen the article for a chart. YouTube/PDF wells on portfolio stay `max-w-5xl`.
+- Prefer `flowchart TD`. Split a fat graph into stacked figures rather than going LR or stretching the page. Short node labels; wrapping is for overflow, not layout.
 - Prefer flowchart / sequence / timeline. No colors that fight dark/light — let the renderer use defaults, then restyle to site tokens if needed.
 - Node IDs: camelCase, no spaces; quote labels that contain punctuation.
 
