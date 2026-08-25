@@ -3,7 +3,6 @@ import {
   getCaseStudiesForIndex,
   hasCaseStudyBody,
 } from "@/content/case-studies";
-import { getExperience } from "@/content/experience";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 type Props = {
@@ -25,7 +24,6 @@ export function CaseStudiesIndex({ locale, dict }: Props) {
 
       <ul className="max-w-2xl divide-y divide-border">
         {studies.map((study) => {
-          const job = getExperience(study.experienceId);
           const featured = hasCaseStudyBody(study);
 
           return (
@@ -43,13 +41,6 @@ export function CaseStudiesIndex({ locale, dict }: Props) {
                 >
                   {study.title[locale]}
                 </h3>
-                {job ? (
-                  <p className="mt-2 font-mono text-[12px] tracking-wide text-muted uppercase">
-                    {job.company}
-                    <span className="mx-2 text-border-strong">·</span>
-                    {job.start} — {job.end}
-                  </p>
-                ) : null}
                 <p
                   className={`leading-relaxed text-muted ${
                     featured ? "mt-4 text-[16px]" : "mt-2 line-clamp-2 text-[14px]"

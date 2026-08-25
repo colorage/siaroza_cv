@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { CaseStudyBody } from "@/components/CaseStudyBody";
 import { PortfolioPiece } from "@/components/PortfolioPiece";
 import { getCaseStudy } from "@/content/case-studies";
-import { getExperience } from "@/content/experience";
 import { getPortfolioShot, isStandaloneShot } from "@/content/portfolio";
 import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/metadata";
@@ -35,11 +34,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
   }
   const study = getCaseStudy(slug);
-  const job = study ? getExperience(study.experienceId) : undefined;
-  if (!study || !job) return {};
+  if (!study) return {};
   return pageMetadata({
     locale,
-    title: `${study.title[locale]} — ${job.company}`,
+    title: study.title[locale],
     description: study.summary[locale],
     path,
   });
@@ -57,8 +55,7 @@ export default async function WorkPage({ params }: Props) {
   }
 
   const study = getCaseStudy(slug);
-  const job = study ? getExperience(study.experienceId) : undefined;
-  if (!study || !job) notFound();
+  if (!study) notFound();
 
   return (
     <article className="mx-auto max-w-2xl px-6 py-16 md:py-24">
@@ -73,13 +70,6 @@ export default async function WorkPage({ params }: Props) {
         <h1 className="text-[clamp(2rem,5vw,3rem)] leading-[1.1] tracking-[-0.03em] text-foreground">
           {study.title[locale]}
         </h1>
-        <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-[12px] tracking-wide text-muted uppercase">
-          <span>{job.company}</span>
-          <span className="text-border-strong">·</span>
-          <span>
-            {job.start} — {job.end}
-          </span>
-        </div>
         {study.stack?.length ? (
           <ul className="mt-5 flex flex-wrap gap-2">
             {study.stack.map((item) => (
