@@ -1,4 +1,15 @@
 import type { Locale } from "@/lib/i18n";
+import {
+  collectReferencesDiagram,
+  commonTitleDiagram,
+  composeRenderDiagram,
+  generateAssetsDiagram,
+  ingestTitlesDiagram,
+  prepareLayersDiagram,
+  qaCompareDiagram,
+  qaTransparencyDiagram,
+  workspaceDiagram,
+} from "@/content/game-thumbnails-diagrams";
 
 export type LocalizedString = Record<Locale, string>;
 export type LocalizedList = Record<Locale, string[]>;
@@ -11,15 +22,16 @@ export type CaseStudyEffort = {
   hard: LocalizedList;
 };
 
+export type CaseStudyDiagram = {
+  source: LocalizedString;
+  title?: LocalizedString;
+};
+
 export type CaseStudySection = {
   title: LocalizedString;
   body?: LocalizedString;
   items?: LocalizedList;
-};
-
-export type CaseStudyDiagram = {
-  source: LocalizedString;
-  title?: LocalizedString;
+  diagrams?: CaseStudyDiagram[];
 };
 
 export type CaseStudy = {
@@ -36,9 +48,14 @@ export type CaseStudy = {
   diagrams?: CaseStudyDiagram[];
   solution?: LocalizedString;
   solutionItems?: LocalizedList;
+  solutionDiagrams?: CaseStudyDiagram[];
   impact?: LocalizedList;
   relatedSlugs?: string[];
 };
+
+function enChart(source: string, title: LocalizedString): CaseStudyDiagram {
+  return { source: { en: source, by: source }, title };
+}
 
 const streamingPipeline: LocalizedString = {
   en: `flowchart TD
@@ -146,6 +163,12 @@ export const caseStudies: CaseStudy[] = [
           en: "n8n fires on a database change and runs the design chain. Production is the priority; the raw provider dump is secondary. Keeping that raw base current is what prevents a title from shipping without a poster.",
           by: "n8n спрацоўвае на змену ў базе і запускае дызайн-ланцуг. Прадакшн — прыярытэт; сырая база правайдара — другая. Трымаць гэтую сырую базу актуальнай — тое, што не дае тытулу выйсці без постара.",
         },
+        diagrams: [
+          enChart(ingestTitlesDiagram, {
+            en: "Poll production and pre-production; retry until new titles land in Workspace / RAW.",
+            by: "Апытанне production і pre-production; паўтор, пакуль новыя тытулы не трапяць у Workspace / RAW.",
+          }),
+        ],
       },
       {
         title: {
@@ -156,6 +179,12 @@ export const caseStudies: CaseStudy[] = [
           en: "Diff the catalog against the local store and the to-do list appears: titles with no poster. Provider files were a poor automation source — slow, a different format every time. Public stills first: IMDb and Rotten Tomatoes cover most of the catalog; region-specific and niche films come from the official site or image search. Playwright died on Cloudflare. Chrome CDP, with one human pass per session, did not. References lived in Obsidian.",
           by: "Параўнанне каталога з лакальным сховішчам — і з'яўляецца to-do: тытулы без постара. Файлы правайдара дрэнна аўтаматызуюцца: павольна, кожны раз іншы фармат. Спачатку публічныя кадры: IMDb і Rotten Tomatoes пакрываюць большасць каталога; рэгіянальныя і нішавыя фільмы — з афіцыйнага сайта або пошуку выяў. Playwright не праходзіў Cloudflare. Chrome CDP, з адным чалавечым праходам на сесію, праходзіў. Рэферэнсы жылі ў Obsidian.",
         },
+        diagrams: [
+          enChart(collectReferencesDiagram, {
+            en: "Poster fallback: IMDB, official site, then Google Images.",
+            by: "Фолбэк постара: IMDB, афіцыйны сайт, потым Google Images.",
+          }),
+        ],
       },
       {
         title: {
@@ -166,6 +195,12 @@ export const caseStudies: CaseStudy[] = [
           en: "Consistency is the same deconstruction on every poster: foreground (person, animal, object), background, unique title. Each layer has its own prompt on the reference — background without type or a large subject; foreground uncropped on transparent; title at 2:1, also transparent. Gemini (Nano Banana) was first. It drifted, hallucinated, and had no alpha. Transparency can be faked in a script or a Photoshop batch, but edges are cleaner when the model emits it. Switched to GPT Images 2.0 when the API shipped.",
           by: "Кансістэнтнасць — адна і тая ж дэканструкцыя кожнага постара: пярэдні план (чалавек, жывёла, аб'ект), фон, унікальны тытр. Кожны слой мае ўласны промпт да рэферэнса — фон без надпісу і буйнога аб'екта; пярэдні план не абрэзаны, на празрыстым; тытр 2:1, таксама празрысты. Спачатку быў Gemini (Nano Banana). Ён збіваўся са стылю, галюцынаваў і не меў альфы. Празрыстасць можна зрабіць скрыптам або Photoshop batch, але краі чысцейшыя, калі мадэль аддае яе сама. Перайшоў на GPT Images 2.0, калі з'явілася API.",
         },
+        diagrams: [
+          enChart(generateAssetsDiagram, {
+            en: "Parallel GPT generation of background, character, and unique title.",
+            by: "Паралельная GPT-генерацыя фону, персанажа і ўнікальнага тытра.",
+          }),
+        ],
       },
       {
         title: {
@@ -176,6 +211,12 @@ export const caseStudies: CaseStudy[] = [
           en: "Some customers wanted one title treatment across the catalog — more contrast, the character does the talking. The hard part is filling negative space and splitting the name across one, two, or three lines so it reads. If the original title art is readable, OCR keeps that split. If it is not, a Python splitter does the job.",
           by: "Некаторым кліентам агрэгатара патрэбны быў адзін тытр на ўвесь каталог — больш кантрасту, герой трымае ўвагу. Складанае — запоўніць негатыўную прастору і падзяліць назву на адзін, два або тры радкі так, каб яна чыталася. Калі арыгінальны тытр чытэльны, OCR захоўвае гэты падзел. Калі не — Python-скрыпт.",
         },
+        diagrams: [
+          enChart(commonTitleDiagram, {
+            en: "Read the title from the reference; split when it runs past three strings.",
+            by: "Зчытаць тытр з рэферэнса; разбіць, калі больш за тры радкі.",
+          }),
+        ],
       },
       {
         title: {
@@ -186,6 +227,12 @@ export const caseStudies: CaseStudy[] = [
           en: "Background and title are light work: crop (models sometimes leave a white border), add title margin, resize. Foreground needs a point of interest. Detect face and silhouette. All faces on one horizontal line; silhouettes in the center of the frame. Crop from those points with as little loss as possible. A minimum face-size variable controls how large the character sits.",
           by: "Фон і тытр — лёгкая праца: кроп (мадэлі часам пакідаюць белую рамку), водступ для тытра, рэсайз. Пярэдні план патрабуе кропкі цікавасці. Дэтэкт твару і сілуэту. Усе твары на адной гарызанталі; сілуэты ў цэнтры кадра. Кроп ад гэтых кропак з мінімальнай стратай. Пераменная мінімальнага памеру твару кантралюе, наколькі буйны герой.",
         },
+        diagrams: [
+          enChart(prepareLayersDiagram, {
+            en: "Resize background and title; crop the character to face and body bounds.",
+            by: "Рэсайз фону і тытра; кроп персанажа па межах твару і цела.",
+          }),
+        ],
       },
       {
         title: {
@@ -196,6 +243,12 @@ export const caseStudies: CaseStudy[] = [
           en: "Composite every required ratio, size, format, skin, and filename. Background always fills. Character pastes in the center, never resized. Unique or common title sits bottom-center, and scales down when the frame is thinner than 1:1. Some skins get an underlay — a colored or black gradient for title contrast. Hue comes from the background: scale to 9×9 and read the center pixel. Bright art still fails white-on-light, so the pipeline picks among 16 hues on a full cycle that keep the same white-on-color contrast. Pillow does the rest.",
           by: "Складае кожную патрэбную прапорцыю, памер, фармат, скін і імя файла. Фон заўсёды запаўняе кадр. Герой у цэнтры, без рэсайзу. Унікальны або агульны тытр — унізе па цэнтры; памяншаецца, калі кадр вузейшы за 1:1. Некаторыя скіны маюць падкладку — каляровы або чорны градыент для кантрасту тытра. Адценне з фону: маштаб да 9×9 і колер цэнтральнага пікселя. На светлым арце белае ўсё роўна правальваецца, таму пайплайн выбірае з 16 адценняў поўнага кола з тым жа кантрастам белага на колеры. Астатняе — Pillow.",
         },
+        diagrams: [
+          enChart(composeRenderDiagram, {
+            en: "Canvas compose across configs, with underlay, title, and branding branches.",
+            by: "Кампазіцыя на палатне па канфігах, з галінамі падкладкі, тытра і брэндынгу.",
+          }),
+        ],
       },
       {
         title: {
@@ -206,6 +259,16 @@ export const caseStudies: CaseStudy[] = [
           en: "Two checks: leftover transparent pixels in the title, and whether the render still matches the reference. Pixel counting is cheap. Image compare does not need to be fast — Gemma 4 via Ollama ran overnight, so the workstation never sat idle. Obsidian showed original vs render plus both scores. Sort the score column and the queue orders itself. A plugin runs a shell script from the vault, so the same board is the control panel.",
           by: "Дзве праверкі: колькі празрыстых пікселяў засталося ў тытры, і ці супадае рэндэр з рэферэнсам. Падлік пікселяў — проста. Параўнанне выяў не мусіць быць хуткім — Gemma 4 праз Ollama ішла ноччу, станцыя не прастойвала. У Obsidian — арыгінал і рэндэр плюс абодва балы. Сартаванне па бале само складае чаргу. Плагін запускае shell-скрыпт са сховішча, таму тая ж дошка — і панэль кіравання.",
         },
+        diagrams: [
+          enChart(qaCompareDiagram, {
+            en: "Rendered poster vs reference via Gemma4.",
+            by: "Рэндэр супраць рэферэнса праз Gemma4.",
+          }),
+          enChart(qaTransparencyDiagram, {
+            en: "Transparent-pixel count on the common title.",
+            by: "Падлік празрыстых пікселяў на агульным тытры.",
+          }),
+        ],
       },
       {
         title: {
@@ -217,6 +280,16 @@ export const caseStudies: CaseStudy[] = [
           by: "Апошні крок самы просты, і яго таксама можна аўтаматызаваць. Watchfolder на рабочай папцы загружае, апавяшчае, сінхранізуе і робіць бэкап.",
         },
       },
+    ],
+    solution: {
+      en: "RAW layers keyed by movie ID. Renders named by skin, ratio, and size. References and QA scores live in the Obsidian vault.",
+      by: "Слаі RAW па movie ID. Рэндэры з імем скін, прапорцыя і памер. Рэферэнсы і QA-балы — у сховішчы Obsidian.",
+    },
+    solutionDiagrams: [
+      enChart(workspaceDiagram, {
+        en: "Workspace layout: Raw assets per movie ID, Obsidian vault for renders, references, and QA fields.",
+        by: "Макет прасторы: Raw-асеты па movie ID, сховішча Obsidian для рэндэраў, рэферэнсаў і QA-палёў.",
+      }),
     ],
     impact: {
       en: [
@@ -271,6 +344,7 @@ export function hasCaseStudyBody(study: CaseStudy): boolean {
       study.diagrams?.length ||
       study.solution ||
       study.solutionItems ||
+      study.solutionDiagrams?.length ||
       study.impact,
   );
 }

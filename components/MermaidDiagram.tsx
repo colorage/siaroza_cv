@@ -103,13 +103,14 @@ export function MermaidDiagram({ source, title }: Props) {
         securityLevel: "strict",
         theme: "base",
         fontFamily,
-        htmlLabels: false,
+        htmlLabels: true,
         themeVariables,
         flowchart: {
           curve: "basis",
           diagramPadding: 8,
           nodeSpacing: 36,
           rankSpacing: 48,
+          wrappingWidth: 240,
           useMaxWidth: false,
         },
       });

@@ -4,6 +4,7 @@ import { MermaidDiagram } from "@/components/MermaidDiagram";
 import {
   getRelatedCaseStudies,
   type CaseStudy,
+  type CaseStudyDiagram,
 } from "@/content/case-studies";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
@@ -53,6 +54,26 @@ function BulletList({ items }: { items: string[] }) {
   );
 }
 
+function DiagramStack({
+  diagrams,
+  locale,
+}: {
+  diagrams: CaseStudyDiagram[];
+  locale: Locale;
+}) {
+  return (
+    <div className="mt-6 space-y-8">
+      {diagrams.map((diagram, index) => (
+        <MermaidDiagram
+          key={`${diagram.source.en.slice(0, 24)}-${index}`}
+          source={diagram.source[locale]}
+          title={diagram.title?.[locale]}
+        />
+      ))}
+    </div>
+  );
+}
+
 export function CaseStudyBody({ study, locale, dict }: Props) {
   const context = study.context?.[locale];
   const problem = study.problem?.[locale];
@@ -66,7 +87,10 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
   const related = getRelatedCaseStudies(study);
 
   const showContext = hasText(context) || hasText(problem);
-  const showSolution = hasText(solution) || hasList(solutionItems);
+  const showSolution =
+    hasText(solution) ||
+    hasList(solutionItems) ||
+    Boolean(study.solutionDiagrams?.length);
   const showProcess = hasList(process) || Boolean(sections?.length);
 
   return (
@@ -141,25 +165,25 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
         </div>
       ) : null}
 
-      <div className="max-w-2xl">
-        {showProcess ? (
-          <Section title={dict.caseStudies.process}>
-            {hasList(process) ? (
-              <ol className="list-decimal space-y-3 pl-5 text-[16px] leading-relaxed text-muted">
-                {process.map((step) => (
-                  <li key={step}>{step}</li>
-                ))}
-              </ol>
-            ) : null}
-            {sections?.length ? (
-              <div
-                className={hasList(process) ? "mt-10 space-y-10" : "space-y-10"}
-              >
-                {sections.map((section) => {
-                  const body = section.body?.[locale];
-                  const items = section.items?.[locale];
-                  return (
-                    <div key={section.title.en}>
+      {showProcess ? (
+        <Section title={dict.caseStudies.process}>
+          {hasList(process) ? (
+            <ol className="max-w-2xl list-decimal space-y-3 pl-5 text-[16px] leading-relaxed text-muted">
+              {process.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+          ) : null}
+          {sections?.length ? (
+            <div
+              className={hasList(process) ? "mt-10 space-y-16" : "space-y-16"}
+            >
+              {sections.map((section) => {
+                const body = section.body?.[locale];
+                const items = section.items?.[locale];
+                return (
+                  <div key={section.title.en}>
+                    <div className="max-w-2xl">
                       <h3 className="text-lg tracking-tight text-foreground">
                         {section.title[locale]}
                       </h3>
@@ -174,15 +198,23 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
                         </div>
                       ) : null}
                     </div>
-                  );
-                })}
-              </div>
-            ) : null}
-          </Section>
-        ) : null}
+                    {section.diagrams?.length ? (
+                      <DiagramStack
+                        diagrams={section.diagrams}
+                        locale={locale}
+                      />
+                    ) : null}
+                  </div>
+                );
+              })}
+            </div>
+          ) : null}
+        </Section>
+      ) : null}
 
-        {showSolution ? (
-          <Section title={dict.caseStudies.solution}>
+      {showSolution ? (
+        <Section title={dict.caseStudies.solution}>
+          <div className="max-w-2xl">
             {hasText(solution) ? (
               <p className="text-[16px] leading-relaxed text-muted">
                 {solution}
@@ -193,32 +225,37 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
                 <BulletList items={solutionItems} />
               </div>
             ) : null}
-          </Section>
-        ) : null}
+          </div>
+          {study.solutionDiagrams?.length ? (
+            <DiagramStack diagrams={study.solutionDiagrams} locale={locale} />
+          ) : null}
+        </Section>
+      ) : null}
 
-        {hasList(impact) ? (
-          <Section title={dict.caseStudies.impact}>
+      {hasList(impact) ? (
+        <Section title={dict.caseStudies.impact}>
+          <div className="max-w-2xl">
             <BulletList items={impact} />
-          </Section>
-        ) : null}
+          </div>
+        </Section>
+      ) : null}
 
-        {related.length ? (
-          <Section title={dict.caseStudies.related}>
-            <ul className="space-y-2">
-              {related.map((item) => (
-                <li key={item.slug}>
-                  <Link
-                    href={`/${locale}/work/${item.slug}`}
-                    className="text-[16px] text-foreground underline-offset-4 transition-opacity hover:opacity-70"
-                  >
-                    {item.title[locale]} →
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </Section>
-        ) : null}
-      </div>
+      {related.length ? (
+        <Section title={dict.caseStudies.related}>
+          <ul className="max-w-2xl space-y-2">
+            {related.map((item) => (
+              <li key={item.slug}>
+                <Link
+                  href={`/${locale}/work/${item.slug}`}
+                  className="text-[16px] text-foreground underline-offset-4 transition-opacity hover:opacity-70"
+                >
+                  {item.title[locale]} →
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      ) : null}
     </div>
   );
 }
