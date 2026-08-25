@@ -109,10 +109,10 @@ export function MermaidDiagram({ source, title }: Props) {
         flowchart: {
           curve: "basis",
           diagramPadding: 8,
-          nodeSpacing: 36,
-          rankSpacing: 48,
-          wrappingWidth: 240,
-          useMaxWidth: false,
+          nodeSpacing: 28,
+          rankSpacing: 40,
+          wrappingWidth: 200,
+          useMaxWidth: true,
         },
       });
 
@@ -148,7 +148,7 @@ export function MermaidDiagram({ source, title }: Props) {
         >
           {svg ? (
             <div
-              className="mermaid-diagram mx-auto w-fit min-w-full"
+              className="mermaid-diagram w-full"
               dangerouslySetInnerHTML={{ __html: svg }}
             />
           ) : (

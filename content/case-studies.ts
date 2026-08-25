@@ -2,13 +2,16 @@ import type { Locale } from "@/lib/i18n";
 import {
   collectReferencesDiagram,
   commonTitleDiagram,
+  composeConfigDiagram,
   composeRenderDiagram,
   generateAssetsDiagram,
   ingestTitlesDiagram,
   prepareLayersDiagram,
   qaCompareDiagram,
   qaTransparencyDiagram,
-  workspaceDiagram,
+  workspaceDatabaseDiagram,
+  workspaceRawDiagram,
+  workspaceVaultDiagram,
 } from "@/content/game-thumbnails-diagrams";
 
 export type LocalizedString = Record<Locale, string>;
@@ -244,9 +247,13 @@ export const caseStudies: CaseStudy[] = [
           by: "Складае кожную патрэбную прапорцыю, памер, фармат, скін і імя файла. Фон заўсёды запаўняе кадр. Герой у цэнтры, без рэсайзу. Унікальны або агульны тытр — унізе па цэнтры; памяншаецца, калі кадр вузейшы за 1:1. Некаторыя скіны маюць падкладку — каляровы або чорны градыент для кантрасту тытра. Адценне з фону: маштаб да 9×9 і колер цэнтральнага пікселя. На светлым арце белае ўсё роўна правальваецца, таму пайплайн выбірае з 16 адценняў поўнага кола з тым жа кантрастам белага на колеры. Астатняе — Pillow.",
         },
         diagrams: [
+          enChart(composeConfigDiagram, {
+            en: "Each render walks aspect ratio, format, size, and skin.",
+            by: "Кожны рэндэр праходзіць прапорцыю, фармат, памер і скін.",
+          }),
           enChart(composeRenderDiagram, {
-            en: "Canvas compose across configs, with underlay, title, and branding branches.",
-            by: "Кампазіцыя на палатне па канфігах, з галінамі падкладкі, тытра і брэндынгу.",
+            en: "Canvas compose with underlay, title, and branding branches. Character stays centered and is never resized.",
+            by: "Кампазіцыя на палатне з галінамі падкладкі, тытра і брэндынгу. Персанаж застаецца па цэнтры і без рэсайзу.",
           }),
         ],
       },
@@ -286,9 +293,17 @@ export const caseStudies: CaseStudy[] = [
       by: "Слаі RAW па movie ID. Рэндэры з імем скін, прапорцыя і памер. Рэферэнсы і QA-балы — у сховішчы Obsidian.",
     },
     solutionDiagrams: [
-      enChart(workspaceDiagram, {
-        en: "Workspace layout: Raw assets per movie ID, Obsidian vault for renders, references, and QA fields.",
-        by: "Макет прасторы: Raw-асеты па movie ID, сховішча Obsidian для рэндэраў, рэферэнсаў і QA-палёў.",
+      enChart(workspaceRawDiagram, {
+        en: "Raw layers keyed by movie ID.",
+        by: "Слаі RAW па movie ID.",
+      }),
+      enChart(workspaceVaultDiagram, {
+        en: "Obsidian vault: renders named by skin, ratio, and size; references by movie ID.",
+        by: "Сховішча Obsidian: рэндэры з імем скін, прапорцыя і памер; рэферэнсы па movie ID.",
+      }),
+      enChart(workspaceDatabaseDiagram, {
+        en: "Vault database fields for titles, posters, and QA scores.",
+        by: "Палі базы ў сховішчы: тытры, постары і QA-балы.",
       }),
     ],
     impact: {

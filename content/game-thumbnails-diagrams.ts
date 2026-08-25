@@ -90,31 +90,32 @@ export const prepareLayersDiagram = `flowchart TD
   titleNode --> resizeTitle --> raw
 `;
 
-export const composeRenderDiagram = `flowchart TD
+export const composeConfigDiagram = `flowchart TD
   subgraph config [Config]
-    direction LR
     ratios[Aspect ratios]
     formats[Formats]
     sizes[Sizes]
     skins[Skins]
-    ratios ~~~ formats ~~~ sizes ~~~ skins
+    ratios --> formats --> sizes --> skins
   end
+`;
+
+export const composeRenderDiagram = `flowchart TD
   canvas[Create empty canvas]
   fill[Fill with background]
-  addChar["Add character. Center aligned.<br/>Do not resize"]
-  underlayQ{Underlay required?}
-  blackQ{Black underlay?}
-  colored[Add colored underlay]
-  black[Add black underlay]
+  addChar["Add character, centered"]
+  underlayQ{Underlay?}
+  blackQ{Black?}
+  colored[Colored underlay]
+  black[Black underlay]
   uniqueQ{Unique title?}
-  commonTitle[Add common title]
-  uniqueTitle[Add unique title]
-  brandQ{Branding required?}
+  commonTitle[Common title]
+  uniqueTitle[Unique title]
+  brandQ{Branding?}
   branding[Add branding]
   save[Save image]
   render["Workspace / Render"]
 
-  config --> canvas
   canvas --> fill --> addChar --> underlayQ
   underlayQ -->|No| uniqueQ
   underlayQ -->|Yes| blackQ
@@ -146,7 +147,7 @@ export const qaTransparencyDiagram = `flowchart TD
   titleNode --> calc --> db
 `;
 
-export const workspaceDiagram = `flowchart TD
+export const workspaceRawDiagram = `flowchart TD
   workspace[Workspace]
   subgraph rawFolder [Raw]
     movieId[Movie ID]
@@ -154,29 +155,31 @@ export const workspaceDiagram = `flowchart TD
     fg[foreground]
     unique[unique_title.png]
     common[common_title.png]
+    movieId --> bg --> fg --> unique --> common
   end
+  workspace --> rawFolder
+`;
+
+export const workspaceVaultDiagram = `flowchart TD
   subgraph vault [Obsidian Vault]
     subgraph renderFolder [Render]
-      renderFile["movie_id_#91;skin#93;_<br/>#91;aspect_ratio#93;_#91;size#93;_.png"]
+      renderFile["skin_ratio_size.png"]
     end
     subgraph referenceFolder [Reference]
       refFile[movie_id.png]
     end
-    subgraph database [Database]
-      direction TB
-      name[Name]
-      splitTitle[Split title]
-      renderedPoster[Rendered Poster]
-      refField[Reference]
-      qaTitle[QA Title Score]
-      qaMatch[QA Match Score]
-    end
+    renderFolder --> referenceFolder
   end
+`;
 
-  workspace --> rawFolder
-  movieId --> bg
-  movieId --> fg
-  movieId --> unique
-  movieId --> common
-  workspace --> vault
+export const workspaceDatabaseDiagram = `flowchart TD
+  subgraph database [Database]
+    name[Name]
+    splitTitle[Split title]
+    renderedPoster[Rendered poster]
+    refField[Reference]
+    qaTitle[QA title score]
+    qaMatch[QA match score]
+    name --> splitTitle --> renderedPoster --> refField --> qaTitle --> qaMatch
+  end
 `;
