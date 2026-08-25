@@ -1,5 +1,11 @@
 import type { Locale } from "@/lib/i18n";
 import {
+  chameleonPipelineBy,
+  chameleonPipelineEn,
+  chameleonPostfixBy,
+  chameleonPostfixEn,
+} from "@/content/chameleon-diagrams";
+import {
   collectReferencesDiagram,
   commonTitleDiagram,
   composeConfigDiagram,
@@ -59,6 +65,13 @@ export type CaseStudy = {
 
 function enChart(source: string, title: LocalizedString): CaseStudyDiagram {
   return { source: { en: source, by: source }, title };
+}
+
+function chart(
+  source: LocalizedString,
+  title: LocalizedString,
+): CaseStudyDiagram {
+  return { source, title };
 }
 
 const streamingPipeline: LocalizedString = {
@@ -326,14 +339,128 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "chameleon-illustrations",
-    experienceId: "spribe",
+    experienceId: "amasty",
     title: {
-      en: "Chameleon Illustrations System",
-      by: "Сістэма ілюстрацый Chameleon",
+      en: "Chameleon illustrations for Shopify themes",
+      by: "Ілюстрацыі Chameleon для тэм Shopify",
     },
     summary: {
-      en: "Illustration set for the Chameleon product line, aligned with platform visual language and brand.",
-      by: "Набор ілюстрацый для лінейкі Chameleon, узгоднены з візуальнай мовай платформы і брэндам.",
+      en: "Theme builder for Shopify: merchants set primary and secondary colors, and pick an illustration style. Vectors recolor with variables. 3D needed a 16×16 render matrix and a hex postfix so the store loaded the matching pair.",
+      by: "Канструктар тэм для Shopify: мерчанты задаюць primary і secondary і выбіраюць стыль ілюстрацый. Вектары перафарбоўваюцца праз пераменныя. Для 3D — матрыца рэндэраў 16×16 і hex-постфікс, каб крама падцягнула патрэбную пару.",
+    },
+    stack: ["Blender"],
+    context: {
+      en: "The product was a theme builder for Shopify stores. Clients wanted more than a two-color setup — they wanted illustrations that belonged to the shop, in a style they chose.",
+      by: "Прадукт быў канструктарам тэм для крам Shopify. Кліентам было мала двух колераў брэнда — патрэбны былі ілюстрацыі, што належаць краме, у выбраным стылі.",
+    },
+    problem: {
+      en: "Flat vector art recolors in one pass with theme variables. The real constraint is 3D: a render is a baked image. Primary and secondary have to live in the scene, then every pair has to be rendered, named, and served.",
+      by: "Плоскі вектар перафарбоўваецца за адзін праход пераменнымі тэмы. Сапраўднае абмежаванне — 3D: рэндэр — гэта ўжо гатовая выява. Primary і secondary мусяць быць у сцэне, потым кожную пару трэба адрэндэрыць, назваць і аддаць.",
+    },
+    effort: {
+      duration: { en: "Multi-month", by: "Некалькі месяцаў" },
+      role: { en: "UI & Visual Designer", by: "UI & Visual Designer" },
+      team: { en: "Solo", by: "Аднаасобна" },
+      constraints: {
+        en: [
+          "Theme colors are a primary–secondary pair",
+          "Vectors recolor with variables; 3D renders cannot",
+          "16 hues × 16 hues = 256 renders per illustration",
+        ],
+        by: [
+          "Колеры тэмы — пара primary–secondary",
+          "Вектары перафарбоўваюцца пераменнымі; 3D-рэндэры — не",
+          "16 адценняў × 16 адценняў = 256 рэндэраў на ілюстрацыю",
+        ],
+      },
+      hard: {
+        en: [
+          "Art that still reads after both colors swap",
+          "Iterate the pair in Blender, then render the full matrix",
+          "A storefront lookup with no filename database",
+        ],
+        by: [
+          "Ілюстрацыя, якая чытаецца пасля змены абодвух колераў",
+          "Ітэраваць пару ў Blender, потым рэндэрыць усю матрыцу",
+          "Пошук на вітрыне без базы імёнаў файлаў",
+        ],
+      },
+    },
+    diagrams: [
+      chart(
+        { en: chameleonPipelineEn, by: chameleonPipelineBy },
+        {
+          en: "From palette pick to the matching PNG.",
+          by: "Ад выбару палітры да патрэбнага PNG.",
+        },
+      ),
+    ],
+    sections: [
+      {
+        title: {
+          en: "Two kinds of art",
+          by: "Два тыпы арта",
+        },
+        body: {
+          en: "Merchants picked illustration style as well as colors. Flat vectors follow the theme in one step: swap the variables. 3D does not. A render is pixels; the pair has to be in the file.",
+          by: "Мерчанты выбіралі стыль ілюстрацый разам з колерамі. Плоскі вектар ідзе за тэмай за адзін крок: змяніць пераменныя. 3D — не. Рэндэр — пікселі; пара мусіць быць у файле.",
+        },
+      },
+      {
+        title: {
+          en: "Design in Blender",
+          by: "Дызайн у Blender",
+        },
+        body: {
+          en: "Illustrations were built with primary and secondary as materials. Iterate the pair in-scene until both colors still read — then batch. No recolor after the render.",
+          by: "Ілюстрацыі збіраліся з primary і secondary як матэрыяламі. Ітэраваць пару ў сцэне, пакуль абодва колеры чытаюцца — потым batch. Пасля рэндэра перафарбоўкі няма.",
+        },
+      },
+      {
+        title: {
+          en: "16×16 matrix",
+          by: "Матрыца 16×16",
+        },
+        body: {
+          en: "A custom plugin rendered every pair. Sixteen hues on each axis: 256 files per illustration. That is the cost of 3D that still matches the theme.",
+          by: "Уласны плагін рэндэрыў кожную пару. Шэсцьнаццаць адценняў на кожнай восі: 256 файлаў на ілюстрацыю. Гэта цана 3D, якое ўсё роўна супадае з тэмай.",
+        },
+      },
+      {
+        title: {
+          en: "Hex postfix",
+          by: "Hex-постфікс",
+        },
+        body: {
+          en: "Colors marked 0–F. The pair is the filename suffix. shopping_cart_a2.png is the Blue–Amber theme. The store builds the name from the palette it already has; no lookup table.",
+          by: "Колеры пазначаны 0–F. Пара — суфікс імя файла. shopping_cart_a2.png — тэма Blue–Amber. Крама складае імя з палітры, якая ўжо ёсць; табліцы пошуку няма.",
+        },
+        diagrams: [
+          chart(
+            { en: chameleonPostfixEn, by: chameleonPostfixBy },
+            {
+              en: "The pair is the filename: shopping_cart_a2.png is Blue–Amber.",
+              by: "Пара — імя файла: shopping_cart_a2.png — Blue–Amber.",
+            },
+          ),
+        ],
+      },
+    ],
+    solution: {
+      en: "Pre-rendered matrix plus a postfix lookup. The store loads the PNG. No runtime recolor on the 3D art.",
+      by: "Папярэдне адрэндэраная матрыца плюс пошук па постфіксе. Крама падцягвае PNG. Runtime-перафарбоўкі на 3D няма.",
+    },
+    impact: {
+      en: [
+        "256 colorways per 3D illustration without hand-export",
+        "Storefront resolve is a postfix, not a table",
+        "3D art matches the palette the merchant already set",
+      ],
+      by: [
+        "256 каляровых варыянтаў на 3D-ілюстрацыю без ручнога экспарту",
+        "Вітрына знаходзіць файл па постфіксе, не па табліцы",
+        "3D-арт супадае з палітрай, якую мерчант ужо задаў",
+      ],
     },
   },
   {
