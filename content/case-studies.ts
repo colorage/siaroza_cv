@@ -344,8 +344,135 @@ export const caseStudies: CaseStudy[] = [
       by: "Левел-дызайн на базе Photoshop",
     },
     summary: {
-      en: "Photoshop-to-game-engine automation: parsing PSD files to cut manual asset prep and speed delivery from design to engine.",
-      by: "Аўтаматызацыя Photoshop → game engine: парсінг PSD, каб скараціць ручную падрыхтоўку асетаў і паскорыць дастаўку ў рухавік.",
+      en: "PSD-to-Lua pipeline for hidden-object iOS ports. Layer names carried function; the engine read position and bounds. Cycle dropped from six months to three or four.",
+      by: "Пайплайн PSD → Lua для hidden-object портаў на iOS. Імя слоя несла функцыю; рухавік чытаў пазіцыю і межы. Цыкл скараціўся з шасці месяцаў да трох–чатырох.",
+    },
+    stack: ["C++", "Lua", "Photoshop"],
+    context: {
+      en: "Early 2010s, mobile games were a growing market. The fast way for a studio to lead was to port PC titles to iOS: art already existed, but mechanics had to be rewritten from cursor click to finger touch. This was before Unity and Unreal were the default. The studio shipped on an in-house engine. A publisher supplied original art as PSD files — casual games, mostly hidden object, with mini-games and cutscenes. Those files held hundreds of layers with chaotic names.",
+      by: "Пачатак 2010-х, рынак мабільных гульняў рос. Хуткі шлях для студыі — партаваць PC-тытулы на iOS: арт ужо быў, але механіку трэба было перапісаць з кліку мышшу на дотык пальцам. Гэта было да таго, як Unity і Unreal сталі стандартам. Студыя выпускала гульні на ўласным рухавіку. Выдавец даваў арыгінальны арт як PSD — казуальныя гульні, пераважна hidden object, з міні-гульнямі і катсцэнамі. У тых файлах — сотні слаёў з хаатычнымі імёнамі.",
+    },
+    problem: {
+      en: "The first port took six months. Every item was exported by hand, placed in a text editor, and wired into a state machine. PSD is an old format, not meant to be parsed from outside. University C++ was the only coding background; this was the first production tooling.",
+      by: "Першы парт заняў шэсць месяцаў. Кожны аб'ект экспартаваўся ўручную, ставіўся ў тэкставым рэдактары і падключаўся да стейт-машыны. PSD — стары фармат, не прызначаны для вонкавага парсінгу. З універсітэта быў толькі C++; гэта быў першы інструмент у прадакшне.",
+    },
+    effort: {
+      duration: {
+        en: "First title 6 months; later 3–4",
+        by: "Першы тытул 6 месяцаў; пазней 3–4",
+      },
+      role: { en: "Game Designer & QA", by: "Game Designer & QA" },
+      team: { en: "Solo on the pipeline", by: "Аднаасобна на пайплайне" },
+      constraints: {
+        en: [
+          "In-house engine, custom Lua for levels and logic",
+          "Publisher PSDs: hundreds of layers, no naming convention",
+          "PSD not designed for external parsing",
+          "Touch mechanics rewritten from PC",
+        ],
+        by: [
+          "Уласны рухавік, кастомны Lua для ўзроўняў і логікі",
+          "PSD ад выдаўца: сотні слаёў, без канвенцыі імён",
+          "PSD не прызначаны для вонкавага парсінгу",
+          "Механіка дотыку перапісаная з PC",
+        ],
+      },
+      hard: {
+        en: [
+          "First production code",
+          "Interpreting chaotic art files as level data",
+          "A naming system that encoded object and function",
+          "Fitting parse output to the Lua format the engine already used",
+        ],
+        by: [
+          "Першы прадакшн-код",
+          "Хаатычны арт як даныя ўзроўню",
+          "Сістэма імён, дзе імя несла аб'ект і функцыю",
+          "Укласці вынік парсінгу ў той Lua, на якім ужо жыў рухавік",
+        ],
+      },
+    },
+    diagrams: [
+      {
+        source: {
+          en: `flowchart TD
+  cleanup["Clean up PSD"]
+  read["Read PSD"]
+  logic["Export level logic"]
+  assets["Export assets"]
+  sheet["Build spritesheet"]
+  test["Test"]
+  cleanup --> read --> logic --> assets --> sheet --> test`,
+          by: `flowchart TD
+  cleanup["Пачысціць PSD"]
+  read["Прачытаць PSD"]
+  logic["Экспартаваць<br/>логіку ўзроўню"]
+  assets["Экспартаваць ассеты"]
+  sheet["Сабраць спрайтшыт"]
+  test["Пратэставаць"]
+  cleanup --> read --> logic --> assets --> sheet --> test`,
+        },
+        title: {
+          en: "From cleaned PSD to a testable level.",
+          by: "Ад пачышчанага PSD да ўзроўню на тэст.",
+        },
+      },
+    ],
+    process: {
+      en: [
+        "Clean up PSD — drop or merge non-interactive layers; rename to the system",
+        "Read PSD",
+        "Export level logic",
+        "Export assets",
+        "Build a spritesheet",
+        "Test",
+      ],
+      by: [
+        "Пачысціць PSD — прыбраць або зліць неінтэрактыўныя слаі; перайменаваць пад сістэму",
+        "Прачытаць PSD",
+        "Экспартаваць логіку ўзроўню",
+        "Экспартаваць ассеты",
+        "Сабраць спрайтшыт",
+        "Пратэставаць",
+      ],
+    },
+    sections: [
+      {
+        title: {
+          en: "A naming system",
+          by: "Сістэма імён",
+        },
+        body: {
+          en: "Layer name = object + function. Designers spent time on cleanup instead of hand-placing every item.",
+          by: "Імя слоя = аб'ект + функцыя. Дызайнеры трацілі час на чыстку, а не на ручное размяшчэнне кожнага аб'екта.",
+        },
+      },
+      {
+        title: {
+          en: "Enough to parse",
+          by: "Хопіць для парсінгу",
+        },
+        body: {
+          en: "A GitHub library could read layer name, xy, and bounding box. That mapped into the studio's Lua level format.",
+          by: "Бібліятэка з GitHub чытала імя слоя, xy і bounding box. Гэта клалася ў Lua-фармат узроўняў студыі.",
+        },
+      },
+    ],
+    solution: {
+      en: "The parser wrote Lua level logic, exported assets, and built a spritesheet.",
+      by: "Парсер пісаў Lua-логіку ўзроўню, экспартаваў ассеты і збіраў спрайтшыт.",
+    },
+    impact: {
+      en: [
+        "Later titles: 6 months → 3–4",
+        "Saved time went to QA",
+        "Studio hired and signed more publisher contracts",
+      ],
+      by: [
+        "Наступныя тытулы: 6 месяцаў → 3–4",
+        "Зэканомлены час пайшоў на QA",
+        "Студыя наняла людзей і падпісала больш кантрактаў з выдаўцом",
+      ],
     },
   },
 ];
