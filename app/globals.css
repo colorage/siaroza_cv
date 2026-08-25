@@ -87,7 +87,13 @@ body {
 .mermaid-diagram .node.notify polygon,
 .mermaid-diagram .node.notify circle,
 .mermaid-diagram .node.notify path {
-  stroke: var(--accent);
+  stroke: var(--foreground-muted);
+}
+
+.mermaid-diagram .arrowheadPath,
+.mermaid-diagram marker path {
+  fill: var(--foreground-muted);
+  stroke: var(--foreground-muted);
 }
 
 .skill-cursor-bubble {

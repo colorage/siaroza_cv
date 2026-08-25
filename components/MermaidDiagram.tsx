@@ -49,14 +49,12 @@ function mermaidTheme() {
   const surface = cssColorHex("--surface", "#1a2b28");
   const foreground = cssColorHex("--foreground", "#c8d4d0");
   const muted = cssColorHex("--foreground-muted", "#78807d");
-  const accent = cssColorHex("--accent", "#00d4b8");
   const fontFamily =
     getComputedStyle(document.body).fontFamily ||
     "ui-sans-serif, system-ui, sans-serif";
 
   return {
     fontFamily,
-    accent,
     themeVariables: {
       darkMode: true,
       background,
@@ -70,11 +68,14 @@ function mermaidTheme() {
       tertiaryTextColor: foreground,
       tertiaryBorderColor: muted,
       lineColor: muted,
+      arrowheadColor: muted,
+      defaultLinkColor: muted,
       textColor: foreground,
       nodeTextColor: foreground,
       mainBkg: surface,
       nodeBorder: muted,
       clusterBkg: background,
+      clusterBorder: muted,
       titleColor: foreground,
       edgeLabelBackground: background,
       fontFamily,
@@ -95,8 +96,8 @@ export function MermaidDiagram({ source, title }: Props) {
 
     async function draw() {
       const mermaid = (await import("mermaid")).default;
-      const { fontFamily, accent, themeVariables } = mermaidTheme();
-      const themedChart = `${source.trim()}\n  classDef notify fill:${themeVariables.primaryColor},stroke:${accent},color:${themeVariables.primaryTextColor}`;
+      const { fontFamily, themeVariables } = mermaidTheme();
+      const themedChart = `${source.trim()}\n  classDef notify fill:${themeVariables.primaryColor},stroke:${themeVariables.lineColor},color:${themeVariables.primaryTextColor}`;
 
       mermaid.initialize({
         startOnLoad: false,
