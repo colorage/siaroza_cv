@@ -80,11 +80,15 @@ export type Dictionary = {
     back: string;
     context: string;
     effort: string;
+    duration: string;
+    role: string;
+    team: string;
     constraints: string;
     hard: string;
     process: string;
     solution: string;
     impact: string;
+    diagram: string;
     related: string;
   };
   footer: {

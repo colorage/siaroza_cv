@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import type { ReactNode } from "react";
-import { useCallback, useRef, useState } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { LoopingVideoCover } from "@/components/LoopingVideoCover";
 import { PortfolioCover } from "@/components/PortfolioCover";
 import {
   getPortfolioPageSrcs,
@@ -10,8 +11,20 @@ import {
   type PortfolioShot,
 } from "@/content/portfolio";
 
+const CARD_HEIGHT = "15rem";
+const GALLERY_INTERVAL_MS = 3500;
+
 const shotClass =
-  "group relative block aspect-[4/3] overflow-hidden rounded-2xl bg-surface text-foreground";
+  "group relative block h-60 shrink-0 overflow-hidden rounded-2xl bg-surface text-foreground";
+
+function getShotBox(shot: PortfolioShot): CSSProperties {
+  const width = shot.pages?.width ?? shot.video?.width ?? (shot.youtube ? 16 : 4);
+  const height =
+    shot.pages?.height ?? shot.video?.height ?? (shot.youtube ? 9 : 3);
+  return {
+    width: `calc(${CARD_HEIGHT} * ${width} / ${height})`,
+  };
+}
 
 type Props = {
   shot: PortfolioShot;
@@ -25,18 +38,20 @@ function CardLink({
   href,
   external,
   className,
+  style,
   children,
   ariaLabel,
 }: {
   href?: string;
   external?: boolean;
   className: string;
+  style?: CSSProperties;
   children: ReactNode;
   ariaLabel?: string;
 }) {
   if (!href) {
     return (
-      <div className={className} aria-label={ariaLabel}>
+      <div className={className} style={style} aria-label={ariaLabel}>
         {children}
       </div>
     );
@@ -49,6 +64,7 @@ function CardLink({
         target="_blank"
         rel="noopener noreferrer"
         className={className}
+        style={style}
         aria-label={ariaLabel}
       >
         {children}
@@ -57,7 +73,7 @@ function CardLink({
   }
 
   return (
-    <Link href={href} className={className} aria-label={ariaLabel}>
+    <Link href={href} className={className} style={style} aria-label={ariaLabel}>
       {children}
     </Link>
   );
@@ -111,57 +127,167 @@ function GalleryThumbnail({
   href,
   external,
   goToImageLabel,
+  box,
 }: {
   srcs: string[];
   title: string;
   href?: string;
   external?: boolean;
   goToImageLabel: string;
+  box: CSSProperties;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const loopingRef = useRef(false);
+  const loopTimerRef = useRef<number>(0);
   const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const settleLoop = useCallback(() => {
+    const el = scrollerRef.current;
+    if (!el || srcs.length < 2) return;
+    const width = el.clientWidth;
+    if (!width) return;
+    if (el.scrollLeft + 2 < srcs.length * width) return;
+
+    loopingRef.current = false;
+    window.clearTimeout(loopTimerRef.current);
+    el.scrollTo({ left: 0, behavior: "auto" });
+    setIndex(0);
+  }, [srcs.length]);
 
   const onScroll = useCallback(() => {
     const el = scrollerRef.current;
     if (!el) return;
-    const next = Math.round(el.scrollLeft / el.clientWidth);
-    setIndex(Math.min(Math.max(next, 0), srcs.length - 1));
-  }, [srcs.length]);
+    const width = el.clientWidth;
+    if (!width) return;
 
-  const goTo = useCallback((next: number) => {
+    if (el.scrollLeft + 2 >= srcs.length * width) {
+      settleLoop();
+      return;
+    }
+
+    if (loopingRef.current) return;
+    const next = Math.round(el.scrollLeft / width);
+    setIndex(Math.min(Math.max(next, 0), srcs.length - 1));
+  }, [settleLoop, srcs.length]);
+
+  const goTo = useCallback(
+    (next: number) => {
+      const el = scrollerRef.current;
+      if (!el) return;
+      const reduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      const wrapForward =
+        !reduced && next === 0 && index === srcs.length - 1;
+
+      window.clearTimeout(loopTimerRef.current);
+
+      if (wrapForward) {
+        loopingRef.current = true;
+        el.scrollTo({
+          left: srcs.length * el.clientWidth,
+          behavior: "smooth",
+        });
+        loopTimerRef.current = window.setTimeout(() => {
+          if (!loopingRef.current) return;
+          loopingRef.current = false;
+          el.scrollTo({ left: 0, behavior: "auto" });
+          setIndex(0);
+        }, 1200);
+        return;
+      }
+
+      loopingRef.current = false;
+      el.scrollTo({
+        left: next * el.clientWidth,
+        behavior: reduced ? "auto" : "smooth",
+      });
+    },
+    [index, srcs.length],
+  );
+
+  useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    el.scrollTo({
-      left: next * el.clientWidth,
-      behavior: reduced ? "auto" : "smooth",
-    });
-  }, []);
+    const onScrollEnd = () => settleLoop();
+    el.addEventListener("scrollend", onScrollEnd);
+    return () => {
+      el.removeEventListener("scrollend", onScrollEnd);
+      window.clearTimeout(loopTimerRef.current);
+    };
+  }, [settleLoop]);
+
+  useEffect(() => {
+    if (paused || srcs.length < 2) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const id = window.setInterval(() => {
+      if (document.hidden) return;
+      goTo((index + 1) % srcs.length);
+    }, GALLERY_INTERVAL_MS);
+
+    return () => window.clearInterval(id);
+  }, [goTo, index, paused, srcs.length]);
+
+  const slides = srcs.length > 1 ? [...srcs, srcs[0]] : srcs;
 
   return (
-    <div className={shotClass}>
+    <div
+      className={shotClass}
+      style={box}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setPaused(false);
+        }
+      }}
+    >
       <div
         ref={scrollerRef}
         onScroll={onScroll}
-        className="flex h-full w-full snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex h-full min-h-0 w-full snap-x snap-mandatory overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         role="region"
         aria-roledescription="carousel"
         aria-label={title}
       >
-        {srcs.map((src) => (
-          <CardLink
-            key={src}
-            href={href}
-            external={external}
-            ariaLabel={title}
-            className="relative block h-full min-w-full shrink-0 snap-center"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={src} alt="" className="h-full w-full object-cover" />
-          </CardLink>
-        ))}
+        {slides.map((src, i) => {
+          const clone = i >= srcs.length;
+          const frameClass =
+            "relative block h-full min-h-0 flex-[0_0_100%] snap-center overflow-hidden";
+          const image = (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={src}
+              alt=""
+              className="h-full w-full rounded-lg object-contain"
+            />
+          );
+
+          if (clone) {
+            return (
+              <div key={`${src}-clone`} className={frameClass} aria-hidden>
+                {image}
+              </div>
+            );
+          }
+
+          return (
+            <CardLink
+              key={src}
+              href={href}
+              external={external}
+              ariaLabel={title}
+              className={frameClass}
+            >
+              {image}
+            </CardLink>
+          );
+        })}
       </div>
       <TitleBar
         title={title}
@@ -199,6 +325,8 @@ export function PortfolioThumbnail({
 }: Props) {
   const kind = getPortfolioThumbnailKind(shot);
 
+  const box = getShotBox(shot);
+
   if (kind === "gallery" && shot.pages) {
     return (
       <GalleryThumbnail
@@ -207,13 +335,23 @@ export function PortfolioThumbnail({
         href={href}
         external={external}
         goToImageLabel={goToImageLabel}
+        box={box}
       />
     );
   }
 
   return (
-    <CardLink href={href} external={external} className={shotClass}>
-      <PortfolioCover cover={shot.cover} />
+    <CardLink
+      href={href}
+      external={external}
+      className={shotClass}
+      style={box}
+    >
+      {shot.video ? (
+        <LoopingVideoCover src={shot.video.src} poster={shot.video.poster} />
+      ) : (
+        <PortfolioCover cover={shot.cover} />
+      )}
       {kind === "video" ? <PlayBadge /> : null}
       <TitleBar title={title} />
     </CardLink>

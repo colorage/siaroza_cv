@@ -6,6 +6,16 @@ export type PortfolioYoutube = {
   caption?: Record<Locale, string>;
 };
 
+export type PortfolioVideo = {
+  src: string;
+  poster?: string;
+  width: number;
+  height: number;
+  title: Record<Locale, string>;
+  caption?: Record<Locale, string>;
+  loop?: boolean;
+};
+
 export type PortfolioPages = {
   dir: string;
   count: number;
@@ -28,6 +38,7 @@ export type PortfolioShot = {
   dribbbleUrl?: string;
   links?: PortfolioLink[];
   youtube?: PortfolioYoutube;
+  video?: PortfolioVideo;
   pages?: PortfolioPages;
 };
 
@@ -43,10 +54,16 @@ export function getPortfolioPageSrcs(pages: PortfolioPages): string[] {
 
 export type PortfolioThumbnailKind = "image" | "gallery" | "video";
 
+export function isAnimatedCover(shot: PortfolioShot): boolean {
+  return Boolean(shot.cover?.toLowerCase().endsWith(".gif"));
+}
+
 export function getPortfolioThumbnailKind(
   shot: PortfolioShot,
 ): PortfolioThumbnailKind {
   if (shot.youtube) return "video";
+  if (shot.video) return "image";
+  if (isAnimatedCover(shot)) return "image";
   if (shot.pages && getPortfolioPageSrcs(shot.pages).length > 1) {
     return "gallery";
   }
@@ -54,6 +71,42 @@ export function getPortfolioThumbnailKind(
 }
 
 export const portfolioShots: PortfolioShot[] = [
+  {
+    slug: "spribe-logo",
+    title: {
+      en: "SPRIBE logo",
+      by: "Лагатып SPRIBE",
+    },
+    cover: "/work/spribe-logo/poster.jpg",
+    description: {
+      en: "Logo loop for SPRIBE — a pixel S assembling from a grid of squares on black, then dissolving.",
+      by: "Лагатыпны луп для SPRIBE — піксельная S збіраецца з сеткі квадратаў на чорным і знікае.",
+    },
+    video: {
+      src: "/work/spribe-logo/loop.mp4",
+      poster: "/work/spribe-logo/poster.jpg",
+      width: 960,
+      height: 960,
+      loop: true,
+      title: {
+        en: "SPRIBE logo loop",
+        by: "Лагатыпны луп SPRIBE",
+      },
+      caption: {
+        en: "Seamless identity loop — squares gather into the S, hold, then fade.",
+        by: "Бесшвовы лагатыпны луп — квадраты збіраюцца ў S, трымаюць форму і знікаюць.",
+      },
+    },
+    links: [
+      {
+        href: "https://www.spribe.co/",
+        label: {
+          en: "SPRIBE",
+          by: "SPRIBE",
+        },
+      },
+    ],
+  },
   {
     slug: "brandbook",
     title: {
@@ -89,6 +142,64 @@ export const portfolioShots: PortfolioShot[] = [
       width: 1280,
       height: 720,
     },
+  },
+  {
+    slug: "paliavnichy",
+    title: {
+      en: "Paliaŭničy",
+      by: "Паляўнічы",
+    },
+    cover: "/work/paliavnichy/cover.jpg",
+    description: {
+      en: "Animation for Wonder Spak's music video Paliaŭničy (The Hunter) — a postcard from Mahilioǔ and other places close to home, for those here and those afar.",
+      by: "Анімацыя да кліпа Wonder Spak «Паляўнічы» — паштоўка з Магілёва і іншых блізкіх сэрцу мясцін, для тых, хто тут, і для тых, хто там.",
+    },
+    youtube: {
+      id: "FzuAH3P5Hzo",
+      title: {
+        en: "Paliaŭničy — Wonder Spak",
+        by: "Паляўнічы — Wonder Spak",
+      },
+      caption: {
+        en: "Music video animation — Wonder Spak, filmed in Mahilioǔ.",
+        by: "Анімацыя музычнага кліпа — Wonder Spak, знятага ў Магілёве.",
+      },
+    },
+  },
+  {
+    slug: "papermotion",
+    title: {
+      en: "Papermotion",
+      by: "Papermotion",
+    },
+    cover: "/work/papermotion/cover.gif",
+    description: {
+      en: "Photoshop script for paper animation with a barrier-grid (moiré) overlay — one layer per frame, then print the interleaved portrait and slide copier film over it. Freebie, 2014.",
+      by: "Скрыпт Photoshop для папяровай анімацыі з бар'ернай сеткай (муар) — адзін слой на кадр, потым друк пераплеценага партрэта і ссоўванне плёнкі паверх. Freebie, 2014.",
+    },
+    pages: {
+      dir: "/work/papermotion",
+      count: 3,
+      width: 1400,
+      height: 1400,
+      files: ["face.png", "frames.png", "diagram.png"],
+    },
+    links: [
+      {
+        href: "https://www.behance.net/gallery/16553529/Papermotion-(Freebie)/modules/112860317",
+        label: {
+          en: "View on Behance",
+          by: "Адкрыць на Behance",
+        },
+      },
+      {
+        href: "https://github.com/colorage/photoshop_scripts/blob/master/paper_animator.jsx",
+        label: {
+          en: "Photoshop script",
+          by: "Скрыпт Photoshop",
+        },
+      },
+    ],
   },
   {
     slug: "ui-test",
@@ -188,6 +299,19 @@ export const portfolioShots: PortfolioShot[] = [
     dribbbleUrl: "https://dribbble.com/shots/16330099-RADZIMA-font",
   },
   {
+    slug: "city-hall",
+    title: {
+      en: "City Hall",
+      by: "Ратуша",
+    },
+    cover: "/work/city-hall/cover.png",
+    description: {
+      en: "Die-cut sticker of Mahilioǔ City Hall — the demolished town hall as a mark of freedom and independence.",
+      by: "Высечаны стыкер магілёўскай ратушы — знесеная ратуша як знак свабоды і незалежнасці.",
+    },
+    dribbbleUrl: "https://dribbble.com/shots/2504124-City-Hall",
+  },
+  {
     slug: "lstr",
     title: {
       en: "LSTR",
@@ -230,6 +354,33 @@ export const portfolioShots: PortfolioShot[] = [
         label: {
           en: "Belarus postcard",
           by: "Паштоўка Беларусь",
+        },
+      },
+    ],
+  },
+  {
+    slug: "mahilyow750",
+    title: {
+      en: "Mahilyow 750",
+      by: "Магілёў 750",
+    },
+    cover: "/work/mahilyow750/page-01.jpg",
+    description: {
+      en: "Identity proposal for Mahilyow's 750th anniversary contest in 2017 — a lion of concentric arcs in the Dnieper / crest blue, the river's current in the pattern. Name and year lock as one mark: #МОГИЛЁВ750.",
+      by: "Прапанова ідэнтычнасці на конкурс да 750-годдзя Магілёва ў 2017 — леў з канцэнтрычных дуг у сінім Дняпра / герба, узор як цячэнне ракі. Назва і юбілей злітыя ў адзін знак: #МОГИЛЁВ750.",
+    },
+    pages: {
+      dir: "/work/mahilyow750",
+      count: 4,
+      width: 1600,
+      height: 1200,
+    },
+    links: [
+      {
+        href: "https://www.behance.net/gallery/47193905/mogilev750",
+        label: {
+          en: "View on Behance",
+          by: "Адкрыць на Behance",
         },
       },
     ],

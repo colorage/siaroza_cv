@@ -2,9 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { MediaCarousel } from "@/components/MediaCarousel";
 import { MediaFrame } from "@/components/MediaFrame";
+import { VideoEmbed } from "@/components/VideoEmbed";
 import { YouTubeEmbed } from "@/components/YouTubeEmbed";
 import {
   getPortfolioPageSrcs,
+  isAnimatedCover,
   type PortfolioShot,
 } from "@/content/portfolio";
 import type { Dictionary, Locale } from "@/lib/i18n";
@@ -19,6 +21,13 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
   const title = shot.title[locale];
   const pageMeta = shot.pages;
   const pages = pageMeta ? getPortfolioPageSrcs(pageMeta) : [];
+  const coverIsHero =
+    Boolean(shot.cover) &&
+    !shot.youtube &&
+    !shot.video &&
+    (!pageMeta || !pages.includes(shot.cover ?? ""));
+  const showCarousel =
+    Boolean(pageMeta) && !shot.youtube && !shot.video && !coverIsHero;
 
   return (
     <article className="mx-auto max-w-5xl px-6 py-16 md:py-24">
@@ -34,7 +43,17 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
           {title}
         </h1>
 
-        {shot.youtube ? (
+        {shot.video ? (
+          <div className="mt-10">
+            <VideoEmbed
+              src={shot.video.src}
+              poster={shot.video.poster}
+              title={shot.video.title[locale]}
+              caption={shot.video.caption?.[locale]}
+              loop={shot.video.loop}
+            />
+          </div>
+        ) : shot.youtube ? (
           <div className="mt-10">
             <YouTubeEmbed
               id={shot.youtube.id}
@@ -42,7 +61,20 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
               caption={shot.youtube.caption?.[locale]}
             />
           </div>
-        ) : pageMeta ? (
+        ) : coverIsHero && shot.cover ? (
+          <figure className="mt-10">
+            <MediaFrame className="bg-surface">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={shot.cover}
+                alt={title}
+                width={isAnimatedCover(shot) ? 400 : 1600}
+                height={isAnimatedCover(shot) ? 400 : 1200}
+                className="mx-auto h-auto w-full"
+              />
+            </MediaFrame>
+          </figure>
+        ) : showCarousel && pageMeta ? (
           <div className="mt-10">
             <MediaCarousel
               pages={pages}
@@ -52,19 +84,6 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
               indexTemplate={dict.portfolio.slide}
             />
           </div>
-        ) : shot.cover ? (
-          <figure className="mt-10">
-            <MediaFrame>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={shot.cover}
-                alt={title}
-                width={1600}
-                height={1200}
-                className="h-auto w-full"
-              />
-            </MediaFrame>
-          </figure>
         ) : null}
 
         {shot.description ? (

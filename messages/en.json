@@ -45,11 +45,15 @@
     "back": "Back to case studies",
     "context": "Context",
     "effort": "Effort",
+    "duration": "Duration",
+    "role": "Role",
+    "team": "Team",
     "constraints": "Constraints",
     "hard": "What was hard",
     "process": "Process",
     "solution": "Solution",
     "impact": "Impact",
+    "diagram": "Workflow",
     "related": "Related"
   },
   "footer": {
