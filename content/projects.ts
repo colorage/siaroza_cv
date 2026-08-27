@@ -30,6 +30,8 @@ export type ProjectMedia =
       poster?: string;
       title: Record<Locale, string>;
       caption?: Record<Locale, string>;
+      loop?: boolean;
+      href?: string;
     }
   | { type: "pdf-pages"; dir: string; count: number };
 
@@ -243,10 +245,145 @@ export const projects: Project[] = [
     stage: "release",
     status: "finished",
     url: "https://kotka.itch.io/radar-n-rockets",
+    links: [{ label: "x", href: "https://x.com/hikotka" }],
     description: {
       en: "Playdate action game — crank to scan the radar, then switch to a rocket gun and defend your base from kamikaze enemies.",
       by: "Экшан-гульня для Playdate — круціце рычажок, каб сканаваць радар, потым пераключайцеся на ракетную гармату і абараняйце базу ад камікадзэ.",
     },
+    media: [
+      {
+        type: "video",
+        src: "/projects/radar-rockets/release.mp4",
+        poster: "/projects/radar-rockets/release-poster.jpg",
+        href: "https://x.com/hikotka/status/1677015806276689936",
+        title: {
+          en: "Radar N Rockets — launch gameplay",
+          by: "Radar N Rockets — геймплэй рэлізу",
+        },
+        caption: {
+          en: "Launch gameplay — crank the radar, then fire rockets from the Playdate.",
+          by: "Геймплэй рэлізу — круціце радар рычажком, потым страляйце ракетамі з Playdate.",
+        },
+      },
+      {
+        type: "video",
+        src: "/projects/radar-rockets/highlight.mp4",
+        poster: "/projects/radar-rockets/highlight-poster.jpg",
+        loop: true,
+        href: "https://x.com/hikotka/status/1710399333739204660",
+        title: {
+          en: "Radar N Rockets — v1.1 menu highlight",
+          by: "Radar N Rockets — падсветка меню v1.1",
+        },
+        caption: {
+          en: "Menu highlight for v1.1 — animated instead of a static invert.",
+          by: "Падсветка меню для v1.1 — анімацыя замест статычнага інверту.",
+        },
+      },
+      {
+        type: "image",
+        src: "/projects/radar-rockets/playdate.jpg",
+        width: 1288,
+        height: 1710,
+        href: "https://x.com/hikotka/status/1706300492433797532",
+        alt: {
+          en: "Yellow Playdate in hand showing the Radar N Rockets title screen — a 1-bit radar dish beside the game name.",
+          by: "Жоўты Playdate ў руцэ з тытульным экранам Radar N Rockets — 1-bit радар побач з назвай гульні.",
+        },
+        caption: {
+          en: "First play on hardware — Radar N Rockets on a real Playdate.",
+          by: "Першая гульня на жалезе — Radar N Rockets на сапраўдным Playdate.",
+        },
+      },
+      {
+        type: "image",
+        src: "/projects/radar-rockets/top-sellers.jpg",
+        width: 1732,
+        height: 934,
+        href: "https://x.com/hikotka/status/1679844899762438146",
+        alt: {
+          en: "itch.io Playdate catalog on Top sellers, with Radar N Rockets listed beside Sketch, Share, Solve and Soko.",
+          by: "Каталог Playdate на itch.io ў раздзеле Top sellers — Radar N Rockets побач з Sketch, Share, Solve і Soko.",
+        },
+        caption: {
+          en: "On the Playdate catalog top-sellers list after launch.",
+          by: "У топе продажаў каталога Playdate пасля рэлізу.",
+        },
+      },
+      {
+        type: "video",
+        src: "/projects/radar-rockets/trailer.mp4",
+        poster: "/projects/radar-rockets/trailer-poster.jpg",
+        href: "https://x.com/hikotka/status/1677252736167956480",
+        title: {
+          en: "Radar N Rockets — TYM Playdate Show trailer",
+          by: "Radar N Rockets — трэйлер для TYM Playdate Show",
+        },
+        caption: {
+          en: "Trailer shown on TYM Playdate Show.",
+          by: "Трэйлер з TYM Playdate Show.",
+        },
+      },
+      {
+        type: "video",
+        src: "/projects/radar-rockets/beta.mp4",
+        poster: "/projects/radar-rockets/beta-poster.jpg",
+        loop: true,
+        href: "https://x.com/hikotka/status/1656969388644356103",
+        title: {
+          en: "Radar N Rockets — pre-release playtest",
+          by: "Radar N Rockets — прэ-рэлізны плэйтэст",
+        },
+        caption: {
+          en: "Pre-release playtest — looking for beta testers before the console arrived.",
+          by: "Прэ-рэлізны плэйтэст — шукалі бэта-тэстараў, пакуль кансоль яшчэ была ў дарозе.",
+        },
+      },
+      {
+        type: "video",
+        src: "/projects/radar-rockets/smoke.mp4",
+        poster: "/projects/radar-rockets/smoke-poster.jpg",
+        href: "https://x.com/hikotka/status/1656273141876809734",
+        title: {
+          en: "Radar N Rockets — end-screen smoke",
+          by: "Radar N Rockets — дым на фінальным экране",
+        },
+        caption: {
+          en: "End-screen smoke, composited in After Effects.",
+          by: "Дым на фінальным экране, сабраны ў After Effects.",
+        },
+      },
+      {
+        type: "image",
+        src: "/projects/radar-rockets/kotka.png",
+        width: 1000,
+        height: 1000,
+        href: "https://x.com/hikotka/status/1655848255903727616",
+        alt: {
+          en: "Stylized portrait of a bearded man in black on yellow, thick white outline — Kotka studio mark.",
+          by: "Стылізаваны партрэт барадатага мужчыны чорным па жоўтым, тоўсты белы контур — знак студыі Kotka.",
+        },
+        caption: {
+          en: "Studio portrait from the first Kotka Playdate devlog post.",
+          by: "Партрэт студыі з першага допісу Kotka пра Playdate.",
+        },
+      },
+      {
+        type: "image",
+        src: "/projects/radar-rockets/game-art.jpg",
+        width: 1000,
+        height: 1000,
+        href: "https://x.com/hikotka/status/1655848255903727616",
+        alt: {
+          en: "Line-art portrait of a man with stubble on yellow, thick white outline — second Kotka studio portrait.",
+          by: "Лінейны партрэт мужчыны з шчаціннем на жоўтым, тоўсты белы контур — другі партрэт студыі Kotka.",
+        },
+        caption: {
+          en: "Second studio portrait from the first Kotka Playdate devlog post.",
+          by: "Другі партрэт студыі з першага допісу Kotka пра Playdate.",
+        },
+      },
+    ],
   },
   {
     slug: "hejka-app",

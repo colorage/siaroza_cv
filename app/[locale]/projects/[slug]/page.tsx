@@ -26,7 +26,32 @@ function projectLinkLabel(label: string, dict: Dictionary): string {
   if (label === "instagram") return dict.projects.instagram;
   if (label === "telegram") return dict.projects.telegram;
   if (label === "dribbble") return dict.projects.dribbble;
+  if (label === "x") return dict.projects.x;
   return label;
+}
+
+function mediaCiteLabel(href: string, dict: Dictionary): string | null {
+  if (href.includes("dribbble.com")) return dict.projects.dribbble;
+  if (href.includes("x.com") || href.includes("twitter.com")) {
+    return dict.projects.viewOnX;
+  }
+  return null;
+}
+
+function MediaCite({ href, dict }: { href?: string; dict: Dictionary }) {
+  if (!href) return null;
+  const label = mediaCiteLabel(href, dict);
+  if (!label) return null;
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="mt-3 inline-flex items-center text-[13px] text-muted transition-colors hover:text-foreground"
+    >
+      {label} →
+    </a>
+  );
 }
 
 function ProjectMediaBlock({
@@ -49,12 +74,16 @@ function ProjectMediaBlock({
   }
 
   if (item.type === "video") {
+    const cite = item.href ? mediaCiteLabel(item.href, dict) : null;
     return (
       <VideoEmbed
         src={item.src}
         poster={item.poster}
         title={item.title[locale]}
         caption={item.caption?.[locale]}
+        loop={item.loop}
+        href={cite ? item.href : undefined}
+        linkLabel={cite ?? undefined}
       />
     );
   }
@@ -88,16 +117,7 @@ function ProjectMediaBlock({
           {item.caption[locale]}
         </figcaption>
       ) : null}
-      {item.href?.includes("dribbble.com") ? (
-        <a
-          href={item.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-3 inline-flex items-center text-[13px] text-muted transition-colors hover:text-foreground"
-        >
-          {dict.projects.dribbble} →
-        </a>
-      ) : null}
+      <MediaCite href={item.href} dict={dict} />
     </figure>
   );
 }
