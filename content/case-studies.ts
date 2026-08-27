@@ -44,6 +44,18 @@ export const caseStudies: CaseStudy[] = [
     },
   },
   {
+    slug: "figma-plugin",
+    experienceId: "spribe",
+    title: {
+      en: "Figma Plugin",
+      by: "Figma-плагін",
+    },
+    summary: {
+      en: "Custom Figma plugin for internal design processes — less repetitive work in the product workflow.",
+      by: "Уласны Figma-плагін для ўнутраных дызайн-працэсаў — менш паўторнай працы ў прадуктовым пайплайне.",
+    },
+  },
+  {
     slug: "psd-parser",
     experienceId: "cybercradle",
     title: {
