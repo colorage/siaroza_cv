@@ -70,7 +70,8 @@
       "gradientDark": "Dark",
       "gradientOriginal": "Original",
       "gradientBright": "Bright",
-      "posters": "Thumbnail skins"
+      "posters": "Thumbnail skins",
+      "caption": "Interactive — change title treatment and gradient."
     }
   },
   "footer": {
