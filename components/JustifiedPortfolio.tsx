@@ -62,7 +62,7 @@ function justify(
     );
     // Keep row height close to the target so 4:3 tiles stay narrower,
     // not taller. Only nudge a row when it already nearly fills the well.
-    const stretch = scale >= 0.88 && scale <= 1.12;
+    const stretch = scale >= 0.88 && scale <= 1.2;
     boxes.push(...packRow(slice, targetH, containerWidth, stretch));
   };
 
