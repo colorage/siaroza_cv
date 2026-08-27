@@ -7,7 +7,6 @@ import {
 } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { MediaFrame } from "@/components/MediaFrame";
 import { MermaidDiagram } from "@/components/MermaidDiagram";
 import { WidgetEmbed } from "@/components/WidgetEmbed";
 import { parseWidgetFence } from "@/lib/vault/markdown";
@@ -34,10 +33,10 @@ function MarkdownImage({ src, alt }: ComponentPropsWithoutRef<"img">) {
   if (typeof src !== "string" || !src) return null;
   return (
     <figure className="relative left-1/2 my-8 w-[min(100vw-3rem,64rem)] -translate-x-1/2">
-      <MediaFrame>
+      <div className="overflow-hidden rounded-2xl">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={alt ?? ""} className="h-auto w-full" />
-      </MediaFrame>
+      </div>
     </figure>
   );
 }
