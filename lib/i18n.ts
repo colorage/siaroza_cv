@@ -106,6 +106,7 @@ export type Dictionary = {
       gradientOriginal: string;
       gradientBright: string;
       posters: string;
+      caption: string;
     };
   };
   footer: {
@@ -125,6 +126,8 @@ export type Dictionary = {
     instagram: string;
     telegram: string;
     dribbble: string;
+    x: string;
+    viewOnX: string;
     ndaNote: string;
     ndaPrivateTitle: string;
   };

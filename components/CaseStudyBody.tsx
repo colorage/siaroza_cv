@@ -33,26 +33,24 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
   const body = study.body?.[locale];
 
   return (
-    <div>
+    <div className="max-w-2xl">
       {body ? <MarkdownBody markdown={body} locale={locale} /> : null}
 
       {related.length ? (
-        <div className="max-w-2xl">
-          <Section title={dict.caseStudies.related}>
-            <ul className="space-y-2">
-              {related.map((item) => (
-                <li key={item.slug}>
-                  <Link
-                    href={`/${locale}/work/${item.slug}`}
-                    className="text-[16px] text-foreground underline-offset-4 transition-opacity hover:opacity-70"
-                  >
-                    {item.title[locale]} →
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </Section>
-        </div>
+        <Section title={dict.caseStudies.related}>
+          <ul className="space-y-2">
+            {related.map((item) => (
+              <li key={item.slug}>
+                <Link
+                  href={`/${locale}/work/${item.slug}`}
+                  className="text-[16px] text-foreground underline-offset-4 transition-opacity hover:opacity-70"
+                >
+                  {item.title[locale]} →
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Section>
       ) : null}
     </div>
   );

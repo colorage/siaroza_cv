@@ -91,12 +91,14 @@ export type ProjectMedia =
       title: LocalizedString;
       caption?: LocalizedString;
     }
-  | {
+    | {
       type: "video";
       src: string;
       poster?: string;
       title: LocalizedString;
       caption?: LocalizedString;
+      loop?: boolean;
+      href?: string;
     }
   | { type: "pdf-pages"; dir: string; count: number };
 

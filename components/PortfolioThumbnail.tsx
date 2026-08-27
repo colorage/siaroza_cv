@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { CSSProperties, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { LoopingVideoCover } from "@/components/LoopingVideoCover";
 import { PortfolioCover } from "@/components/PortfolioCover";
@@ -11,20 +11,10 @@ import {
 } from "@/lib/vault/portfolio-utils";
 import type { PortfolioShot } from "@/lib/vault/types";
 
-const CARD_HEIGHT = "15rem";
 const GALLERY_INTERVAL_MS = 3500;
 
 const shotClass =
-  "group relative block h-60 shrink-0 overflow-hidden rounded-2xl bg-surface text-foreground";
-
-function getShotBox(shot: PortfolioShot): CSSProperties {
-  const width = shot.pages?.width ?? shot.video?.width ?? (shot.youtube ? 16 : 4);
-  const height =
-    shot.pages?.height ?? shot.video?.height ?? (shot.youtube ? 9 : 3);
-  return {
-    width: `calc(${CARD_HEIGHT} * ${width} / ${height})`,
-  };
-}
+  "group absolute inset-0 overflow-hidden rounded-2xl bg-surface text-foreground";
 
 type Props = {
   shot: PortfolioShot;
@@ -38,20 +28,18 @@ function CardLink({
   href,
   external,
   className,
-  style,
   children,
   ariaLabel,
 }: {
   href?: string;
   external?: boolean;
   className: string;
-  style?: CSSProperties;
   children: ReactNode;
   ariaLabel?: string;
 }) {
   if (!href) {
     return (
-      <div className={className} style={style} aria-label={ariaLabel}>
+      <div className={className} aria-label={ariaLabel}>
         {children}
       </div>
     );
@@ -64,7 +52,6 @@ function CardLink({
         target="_blank"
         rel="noopener noreferrer"
         className={className}
-        style={style}
         aria-label={ariaLabel}
       >
         {children}
@@ -73,7 +60,7 @@ function CardLink({
   }
 
   return (
-    <Link href={href} className={className} style={style} aria-label={ariaLabel}>
+    <Link href={href} className={className} aria-label={ariaLabel}>
       {children}
     </Link>
   );
@@ -127,14 +114,12 @@ function GalleryThumbnail({
   href,
   external,
   goToImageLabel,
-  box,
 }: {
   srcs: string[];
   title: string;
   href?: string;
   external?: boolean;
   goToImageLabel: string;
-  box: CSSProperties;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const loopingRef = useRef(false);
@@ -237,7 +222,6 @@ function GalleryThumbnail({
   return (
     <div
       className={shotClass}
-      style={box}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -325,8 +309,6 @@ export function PortfolioThumbnail({
 }: Props) {
   const kind = getPortfolioThumbnailKind(shot);
 
-  const box = getShotBox(shot);
-
   if (kind === "gallery" && shot.pages) {
     return (
       <GalleryThumbnail
@@ -335,18 +317,12 @@ export function PortfolioThumbnail({
         href={href}
         external={external}
         goToImageLabel={goToImageLabel}
-        box={box}
       />
     );
   }
 
   return (
-    <CardLink
-      href={href}
-      external={external}
-      className={shotClass}
-      style={box}
-    >
+    <CardLink href={href} external={external} className={shotClass}>
       {shot.video ? (
         <LoopingVideoCover src={shot.video.src} poster={shot.video.poster} />
       ) : (

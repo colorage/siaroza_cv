@@ -440,6 +440,7 @@ function loadProjectMedia(
       const poster = str(data.poster);
       const captionEn = str(data.caption);
       const captionBy = str(byItem?.caption);
+      const href = str(data.href);
       mapped.push({
         type: "video",
         src: resolveNoteAsset(en.dir, src),
@@ -448,6 +449,8 @@ function loadProjectMedia(
         ...(captionEn || captionBy
           ? { caption: localized(captionEn, captionBy) }
           : {}),
+        ...(data.loop === true ? { loop: true } : {}),
+        ...(href ? { href } : {}),
       });
       return;
     }

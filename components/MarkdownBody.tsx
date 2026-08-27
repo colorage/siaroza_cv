@@ -32,10 +32,12 @@ function languageOf(node: ReactNode): { lang?: string; text: string } | null {
 function MarkdownImage({ src, alt }: { src?: string; alt?: string }) {
   if (!src) return null;
   return (
-    <MediaFrame className="my-6">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={alt ?? ""} className="h-auto w-full" />
-    </MediaFrame>
+    <figure className="relative left-1/2 my-8 w-[min(100vw-3rem,64rem)] -translate-x-1/2">
+      <MediaFrame>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={src} alt={alt ?? ""} className="h-auto w-full" />
+      </MediaFrame>
+    </figure>
   );
 }
 
@@ -53,27 +55,21 @@ function unwrapLoneImage(children: ReactNode): ReactNode | null {
   return null;
 }
 
-const prose = "max-w-2xl";
-
 export function MarkdownBody({ markdown, locale }: Props) {
   if (!markdown.trim()) return null;
 
   return (
-    <div className="[&_a]:text-foreground [&_a]:underline-offset-4 [&_a]:hover:opacity-70">
+    <div className="max-w-2xl [&_a]:text-foreground [&_a]:underline-offset-4 [&_a]:hover:opacity-70">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
           h2: ({ children }) => (
-            <h2
-              className={`${prose} mt-14 mb-4 font-mono text-[11px] tracking-wide text-muted uppercase`}
-            >
+            <h2 className="mt-14 mb-4 font-mono text-[11px] tracking-wide text-muted uppercase">
               {children}
             </h2>
           ),
           h3: ({ children }) => (
-            <h3
-              className={`${prose} mt-8 mb-3 text-[18px] tracking-tight text-foreground`}
-            >
+            <h3 className="mt-8 mb-3 text-[18px] tracking-tight text-foreground">
               {children}
             </h3>
           ),
@@ -81,24 +77,18 @@ export function MarkdownBody({ markdown, locale }: Props) {
             const image = unwrapLoneImage(children);
             if (image) return image;
             return (
-              <p
-                className={`${prose} mb-4 text-[16px] leading-relaxed text-muted last:mb-0`}
-              >
+              <p className="mb-4 text-[16px] leading-relaxed text-muted last:mb-0">
                 {children}
               </p>
             );
           },
           ul: ({ children }) => (
-            <ul
-              className={`${prose} mb-4 space-y-2 last:mb-0 [&_li]:before:mr-2 [&_li]:before:text-border-strong [&_li]:before:content-['–']`}
-            >
+            <ul className="mb-4 space-y-2 last:mb-0 [&_li]:before:mr-2 [&_li]:before:text-border-strong [&_li]:before:content-['–']">
               {children}
             </ul>
           ),
           ol: ({ children }) => (
-            <ol
-              className={`${prose} mb-4 list-decimal space-y-3 pl-5 text-[16px] leading-relaxed text-muted last:mb-0`}
-            >
+            <ol className="mb-4 list-decimal space-y-3 pl-5 text-[16px] leading-relaxed text-muted last:mb-0">
               {children}
             </ol>
           ),
@@ -109,11 +99,7 @@ export function MarkdownBody({ markdown, locale }: Props) {
           pre: ({ children }) => {
             const code = languageOf(children);
             if (code?.lang === "mermaid") {
-              return (
-                <div className={prose}>
-                  <MermaidDiagram source={code.text} />
-                </div>
-              );
+              return <MermaidDiagram source={code.text} />;
             }
             if (code?.lang === "widget") {
               const parsed = parseWidgetFence(code.text);
@@ -126,9 +112,7 @@ export function MarkdownBody({ markdown, locale }: Props) {
               );
             }
             return (
-              <pre
-                className={`${prose} mb-4 overflow-x-auto rounded-2xl border border-border bg-surface p-4 font-mono text-[13px] text-muted last:mb-0`}
-              >
+              <pre className="mb-4 overflow-x-auto rounded-2xl border border-border bg-surface p-4 font-mono text-[13px] text-muted last:mb-0">
                 {children}
               </pre>
             );
