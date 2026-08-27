@@ -4,7 +4,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { imageSize } from "image-size";
-import yaml from "js-yaml";
+import { dump as yamlDump, load as yamlLoad, JSON_SCHEMA } from "js-yaml";
 import { locales, type Locale } from "@/lib/i18n";
 import {
   localized,
@@ -49,17 +49,29 @@ type Catalog = {
 
 let productionCache: Catalog | undefined;
 
+function vaultExists(absPath: string): boolean {
+  return existsSync(/* turbopackIgnore: true */ absPath);
+}
+
+function vaultReadText(absPath: string): string {
+  return readFileSync(/* turbopackIgnore: true */ absPath, "utf8");
+}
+
+function vaultReadBytes(absPath: string): Buffer {
+  return readFileSync(/* turbopackIgnore: true */ absPath);
+}
+
 function parseNote(absPath: string): NoteFile {
-  const raw = readFileSync(absPath, "utf8");
+  const raw = vaultReadText(absPath);
   const parsed = matter(raw, {
     engines: {
       yaml: {
         parse: (input: string) =>
-          (yaml.load(input, { schema: yaml.JSON_SCHEMA }) ?? {}) as Record<
+          (yamlLoad(input, { schema: JSON_SCHEMA }) ?? {}) as Record<
             string,
             unknown
           >,
-        stringify: (data: object) => yaml.dump(data),
+        stringify: (data: object) => yamlDump(data),
       },
     },
   });
@@ -72,8 +84,10 @@ function parseNote(absPath: string): NoteFile {
 }
 
 function walkNotes(dir: string, locale: Locale, acc: string[] = []): string[] {
-  if (!existsSync(dir)) return acc;
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+  if (!vaultExists(dir)) return acc;
+  for (const entry of readdirSync(/* turbopackIgnore: true */ dir, {
+    withFileTypes: true,
+  })) {
     if (entry.name.startsWith(".")) continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
@@ -91,7 +105,7 @@ function pairNotes(dir: string): Array<{ en: NoteFile; by?: NoteFile }> {
     const byPath = enPath.replace(/\.en\.md$/, ".by.md");
     return {
       en: parseNote(enPath),
-      by: existsSync(byPath) ? parseNote(byPath) : undefined,
+      by: vaultExists(byPath) ? parseNote(byPath) : undefined,
     };
   });
 }
@@ -125,9 +139,9 @@ function probeImage(
   src: string,
 ): { width: number; height: number } {
   const abs = path.resolve(noteDir, src);
-  if (!existsSync(abs)) return { width: 1600, height: 1200 };
+  if (!vaultExists(abs)) return { width: 1600, height: 1200 };
   try {
-    const size = imageSize(new Uint8Array(readFileSync(abs)));
+    const size = imageSize(new Uint8Array(vaultReadBytes(abs)));
     return {
       width: size.width ?? 1600,
       height: size.height ?? 1200,
@@ -417,7 +431,7 @@ function detectLogo(en: NoteFile): string | undefined {
   const explicit = str(en.data.logo);
   if (explicit) return resolveNoteAsset(en.dir, explicit);
   for (const name of ["logo.png", "logo.jpg", "logo.webp", "logo.svg"]) {
-    if (existsSync(path.join(en.dir, name))) {
+    if (vaultExists(path.join(/* turbopackIgnore: true */ en.dir, name))) {
       return resolveNoteAsset(en.dir, name);
     }
   }

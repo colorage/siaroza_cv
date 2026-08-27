@@ -8,6 +8,7 @@ import remarkGfm from "remark-gfm";
 import { MediaFrame } from "@/components/MediaFrame";
 import { MermaidDiagram } from "@/components/MermaidDiagram";
 import { WidgetEmbed } from "@/components/WidgetEmbed";
+import { parseWidgetFence } from "@/lib/vault/markdown";
 
 type Props = {
   markdown: string;
@@ -74,7 +75,10 @@ export function MarkdownBody({ markdown }: Props) {
               return <MermaidDiagram chart={code.text} />;
             }
             if (code?.lang === "widget") {
-              return <WidgetEmbed source={code.text} />;
+              const parsed = parseWidgetFence(code.text);
+              return (
+                <WidgetEmbed id={parsed?.id} props={parsed?.props} />
+              );
             }
             return (
               <pre className="mb-4 overflow-x-auto rounded-2xl border border-border bg-surface p-4 font-mono text-[13px] text-muted last:mb-0">

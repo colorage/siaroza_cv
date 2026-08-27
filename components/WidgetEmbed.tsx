@@ -1,29 +1,15 @@
 "use client";
 
-import yaml from "js-yaml";
 import { MediaFrame } from "@/components/MediaFrame";
 import { widgets } from "@/components/widgets/registry";
 
 type Props = {
-  source: string;
+  id?: string;
+  props?: Record<string, unknown>;
 };
 
-function parseFence(source: string): { id: string; props: Record<string, unknown> } | null {
-  try {
-    const parsed = yaml.load(source, { schema: yaml.JSON_SCHEMA });
-    if (!parsed || typeof parsed !== "object") return null;
-    const data = parsed as Record<string, unknown>;
-    if (typeof data.id !== "string" || !data.id) return null;
-    const { id, ...props } = data;
-    return { id, props };
-  } catch {
-    return null;
-  }
-}
-
-export function WidgetEmbed({ source }: Props) {
-  const parsed = parseFence(source);
-  if (!parsed) {
+export function WidgetEmbed({ id, props = {} }: Props) {
+  if (!id) {
     return (
       <MediaFrame>
         <p className="px-6 py-10 text-center text-[14px] text-muted">
@@ -33,12 +19,12 @@ export function WidgetEmbed({ source }: Props) {
     );
   }
 
-  const Widget = widgets[parsed.id];
+  const Widget = widgets[id];
   if (!Widget) {
     return (
       <MediaFrame>
         <p className="px-6 py-10 text-center text-[14px] text-muted">
-          Widget &ldquo;{parsed.id}&rdquo; is not registered
+          Widget &ldquo;{id}&rdquo; is not registered
         </p>
       </MediaFrame>
     );
@@ -46,7 +32,7 @@ export function WidgetEmbed({ source }: Props) {
 
   return (
     <MediaFrame>
-      <Widget {...parsed.props} />
+      <Widget {...props} />
     </MediaFrame>
   );
 }

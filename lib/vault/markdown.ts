@@ -1,3 +1,4 @@
+import { load as yamlLoad, JSON_SCHEMA } from "js-yaml";
 import type { Locale } from "@/lib/i18n";
 import { resolveNoteAsset } from "@/lib/vault/paths";
 
@@ -42,6 +43,21 @@ export function preprocessMarkdown(source: string, noteDir: string): string {
   );
 
   return out;
+}
+
+export function parseWidgetFence(
+  source: string,
+): { id: string; props: Record<string, unknown> } | null {
+  try {
+    const parsed = yamlLoad(source, { schema: JSON_SCHEMA });
+    if (!parsed || typeof parsed !== "object") return null;
+    const data = parsed as Record<string, unknown>;
+    if (typeof data.id !== "string" || !data.id) return null;
+    const { id, ...props } = data;
+    return { id, props };
+  } catch {
+    return null;
+  }
 }
 
 export function rewriteWikiLinks(
