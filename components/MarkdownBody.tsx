@@ -29,6 +29,30 @@ function languageOf(node: ReactNode): { lang?: string; text: string } | null {
   return { lang, text };
 }
 
+function MarkdownImage({ src, alt }: { src?: string; alt?: string }) {
+  if (!src) return null;
+  return (
+    <MediaFrame className="my-6">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={src} alt={alt ?? ""} className="h-auto w-full" />
+    </MediaFrame>
+  );
+}
+
+function unwrapLoneImage(children: ReactNode): ReactNode | null {
+  const items = Children.toArray(children).filter(
+    (child) => !(typeof child === "string" && !child.trim()),
+  );
+  if (
+    items.length === 1 &&
+    isValidElement(items[0]) &&
+    items[0].type === MarkdownImage
+  ) {
+    return items[0];
+  }
+  return null;
+}
+
 export function MarkdownBody({ markdown, locale }: Props) {
   if (!markdown.trim()) return null;
 
@@ -48,14 +72,8 @@ export function MarkdownBody({ markdown, locale }: Props) {
             </h3>
           ),
           p: ({ children }) => {
-            const items = Children.toArray(children);
-            if (
-              items.length === 1 &&
-              isValidElement(items[0]) &&
-              items[0].type === MediaFrame
-            ) {
-              return items[0];
-            }
+            const image = unwrapLoneImage(children);
+            if (image) return image;
             return (
               <p className="mb-4 text-[16px] leading-relaxed text-muted last:mb-0">
                 {children}
@@ -75,13 +93,7 @@ export function MarkdownBody({ markdown, locale }: Props) {
           li: ({ children }) => (
             <li className="text-[16px] leading-relaxed text-muted">{children}</li>
           ),
-          img: ({ src, alt }) =>
-            src ? (
-              <MediaFrame className="my-6">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt={alt ?? ""} className="h-auto w-full" />
-              </MediaFrame>
-            ) : null,
+          img: MarkdownImage,
           pre: ({ children }) => {
             const code = languageOf(children);
             if (code?.lang === "mermaid") {
