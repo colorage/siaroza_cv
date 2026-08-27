@@ -1,17 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { useCallback, useRef, useState } from "react";
 import { PortfolioCover } from "@/components/PortfolioCover";
 import {
   getPortfolioPageSrcs,
+  getPortfolioShotAspect,
   getPortfolioThumbnailKind,
   type PortfolioShot,
 } from "@/content/portfolio";
 
 const shotClass =
-  "group relative block aspect-[4/3] overflow-hidden rounded-2xl bg-surface text-foreground";
+  "group relative block w-full overflow-hidden rounded-2xl bg-surface text-foreground";
+
+function getShotBox(shot: PortfolioShot): CSSProperties {
+  const { width, height } = getPortfolioShotAspect(shot);
+  return { aspectRatio: `${width} / ${height}` };
+}
 
 type Props = {
   shot: PortfolioShot;
@@ -25,18 +31,20 @@ function CardLink({
   href,
   external,
   className,
+  style,
   children,
   ariaLabel,
 }: {
   href?: string;
   external?: boolean;
   className: string;
+  style?: CSSProperties;
   children: ReactNode;
   ariaLabel?: string;
 }) {
   if (!href) {
     return (
-      <div className={className} aria-label={ariaLabel}>
+      <div className={className} style={style} aria-label={ariaLabel}>
         {children}
       </div>
     );
@@ -49,6 +57,7 @@ function CardLink({
         target="_blank"
         rel="noopener noreferrer"
         className={className}
+        style={style}
         aria-label={ariaLabel}
       >
         {children}
@@ -57,7 +66,7 @@ function CardLink({
   }
 
   return (
-    <Link href={href} className={className} aria-label={ariaLabel}>
+    <Link href={href} className={className} style={style} aria-label={ariaLabel}>
       {children}
     </Link>
   );
@@ -111,12 +120,14 @@ function GalleryThumbnail({
   href,
   external,
   goToImageLabel,
+  box,
 }: {
   srcs: string[];
   title: string;
   href?: string;
   external?: boolean;
   goToImageLabel: string;
+  box: CSSProperties;
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
@@ -141,11 +152,11 @@ function GalleryThumbnail({
   }, []);
 
   return (
-    <div className={shotClass}>
+    <div className={shotClass} style={box}>
       <div
         ref={scrollerRef}
         onScroll={onScroll}
-        className="flex h-full w-full snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex h-full min-h-0 w-full snap-x snap-mandatory overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         role="region"
         aria-roledescription="carousel"
         aria-label={title}
@@ -156,10 +167,10 @@ function GalleryThumbnail({
             href={href}
             external={external}
             ariaLabel={title}
-            className="relative block h-full min-w-full shrink-0 snap-center"
+            className="relative block h-full min-h-0 flex-[0_0_100%] snap-center overflow-hidden"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={src} alt="" className="h-full w-full object-cover" />
+            <img src={src} alt="" className="h-full w-full object-contain" />
           </CardLink>
         ))}
       </div>
@@ -198,6 +209,7 @@ export function PortfolioThumbnail({
   goToImageLabel,
 }: Props) {
   const kind = getPortfolioThumbnailKind(shot);
+  const box = getShotBox(shot);
 
   if (kind === "gallery" && shot.pages) {
     return (
@@ -207,12 +219,13 @@ export function PortfolioThumbnail({
         href={href}
         external={external}
         goToImageLabel={goToImageLabel}
+        box={box}
       />
     );
   }
 
   return (
-    <CardLink href={href} external={external} className={shotClass}>
+    <CardLink href={href} external={external} className={shotClass} style={box}>
       <PortfolioCover cover={shot.cover} />
       {kind === "video" ? <PlayBadge /> : null}
       <TitleBar title={title} />

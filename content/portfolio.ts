@@ -53,6 +53,19 @@ export function getPortfolioThumbnailKind(
   return "image";
 }
 
+export function getPortfolioShotAspect(shot: PortfolioShot): {
+  width: number;
+  height: number;
+} {
+  if (shot.pages) {
+    return { width: shot.pages.width, height: shot.pages.height };
+  }
+  if (shot.youtube) {
+    return { width: 16, height: 9 };
+  }
+  return { width: 4, height: 3 };
+}
+
 export const portfolioShots: PortfolioShot[] = [
   {
     slug: "brandbook",

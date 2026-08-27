@@ -47,7 +47,7 @@ export function MediaCarousel({
           {pages.map((src, i) => (
             <div
               key={src}
-              className="w-full shrink-0 snap-center"
+              className="min-h-0 w-full shrink-0 snap-center"
               aria-hidden={i !== index}
             >
               <Image
@@ -55,8 +55,8 @@ export function MediaCarousel({
                 alt={`${alt} (${i + 1} / ${pages.length})`}
                 width={width}
                 height={height}
-                className="h-auto w-full"
-                sizes="(max-width: 64rem) calc(100vw - 3rem), 64rem"
+                className="h-auto w-full object-contain"
+                sizes="(max-width: 90rem) calc(100vw - 2rem), 90rem"
                 priority={i === 0}
               />
             </div>

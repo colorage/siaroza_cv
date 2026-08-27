@@ -14,7 +14,7 @@ export function PortfolioGrid({ locale, dict }: Props) {
         {dict.portfolio.heading}
       </h2>
 
-      <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid grid-cols-1 items-start gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {portfolioShots.map((shot, index) => {
           const href = getPortfolioHref(shot, locale);
           const title = shot.title[locale];
