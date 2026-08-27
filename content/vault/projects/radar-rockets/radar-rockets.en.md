@@ -4,7 +4,7 @@ slug: radar-rockets
 name: Radar N Rockets
 order: 7
 stage: release
-status: finished
+status: active
 needs_translation: false
 url: https://kotka.itch.io/radar-n-rockets
 logo: logo.png
