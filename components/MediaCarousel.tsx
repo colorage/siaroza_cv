@@ -7,6 +7,7 @@ import { MediaFrame } from "@/components/MediaFrame";
 type Props = {
   pages: string[];
   alt: string;
+  alts?: string[];
   width: number;
   height: number;
   indexTemplate: string;
@@ -15,6 +16,7 @@ type Props = {
 export function MediaCarousel({
   pages,
   alt,
+  alts,
   width,
   height,
   indexTemplate,
@@ -52,7 +54,7 @@ export function MediaCarousel({
             >
               <Image
                 src={src}
-                alt={`${alt} (${i + 1} / ${pages.length})`}
+                alt={alts?.[i] || `${alt} (${i + 1} / ${pages.length})`}
                 width={width}
                 height={height}
                 className="h-auto w-full object-contain"

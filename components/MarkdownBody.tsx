@@ -7,6 +7,7 @@ import {
 } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { GalleryEmbed } from "@/components/GalleryEmbed";
 import { MermaidDiagram } from "@/components/MermaidDiagram";
 import { WidgetEmbed } from "@/components/WidgetEmbed";
 import { parseWidgetFence } from "@/lib/vault/markdown";
@@ -15,6 +16,7 @@ import type { Locale } from "@/lib/i18n";
 type Props = {
   markdown: string;
   locale: Locale;
+  slideIndexTemplate: string;
 };
 
 function languageOf(node: ReactNode): { lang?: string; text: string } | null {
@@ -55,7 +57,7 @@ function unwrapLoneImage(children: ReactNode): ReactNode | null {
   return null;
 }
 
-export function MarkdownBody({ markdown, locale }: Props) {
+export function MarkdownBody({ markdown, locale, slideIndexTemplate }: Props) {
   if (!markdown.trim()) return null;
 
   return (
@@ -100,6 +102,14 @@ export function MarkdownBody({ markdown, locale }: Props) {
             const code = languageOf(children);
             if (code?.lang === "mermaid") {
               return <MermaidDiagram source={code.text} />;
+            }
+            if (code?.lang === "gallery") {
+              return (
+                <GalleryEmbed
+                  source={code.text}
+                  indexTemplate={slideIndexTemplate}
+                />
+              );
             }
             if (code?.lang === "widget") {
               const parsed = parseWidgetFence(code.text);

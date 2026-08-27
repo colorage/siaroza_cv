@@ -20,6 +20,28 @@ export function markdownBullets(body: string): string[] {
     });
 }
 
+function isRemoteOrAbsolute(src: string): boolean {
+  return (
+    /^https?:\/\//.test(src) || src.startsWith("/") || src.startsWith("#")
+  );
+}
+
+function rewriteGalleryFences(source: string, noteDir: string): string {
+  return source.replace(/```gallery\r?\n([\s\S]*?)```/g, (_, body: string) => {
+    const rewritten = body.replace(
+      /^(\s*(?:-\s+)?src:\s*)(.+)$/gm,
+      (_match, prefix: string, raw: string) => {
+        const trimmed = raw.trim().replace(/^['"]|['"]$/g, "");
+        if (!trimmed || isRemoteOrAbsolute(trimmed)) {
+          return `${prefix}${trimmed || raw}`;
+        }
+        return `${prefix}${resolveNoteAsset(noteDir, trimmed)}`;
+      },
+    );
+    return `\`\`\`gallery\n${rewritten}\`\`\``;
+  });
+}
+
 export function preprocessMarkdown(source: string, noteDir: string): string {
   let out = source.replace(/!\[\[([^\]]+)\]\]/g, (_, target: string) => {
     const file = target.split("|")[0]?.trim() ?? "";
@@ -31,18 +53,39 @@ export function preprocessMarkdown(source: string, noteDir: string): string {
     /!\[([^\]]*)\]\(([^)]+)\)/g,
     (match, alt: string, href: string) => {
       const trimmed = href.trim();
-      if (
-        /^https?:\/\//.test(trimmed) ||
-        trimmed.startsWith("/") ||
-        trimmed.startsWith("#")
-      ) {
+      if (isRemoteOrAbsolute(trimmed)) {
         return match;
       }
       return `![${alt}](${resolveNoteAsset(noteDir, trimmed)})`;
     },
   );
 
-  return out;
+  return rewriteGalleryFences(out, noteDir);
+}
+
+export type GalleryFenceImage = {
+  src: string;
+  alt: string;
+};
+
+export function parseGalleryFence(source: string): GalleryFenceImage[] {
+  try {
+    const parsed = yamlLoad(source, { schema: JSON_SCHEMA });
+    if (!Array.isArray(parsed)) return [];
+    return parsed.flatMap((item) => {
+      if (!item || typeof item !== "object") return [];
+      const data = item as Record<string, unknown>;
+      if (typeof data.src !== "string" || !data.src) return [];
+      return [
+        {
+          src: data.src,
+          alt: typeof data.alt === "string" ? data.alt : "",
+        },
+      ];
+    });
+  } catch {
+    return [];
+  }
 }
 
 export function parseWidgetFence(
