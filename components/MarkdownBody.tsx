@@ -30,10 +30,17 @@ function languageOf(node: ReactNode): { lang?: string; text: string } | null {
   return { lang, text };
 }
 
-function MarkdownImage({ src, alt }: ComponentPropsWithoutRef<"img">) {
+function MarkdownImage({ src, alt, title }: ComponentPropsWithoutRef<"img">) {
   if (typeof src !== "string" || !src) return null;
+  const fit = title?.trim().toLowerCase() === "fit";
   return (
-    <figure className="relative left-1/2 my-8 w-[min(100vw-3rem,64rem)] -translate-x-1/2">
+    <figure
+      className={
+        fit
+          ? "my-8 w-full"
+          : "relative left-1/2 my-8 w-[min(100vw-3rem,64rem)] -translate-x-1/2"
+      }
+    >
       <MediaFrame>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={alt ?? ""} className="h-auto w-full" />

@@ -20,6 +20,14 @@ export function markdownBullets(body: string): string[] {
     });
 }
 
+function splitMarkdownImageDest(dest: string): { href: string; title?: string } {
+  const trimmed = dest.trim();
+  const quoted =
+    /^(\S+)\s+("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')$/.exec(trimmed);
+  if (!quoted) return { href: trimmed };
+  return { href: quoted[1], title: quoted[2].slice(1, -1) };
+}
+
 export function preprocessMarkdown(source: string, noteDir: string): string {
   let out = source.replace(/!\[\[([^\]]+)\]\]/g, (_, target: string) => {
     const file = target.split("|")[0]?.trim() ?? "";
@@ -29,16 +37,19 @@ export function preprocessMarkdown(source: string, noteDir: string): string {
 
   out = out.replace(
     /!\[([^\]]*)\]\(([^)]+)\)/g,
-    (match, alt: string, href: string) => {
-      const trimmed = href.trim();
+    (match, alt: string, dest: string) => {
+      const { href, title } = splitMarkdownImageDest(dest);
       if (
-        /^https?:\/\//.test(trimmed) ||
-        trimmed.startsWith("/") ||
-        trimmed.startsWith("#")
+        /^https?:\/\//.test(href) ||
+        href.startsWith("/") ||
+        href.startsWith("#")
       ) {
         return match;
       }
-      return `![${alt}](${resolveNoteAsset(noteDir, trimmed)})`;
+      const resolved = resolveNoteAsset(noteDir, href);
+      return title === undefined
+        ? `![${alt}](${resolved})`
+        : `![${alt}](${resolved} "${title}")`;
     },
   );
 
