@@ -102,6 +102,7 @@ export type Dictionary = {
       gradientOriginal: string;
       gradientBright: string;
       posters: string;
+      caption: string;
     };
   };
   footer: {
