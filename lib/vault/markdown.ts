@@ -20,6 +20,14 @@ export function markdownBullets(body: string): string[] {
     });
 }
 
+function splitMarkdownImageDest(dest: string): { href: string; title?: string } {
+  const trimmed = dest.trim();
+  const quoted =
+    /^(\S+)\s+("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')$/.exec(trimmed);
+  if (!quoted) return { href: trimmed };
+  return { href: quoted[1], title: quoted[2].slice(1, -1) };
+}
+
 function isRemoteOrAbsolute(src: string): boolean {
   return (
     /^https?:\/\//.test(src) || src.startsWith("/") || src.startsWith("#")
@@ -51,12 +59,15 @@ export function preprocessMarkdown(source: string, noteDir: string): string {
 
   out = out.replace(
     /!\[([^\]]*)\]\(([^)]+)\)/g,
-    (match, alt: string, href: string) => {
-      const trimmed = href.trim();
-      if (isRemoteOrAbsolute(trimmed)) {
+    (match, alt: string, dest: string) => {
+      const { href, title } = splitMarkdownImageDest(dest);
+      if (isRemoteOrAbsolute(href)) {
         return match;
       }
-      return `![${alt}](${resolveNoteAsset(noteDir, trimmed)})`;
+      const resolved = resolveNoteAsset(noteDir, href);
+      return title === undefined
+        ? `![${alt}](${resolved})`
+        : `![${alt}](${resolved} "${title}")`;
     },
   );
 
