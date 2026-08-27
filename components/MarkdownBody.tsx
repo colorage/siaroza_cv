@@ -1,6 +1,7 @@
 import {
   Children,
   isValidElement,
+  type ComponentPropsWithoutRef,
   type ReactElement,
   type ReactNode,
 } from "react";
@@ -29,8 +30,8 @@ function languageOf(node: ReactNode): { lang?: string; text: string } | null {
   return { lang, text };
 }
 
-function MarkdownImage({ src, alt }: { src?: string; alt?: string }) {
-  if (!src) return null;
+function MarkdownImage({ src, alt }: ComponentPropsWithoutRef<"img">) {
+  if (typeof src !== "string" || !src) return null;
   return (
     <figure className="relative left-1/2 my-8 w-[min(100vw-3rem,64rem)] -translate-x-1/2">
       <MediaFrame>
