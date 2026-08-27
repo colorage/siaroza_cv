@@ -54,7 +54,7 @@ content/vault/
 - Both locales **share image files**. Never duplicate PNGs per language.
 - Obsidian settings in [`content/vault/.obsidian/app.json`](content/vault/.obsidian/app.json): markdown links, relative attachments in the note folder. `![[file]]` still works; the loader rewrites it.
 - `[[slug]]` wikilinks resolve to work or project routes. Do not leave `[[brackets]]` in rendered copy.
-- UI chrome stays in [`messages/en.json`](messages/en.json) / [`messages/by.json`](messages/by.json). Skills stay in [`content/skills.ts`](content/skills.ts).
+- UI chrome stays in [`messages/en.json`](messages/en.json) / [`messages/by.json`](messages/by.json). Capability phrases stay in [`content/skills.ts`](content/skills.ts).
 
 Slugs: lowercase kebab-case, ASCII, stable. Reuse an existing pet-project slug when filling one in. Preserve grid/timeline order with `order`.
 
@@ -76,7 +76,7 @@ Slugs: lowercase kebab-case, ASCII, stable. Reuse an existing pet-project slug w
 | [`content/vault/work/`](content/vault/work/) | Portfolio shots + page images |
 | [`content/vault/case-studies/`](content/vault/case-studies/) | Long-form case studies |
 | [`content/vault/projects/`](content/vault/projects/) | Pet projects + logos + galleries |
-| [`content/skills.ts`](content/skills.ts) | Hero skill trail |
+| [`content/skills.ts`](content/skills.ts) | Hero capability trail (claim-aligned, not a tool catalog) |
 | [`messages/en.json`](messages/en.json), [`messages/by.json`](messages/by.json) | Nav, headings, CTAs |
 | [`public/cv/`](public/cv/) | CV PDF |
 | [`app/[locale]/work/page.tsx`](app/[locale]/work/page.tsx) | Full portfolio archive |
