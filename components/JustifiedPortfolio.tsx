@@ -49,10 +49,21 @@ function justify(
   let start = 0;
   let arSum = 0;
 
-  const flush = (end: number, stretch: boolean) => {
-    boxes.push(
-      ...packRow(aspects.slice(start, end), targetH, containerWidth, stretch),
+  const rowScale = (sum: number, count: number) => {
+    const gaps = GAP * Math.max(0, count - 1);
+    return (containerWidth - gaps) / (sum * targetH);
+  };
+
+  const flush = (end: number) => {
+    const slice = aspects.slice(start, end);
+    const scale = rowScale(
+      slice.reduce((total, ar) => total + ar, 0),
+      slice.length,
     );
+    // Keep row height close to the target so 4:3 tiles stay narrower,
+    // not taller. Only nudge a row when it already nearly fills the well.
+    const stretch = scale >= 0.88 && scale <= 1.12;
+    boxes.push(...packRow(slice, targetH, containerWidth, stretch));
   };
 
   for (let i = 0; i < aspects.length; i += 1) {
@@ -60,7 +71,7 @@ function justify(
     const count = i - start + 1;
     const natural = nextSum * targetH + GAP * (count - 1);
     if (count > 1 && natural > containerWidth) {
-      flush(i, true);
+      flush(i);
       start = i;
       arSum = aspects[i];
     } else {
@@ -68,10 +79,7 @@ function justify(
     }
   }
 
-  const lastCount = aspects.length - start;
-  const lastNatural = arSum * targetH + GAP * Math.max(0, lastCount - 1);
-  flush(aspects.length, lastNatural > containerWidth * 0.72);
-
+  flush(aspects.length);
   return boxes;
 }
 
@@ -119,12 +127,14 @@ export function JustifiedPortfolio({ shots, locale, dict }: Props) {
         return (
           <li
             key={shot.slug}
-            className="relative max-w-full min-w-0 shrink-0 animate-fade-up overflow-hidden"
+            className="relative min-w-0 animate-fade-up overflow-hidden"
             style={{
               width: measured
                 ? box.width
                 : `min(100%, ${targetH * (ratioW / ratioH)}px)`,
               height: measured ? box.height : undefined,
+              flex: measured ? `0 0 ${box.width}px` : "0 1 auto",
+              maxWidth: "100%",
               animationDelay: `${Math.min(index, 8) * 40}ms`,
             }}
           >
