@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { PortfolioThumbnail } from "@/components/PortfolioThumbnail";
-import { getPortfolioHref } from "@/lib/vault/portfolio-utils";
+import { JustifiedPortfolio } from "@/components/JustifiedPortfolio";
 import type { PortfolioShot } from "@/lib/vault/types";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
@@ -35,28 +34,7 @@ export function PortfolioGrid({
         {heading}
       </Heading>
 
-      <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {shots.map((shot, index) => {
-          const href = getPortfolioHref(shot, locale);
-          const title = shot.title[locale];
-
-          return (
-            <li
-              key={shot.slug}
-              className="animate-fade-up"
-              style={{ animationDelay: `${Math.min(index, 8) * 40}ms` }}
-            >
-              <PortfolioThumbnail
-                shot={shot}
-                title={title}
-                href={href}
-                external={Boolean(shot.href)}
-                goToImageLabel={dict.portfolio.goToImage}
-              />
-            </li>
-          );
-        })}
-      </ul>
+      <JustifiedPortfolio shots={shots} locale={locale} dict={dict} />
 
       {seeAllHref && seeAllLabel ? (
         <Link

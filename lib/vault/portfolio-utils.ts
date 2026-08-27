@@ -38,3 +38,19 @@ export function isStandaloneShot(shot: PortfolioShot): boolean {
 export function getPortfolioHref(shot: PortfolioShot, locale: Locale): string {
   return shot.href ?? `/${locale}/work/${shot.slug}`;
 }
+
+export function getPortfolioShotAspect(shot: PortfolioShot): {
+  width: number;
+  height: number;
+} {
+  if (shot.pages) {
+    return { width: shot.pages.width, height: shot.pages.height };
+  }
+  if (shot.video) {
+    return { width: shot.video.width, height: shot.video.height };
+  }
+  if (shot.youtube) {
+    return { width: 16, height: 9 };
+  }
+  return { width: 4, height: 3 };
+}
