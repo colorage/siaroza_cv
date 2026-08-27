@@ -91,6 +91,19 @@ export type Dictionary = {
     diagram: string;
     related: string;
   };
+  widgets: {
+    thumbnailPipeline: {
+      title: string;
+      titleOriginal: string;
+      titleCommon: string;
+      gradient: string;
+      gradientNone: string;
+      gradientDark: string;
+      gradientOriginal: string;
+      gradientBright: string;
+      posters: string;
+    };
+  };
   footer: {
     contact: string;
   };

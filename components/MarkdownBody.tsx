@@ -9,9 +9,11 @@ import { MediaFrame } from "@/components/MediaFrame";
 import { MermaidDiagram } from "@/components/MermaidDiagram";
 import { WidgetEmbed } from "@/components/WidgetEmbed";
 import { parseWidgetFence } from "@/lib/vault/markdown";
+import type { Locale } from "@/lib/i18n";
 
 type Props = {
   markdown: string;
+  locale: Locale;
 };
 
 function languageOf(node: ReactNode): { lang?: string; text: string } | null {
@@ -26,7 +28,7 @@ function languageOf(node: ReactNode): { lang?: string; text: string } | null {
   return { lang, text };
 }
 
-export function MarkdownBody({ markdown }: Props) {
+export function MarkdownBody({ markdown, locale }: Props) {
   if (!markdown.trim()) return null;
 
   return (
@@ -77,7 +79,11 @@ export function MarkdownBody({ markdown }: Props) {
             if (code?.lang === "widget") {
               const parsed = parseWidgetFence(code.text);
               return (
-                <WidgetEmbed id={parsed?.id} props={parsed?.props} />
+                <WidgetEmbed
+                  id={parsed?.id}
+                  locale={locale}
+                  props={parsed?.props}
+                />
               );
             }
             return (

@@ -56,6 +56,19 @@
     "diagram": "Пайплайн",
     "related": "Таксама"
   },
+  "widgets": {
+    "thumbnailPipeline": {
+      "title": "Тытр",
+      "titleOriginal": "Арыгінал",
+      "titleCommon": "Агульны",
+      "gradient": "Градыент",
+      "gradientNone": "Няма",
+      "gradientDark": "Цёмны",
+      "gradientOriginal": "Арыгінал",
+      "gradientBright": "Яркі",
+      "posters": "Скіны тамбнейлаў"
+    }
+  },
   "footer": {
     "contact": "Звязацца"
   },

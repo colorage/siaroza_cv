@@ -56,6 +56,19 @@
     "diagram": "Workflow",
     "related": "Related"
   },
+  "widgets": {
+    "thumbnailPipeline": {
+      "title": "Title",
+      "titleOriginal": "Original",
+      "titleCommon": "Common",
+      "gradient": "Gradient",
+      "gradientNone": "None",
+      "gradientDark": "Dark",
+      "gradientOriginal": "Original",
+      "gradientBright": "Bright",
+      "posters": "Thumbnail skins"
+    }
+  },
   "footer": {
     "contact": "Contact me"
   },

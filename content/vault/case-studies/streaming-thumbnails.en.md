@@ -245,6 +245,10 @@ flowchart TD
   save --> render
 ```
 
+```widget
+id: thumbnail-pipeline
+```
+
 ### Local AI QA
 
 Two checks: leftover transparent pixels in the title, and whether the render still matches the reference. Pixel counting is cheap. Image compare does not need to be fast — Gemma 4 via Ollama ran overnight, so the workstation never sat idle. Obsidian showed original vs render plus both scores. Sort the score column and the queue orders itself. A plugin runs a shell script from the vault, so the same board is the control panel.
