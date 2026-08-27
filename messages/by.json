@@ -23,6 +23,7 @@
   },
   "experience": {
     "heading": "Досвед",
+    "earlier": "Раней",
     "downloadCv": "Спампаваць CV",
     "caseStudies": "Кейсы",
     "caseStudyBack": "Назад да досведу",
@@ -34,6 +35,9 @@
   },
   "portfolio": {
     "heading": "Партфоліа",
+    "seeAll": "Усё партфоліа",
+    "archiveTitle": "Усё партфоліа",
+    "archiveDescription": "Ідэнтычнасць, моўшн і прадуктовы UI.",
     "back": "Назад",
     "viewOnDribbble": "Адкрыць на Dribbble",
     "viewOnYouTube": "Глядзець на YouTube",
@@ -74,6 +78,9 @@
   },
   "projects": {
     "heading": "Пет-праекты",
+    "seeAll": "Усе пет-праекты",
+    "archiveTitle": "Усе пет-праекты",
+    "archiveDescription": "Выпушчаныя прадукты, эксперыменты і гарадскія інструменты.",
     "active": "Актыўны",
     "stage": {
       "release": "Release",

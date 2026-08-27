@@ -143,7 +143,7 @@ export default async function ProjectPage({ params }: Props) {
     <article className="py-16 md:py-24">
       <div className="mx-auto max-w-5xl px-6">
         <Link
-          href={`/${locale}#projects`}
+          href={`/${locale}/projects`}
           className="text-[13px] text-muted transition-colors hover:text-foreground"
         >
           ← {dict.projects.back}

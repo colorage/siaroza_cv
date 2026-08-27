@@ -597,3 +597,37 @@ export function getSortedProjects(): Project[] {
     return 0;
   });
 }
+
+export const featuredExperienceIds = ["spribe", "ptchr", "hiveon"] as const;
+export const featuredPortfolioSlugs = ["ui-test", "brandbook", "ptchr"] as const;
+export const featuredProjectSlugs = [
+  "bloodlabs",
+  "pavuk-club",
+  "lacinka",
+] as const;
+
+export function getFeaturedExperience(): ExperienceItem[] {
+  return featuredExperienceIds
+    .map((id) => getExperience(id))
+    .filter((item): item is ExperienceItem => item !== undefined);
+}
+
+export function getEarlierExperience(): ExperienceItem[] {
+  const featured = new Set<string>(featuredExperienceIds);
+  return getExperienceItems().filter((item) => !featured.has(item.id));
+}
+
+export function getFeaturedPortfolio(): PortfolioShot[] {
+  return featuredPortfolioSlugs
+    .map((slug) => getPortfolioShot(slug))
+    .filter((shot): shot is PortfolioShot => shot !== undefined);
+}
+
+export function getFeaturedProjects(): Project[] {
+  return featuredProjectSlugs
+    .map((slug) => getProject(slug))
+    .filter(
+      (project): project is Project =>
+        project !== undefined && project.stage !== "nda",
+    );
+}

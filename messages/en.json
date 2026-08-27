@@ -23,6 +23,7 @@
   },
   "experience": {
     "heading": "Experience",
+    "earlier": "Earlier",
     "downloadCv": "Download CV",
     "caseStudies": "Case studies",
     "caseStudyBack": "Back to experience",
@@ -34,6 +35,9 @@
   },
   "portfolio": {
     "heading": "Portfolio",
+    "seeAll": "All portfolio",
+    "archiveTitle": "All portfolio",
+    "archiveDescription": "Identity, motion, and product UI.",
     "back": "Back",
     "viewOnDribbble": "View on Dribbble",
     "viewOnYouTube": "Watch on YouTube",
@@ -74,6 +78,9 @@
   },
   "projects": {
     "heading": "Pet projects",
+    "seeAll": "All pet projects",
+    "archiveTitle": "All pet projects",
+    "archiveDescription": "Shipped products, experiments, and civic tools.",
     "active": "Active",
     "stage": {
       "release": "Release",

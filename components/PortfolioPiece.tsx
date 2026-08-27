@@ -32,7 +32,7 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
   return (
     <article className="mx-auto max-w-5xl px-6 py-16 md:py-24">
       <Link
-        href={`/${locale}#portfolio`}
+        href={`/${locale}/work`}
         className="text-[13px] text-muted transition-colors hover:text-foreground"
       >
         ← {dict.portfolio.back}
