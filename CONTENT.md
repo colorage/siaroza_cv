@@ -144,7 +144,7 @@ Route: `/{locale}/work/{slug}`. Archive: `/{locale}/work`. Note: `content/vault/
 
 ## Case studies
 
-Route: `/{locale}/work/{slug}`. Note body **is** the article (`## Context`, `## Effort`, process, outcome). Frontmatter: `slug`, `experienceId`, `title`, `summary`, `stack`, `related`.
+Route: `/{locale}/work/{slug}`. Note body **is** the article (`## Context`, `## Effort`, process, outcome). Frontmatter: `slug`, `experienceId`, `title`, `summary`, `cover`, `stack`, `related`. Home list uses `cover` as a Medium-style thumbnail (`{slug}.jpg` / `{slug}-cover.jpg` next to the note also works).
 
 Required sections in the markdown body:
 
