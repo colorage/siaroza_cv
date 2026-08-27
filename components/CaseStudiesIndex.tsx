@@ -1,8 +1,5 @@
 import Link from "next/link";
-import {
-  getCaseStudiesForIndex,
-  hasCaseStudyBody,
-} from "@/content/case-studies";
+import { getCaseStudiesForIndex } from "@/content/case-studies";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 type Props = {
@@ -23,35 +20,21 @@ export function CaseStudiesIndex({ locale, dict }: Props) {
       </h2>
 
       <ul className="max-w-2xl divide-y divide-border">
-        {studies.map((study) => {
-          const featured = hasCaseStudyBody(study);
-
-          return (
-            <li key={study.slug} className={featured ? "py-10 first:pt-0" : "py-6 first:pt-0"}>
-              <Link
-                href={`/${locale}/work/${study.slug}`}
-                className="group block"
-              >
-                <h3
-                  className={`tracking-tight text-foreground transition-opacity group-hover:opacity-70 ${
-                    featured
-                      ? "text-2xl leading-tight md:text-3xl"
-                      : "text-lg leading-snug"
-                  }`}
-                >
-                  {study.title[locale]}
-                </h3>
-                <p
-                  className={`leading-relaxed text-muted ${
-                    featured ? "mt-4 text-[16px]" : "mt-2 line-clamp-2 text-[14px]"
-                  }`}
-                >
-                  {study.summary[locale]}
-                </p>
-              </Link>
-            </li>
-          );
-        })}
+        {studies.map((study) => (
+          <li key={study.slug} className="py-10 first:pt-0">
+            <Link
+              href={`/${locale}/work/${study.slug}`}
+              className="group block"
+            >
+              <h3 className="text-2xl leading-tight tracking-tight text-foreground transition-opacity group-hover:opacity-70 md:text-3xl">
+                {study.title[locale]}
+              </h3>
+              <p className="mt-4 text-[16px] leading-relaxed text-muted">
+                {study.summary[locale]}
+              </p>
+            </Link>
+          </li>
+        ))}
       </ul>
     </section>
   );
