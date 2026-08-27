@@ -258,6 +258,18 @@ export function getPortfolioShot(slug: string): PortfolioShot | undefined {
   return portfolioShots.find((shot) => shot.slug === slug);
 }
 
+export const featuredPortfolioSlugs = ["ui-test", "brandbook", "ptchr"] as const;
+
+export function getFeaturedPortfolio(): PortfolioShot[] {
+  return featuredPortfolioSlugs
+    .map((slug) => getPortfolioShot(slug))
+    .filter((shot): shot is PortfolioShot => shot !== undefined);
+}
+
+export function getAllPortfolio(): PortfolioShot[] {
+  return portfolioShots;
+}
+
 export function isStandaloneShot(shot: PortfolioShot): boolean {
   return !shot.href;
 }

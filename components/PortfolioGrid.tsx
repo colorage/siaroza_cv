@@ -1,21 +1,44 @@
+import Link from "next/link";
 import { PortfolioThumbnail } from "@/components/PortfolioThumbnail";
-import { getPortfolioHref, portfolioShots } from "@/content/portfolio";
+import {
+  getPortfolioHref,
+  type PortfolioShot,
+} from "@/content/portfolio";
 import type { Dictionary, Locale } from "@/lib/i18n";
+
+type HeadingTag = "h1" | "h2";
 
 type Props = {
   locale: Locale;
   dict: Dictionary;
+  shots: PortfolioShot[];
+  heading: string;
+  headingAs?: HeadingTag;
+  id?: string;
+  seeAllHref?: string;
+  seeAllLabel?: string;
 };
 
-export function PortfolioGrid({ locale, dict }: Props) {
+export function PortfolioGrid({
+  locale,
+  dict,
+  shots,
+  heading,
+  headingAs = "h2",
+  id,
+  seeAllHref,
+  seeAllLabel,
+}: Props) {
+  const Heading = headingAs;
+
   return (
-    <section id="portfolio" className="mx-auto max-w-5xl scroll-mt-20 px-6 py-24">
-      <h2 className="mb-12 text-3xl tracking-tight text-foreground md:text-4xl">
-        {dict.portfolio.heading}
-      </h2>
+    <section id={id} className="mx-auto max-w-5xl scroll-mt-20 px-6 py-24">
+      <Heading className="mb-12 text-3xl tracking-tight text-foreground md:text-4xl">
+        {heading}
+      </Heading>
 
       <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {portfolioShots.map((shot, index) => {
+        {shots.map((shot, index) => {
           const href = getPortfolioHref(shot, locale);
           const title = shot.title[locale];
 
@@ -36,6 +59,15 @@ export function PortfolioGrid({ locale, dict }: Props) {
           );
         })}
       </ul>
+
+      {seeAllHref && seeAllLabel ? (
+        <Link
+          href={seeAllHref}
+          className="mt-8 inline-flex text-[13px] text-muted transition-colors hover:text-foreground"
+        >
+          {seeAllLabel} →
+        </Link>
+      ) : null}
     </section>
   );
 }

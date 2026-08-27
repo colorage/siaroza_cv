@@ -58,6 +58,7 @@ export type Dictionary = {
   };
   experience: {
     heading: string;
+    earlier: string;
     downloadCv: string;
     caseStudies: string;
     caseStudyBack: string;
@@ -69,6 +70,9 @@ export type Dictionary = {
   };
   portfolio: {
     heading: string;
+    seeAll: string;
+    archiveTitle: string;
+    archiveDescription: string;
     back: string;
     viewOnDribbble: string;
     viewOnYouTube: string;
@@ -89,6 +93,9 @@ export type Dictionary = {
   };
   projects: {
     heading: string;
+    seeAll: string;
+    archiveTitle: string;
+    archiveDescription: string;
     active: string;
     stage: Record<string, string>;
     status: Record<string, string>;

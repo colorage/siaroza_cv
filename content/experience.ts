@@ -247,3 +247,16 @@ export const experience: ExperienceItem[] = [
 export function getExperience(id: string): ExperienceItem | undefined {
   return experience.find((item) => item.id === id);
 }
+
+export const featuredExperienceIds = ["spribe", "ptchr", "hiveon"] as const;
+
+export function getFeaturedExperience(): ExperienceItem[] {
+  return featuredExperienceIds
+    .map((id) => getExperience(id))
+    .filter((item): item is ExperienceItem => item !== undefined);
+}
+
+export function getEarlierExperience(): ExperienceItem[] {
+  const featured = new Set<string>(featuredExperienceIds);
+  return experience.filter((item) => !featured.has(item.id));
+}

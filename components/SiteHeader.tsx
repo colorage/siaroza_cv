@@ -34,18 +34,6 @@ export function SiteHeader({ locale, dict }: Props) {
         </Link>
         <nav className="flex min-w-0 items-center gap-3 overflow-x-auto text-[12px] text-muted [scrollbar-width:none] sm:gap-5 sm:text-[13px]">
           <Link
-            href={`/${locale}#experience`}
-            className="shrink-0 transition-colors hover:text-foreground"
-          >
-            {dict.nav.experience}
-          </Link>
-          <Link
-            href={`/${locale}#portfolio`}
-            className="shrink-0 transition-colors hover:text-foreground"
-          >
-            {dict.nav.portfolio}
-          </Link>
-          <Link
             href={`/${locale}#case-studies`}
             className="shrink-0 whitespace-nowrap transition-colors hover:text-foreground"
           >
@@ -53,12 +41,24 @@ export function SiteHeader({ locale, dict }: Props) {
           </Link>
           {isPetProjectsEnabled() ? (
             <Link
-              href={`/${locale}#projects`}
+              href={`/${locale}/projects`}
               className="shrink-0 whitespace-nowrap transition-colors hover:text-foreground"
             >
               {dict.nav.projects}
             </Link>
           ) : null}
+          <Link
+            href={`/${locale}#experience`}
+            className="shrink-0 transition-colors hover:text-foreground"
+          >
+            {dict.nav.experience}
+          </Link>
+          <Link
+            href={`/${locale}/work`}
+            className="shrink-0 transition-colors hover:text-foreground"
+          >
+            {dict.nav.portfolio}
+          </Link>
           <Suspense fallback={<LocaleSwitcherFallback locale={locale} />}>
             <LocaleSwitcher locale={locale} />
           </Suspense>

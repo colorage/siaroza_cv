@@ -18,7 +18,9 @@ Prefer the type the user named. Otherwise:
 | Deep process, constraints, outcomes, “how we got there” | **Case study** |
 | Personal / side product, existing pet-project slug | **Pet project** |
 
-Home is five blocks: Hero, Experience, Portfolio, Case studies, Pet projects. Pet projects stay preview-gated.
+Home is five blocks: Hero, Case studies, three featured pet projects, collapsed Experience, three featured portfolio shots. Full grids live at `/{locale}/work` and `/{locale}/projects`. Pet projects stay preview-gated.
+
+Featured lists: [`featuredPortfolioSlugs`](content/portfolio.ts), [`featuredProjectSlugs`](content/projects.ts), [`featuredExperienceIds`](content/experience.ts). New items go in the full arrays; only add them to a featured list when they should appear on home.
 
 ```mermaid
 flowchart TD
@@ -31,6 +33,8 @@ flowchart TD
   portfolio --> mediaFrame[Shared media well]
   pets --> mediaFrame
   cases --> mermaid[Mermaid + effort]
+  portfolio --> archive["/{locale}/work"]
+  pets --> petArchive["/{locale}/projects"]
 ```
 
 ## Global rules
@@ -56,7 +60,9 @@ flowchart TD
 | `public/case-studies/{slug}/` | Case study images |
 | `public/projects/{slug}/` | Pet-project media beyond the logo |
 | [`public/projects/`](public/projects/) | Existing project logos |
-| `app/[locale]/work/[slug]/page.tsx` | Shared portfolio + case-study detail |
+| [`app/[locale]/work/page.tsx`](app/[locale]/work/page.tsx) | Full portfolio archive |
+| [`app/[locale]/work/[slug]/page.tsx`](app/[locale]/work/[slug]/page.tsx) | Shared portfolio + case-study detail |
+| [`app/[locale]/projects/page.tsx`](app/[locale]/projects/page.tsx) | Full pet-project archive (preview-gated) |
 | [`app/[locale]/projects/[slug]/page.tsx`](app/[locale]/projects/[slug]/page.tsx) | Pet-project detail (exists) |
 
 Slugs: lowercase kebab-case, ASCII, stable. Reuse an existing pet-project slug when filling one in.
@@ -76,7 +82,7 @@ Portfolio and pet-project media share one outer frame:
 
 ## Portfolio
 
-Route: `/{locale}/work/{slug}`. Content module: `content/portfolio.ts` (create when the first item lands). Also add a Work grid on the home page and a nav link.
+Route: `/{locale}/work/{slug}`. Archive: `/{locale}/work`. Content module: `content/portfolio.ts`. Home shows three featured shots plus “All portfolio”; the archive lists every shot. Nav Portfolio goes to the archive.
 
 ### PDF
 
@@ -152,7 +158,7 @@ Do not turn a Dribbble shot or a one-pager into a case study unless the user ask
 
 ## Pet projects
 
-Existing grid + detail: [`content/projects.ts`](content/projects.ts), [`app/[locale]/projects/[slug]/page.tsx`](app/[locale]/projects/[slug]/page.tsx), [`components/ProjectLogo.tsx`](components/ProjectLogo.tsx).
+Existing grid + detail: [`content/projects.ts`](content/projects.ts), [`app/[locale]/projects/page.tsx`](app/[locale]/projects/page.tsx), [`app/[locale]/projects/[slug]/page.tsx`](app/[locale]/projects/[slug]/page.tsx), [`components/ProjectLogo.tsx`](components/ProjectLogo.tsx). Home shows three featured projects plus “All pet projects”; the archive lists every project. Nav Pet projects goes to the archive.
 
 When the user gives a **link** (site, App Store, GitHub, YouTube, Telegram, itch, article):
 
@@ -191,7 +197,8 @@ Create only when the first content item needs them. Name and role:
 | `VideoEmbed` | Self-hosted `<video>` inside `MediaFrame` |
 | `MermaidDiagram` | Client renderer for case-study diagrams |
 | Work / case-study routes | `generateStaticParams`, locale, `notFound` |
-| Home sections + nav | Grid + `/{locale}#section` links, i18n in both message files |
+| Portfolio / pet archives | `/{locale}/work`, `/{locale}/projects` |
+| Home sections + nav | Featured grids + `/{locale}#section` and archive links, i18n in both message files |
 
 Match [`ProjectsGrid`](components/ProjectsGrid.tsx) and the pet-project detail page: fade-up, pills for metadata, muted body copy, pill CTA for outbound links.
 
@@ -209,6 +216,6 @@ Match [`ProjectsGrid`](components/ProjectsGrid.tsx) and the pet-project detail p
 3. Save images under the matching `public/…/{slug}/` folder. Convert PDF pages to PNG.
 4. Write en + by copy in site voice. Fill effort + Mermaid for case studies.
 5. Implement any missing media/route/nav primitive in this change.
-6. Wire the content module and detail page. Add a logo for pet projects.
+6. Wire the content module and detail page. Add a logo for pet projects. Leave featured lists unchanged unless the item should appear on home.
 7. Honor NDA and preview-only pet projects. Do not commit secrets or confidential PDFs.
 8. Scan the page against existing spacing, type, and chrome before finishing.

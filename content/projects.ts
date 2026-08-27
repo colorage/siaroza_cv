@@ -523,6 +523,21 @@ export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
 }
 
+export const featuredProjectSlugs = [
+  "bloodlabs",
+  "pavuk-club",
+  "lacinka",
+] as const;
+
+export function getFeaturedProjects(): Project[] {
+  return featuredProjectSlugs
+    .map((slug) => getProject(slug))
+    .filter(
+      (project): project is Project =>
+        project !== undefined && project.stage !== "nda",
+    );
+}
+
 /** Active projects first; original order is kept within each status. */
 export function getSortedProjects(): Project[] {
   return [...projects].sort((a, b) => {

@@ -19,9 +19,14 @@ function sitemapEntry(path = ""): MetadataRoute.Sitemap[number] {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const entries = [sitemapEntry(), ...getWorkSlugs().map((slug) => sitemapEntry(`/work/${slug}`))];
+  const entries = [
+    sitemapEntry(),
+    sitemapEntry("/work"),
+    ...getWorkSlugs().map((slug) => sitemapEntry(`/work/${slug}`)),
+  ];
 
   if (isPetProjectsEnabled()) {
+    entries.push(sitemapEntry("/projects"));
     for (const project of projects) {
       if (project.stage === "nda") continue;
       entries.push(sitemapEntry(`/projects/${project.slug}`));
