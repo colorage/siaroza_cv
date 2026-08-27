@@ -2,7 +2,7 @@ import Link from "next/link";
 import {
   getCaseStudiesForIndex,
   hasCaseStudyBody,
-} from "@/content/case-studies";
+} from "@/lib/vault/load";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 type Props = {

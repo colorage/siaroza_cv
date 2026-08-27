@@ -7,8 +7,8 @@ import { PortfolioCover } from "@/components/PortfolioCover";
 import {
   getPortfolioPageSrcs,
   getPortfolioThumbnailKind,
-  type PortfolioShot,
-} from "@/content/portfolio";
+} from "@/lib/vault/portfolio-utils";
+import type { PortfolioShot } from "@/lib/vault/types";
 
 const shotClass =
   "group relative block aspect-[4/3] overflow-hidden rounded-2xl bg-surface text-foreground";

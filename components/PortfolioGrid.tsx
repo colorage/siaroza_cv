@@ -1,5 +1,6 @@
 import { PortfolioThumbnail } from "@/components/PortfolioThumbnail";
-import { getPortfolioHref, portfolioShots } from "@/content/portfolio";
+import { getPortfolioHref } from "@/lib/vault/portfolio-utils";
+import { getPortfolioShots } from "@/lib/vault/load";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 type Props = {
@@ -15,7 +16,7 @@ export function PortfolioGrid({ locale, dict }: Props) {
       </h2>
 
       <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {portfolioShots.map((shot, index) => {
+        {getPortfolioShots().map((shot, index) => {
           const href = getPortfolioHref(shot, locale);
           const title = shot.title[locale];
 

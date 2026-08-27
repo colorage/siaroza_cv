@@ -5,6 +5,7 @@ type Props = {
   slug: string;
   name: string;
   className?: string;
+  logoSrc?: string;
 };
 
 const markClass = "h-full w-full";
@@ -17,6 +18,7 @@ function RasterMark({ src }: { src: string }) {
       width={32}
       height={32}
       className="h-full w-full object-cover"
+      unoptimized={src.startsWith("/media/")}
     />
   );
 }
@@ -36,21 +38,6 @@ function Mark({ children }: { children: ReactNode }) {
 }
 
 const icons: Record<string, ReactNode> = {
-  "yadoma-bel": (
-    <RasterMark src="/projects/yadoma-bel.png" />
-  ),
-  "spasem-bel": (
-    <RasterMark src="/projects/spasem-bel.png" />
-  ),
-  bloodlabs: (
-    <RasterMark src="/projects/bloodlabs.png" />
-  ),
-  pavetra: (
-    <RasterMark src="/projects/pavetra.png" />
-  ),
-  "pah-bot": (
-    <RasterMark src="/projects/pah-bot.png" />
-  ),
   dc: (
     <Mark>
       <path
@@ -66,12 +53,6 @@ const icons: Record<string, ReactNode> = {
         strokeLinecap="round"
       />
     </Mark>
-  ),
-  "kropki-mahiliou": (
-    <RasterMark src="/projects/kropki-mahiliou.png" />
-  ),
-  "radar-rockets": (
-    <RasterMark src="/projects/radar-rockets.png" />
   ),
   "hejka-app": (
     <Mark>
@@ -90,9 +71,6 @@ const icons: Record<string, ReactNode> = {
       <circle cx="16" cy="11" r="2" fill="currentColor" />
     </Mark>
   ),
-  halasy: (
-    <RasterMark src="/projects/halasy.png" />
-  ),
   impact: (
     <Mark>
       <circle cx="16" cy="16" r="3" fill="currentColor" />
@@ -103,9 +81,6 @@ const icons: Record<string, ReactNode> = {
         strokeLinecap="round"
       />
     </Mark>
-  ),
-  "polny-trash": (
-    <RasterMark src="/projects/polny-trash.png" />
   ),
   cobike: (
     <Mark>
@@ -119,18 +94,6 @@ const icons: Record<string, ReactNode> = {
         strokeLinejoin="round"
       />
     </Mark>
-  ),
-  losque: (
-    <RasterMark src="/projects/losque.png" />
-  ),
-  "my-ostalis": (
-    <RasterMark src="/projects/my-ostalis.png" />
-  ),
-  "mogilev-norm": (
-    <RasterMark src="/projects/mogilev-norm.png" />
-  ),
-  tedxmahilyow: (
-    <RasterMark src="/projects/tedxmahilyow.png" />
   ),
   akanicy: (
     <Mark>
@@ -150,12 +113,6 @@ const icons: Record<string, ReactNode> = {
         strokeLinecap="round"
       />
     </Mark>
-  ),
-  "sunsethunters-club": (
-    <RasterMark src="/projects/sunsethunters-club.png" />
-  ),
-  lacinka: (
-    <RasterMark src="/projects/lacinka.png" />
   ),
   "pavuk-club": (
     <Mark>
@@ -201,9 +158,6 @@ const icons: Record<string, ReactNode> = {
       />
     </Mark>
   ),
-  "belarus-bw": (
-    <RasterMark src="/projects/belarus-bw.png" />
-  ),
 };
 
 function FallbackMark({ name }: { name: string }) {
@@ -231,27 +185,13 @@ function FallbackMark({ name }: { name: string }) {
   );
 }
 
-const imageLogos = new Set([
-  "lacinka",
-  "kropki-mahiliou",
-  "bloodlabs",
-  "losque",
-  "my-ostalis",
-  "pavetra",
-  "radar-rockets",
-  "spasem-bel",
-  "mogilev-norm",
-  "yadoma-bel",
-  "belarus-bw",
-  "pah-bot",
-  "polny-trash",
-  "sunsethunters-club",
-  "tedxmahilyow",
-  "halasy",
-]);
-
-export function ProjectLogo({ slug, name, className = "" }: Props) {
-  const isImageLogo = imageLogos.has(slug);
+export function ProjectLogo({
+  slug,
+  name,
+  className = "",
+  logoSrc,
+}: Props) {
+  const isImageLogo = Boolean(logoSrc);
 
   return (
     <span
@@ -262,7 +202,11 @@ export function ProjectLogo({ slug, name, className = "" }: Props) {
       } ${className}`}
       aria-hidden
     >
-      {icons[slug] ?? <FallbackMark name={name} />}
+      {logoSrc ? (
+        <RasterMark src={logoSrc} />
+      ) : (
+        icons[slug] ?? <FallbackMark name={name} />
+      )}
     </span>
   );
 }

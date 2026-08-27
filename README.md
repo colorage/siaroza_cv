@@ -31,11 +31,12 @@ Open [http://localhost:3000](http://localhost:3000) — redirects to `/en`. Bela
 
 ## Content
 
-Agent playbook for adding work from files and links: [CONTENT.md](CONTENT.md)
+Source of truth is the Obsidian vault at [`content/vault/`](content/vault/) — open that folder in Obsidian. English notes (`*.en.md`) are canonical; `*.by.md` sit beside them and share media. Agent playbook: [CONTENT.md](CONTENT.md)
 
-- Experience: `content/experience.ts`
-- Portfolio shots: `content/portfolio.ts`
-- Case studies: `content/case-studies.ts`
-- Pet projects: `content/projects.ts`
+- Experience: `content/vault/experience/`
+- Portfolio: `content/vault/work/{slug}/`
+- Case studies: `content/vault/case-studies/`
+- Pet projects: `content/vault/projects/{slug}/`
 - UI strings: `messages/en.json`, `messages/by.json`
 - CV PDF: `public/cv/siaroza-cv.pdf`
+

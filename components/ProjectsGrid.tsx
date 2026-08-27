@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { AsciiNoise } from "@/components/AsciiNoise";
 import { ProjectLogo } from "@/components/ProjectLogo";
-import { getSortedProjects } from "@/content/projects";
+import { getSortedProjects } from "@/lib/vault/load";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 type Props = {
@@ -52,6 +52,7 @@ export function ProjectsGrid({ locale, dict }: Props) {
                     <ProjectLogo
                       slug={project.slug}
                       name={project.name}
+                      logoSrc={project.logo}
                       className="h-11 w-11 transition-colors group-hover:border-border-strong group-hover:text-accent"
                     />
                     {project.status === "active" && (
