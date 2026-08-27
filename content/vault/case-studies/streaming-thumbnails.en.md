@@ -44,7 +44,7 @@ The catalog never stood still. New providers joined; ones already on the pipe dr
 
 - Same crop and geometry rules across tens of thousands of titles
 - Titles fitted into one, two, or three lines of negative space
-- Faces on one horizon, silhouettes centered
+- Mouths on one horizon; cropped subjects skip the vertical step
 - Type readable on bright art
 
 *From catalog change to delivery.*
@@ -111,7 +111,33 @@ Some customers wanted one title treatment across the catalog — more contrast, 
 
 ### Tune the layers
 
-Background and title are light work: crop (models sometimes leave a white border), add title margin, resize. Foreground needs a point of interest. Detect face and silhouette. All faces on one horizontal line; silhouettes in the center of the frame. Crop from those points with as little loss as possible. A minimum face-size variable controls how large the character sits.
+Background and title are light work: crop (models sometimes leave a white border), add title margin, resize. Foreground needs a point of interest.
+
+People: detect mouths, take their bounding box, and sit that box on one horizontal axis. Crop transparent padding with the mouth as the anchor. No people: skip the vertical step if the subject is already cropped; otherwise align it on the same horizon. Then every layer is centered horizontally. A minimum face-size variable still controls how large the character sits.
+
+*Foreground crop: mouths on one horizon, then center.*
+
+```mermaid
+flowchart TD
+  fg[Foreground image]
+  people{"Has people?"}
+  detect[Detect mouth]
+  bbox["Find mouths<br/>bounding box"]
+  vAlignMouth["Vertical align mouth box<br/>along horizontal axis"]
+  cropMouth["Crop transparent part<br/>with mouth as anchor"]
+  cropped{"Cropped?"}
+  vAlign["Vertical align along<br/>horizontal axis"]
+  hCenter[Horizontal center align]
+  fg --> people
+  people -->|Yes| detect --> bbox --> vAlignMouth --> cropMouth --> hCenter
+  people -->|No| cropped
+  cropped -->|No| vAlign --> hCenter
+  cropped -->|Yes| hCenter
+```
+
+![Foreground crops aligned on mouths versus already-cropped subjects](streaming-thumbnails/face-align.png)
+
+*Same rules on different titles: mouths sit on one horizon; cropped subjects skip the vertical step, then everything centers.*
 
 ### Render
 
