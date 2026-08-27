@@ -178,6 +178,17 @@ id: thumbnail-pipeline
 
 Register the React component in [`components/widgets/registry.ts`](components/widgets/registry.ts). Unknown ids render a placeholder. First real widget is a first-use primitive: component + register + fence in the same PR. Vault stores only `id` + props. NDA studies must not embed public widgets that leak the work.
 
+### Gallery
+
+Several stills in one scroll-snap slider (case-study body). Same breakout well as body images. Relative `src` values are rewritten at load time.
+
+````md
+```gallery
+- src: streaming-thumbnails/detect-mouth-01.png
+  alt: 1670 foreground — two mouths boxed on one horizon
+```
+````
+
 Do not turn a Dribbble shot or a one-pager into a case study unless the user asked for that depth.
 
 ---
@@ -228,6 +239,7 @@ Create only when the first content item needs them. Name and role:
 | `YouTubeEmbed` | 16:9 nocookie iframe inside `MediaFrame` |
 | `VideoEmbed` | Self-hosted `<video>` inside `MediaFrame` |
 | `MermaidDiagram` | Client renderer for ` ```mermaid ` fences |
+| `GalleryEmbed` | Case-study ` ```gallery ` fence → scroll-snap slider |
 | Widget registry | `components/widgets/` + ` ```widget ` fence |
 | Work / case-study routes | `generateStaticParams`, locale, `notFound` |
 | Portfolio / pet archives | `/{locale}/work`, `/{locale}/projects` |
