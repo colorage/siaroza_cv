@@ -13,6 +13,7 @@ stack:
   - Ollama
 locale: en
 title: Responsive Netflix-like thumbnails design cycle
+cover: streaming-thumbnails/different-aspect-ratio.png
 summary: >-
   Thumbnail system for a B2B movie aggregator — one geometry, several skins and ratios, four file sizes. Nearly 30,000
   posters in a year.
@@ -202,6 +203,10 @@ flowchart TD
 ### Render
 
 Composite every required ratio, size, format, skin, and filename. Background always fills. Character pastes in the center, never resized. Unique or common title sits bottom-center, and scales down when the frame is thinner than 1:1. Some skins get an underlay — a colored or black gradient for title contrast. Hue comes from the background: scale to 9×9 and read the center pixel. Bright art still fails white-on-light, so the pipeline picks among 16 hues on a full cycle that keep the same white-on-color contrast. Pillow does the rest.
+
+![Wednesday key art across nine aspect ratios, from 1:2 to 2:1](streaming-thumbnails/different-aspect-ratio.png)
+
+*Same geometry across nine ratios. Character stays centered; the title sits bottom-center and scales on thinner frames.*
 
 *Each render walks aspect ratio, format, size, and skin.*
 

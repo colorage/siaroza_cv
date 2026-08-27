@@ -1,4 +1,5 @@
 import {
+  Children,
   isValidElement,
   type ReactElement,
   type ReactNode,
@@ -46,11 +47,21 @@ export function MarkdownBody({ markdown, locale }: Props) {
               {children}
             </h3>
           ),
-          p: ({ children }) => (
-            <p className="mb-4 text-[16px] leading-relaxed text-muted last:mb-0">
-              {children}
-            </p>
-          ),
+          p: ({ children }) => {
+            const items = Children.toArray(children);
+            if (
+              items.length === 1 &&
+              isValidElement(items[0]) &&
+              items[0].type === MediaFrame
+            ) {
+              return items[0];
+            }
+            return (
+              <p className="mb-4 text-[16px] leading-relaxed text-muted last:mb-0">
+                {children}
+              </p>
+            );
+          },
           ul: ({ children }) => (
             <ul className="mb-4 space-y-2 last:mb-0 [&_li]:before:mr-2 [&_li]:before:text-border-strong [&_li]:before:content-['–']">
               {children}
