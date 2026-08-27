@@ -34,7 +34,13 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
 
   return (
     <div className="max-w-2xl">
-      {body ? <MarkdownBody markdown={body} locale={locale} /> : null}
+      {body ? (
+        <MarkdownBody
+          markdown={body}
+          locale={locale}
+          slideIndexTemplate={dict.portfolio.slide}
+        />
+      ) : null}
 
       {related.length ? (
         <Section title={dict.caseStudies.related}>

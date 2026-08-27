@@ -135,7 +135,20 @@ flowchart TD
   cropped -->|Yes| hCenter
 ```
 
-![Foreground crops aligned on mouths versus already-cropped subjects](streaming-thumbnails/face-align.png)
+```gallery
+- src: streaming-thumbnails/detect-mouth-01.png
+  alt: 1670 foreground — two mouths boxed on one horizon
+- src: streaming-thumbnails/detect-mouth-02.png
+  alt: Squid Game group — five mouths on one horizon
+- src: streaming-thumbnails/detect-mouth-03.png
+  alt: Stranger Things — two mouths aligned on the horizon
+- src: streaming-thumbnails/detect-mouth-04.png
+  alt: Wednesday — one mouth on the horizon, crop anchored there
+- src: streaming-thumbnails/detect-mouth-05.png
+  alt: BoJack Horseman — cropped subject, skip the vertical step, then center
+- src: streaming-thumbnails/detect-mouth-06.png
+  alt: Drive to Survive — no people; subject box aligned and centered
+```
 
 *Same rules on different titles: mouths sit on one horizon; cropped subjects skip the vertical step, then everything centers.*
 

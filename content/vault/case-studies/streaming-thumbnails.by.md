@@ -135,7 +135,20 @@ flowchart TD
   cropped -->|Так| hCenter
 ```
 
-![Кропы пярэдняга плана, выраўнаваныя па ртах і ўжо абрэзаных аб'ектах](streaming-thumbnails/face-align.png)
+```gallery
+- src: streaming-thumbnails/detect-mouth-01.png
+  alt: 1670 — два рты ў боксе на адной гарызанталі
+- src: streaming-thumbnails/detect-mouth-02.png
+  alt: Squid Game — пяць ртоў на адной гарызанталі
+- src: streaming-thumbnails/detect-mouth-03.png
+  alt: Stranger Things — два рты выраўнаваныя на гарызанталі
+- src: streaming-thumbnails/detect-mouth-04.png
+  alt: Wednesday — адзін рот на гарызанталі, кроп з якарам там
+- src: streaming-thumbnails/detect-mouth-05.png
+  alt: BoJack Horseman — абрэзаны аб'ект, вертыкальны крок прапускаецца, потым цэнтр
+- src: streaming-thumbnails/detect-mouth-06.png
+  alt: Drive to Survive — без людзей; бокс аб'екта выраўнаваны і цэнтраваны
+```
 
 *Тыя ж правілы на розных тытулах: рты на адной гарызанталі; абрэзаныя аб'екты прапускаюць вертыкальны крок, потым усё цэнтруецца.*
 

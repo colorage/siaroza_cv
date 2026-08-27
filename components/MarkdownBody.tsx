@@ -7,7 +7,7 @@ import {
 } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { MediaFrame } from "@/components/MediaFrame";
+import { GalleryEmbed } from "@/components/GalleryEmbed";
 import { MermaidDiagram } from "@/components/MermaidDiagram";
 import { WidgetEmbed } from "@/components/WidgetEmbed";
 import { parseWidgetFence } from "@/lib/vault/markdown";
@@ -16,6 +16,7 @@ import type { Locale } from "@/lib/i18n";
 type Props = {
   markdown: string;
   locale: Locale;
+  slideIndexTemplate: string;
 };
 
 function languageOf(node: ReactNode): { lang?: string; text: string } | null {
@@ -41,10 +42,10 @@ function MarkdownImage({ src, alt, title }: ComponentPropsWithoutRef<"img">) {
           : "relative left-1/2 my-8 w-[min(100vw-3rem,64rem)] -translate-x-1/2"
       }
     >
-      <MediaFrame>
+      <div className="overflow-hidden rounded-2xl">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={alt ?? ""} className="h-auto w-full" />
-      </MediaFrame>
+      </div>
     </figure>
   );
 }
@@ -63,7 +64,7 @@ function unwrapLoneImage(children: ReactNode): ReactNode | null {
   return null;
 }
 
-export function MarkdownBody({ markdown, locale }: Props) {
+export function MarkdownBody({ markdown, locale, slideIndexTemplate }: Props) {
   if (!markdown.trim()) return null;
 
   return (
@@ -108,6 +109,14 @@ export function MarkdownBody({ markdown, locale }: Props) {
             const code = languageOf(children);
             if (code?.lang === "mermaid") {
               return <MermaidDiagram source={code.text} />;
+            }
+            if (code?.lang === "gallery") {
+              return (
+                <GalleryEmbed
+                  source={code.text}
+                  indexTemplate={slideIndexTemplate}
+                />
+              );
             }
             if (code?.lang === "widget") {
               const parsed = parseWidgetFence(code.text);

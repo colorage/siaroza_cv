@@ -35,7 +35,7 @@ export function CaseStudiesIndex({ locale, dict }: Props) {
                 </p>
               </div>
               <div
-                className="h-20 w-28 shrink-0 overflow-hidden rounded-xl border border-border bg-surface md:h-28 md:w-40"
+                className="h-20 w-28 shrink-0 overflow-hidden rounded-xl bg-surface md:h-28 md:w-40"
                 aria-hidden
               >
                 {study.cover ? (
