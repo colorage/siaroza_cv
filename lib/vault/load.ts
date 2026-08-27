@@ -622,9 +622,9 @@ export function getSortedProjects(): Project[] {
 export const featuredExperienceIds = ["spribe", "ptchr", "hiveon"] as const;
 export const featuredPortfolioSlugs = ["ui-test", "brandbook", "ptchr"] as const;
 export const featuredProjectSlugs = [
-  "bloodlabs",
-  "pavuk-club",
   "lacinka",
+  "radar-rockets",
+  "kropki-mahiliou",
 ] as const;
 
 export function getFeaturedExperience(): ExperienceItem[] {
