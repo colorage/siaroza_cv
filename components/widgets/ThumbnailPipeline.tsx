@@ -11,7 +11,6 @@ const MEDIA_DIR = "/media/case-studies/streaming-thumbnails/widget";
 const TITLES = [
   { id: "stranger_things", alt: "Stranger Things" },
   { id: "wednesday", alt: "Wednesday" },
-  { id: "squid_game", alt: "Squid Game" },
   { id: "bojack_horseman", alt: "BoJack Horseman" },
   { id: "drive_to_survive", alt: "Drive to Survive" },
   { id: "1670", alt: "1670" },
@@ -157,7 +156,7 @@ export function ThumbnailPipeline(props: Record<string, unknown>) {
       </div>
       <ul
         aria-label={copy.posters}
-        className="flex gap-2 overflow-x-auto overscroll-x-contain snap-x snap-proximity [scrollbar-width:none] md:grid md:grid-cols-6 md:overflow-visible [&::-webkit-scrollbar]:hidden"
+        className="flex gap-2 overflow-x-auto overscroll-x-contain snap-x snap-proximity [scrollbar-width:none] md:grid md:grid-cols-5 md:overflow-visible [&::-webkit-scrollbar]:hidden"
       >
         {TITLES.map((title) => (
           <li
