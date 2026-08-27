@@ -58,34 +58,36 @@ export default async function WorkPage({ params }: Props) {
   if (!study) notFound();
 
   return (
-    <article className="mx-auto max-w-2xl px-6 py-16 md:py-24">
-      <Link
-        href={`/${locale}#case-studies`}
-        className="text-[13px] text-muted transition-colors hover:text-foreground"
-      >
-        ← {dict.caseStudies.back}
-      </Link>
+    <article className="mx-auto max-w-5xl px-6 py-16 md:py-24">
+      <div className="max-w-2xl">
+        <Link
+          href={`/${locale}#case-studies`}
+          className="text-[13px] text-muted transition-colors hover:text-foreground"
+        >
+          ← {dict.caseStudies.back}
+        </Link>
 
-      <header className="mt-10 animate-fade-up">
-        <h1 className="text-[clamp(2rem,5vw,3rem)] leading-[1.1] tracking-[-0.03em] text-foreground">
-          {study.title[locale]}
-        </h1>
-        {study.stack?.length ? (
-          <ul className="mt-5 flex flex-wrap gap-2">
-            {study.stack.map((item) => (
-              <li
-                key={item}
-                className="rounded-full border border-border px-3 py-1 font-mono text-[12px] tracking-wide text-muted uppercase"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        ) : null}
-        <p className="mt-8 text-[18px] leading-relaxed text-muted">
-          {study.summary[locale]}
-        </p>
-      </header>
+        <header className="mt-10 animate-fade-up">
+          <h1 className="text-[clamp(2rem,5vw,3rem)] leading-[1.1] tracking-[-0.03em] text-foreground">
+            {study.title[locale]}
+          </h1>
+          {study.stack?.length ? (
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {study.stack.map((item) => (
+                <li
+                  key={item}
+                  className="rounded-full border border-border px-3 py-1 font-mono text-[12px] tracking-wide text-muted uppercase"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+          <p className="mt-8 text-[18px] leading-relaxed text-muted">
+            {study.summary[locale]}
+          </p>
+        </header>
+      </div>
 
       <div className="animate-fade-up">
         <CaseStudyBody study={study} locale={locale} dict={dict} />

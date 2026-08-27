@@ -168,7 +168,7 @@ export function ThumbnailPipeline(props: Record<string, unknown>) {
               src={posterSrc(title.id, skin)}
               alt={title.alt}
               fill
-              sizes="(min-width: 768px) 104px, 108px"
+              sizes="(min-width: 768px) 156px, 108px"
               className="object-cover"
               unoptimized
             />
