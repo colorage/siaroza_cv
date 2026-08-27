@@ -125,6 +125,8 @@ export type Dictionary = {
     instagram: string;
     telegram: string;
     dribbble: string;
+    x: string;
+    viewOnX: string;
     ndaNote: string;
     ndaPrivateTitle: string;
   };
