@@ -7,7 +7,8 @@ import { ProjectGallery } from "@/components/ProjectGallery";
 import { ProjectLogo } from "@/components/ProjectLogo";
 import { VideoEmbed } from "@/components/VideoEmbed";
 import { YouTubeEmbed } from "@/components/YouTubeEmbed";
-import { getProject, projects, type ProjectMedia } from "@/content/projects";
+import { getProject, getProjects } from "@/lib/vault/load";
+import type { ProjectMedia } from "@/lib/vault/types";
 import {
   getDictionary,
   isLocale,
@@ -69,6 +70,7 @@ function ProjectMediaBlock({
       height={item.height}
       className="h-auto w-full"
       sizes="(max-width: 64rem) calc(100vw - 3rem), 64rem"
+      unoptimized={item.src.startsWith("/media/")}
     />
   );
 
@@ -105,7 +107,7 @@ function ProjectMediaBlock({
 export function generateStaticParams() {
   if (!isPetProjectsEnabled()) return [];
   return locales.flatMap((locale) =>
-    projects
+    getProjects()
       .filter((project) => project.stage !== "nda")
       .map((project) => ({ locale, slug: project.slug })),
   );
@@ -152,6 +154,7 @@ export default async function ProjectPage({ params }: Props) {
             <ProjectLogo
               slug={project.slug}
               name={project.name}
+              logoSrc={project.logo}
               className="h-14 w-14"
             />
             <div className="min-w-0">

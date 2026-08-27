@@ -3,9 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CaseStudyBody } from "@/components/CaseStudyBody";
 import { PortfolioPiece } from "@/components/PortfolioPiece";
-import { getCaseStudy } from "@/content/case-studies";
-import { getExperience } from "@/content/experience";
-import { getPortfolioShot, isStandaloneShot } from "@/content/portfolio";
+import { getCaseStudy, getPortfolioShot } from "@/lib/vault/load";
+import { isStandaloneShot } from "@/lib/vault/portfolio-utils";
 import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/metadata";
 import { getWorkSlugs } from "@/lib/work";
@@ -35,8 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
   }
   const study = getCaseStudy(slug);
-  const job = study ? getExperience(study.experienceId) : undefined;
-  if (!study || !job) return {};
+  if (!study) return {};
   return pageMetadata({
     locale,
     title: study.title[locale],
@@ -57,8 +55,7 @@ export default async function WorkPage({ params }: Props) {
   }
 
   const study = getCaseStudy(slug);
-  const job = study ? getExperience(study.experienceId) : undefined;
-  if (!study || !job) notFound();
+  if (!study) notFound();
 
   return (
     <article className="mx-auto max-w-2xl px-6 py-16 md:py-24">
@@ -73,9 +70,6 @@ export default async function WorkPage({ params }: Props) {
         <h1 className="text-[clamp(2rem,5vw,3rem)] leading-[1.1] tracking-[-0.03em] text-foreground">
           {study.title[locale]}
         </h1>
-        <p className="mt-4 font-mono text-[12px] tracking-wide text-muted uppercase">
-          {job.start} — {job.end}
-        </p>
         {study.stack?.length ? (
           <ul className="mt-5 flex flex-wrap gap-2">
             {study.stack.map((item) => (

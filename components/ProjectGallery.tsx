@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { ProjectGalleryImage } from "@/content/projects";
+import type { ProjectGalleryImage } from "@/lib/vault/types";
 import type { Locale } from "@/lib/i18n";
 
 type Props = {
@@ -31,6 +31,7 @@ export function ProjectGallery({ images, locale, label }: Props) {
                 sizes="(min-width: 768px) 240px, 194px"
                 className="object-cover"
                 preload={index === 0}
+                unoptimized={image.src.startsWith("/media/")}
               />
             </li>
           ))}

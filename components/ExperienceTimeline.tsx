@@ -1,4 +1,4 @@
-import { experience } from "@/content/experience";
+import { getExperienceItems } from "@/lib/vault/load";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 type Props = {
@@ -7,6 +7,8 @@ type Props = {
 };
 
 export function ExperienceTimeline({ locale, dict }: Props) {
+  const items = getExperienceItems();
+
   return (
     <section id="experience" className="mx-auto max-w-5xl scroll-mt-20 px-6 py-24">
       <h2 className="mb-12 text-3xl tracking-tight text-foreground md:text-4xl">
@@ -14,7 +16,7 @@ export function ExperienceTimeline({ locale, dict }: Props) {
       </h2>
 
       <ol className="relative border-l border-border-strong">
-        {experience.map((item, index) => (
+        {items.map((item, index) => (
           <li
             key={item.id}
             className="group relative pl-8 md:pl-10"

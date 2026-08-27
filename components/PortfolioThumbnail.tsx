@@ -8,8 +8,8 @@ import { PortfolioCover } from "@/components/PortfolioCover";
 import {
   getPortfolioPageSrcs,
   getPortfolioThumbnailKind,
-  type PortfolioShot,
-} from "@/content/portfolio";
+} from "@/lib/vault/portfolio-utils";
+import type { PortfolioShot } from "@/lib/vault/types";
 
 const CARD_HEIGHT = "15rem";
 const GALLERY_INTERVAL_MS = 3500;

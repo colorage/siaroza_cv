@@ -1,10 +1,8 @@
 import { Marquee } from "@/components/Marquee";
 import { PortfolioThumbnail } from "@/components/PortfolioThumbnail";
-import {
-  getPortfolioHref,
-  portfolioShots,
-  type PortfolioShot,
-} from "@/content/portfolio";
+import { getPortfolioHref } from "@/lib/vault/portfolio-utils";
+import { getPortfolioShots } from "@/lib/vault/load";
+import type { PortfolioShot } from "@/lib/vault/types";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 type Props = {
@@ -30,7 +28,7 @@ function fillRow<T>(items: T[], minCount: number): T[] {
 }
 
 export function PortfolioGrid({ locale, dict }: Props) {
-  const rows = splitIntoRows(portfolioShots, ROW_COUNT).map((row) =>
+  const rows = splitIntoRows(getPortfolioShots(), ROW_COUNT).map((row) =>
     fillRow(row, MIN_ROW_SLOTS),
   );
 

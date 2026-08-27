@@ -7,8 +7,8 @@ import { YouTubeEmbed } from "@/components/YouTubeEmbed";
 import {
   getPortfolioPageSrcs,
   isAnimatedCover,
-  type PortfolioShot,
-} from "@/content/portfolio";
+} from "@/lib/vault/portfolio-utils";
+import type { PortfolioShot } from "@/lib/vault/types";
 import type { Dictionary, Locale } from "@/lib/i18n";
 
 type Props = {
@@ -103,6 +103,7 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
                   height={pageMeta.height}
                   className="h-auto w-full"
                   sizes="(max-width: 64rem) calc(100vw - 3rem), 64rem"
+                  unoptimized={src.startsWith("/media/")}
                 />
               </MediaFrame>
             ))}

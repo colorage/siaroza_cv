@@ -6,7 +6,7 @@ Do **not** put custom agent rules in `AGENTS.md` — Next.js regenerates that fi
 
 ## When this applies
 
-The user provides source material (files, URLs, short notes) and wants it on the site. Classify the drop, extract a summary, save media locally, write bilingual copy, and wire it into content modules. If a needed page type or media component does not exist yet, **build it in the same change**.
+The user provides source material (files, URLs, short notes) and wants it on the site. Classify the drop, extract a summary, save media in the Obsidian vault, write English first, then Belarusian, and let the site loader pick it up. If a needed page type or media component does not exist yet, **build it in the same change**.
 
 ## Classify
 
@@ -30,36 +30,54 @@ flowchart TD
   classify --> pets["/{locale}/projects/{slug}"]
   portfolio --> mediaFrame[Shared media well]
   pets --> mediaFrame
-  cases --> mermaid[Mermaid + effort]
+  cases --> mermaid[Mermaid + widgets]
 ```
+
+## Vault
+
+Open **[`content/vault/`](content/vault/)** in Obsidian (not the whole repo). That folder is the source of truth. Next.js reads it at build time via [`lib/vault/load.ts`](lib/vault/load.ts). Do **not** put page copy back into TypeScript catalogs.
+
+```text
+content/vault/
+  experience/{id}.en.md
+  work/{slug}/{slug}.en.md      # note + images
+  case-studies/{slug}.en.md
+  projects/{slug}/{slug}.en.md  # note + logo + gallery/media
+```
+
+- **English is canonical.** Write `{slug}.en.md` first. Set `needs_translation: true` until `{slug}.by.md` exists and is real Belarusian.
+- **Agents** tighten EN, fill YAML, then create/update the sibling `.by.md`. Do not invent `by` in the same pass as a rough EN dump unless the user asked to publish immediately.
+- Both locales **share image files**. Never duplicate PNGs per language.
+- Obsidian settings in [`content/vault/.obsidian/app.json`](content/vault/.obsidian/app.json): markdown links, relative attachments in the note folder. `![[file]]` still works; the loader rewrites it.
+- `[[slug]]` wikilinks resolve to work or project routes. Do not leave `[[brackets]]` in rendered copy.
+- UI chrome stays in [`messages/en.json`](messages/en.json) / [`messages/by.json`](messages/by.json). Skills stay in [`content/skills.ts`](content/skills.ts).
+
+Slugs: lowercase kebab-case, ASCII, stable. Reuse an existing pet-project slug when filling one in. Preserve grid/timeline order with `order`.
 
 ## Global rules
 
-- **Locales:** every user-facing string is `en` and `by`. Match existing voice in [`content/projects.ts`](content/projects.ts) and [`content/experience.ts`](content/experience.ts): product-first, concise, no filler, no marketing superlatives.
+- **Locales:** every user-facing string is `en` and `by`. Match existing vault voice: product-first, concise, no filler, no marketing superlatives.
 - **Summarize.** Do not dump source text onto the page. Keep original article URLs as citations / further reading.
-- **Media lives in `public/`.** Download images. Do not hotlink Dribbble, OG images, or CDNs. YouTube is the only embed exception (privacy-enhanced iframe).
-- **NDA:** if `stage === "nda"` (or the user says it is confidential), no public detail route, no extracted media, no quotes from the source. Grid card stays private (ASCII noise pattern).
+- **Media lives in the vault note folder.** Download images next to the note. The site serves them at `/media/...`. Do not hotlink Dribbble, OG images, or CDNs. YouTube is the only embed exception (privacy-enhanced iframe). Do not put editorial media in `public/` (CV PDF and hero stills stay there).
+- **NDA:** if `stage === "nda"` (or the user says it is confidential), no public detail route, no extracted media, no quotes from the source, no public widgets. Grid card stays private (ASCII noise pattern).
 - **Pet projects** stay preview-only until [`lib/site-url.ts`](lib/site-url.ts) changes. Do not leak them onto production.
 - **Visual language:** `max-w-5xl` for site chrome and portfolio media; `max-w-2xl` for case-study prose and Mermaid wells. `rounded-2xl`, `border-border`, Geist, `text-muted` / `text-foreground`. Prefer scroll-snap over a carousel library.
 - **Missing UI:** implement the primitive in the same PR. Do not leave “TODO: add carousel later.”
 
-## File map (create on first use)
+## File map
 
 | Path | Role |
 | --- | --- |
-| [`content/projects.ts`](content/projects.ts) | Pet projects (exists) |
-| [`content/experience.ts`](content/experience.ts) | Career timeline (exists) |
-| `content/portfolio.ts` | Portfolio / work pieces |
-| `content/case-studies.ts` | Long-form case studies |
+| [`content/vault/experience/`](content/vault/experience/) | Career timeline notes |
+| [`content/vault/work/`](content/vault/work/) | Portfolio shots + page images |
+| [`content/vault/case-studies/`](content/vault/case-studies/) | Long-form case studies |
+| [`content/vault/projects/`](content/vault/projects/) | Pet projects + logos + galleries |
+| [`content/skills.ts`](content/skills.ts) | Hero skill trail |
 | [`messages/en.json`](messages/en.json), [`messages/by.json`](messages/by.json) | Nav, headings, CTAs |
-| `public/work/{slug}/` | Portfolio page images |
-| `public/case-studies/{slug}/` | Case study images |
-| `public/projects/{slug}/` | Pet-project media beyond the logo |
-| [`public/projects/`](public/projects/) | Existing project logos |
-| `app/[locale]/work/[slug]/page.tsx` | Shared portfolio + case-study detail |
-| [`app/[locale]/projects/[slug]/page.tsx`](app/[locale]/projects/[slug]/page.tsx) | Pet-project detail (exists) |
-
-Slugs: lowercase kebab-case, ASCII, stable. Reuse an existing pet-project slug when filling one in.
+| [`public/cv/`](public/cv/) | CV PDF |
+| [`app/[locale]/work/[slug]/page.tsx`](app/[locale]/work/[slug]/page.tsx) | Shared portfolio + case-study detail |
+| [`app/[locale]/projects/[slug]/page.tsx`](app/[locale]/projects/[slug]/page.tsx) | Pet-project detail |
+| [`app/media/[...path]/route.ts`](app/media/[...path]/route.ts) | Vault binary serving |
 
 ## Shared media well
 
@@ -70,54 +88,59 @@ Portfolio and pet-project media share one outer frame:
 - **YouTube:** iframe fills the well at **16:9**
 - **Local video:** `<video>` in the same well; height follows the file aspect ratio
 - **PDF carousel:** same well; height follows the page aspect ratio
-- First-use components: `MediaFrame`, `MediaCarousel` (scroll-snap), `YouTubeEmbed`, `VideoEmbed`
+- Components: `MediaFrame`, `MediaCarousel` (scroll-snap), `YouTubeEmbed`, `VideoEmbed`
+
+Relative paths in YAML (`cover: page-01.jpg`, `src: gallery/import.jpg`) are rewritten to `/media/work/{slug}/...`.
 
 ---
 
 ## Portfolio
 
-Route: `/{locale}/work/{slug}`. Content module: `content/portfolio.ts` (create when the first item lands). Also add a Work grid on the home page and a nav link.
+Route: `/{locale}/work/{slug}`. Note: `content/vault/work/{slug}/{slug}.en.md`. Body = caption. Frontmatter holds `title`, `cover`, `pages`, `youtube`, `dribbbleUrl`, `links`.
 
 ### PDF
 
-1. Convert pages to PNG:
+1. Convert pages to PNG in the note folder:
    ```bash
-   pdftoppm -png -r 144 source.pdf public/work/{slug}/page
+   pdftoppm -png -r 144 source.pdf content/vault/work/{slug}/page
    ```
-   Fallback: `pdftocairo -png` or ImageMagick `magick`. Zero-pad names: `page-01.png`, `page-02.png`.
+   Fallback: `pdftocairo -png` or ImageMagick `magick`. Zero-pad names: `page-01.png`, `page-02.jpg`.
 2. Put a **carousel preview** of the pages in the media well (scroll-snap, one page per slide, peek/dots or page index).
-3. Also put **each extracted PNG on the work page** — either as the carousel slides themselves plus a still gallery, or as the gallery under the carousel. Both a browsable preview and the page images must be on the page.
-4. Do **not** commit the source PDF unless the user wants it as a public download (then `public/work/{slug}/download.pdf` + a download link).
-5. Write a short bilingual summary of the deck (what it is, for whom, what you made). Do not transcribe slides.
+3. Also put **each extracted PNG on the work page** — carousel plus stills. Set `pages.count` / `width` / `height` (or `files` when names are not `page-NN.jpg`).
+4. Do **not** commit the source PDF unless the user wants it as a public download.
+5. Write a short bilingual summary in the note body (what it is, for whom, what you made). Do not transcribe slides.
 
 ### YouTube
 
 1. Parse the video id from `watch?v=`, `youtu.be/`, `/embed/`, or `/shorts/`.
-2. Embed `https://www.youtube-nocookie.com/embed/{id}` in the media well at 16:9.
-3. Set `title` on the iframe. No extra player chrome, no related-video clutter (`rel=0` where it still helps).
-4. Short bilingual caption: what the video is, your role if known.
+2. YAML:
+   ```yaml
+   youtube:
+     id: WB-v16caDZQ
+     title: UI test
+     caption: Shop UI motion — grid, 3D preview, controller prompts.
+   ```
+3. Embed uses `https://www.youtube-nocookie.com/embed/{id}` at 16:9. Cover image lives in the note folder.
 
 ### Local video (mp4 / webm)
 
-1. Save under `public/work/{slug}/` or `public/projects/{slug}/`. Do not hotlink CDNs.
+1. Save next to the note. Do not hotlink CDNs.
 2. Keep the file small: `+faststart`, H.264, extract a poster JPEG for `preload="none"`.
-3. Play it with `VideoEmbed` (`<video controls playsInline>`) inside `MediaFrame`. Height follows the file, unlike YouTube’s 16:9 well.
-4. Short bilingual caption, same voice as YouTube.
+3. Play it with `VideoEmbed` inside `MediaFrame`.
 
 ### Dribbble
 
-1. Fetch the shot page. Prefer `og:image`. If scrape fails, use an export the user attached.
-2. Save the image under `public/work/{slug}/` (not a hotlink).
-3. Write **1–3 sentences** in en + by on the work page. This is a caption, not a case study.
-4. Add a “View on Dribbble” outbound link.
+1. Fetch the shot page. Prefer `og:image`. Save the image in the note folder.
+2. Write **1–3 sentences** in the EN body, then BY. Caption, not a case study.
+3. `dribbbleUrl` plus optional `links`.
 
 ---
 
 ## Case studies
 
-Route: `/{locale}/work/{slug}` (same article route as portfolio). Content module: `content/case-studies.ts`. Goal: show **effort**, not only polish.
+Route: `/{locale}/work/{slug}`. Note body **is** the article (`## Context`, `## Effort`, process, outcome). Frontmatter: `slug`, `experienceId`, `title`, `summary`, `stack`, `related`.
 
-Required bilingual blocks:
+Required sections in the markdown body:
 
 | Block | What to write |
 | --- | --- |
@@ -125,28 +148,29 @@ Required bilingual blocks:
 | **Effort** | Duration, role, team (or solo), constraints, what was hard |
 | Process | Iterations and decisions — not a tool list |
 | Outcome | What shipped, what changed |
-| Diagram | At least one Mermaid (process, system, or timeline) |
+| Diagram | At least one Mermaid fence |
 
-Effort shape to store in content (adapt field names, keep the data):
+### Mermaid
 
-```ts
-effort: {
-  duration: string; // "6 weeks"
-  role: Record<Locale, string>;
-  team: Record<Locale, string>; // "Solo" / "2 designers + 1 engineer"
-  constraints: Record<Locale, string[]>;
-  hard: Record<Locale, string[]>; // what was actually difficult
-}
-```
+Edit in Obsidian (` ```mermaid ` fences). The site renders them with [`MermaidDiagram`](components/MermaidDiagram.tsx).
 
-Mermaid:
-
-- Store diagram source as strings on the case-study record.
-- Render with a small client `MermaidDiagram` component. Add the `mermaid` package the first time it is needed.
-- Case-study diagrams share the **text column** (`max-w-2xl`). Do not widen the article for a chart. YouTube/PDF wells on portfolio stay `max-w-5xl`.
 - Prefer `flowchart TD`. Split a fat graph into stacked figures rather than going LR or stretching the page. Short node labels; wrapping is for overflow, not layout.
-- Prefer flowchart / sequence / timeline. No colors that fight dark/light — let the renderer use defaults, then restyle to site tokens if needed.
+- Case-study diagrams share the **text column** (`max-w-2xl`). Do not widen the article for a chart. YouTube/PDF wells on portfolio stay `max-w-5xl`.
+- Prefer flowchart / sequence / timeline.
 - Node IDs: camelCase, no spaces; quote labels that contain punctuation.
+- No extra colors — the renderer uses site dark tokens.
+
+### Widgets
+
+Interactive demos use a `widget` fence, not JSX/MDX:
+
+````md
+```widget
+id: thumbnail-pipeline
+```
+````
+
+Register the React component in [`components/widgets/registry.ts`](components/widgets/registry.ts). Unknown ids render a placeholder. First real widget is a first-use primitive: component + register + fence in the same PR. Vault stores only `id` + props. NDA studies must not embed public widgets that leak the work.
 
 Do not turn a Dribbble shot or a one-pager into a case study unless the user asked for that depth.
 
@@ -154,30 +178,36 @@ Do not turn a Dribbble shot or a one-pager into a case study unless the user ask
 
 ## Pet projects
 
-Existing grid + detail: [`content/projects.ts`](content/projects.ts), [`app/[locale]/projects/[slug]/page.tsx`](app/[locale]/projects/[slug]/page.tsx), [`components/ProjectLogo.tsx`](components/ProjectLogo.tsx).
+Grid + detail: vault notes, [`app/[locale]/projects/[slug]/page.tsx`](app/[locale]/projects/[slug]/page.tsx), [`components/ProjectLogo.tsx`](components/ProjectLogo.tsx).
 
 When the user gives a **link** (site, App Store, GitHub, YouTube, Telegram, itch, article):
 
 1. Fetch the page. Extract title, description, hero / `og:image`, extra article links.
-2. Save images under `public/projects/{slug}/`.
-3. Rewrite the bilingual `description` — a tight summary, not the OG dump. Replace “Description coming soon.”
-4. Set `url` to the primary destination. Add extra links (articles, repos, stores) on the detail page when the type grows to support them.
-5. If the logo is missing, add a mark in `ProjectLogo` (inline SVG in the existing style, or a file in `public/projects/` plus the `imageLogos` set).
-6. YouTube / local video / PDF / Dribbble on a pet project uses the same media-well rules as Portfolio.
+2. Save images in `content/vault/projects/{slug}/`. Raster logos as `logo.png`.
+3. Rewrite the bilingual `description` in frontmatter — a tight summary, not the OG dump.
+4. Set `url` to the primary destination. Extra `links` for articles, repos, stores.
+5. If the logo is missing, add `logo.png` or an inline SVG mark in `ProjectLogo`.
+6. YouTube / local video / PDF / Dribbble uses the same media-well YAML as Portfolio (`media:`).
 
-Extend `Project` when the first rich page needs it, for example:
+### Gallery (Blood Labs pattern)
 
-```ts
-media?: Array<
-  | { type: "image"; src: string; alt: Record<Locale, string> }
-  | { type: "youtube"; id: string }
-  | { type: "video"; src: string; poster?: string }
-  | { type: "pdf-pages"; dir: string; count: number }
->;
-links?: { href: string; label: Record<Locale, string> }[];
+Phone-screenshot strips stay a **YAML gallery**, not a pile of body images — that keeps the horizontal snap strip:
+
+```yaml
+gallery:
+  - src: gallery/import.jpg
+    alt: Blood Labs import screen — add lab results from a photo or PDF
 ```
 
+Put files in `gallery/` next to the note. Alts are per locale (EN vs BY files). Width/height are probed from the file.
+
 NDA pet projects stay non-routable. Do not extract public media for them.
+
+---
+
+## Experience
+
+Notes in `content/vault/experience/{id}.en.md`. Frontmatter: `id`, `start`, `end`, `company`, `role`. Body = markdown bullets (the timeline list).
 
 ---
 
@@ -191,7 +221,8 @@ Create only when the first content item needs them. Name and role:
 | `MediaCarousel` | Scroll-snap page/image preview |
 | `YouTubeEmbed` | 16:9 nocookie iframe inside `MediaFrame` |
 | `VideoEmbed` | Self-hosted `<video>` inside `MediaFrame` |
-| `MermaidDiagram` | Client renderer for case-study diagrams |
+| `MermaidDiagram` | Client renderer for ` ```mermaid ` fences |
+| Widget registry | `components/widgets/` + ` ```widget ` fence |
 | Work / case-study routes | `generateStaticParams`, locale, `notFound` |
 | Home sections + nav | Grid + `/{locale}#section` links, i18n in both message files |
 
@@ -207,10 +238,10 @@ Match [`ProjectsGrid`](components/ProjectsGrid.tsx) and the pet-project detail p
 ## Fulfillment checklist
 
 1. Classify (Portfolio / Case study / Pet project) and pick or reuse a slug.
-2. Extract and summarize source material; keep citation links.
-3. Save images under the matching `public/…/{slug}/` folder. Convert PDF pages to PNG.
-4. Write en + by copy in site voice. Fill effort + Mermaid for case studies.
-5. Implement any missing media/route/nav primitive in this change.
-6. Wire the content module and detail page. Add a logo for pet projects.
+2. Write the English vault note; extract and summarize; keep citation links.
+3. Save images in the note folder (gallery files under `gallery/`). Convert PDF pages to PNG there.
+4. Agent-improve EN, then write `{slug}.by.md`. Fill effort + Mermaid for case studies.
+5. Implement any missing media/route/nav/widget primitive in this change.
+6. Confirm the loader picks it up (home grid + detail). Add a logo for pet projects.
 7. Honor NDA and preview-only pet projects. Do not commit secrets or confidential PDFs.
 8. Scan the page against existing spacing, type, and chrome before finishing.
