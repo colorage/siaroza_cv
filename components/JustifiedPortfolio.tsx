@@ -15,17 +15,12 @@ const ROW_H_DESKTOP = 240;
 
 type Box = { width: number; height: number };
 
-function packRow(
-  aspects: number[],
-  height: number,
-  containerWidth: number,
-  stretch: boolean,
-): Box[] {
+function packRow(aspects: number[], containerWidth: number): Box[] {
   const gaps = GAP * Math.max(0, aspects.length - 1);
   const sum = aspects.reduce((total, ar) => total + ar, 0);
-  const h = stretch ? (containerWidth - gaps) / sum : height;
+  const h = (containerWidth - gaps) / sum;
   const boxes = aspects.map((ar) => ({ width: h * ar, height: h }));
-  if (stretch && boxes.length > 0) {
+  if (boxes.length > 0) {
     const used = boxes.reduce((total, box) => total + box.width, 0) + gaps;
     boxes[boxes.length - 1].width += containerWidth - used;
     boxes[boxes.length - 1].width = Math.max(0, boxes[boxes.length - 1].width);
@@ -49,21 +44,8 @@ function justify(
   let start = 0;
   let arSum = 0;
 
-  const rowScale = (sum: number, count: number) => {
-    const gaps = GAP * Math.max(0, count - 1);
-    return (containerWidth - gaps) / (sum * targetH);
-  };
-
   const flush = (end: number) => {
-    const slice = aspects.slice(start, end);
-    const scale = rowScale(
-      slice.reduce((total, ar) => total + ar, 0),
-      slice.length,
-    );
-    // Keep row height close to the target so 4:3 tiles stay narrower,
-    // not taller. Only nudge a row when it already nearly fills the well.
-    const stretch = scale >= 0.88 && scale <= 1.2;
-    boxes.push(...packRow(slice, targetH, containerWidth, stretch));
+    boxes.push(...packRow(aspects.slice(start, end), containerWidth));
   };
 
   for (let i = 0; i < aspects.length; i += 1) {
