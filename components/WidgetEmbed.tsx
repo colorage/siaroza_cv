@@ -32,9 +32,5 @@ export function WidgetEmbed({ id, locale, props = {} }: Props) {
     );
   }
 
-  return (
-    <MediaFrame className="my-6 bg-card">
-      <Widget {...props} locale={locale} />
-    </MediaFrame>
-  );
+  return <Widget {...props} locale={locale} />;
 }
