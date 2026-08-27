@@ -208,6 +208,10 @@ Composite every required ratio, size, format, skin, and filename. Background alw
 
 *Same geometry across nine ratios. Character stays centered; the title sits bottom-center and scales on thinner frames.*
 
+![Stranger Things key art at tiny, small, medium, and large sizes](streaming-thumbnails/different-size.png)
+
+*Four file sizes — tiny, small, medium, large — so each surface can trade quality for speed.*
+
 *Each render walks aspect ratio, format, size, and skin.*
 
 ```mermaid
