@@ -12,7 +12,7 @@ stack:
   - Obsidian
   - Ollama
 locale: en
-title: Responsive Netflix-like thumbnails design cycle
+title: Streaming thumbnails pipeline
 summary: >-
   Thumbnail system for a B2B movie aggregator — one geometry, several skins and ratios, four file sizes. Nearly 30,000
   posters in a year.
