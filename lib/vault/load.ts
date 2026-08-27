@@ -306,6 +306,25 @@ function loadPortfolio(): PortfolioShot[] {
   return ranked(rows);
 }
 
+function detectCaseStudyCover(en: NoteFile, slug: string): string | undefined {
+  const explicit = str(en.data.cover);
+  if (explicit) return resolveNoteAsset(en.dir, explicit);
+  const candidates = [
+    `${slug}.jpg`,
+    `${slug}.png`,
+    `${slug}.webp`,
+    `${slug}-cover.jpg`,
+    `${slug}-cover.png`,
+    `${slug}-cover.webp`,
+  ];
+  for (const name of candidates) {
+    if (vaultExists(path.join(/* turbopackIgnore: true */ en.dir, name))) {
+      return resolveNoteAsset(en.dir, name);
+    }
+  }
+  return undefined;
+}
+
 function loadCaseStudies(): CaseStudy[] {
   const pairs = pairNotes(path.join(VAULT_ROOT, "case-studies"));
   const rows = pairs.map(({ en, by }, index) => {
@@ -315,11 +334,13 @@ function loadCaseStudies(): CaseStudy[] {
     const byBody = preprocessMarkdown((by?.body ?? en.body).trim(), en.dir);
     const stack = strList(en.data.stack);
     const relatedSlugs = strList(en.data.related);
+    const cover = detectCaseStudyCover(en, slug);
     const item: CaseStudy = {
       slug,
       experienceId: str(en.data.experienceId) ?? "",
       title: localized(str(en.data.title), str(by?.data.title)),
       summary: localized(str(en.data.summary), str(by?.data.summary)),
+      ...(cover ? { cover } : {}),
       ...(stack ? { stack } : {}),
       ...(enBody ? { body: localized(enBody, byBody) } : {}),
       ...(relatedSlugs ? { relatedSlugs } : {}),

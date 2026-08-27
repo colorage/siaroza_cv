@@ -22,32 +22,50 @@ export function CaseStudiesIndex({ locale, dict }: Props) {
         {dict.caseStudies.heading}
       </h2>
 
-      <ul className="max-w-2xl divide-y divide-border">
+      <ul className="max-w-3xl divide-y divide-border">
         {studies.map((study) => {
           const featured = hasCaseStudyBody(study);
 
           return (
-            <li key={study.slug} className={featured ? "py-10 first:pt-0" : "py-6 first:pt-0"}>
+            <li
+              key={study.slug}
+              className={featured ? "py-10 first:pt-0" : "py-6 first:pt-0"}
+            >
               <Link
                 href={`/${locale}/work/${study.slug}`}
-                className="group block"
+                className="group flex items-start justify-between gap-5 md:gap-8"
               >
-                <h3
-                  className={`tracking-tight text-foreground transition-opacity group-hover:opacity-70 ${
-                    featured
-                      ? "text-2xl leading-tight md:text-3xl"
-                      : "text-lg leading-snug"
-                  }`}
+                <div className="min-w-0 flex-1">
+                  <h3
+                    className={`tracking-tight text-foreground transition-opacity group-hover:opacity-70 ${
+                      featured
+                        ? "text-2xl leading-tight md:text-3xl"
+                        : "text-lg leading-snug"
+                    }`}
+                  >
+                    {study.title[locale]}
+                  </h3>
+                  <p
+                    className={`line-clamp-2 leading-relaxed text-muted ${
+                      featured ? "mt-3 text-[16px]" : "mt-2 text-[14px]"
+                    }`}
+                  >
+                    {study.summary[locale]}
+                  </p>
+                </div>
+                <div
+                  className="h-20 w-28 shrink-0 overflow-hidden rounded-xl border border-border bg-surface md:h-28 md:w-40"
+                  aria-hidden
                 >
-                  {study.title[locale]}
-                </h3>
-                <p
-                  className={`leading-relaxed text-muted ${
-                    featured ? "mt-4 text-[16px]" : "mt-2 line-clamp-2 text-[14px]"
-                  }`}
-                >
-                  {study.summary[locale]}
-                </p>
+                  {study.cover ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={study.cover}
+                      alt=""
+                      className="h-full w-full object-cover"
+                    />
+                  ) : null}
+                </div>
               </Link>
             </li>
           );
