@@ -623,7 +623,11 @@ export function getSortedProjects(): Project[] {
 }
 
 export const featuredExperienceIds = ["spribe", "ptchr", "hiveon"] as const;
-export const featuredPortfolioSlugs = ["ui-test", "brandbook", "ptchr"] as const;
+export const featuredPortfolioSlugs = [
+  "showreel-23",
+  "brandbook",
+  "ice-sculptor",
+] as const;
 export const featuredProjectSlugs = [
   "lacinka",
   "radar-rockets",
