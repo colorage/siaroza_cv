@@ -7,17 +7,19 @@ needs_translation: false
 stack:
   - Blender
 locale: en
-title: Chameleon illustrations for Shopify themes
+title: Chameleon illustration system for Shopify
 summary: >-
-  Theme builder for Shopify: merchants set primary and secondary colors, and pick an illustration style. Vectors recolor
-  with variables. 3D needed a 16×16 render matrix and a hex postfix so the store loaded the matching pair.
+  Theme-aware illustration system for a Shopify builder: vector art recolored at runtime, 3D art served from a
+  generated 16×16 matrix and resolved by filename.
 ---
 
 ## Context
 
-The product was a theme builder for Shopify stores. Clients wanted more than a two-color setup — they wanted illustrations that belonged to the shop, in a style they chose.
+The Shopify theme builder let merchants choose a primary and secondary color, then pick an illustration style. The visual system needed those choices to feel intentional, not like a generic asset with a tint applied.
 
-Flat vector art recolors in one pass with theme variables. The real constraint is 3D: a render is a baked image. Primary and secondary have to live in the scene, then every pair has to be rendered, named, and served.
+Vectors could respond to theme variables. 3D could not: once rendered, color was pixels. Each primary–secondary pair had to be present in the asset, named predictably, and returned to the storefront without a lookup table.
+
+I designed the 3D path as a data problem: constrain the palette, render it once, and let the storefront derive the file name.
 ## Effort
 
 **Duration.** Multi-month
@@ -32,11 +34,11 @@ Flat vector art recolors in one pass with theme variables. The real constraint i
 - Vectors recolor with variables; 3D renders cannot
 - 16 hues × 16 hues = 256 renders per illustration
 
-### What was hard
+### What required judgment
 
-- Art that still reads after both colors swap
-- Iterate the pair in Blender, then render the full matrix
-- A storefront lookup with no filename database
+- Illustration had to stay legible after two independent color changes
+- 3D needed a complete matrix instead of runtime recoloring
+- The storefront needed a predictable lookup without a filename database
 
 *From palette pick to the matching PNG.*
 
@@ -58,21 +60,21 @@ flowchart TD
 
 ## Process
 
-### Two kinds of art
+### Two rendering paths
 
-Merchants picked illustration style as well as colors. Flat vectors follow the theme in one step: swap the variables. 3D does not. A render is pixels; the pair has to be in the file.
+Merchants selected an illustration style alongside the colors. Flat vectors followed the theme in one step by swapping variables. For 3D, the color pair had to be built into the scene before rendering.
 
-### Design in Blender
+### Build color into the 3D scene
 
-Illustrations were built with primary and secondary as materials. Iterate the pair in-scene until both colors still read — then batch. No recolor after the render.
+I built the illustrations in Blender with primary and secondary as materials. I iterated on the pair in-scene until both colors still read, then rendered the batch. There was no reliable recolor step after the render.
 
-### 16×16 matrix
+### Render the 16×16 matrix
 
-A custom plugin rendered every pair. Sixteen hues on each axis: 256 files per illustration. That is the cost of 3D that still matches the theme.
+A custom plugin rendered every pair: sixteen hues on each axis, 256 files per illustration. The matrix made 3D predictable while keeping it tied to the merchant's theme.
 
-### Hex postfix
+### Resolve by filename
 
-Colors marked 0–F. The pair is the filename suffix. shopping_cart_a2.png is the Blue–Amber theme. The store builds the name from the palette it already has; no lookup table.
+Each hue was assigned a hexadecimal index from 0–F. The pair became the filename suffix: `shopping_cart_a2.png` represented the Blue–Amber theme. The storefront already knew the selected palette, so it could build the filename directly — no lookup table.
 
 *The pair is the filename: shopping_cart_a2.png is Blue–Amber.*
 
@@ -87,12 +89,10 @@ flowchart TD
   file --> theme
 ```
 
-## Solution
+## Outcome
 
-Pre-rendered matrix plus a postfix lookup. The store loads the PNG. No runtime recolor on the 3D art.
+The shipped pattern was a pre-rendered 3D library plus a deterministic filename contract. The storefront requested the file it needed; it never had to recolor a 3D image at runtime.
 
-## Impact
-
-- 256 colorways per 3D illustration without hand-export
-- Storefront resolve is a postfix, not a table
-- 3D art matches the palette the merchant already set
+- 256 colorways per 3D illustration without hand-exporting every pair
+- One filename contract replaced a separate lookup table
+- Merchant-selected colors carried through to the 3D illustration

@@ -5,7 +5,7 @@ order: 3
 experienceId: spribe
 needs_translation: false
 locale: en
-title: Figma Plugin
+title: Internal Figma workflow plugin
 summary: >-
-  Custom Figma plugin for internal design processes — less repetitive work in the product workflow.
+  Custom Figma plugin for automating repetitive steps in internal design workflows.
 ---
