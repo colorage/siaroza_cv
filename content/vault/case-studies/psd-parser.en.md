@@ -9,20 +9,20 @@ stack:
   - Lua
   - Photoshop
 locale: en
-title: Photoshop-based level design
+title: PSD-to-Lua level pipeline
 summary: >-
-  PSD-to-Lua pipeline for hidden-object iOS ports. Layer names carried function; the engine read position and bounds.
-  Cycle dropped from six months to three or four.
+  Photoshop-to-Lua pipeline for hidden-object games ported to iOS: layer names carried behavior, the engine read
+  position and bounds, and the production cycle dropped from six months to three or four.
 ---
 
 ## Context
 
-Early 2010s, mobile games were a growing market. The fast way for a studio to lead was to port PC titles to iOS: art already existed, but mechanics had to be rewritten from cursor click to finger touch. This was before Unity and Unreal were the default. The studio shipped on an in-house engine. A publisher supplied original art as PSD files — casual games, mostly hidden object, with mini-games and cutscenes. Those files held hundreds of layers with chaotic names.
+In the early 2010s, CyberCradle ported casual PC games to iOS on an in-house engine. The art already existed in Photoshop; interaction had to be rebuilt for touch, and each level had to become Lua data. Publisher PSDs contained hundreds of layers with no reliable naming system.
 
-The first port took six months. Every item was exported by hand, placed in a text editor, and wired into a state machine. PSD is an old format, not meant to be parsed from outside. University C++ was the only coding background; this was the first production tooling.
+The first port took six months. I exported items by hand, placed coordinates in a text editor, and wired them into a state machine. That repetition made the production handoff — not the game design — the bottleneck. PSD was also an old format with no straightforward external parsing path; I had C++ from university and was building my first production tool.
 ## Effort
 
-**Duration.** First title 6 months; later 3–4
+**Duration.** First title: 6 months; later titles: 3–4 months
 
 **Role.** Game Designer & QA
 
@@ -35,14 +35,14 @@ The first port took six months. Every item was exported by hand, placed in a tex
 - PSD not designed for external parsing
 - Touch mechanics rewritten from PC
 
-### What was hard
+### What required judgment
 
 - First production code
-- Interpreting chaotic art files as level data
-- A naming system that encoded object and function
-- Fitting parse output to the Lua format the engine already used
+- Turning visual layers into reliable level data
+- A naming contract that encoded object and behavior
+- Fitting generated data to the Lua format the engine already used
 
-*From cleaned PSD to a testable level.*
+*From cleaned PSD to a playable, testable level.*
 
 ```mermaid
 flowchart TD
@@ -57,27 +57,22 @@ flowchart TD
 
 ## Process
 
-1. Clean up PSD — drop or merge non-interactive layers; rename to the system
-2. Read PSD
-3. Export level logic
-4. Export assets
-5. Build a spritesheet
-6. Test
+### Make the PSD predictable
 
-### A naming system
+I defined a small naming contract for the source file: remove or merge non-interactive layers, then name interactive layers as object plus function. Cleanup became the input contract instead of a recurring export task.
 
-Layer name = object + function. Designers spent time on cleanup instead of hand-placing every item.
+### Parse only the data the engine needed
 
-### Enough to parse
+A parser read the layer name, x/y position, and bounding box — enough to map the visual file into the engine's existing Lua level format. The PSD remained the designer-facing source; the parser carried the repetitive handoff.
 
-A GitHub library could read layer name, xy, and bounding box. That mapped into the studio's Lua level format.
+### Export and test as one loop
 
-## Solution
+The tool wrote Lua level logic, exported the art, and built a spritesheet. QA could then test the level in the engine instead of discovering placement problems after a long manual export.
 
-The parser wrote Lua level logic, exported assets, and built a spritesheet.
+## Outcome
 
-## Impact
+The tool turned a cleaned PSD into a testable level while keeping the designer's source file intact.
 
-- Later titles: 6 months → 3–4
-- Saved time went to QA
-- Studio hired and signed more publisher contracts
+- Later titles dropped from 6 months to 3–4 months
+- Recovered production time went to QA and gameplay polish
+- A repeatable pipeline supported the studio as it hired and took on more publisher contracts
