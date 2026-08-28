@@ -33,7 +33,7 @@ export function CaseStudyBody({ study, locale, dict }: Props) {
   const body = study.body?.[locale];
 
   return (
-    <div className="max-w-2xl">
+    <div>
       {body ? (
         <MarkdownBody
           markdown={body}

@@ -39,7 +39,7 @@ export function GalleryEmbed({ source, indexTemplate }: Props) {
   const label = images.find((image) => image.alt)?.alt ?? "Gallery";
 
   return (
-    <div className="relative left-1/2 my-8 w-[min(100vw-3rem,64rem)] -translate-x-1/2">
+    <div className="my-8 w-full">
       <MediaCarousel
         pages={images.map((image) => image.src)}
         alt={label}
