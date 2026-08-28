@@ -31,6 +31,10 @@ Wednesday, Stranger Things, BoJack Horseman and the rest here are catalog titles
 
 The catalog never stood still. New providers joined; ones already on the pipe dropped premieres. The chain had to watch production first and the pre-release dump second: work on raw data early is what stops missing posters when a title goes live.
 
+![n8n canvas — hourly generate, manual render and upload, daily QA](streaming-thumbnails/n8n-workflow.png)
+
+*n8n runs the chain: hourly fetch and generate when titles land, a manual render-and-upload hop, and daily QA.*
+
 ## Effort
 
 **Duration.** 1 year
