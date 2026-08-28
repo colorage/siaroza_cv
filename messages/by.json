@@ -70,8 +70,16 @@
       "gradientDark": "Цёмны",
       "gradientOriginal": "Арыгінал",
       "gradientBright": "Яркі",
+      "size": "Памер",
+      "sizeTiny": "Дробны",
+      "sizeSmall": "Малы",
+      "sizeMedium": "Сярэдні",
+      "sizeLarge": "Вялікі",
+      "aspect": "Прапорцыі",
+      "aspectThin": "Вузкі",
+      "aspectWide": "Шырокі",
       "posters": "Скіны тамбнейлаў",
-      "caption": "Інтэрактыўна — змяніце тытр і градыент."
+      "caption": "Інтэрактыўна — змяніце тытр, градыент, памер і прапорцыі."
     }
   },
   "footer": {

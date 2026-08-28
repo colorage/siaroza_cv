@@ -228,6 +228,18 @@ body {
   background: var(--border-strong);
 }
 
+.thumbnail-pipeline-row {
+  width: 100%;
+}
+
+.thumbnail-pipeline-item {
+  flex-shrink: 0;
+  transition:
+    width 400ms ease,
+    margin-right 400ms ease,
+    opacity 280ms ease;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-up-delay,
@@ -251,5 +263,9 @@ body {
 
   .marquee-clone {
     display: none;
+  }
+
+  .thumbnail-pipeline-item {
+    transition: none;
   }
 }

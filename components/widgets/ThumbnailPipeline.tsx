@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { isLocale, type Locale } from "@/lib/i18n";
 import by from "@/messages/by.json";
 import en from "@/messages/en.json";
@@ -20,6 +20,22 @@ type TitleMode = "original" | "common";
 type Gradient = "none" | "dark" | "original" | "bright";
 
 const GRADIENTS: Gradient[] = ["none", "dark", "original", "bright"];
+const SIZES = ["tiny", "small", "medium", "large"] as const;
+type PosterSize = (typeof SIZES)[number];
+const RATIOS = [
+  { token: "1_2", w: 1, h: 2, label: "1:2" },
+  { token: "9_16", w: 9, h: 16, label: "9:16" },
+  { token: "2_3", w: 2, h: 3, label: "2:3" },
+  { token: "3_4", w: 3, h: 4, label: "3:4" },
+  { token: "1_1", w: 1, h: 1, label: "1:1" },
+  { token: "4_3", w: 4, h: 3, label: "4:3" },
+  { token: "3_2", w: 3, h: 2, label: "3:2" },
+  { token: "16_9", w: 16, h: 9, label: "16:9" },
+  { token: "2_1", w: 2, h: 1, label: "2:1" },
+] as const;
+const DEFAULT_RATIO_INDEX = 3;
+const MIN_GAP = 8;
+const REF_RATIO = 3 / 4;
 
 const SKIN_LETTERS = ["a", "b", "c", "d", "e", "f", "g", "h"] as const;
 
@@ -28,12 +44,39 @@ const SKIN_BY_STATE: Record<TitleMode, Record<Gradient, string>> = {
   common: { none: "e", dark: "f", original: "g", bright: "h" },
 };
 
-function posterSrc(titleId: string, skin: string): string {
-  return `${MEDIA_DIR}/netflix@${titleId}-style-${skin}-3_4-medium.png`;
+function posterSrc(
+  titleId: string,
+  skin: string,
+  ratioToken: string,
+  size: PosterSize,
+): string {
+  return `${MEDIA_DIR}/netflix@${titleId}-style-${skin}-${ratioToken}-${size}.webp`;
 }
 
 function copyFor(locale: Locale) {
   return (locale === "by" ? by : en).widgets.thumbnailPipeline;
+}
+
+function layoutFor(containerWidth: number, ratioW: number, ratioH: number) {
+  const width = containerWidth > 0 ? containerWidth : 1024;
+  let height =
+    (width - (TITLES.length - 1) * MIN_GAP) / TITLES.length / REF_RATIO;
+  height = Math.max(height, 64);
+  let thumbWidth = height * (ratioW / ratioH);
+  let visible: number = TITLES.length;
+  while (visible > 1) {
+    const needed = visible * thumbWidth + (visible - 1) * MIN_GAP;
+    if (needed <= width + 0.5) break;
+    visible -= 2;
+  }
+  if (visible === 1 && thumbWidth > width) {
+    const scale = width / thumbWidth;
+    thumbWidth = width;
+    height *= scale;
+  }
+  const gap = visible > 1 ? (width - visible * thumbWidth) / (visible - 1) : 0;
+  const hide = (TITLES.length - visible) / 2;
+  return { height, thumbWidth, gap, hide, visible };
 }
 
 function TitleSwitch({
@@ -90,19 +133,24 @@ function TitleSwitch({
   );
 }
 
-function GradientSlider({
-  value,
-  labels,
+function DiscreteSlider({
+  valuesLength,
+  index,
   groupLabel,
+  valueText,
   onChange,
+  ticks,
+  endLabels,
 }: {
-  value: Gradient;
-  labels: Record<Gradient, string>;
+  valuesLength: number;
+  index: number;
   groupLabel: string;
-  onChange: (value: Gradient) => void;
+  valueText: string;
+  onChange: (index: number) => void;
+  ticks?: readonly string[];
+  endLabels?: readonly [string, string];
 }) {
   const sliderId = useId();
-  const index = GRADIENTS.indexOf(value);
 
   return (
     <div className="flex w-64 max-w-full flex-col gap-2">
@@ -113,28 +161,44 @@ function GradientSlider({
         id={sliderId}
         type="range"
         min={0}
-        max={GRADIENTS.length - 1}
+        max={valuesLength - 1}
         step={1}
         value={index}
-        aria-valuetext={labels[value]}
-        onChange={(event) => {
-          const next = GRADIENTS[Number(event.target.value)];
-          if (next) onChange(next);
-        }}
+        aria-valuetext={valueText}
+        onChange={(event) => onChange(Number(event.target.value))}
         className="thumbnail-gradient-slider"
       />
-      <div className="flex justify-between">
-        {GRADIENTS.map((gradient) => (
+      {ticks ? (
+        <div className="flex justify-between">
+          {ticks.map((label, tickIndex) => (
+            <span
+              key={`${label}-${tickIndex}`}
+              className={`font-mono text-[11px] tracking-wide uppercase ${
+                tickIndex === index ? "text-foreground" : "text-muted"
+              }`}
+            >
+              {label}
+            </span>
+          ))}
+        </div>
+      ) : endLabels ? (
+        <div className="flex justify-between">
           <span
-            key={gradient}
             className={`font-mono text-[11px] tracking-wide uppercase ${
-              gradient === value ? "text-foreground" : "text-muted"
+              index === 0 ? "text-foreground" : "text-muted"
             }`}
           >
-            {labels[gradient]}
+            {endLabels[0]}
           </span>
-        ))}
-      </div>
+          <span
+            className={`font-mono text-[11px] tracking-wide uppercase ${
+              index === valuesLength - 1 ? "text-foreground" : "text-muted"
+            }`}
+          >
+            {endLabels[1]}
+          </span>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -147,38 +211,75 @@ export function ThumbnailPipeline(props: Record<string, unknown>) {
   const copy = copyFor(locale);
   const [titleMode, setTitleMode] = useState<TitleMode>("original");
   const [gradient, setGradient] = useState<Gradient>("none");
+  const [size, setSize] = useState<PosterSize>("medium");
+  const [ratioIndex, setRatioIndex] = useState(DEFAULT_RATIO_INDEX);
+  const [rowWidth, setRowWidth] = useState(0);
+  const rowRef = useRef<HTMLUListElement>(null);
+  const ratio = RATIOS[ratioIndex] ?? RATIOS[DEFAULT_RATIO_INDEX];
   const skin = SKIN_BY_STATE[titleMode][gradient];
+  const layout = useMemo(
+    () => layoutFor(rowWidth, ratio.w, ratio.h),
+    [rowWidth, ratio.w, ratio.h],
+  );
+
+  useLayoutEffect(() => {
+    const node = rowRef.current;
+    if (!node) return;
+    const observer = new ResizeObserver((entries) => {
+      const next = entries[0]?.contentRect.width ?? 0;
+      setRowWidth((prev) => (Math.abs(prev - next) < 0.5 ? prev : next));
+    });
+    observer.observe(node);
+    setRowWidth(node.getBoundingClientRect().width);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     for (const title of TITLES) {
       for (const letter of SKIN_LETTERS) {
         const img = new window.Image();
-        img.src = posterSrc(title.id, letter);
+        img.src = posterSrc(title.id, letter, ratio.token, size);
       }
     }
-  }, []);
+  }, [ratio.token, size]);
+
+  const lastVisible = TITLES.length - 1 - layout.hide;
 
   return (
     <figure className="relative left-1/2 my-8 w-[min(100vw-3rem,64rem)] -translate-x-1/2">
       <ul
+        ref={rowRef}
         aria-label={copy.posters}
-        className="flex gap-2 overflow-x-auto overscroll-x-contain snap-x snap-proximity [scrollbar-width:none] md:grid md:grid-cols-5 md:overflow-visible [&::-webkit-scrollbar]:hidden"
+        className="thumbnail-pipeline-row flex justify-center overflow-hidden"
+        style={{ height: layout.height }}
       >
-        {TITLES.map((title) => (
-          <li
-            key={title.id}
-            className="relative aspect-[3/4] h-36 shrink-0 snap-start overflow-hidden rounded-lg bg-surface md:h-auto md:w-full"
-          >
-            <Image
-              src={posterSrc(title.id, skin)}
-              alt={title.alt}
-              fill
-              sizes="(min-width: 768px) 160px, 108px"
-              className="object-cover"
-              unoptimized
-            />
-          </li>
-        ))}
+        {TITLES.map((title, index) => {
+          const visible = index >= layout.hide && index <= lastVisible;
+          const last = index === lastVisible;
+          return (
+            <li
+              key={title.id}
+              aria-hidden={!visible}
+              className="thumbnail-pipeline-item relative overflow-hidden rounded-lg bg-surface"
+              style={{
+                width: visible ? layout.thumbWidth : 0,
+                height: layout.height,
+                marginRight: visible && !last ? layout.gap : 0,
+                opacity: visible ? 1 : 0,
+                pointerEvents: visible ? "auto" : "none",
+              }}
+            >
+              <Image
+                src={posterSrc(title.id, skin, ratio.token, size)}
+                alt={visible ? title.alt : ""}
+                fill
+                sizes={`${Math.round(layout.thumbWidth)}px`}
+                className="object-cover"
+                unoptimized
+              />
+            </li>
+          );
+        })}
       </ul>
       <div className="mx-auto mt-5 flex flex-col items-center gap-4">
         <TitleSwitch
@@ -188,15 +289,55 @@ export function ThumbnailPipeline(props: Record<string, unknown>) {
           groupLabel={copy.title}
           onChange={setTitleMode}
         />
-        <GradientSlider
-          value={gradient}
+        <DiscreteSlider
+          valuesLength={SIZES.length}
+          index={SIZES.indexOf(size)}
+          groupLabel={copy.size}
+          valueText={
+            {
+              tiny: copy.sizeTiny,
+              small: copy.sizeSmall,
+              medium: copy.sizeMedium,
+              large: copy.sizeLarge,
+            }[size]
+          }
+          ticks={[copy.sizeTiny, copy.sizeSmall, copy.sizeMedium, copy.sizeLarge]}
+          onChange={(next) => {
+            const value = SIZES[next];
+            if (value) setSize(value);
+          }}
+        />
+        <DiscreteSlider
+          valuesLength={RATIOS.length}
+          index={ratioIndex}
+          groupLabel={copy.aspect}
+          valueText={ratio.label}
+          endLabels={[copy.aspectThin, copy.aspectWide]}
+          onChange={(next) => {
+            if (RATIOS[next]) setRatioIndex(next);
+          }}
+        />
+        <DiscreteSlider
+          valuesLength={GRADIENTS.length}
+          index={GRADIENTS.indexOf(gradient)}
           groupLabel={copy.gradient}
-          onChange={setGradient}
-          labels={{
-            none: copy.gradientNone,
-            dark: copy.gradientDark,
-            original: copy.gradientOriginal,
-            bright: copy.gradientBright,
+          valueText={
+            {
+              none: copy.gradientNone,
+              dark: copy.gradientDark,
+              original: copy.gradientOriginal,
+              bright: copy.gradientBright,
+            }[gradient]
+          }
+          ticks={[
+            copy.gradientNone,
+            copy.gradientDark,
+            copy.gradientOriginal,
+            copy.gradientBright,
+          ]}
+          onChange={(next) => {
+            const value = GRADIENTS[next];
+            if (value) setGradient(value);
           }}
         />
       </div>

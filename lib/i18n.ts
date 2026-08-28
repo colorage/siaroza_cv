@@ -105,6 +105,14 @@ export type Dictionary = {
       gradientDark: string;
       gradientOriginal: string;
       gradientBright: string;
+      size: string;
+      sizeTiny: string;
+      sizeSmall: string;
+      sizeMedium: string;
+      sizeLarge: string;
+      aspect: string;
+      aspectThin: string;
+      aspectWide: string;
       posters: string;
       caption: string;
     };

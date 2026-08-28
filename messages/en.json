@@ -70,8 +70,16 @@
       "gradientDark": "Dark",
       "gradientOriginal": "Original",
       "gradientBright": "Bright",
+      "size": "Size",
+      "sizeTiny": "Tiny",
+      "sizeSmall": "Small",
+      "sizeMedium": "Medium",
+      "sizeLarge": "Large",
+      "aspect": "Aspect ratio",
+      "aspectThin": "Thin",
+      "aspectWide": "Wide",
       "posters": "Thumbnail skins",
-      "caption": "Interactive — change title treatment and gradient."
+      "caption": "Interactive — change title treatment, gradient, size, and aspect ratio."
     }
   },
   "footer": {
