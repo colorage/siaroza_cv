@@ -7,7 +7,8 @@ import { ProjectGallery } from "@/components/ProjectGallery";
 import { ProjectLogo } from "@/components/ProjectLogo";
 import { VideoEmbed } from "@/components/VideoEmbed";
 import { YouTubeEmbed } from "@/components/YouTubeEmbed";
-import { getProject, projects, type ProjectMedia } from "@/content/projects";
+import { getProject, getProjects } from "@/lib/vault/load";
+import type { ProjectMedia } from "@/lib/vault/types";
 import {
   getDictionary,
   isLocale,
@@ -26,7 +27,32 @@ function projectLinkLabel(label: string, dict: Dictionary): string {
   if (label === "instagram") return dict.projects.instagram;
   if (label === "telegram") return dict.projects.telegram;
   if (label === "dribbble") return dict.projects.dribbble;
+  if (label === "x") return dict.projects.x;
   return label;
+}
+
+function mediaCiteLabel(href: string, dict: Dictionary): string | null {
+  if (href.includes("dribbble.com")) return dict.projects.dribbble;
+  if (href.includes("x.com") || href.includes("twitter.com")) {
+    return dict.projects.viewOnX;
+  }
+  return null;
+}
+
+function MediaCite({ href, dict }: { href?: string; dict: Dictionary }) {
+  if (!href) return null;
+  const label = mediaCiteLabel(href, dict);
+  if (!label) return null;
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="mt-3 inline-flex items-center text-[13px] text-muted transition-colors hover:text-foreground"
+    >
+      {label} →
+    </a>
+  );
 }
 
 function ProjectMediaBlock({
@@ -49,12 +75,16 @@ function ProjectMediaBlock({
   }
 
   if (item.type === "video") {
+    const cite = item.href ? mediaCiteLabel(item.href, dict) : null;
     return (
       <VideoEmbed
         src={item.src}
         poster={item.poster}
         title={item.title[locale]}
         caption={item.caption?.[locale]}
+        loop={item.loop}
+        href={cite ? item.href : undefined}
+        linkLabel={cite ?? undefined}
       />
     );
   }
@@ -69,6 +99,7 @@ function ProjectMediaBlock({
       height={item.height}
       className="h-auto w-full"
       sizes="(max-width: 64rem) calc(100vw - 3rem), 64rem"
+      unoptimized={item.src.startsWith("/media/")}
     />
   );
 
@@ -88,16 +119,7 @@ function ProjectMediaBlock({
           {item.caption[locale]}
         </figcaption>
       ) : null}
-      {item.href?.includes("dribbble.com") ? (
-        <a
-          href={item.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-3 inline-flex items-center text-[13px] text-muted transition-colors hover:text-foreground"
-        >
-          {dict.projects.dribbble} →
-        </a>
-      ) : null}
+      <MediaCite href={item.href} dict={dict} />
     </figure>
   );
 }
@@ -105,7 +127,7 @@ function ProjectMediaBlock({
 export function generateStaticParams() {
   if (!isPetProjectsEnabled()) return [];
   return locales.flatMap((locale) =>
-    projects
+    getProjects()
       .filter((project) => project.stage !== "nda")
       .map((project) => ({ locale, slug: project.slug })),
   );
@@ -141,7 +163,7 @@ export default async function ProjectPage({ params }: Props) {
     <article className="py-16 md:py-24">
       <div className="mx-auto max-w-5xl px-6">
         <Link
-          href={`/${locale}#projects`}
+          href={`/${locale}/projects`}
           className="text-[13px] text-muted transition-colors hover:text-foreground"
         >
           ← {dict.projects.back}
@@ -152,6 +174,7 @@ export default async function ProjectPage({ params }: Props) {
             <ProjectLogo
               slug={project.slug}
               name={project.name}
+              logoSrc={project.logo}
               className="h-14 w-14"
             />
             <div className="min-w-0">
@@ -182,7 +205,7 @@ export default async function ProjectPage({ params }: Props) {
             </span>
           </div>
 
-          <p className="mt-8 max-w-2xl text-[16px] leading-relaxed text-muted">
+          <p className="mt-8 text-[16px] leading-relaxed text-muted">
             {project.description[locale]}
           </p>
         </div>

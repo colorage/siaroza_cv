@@ -3,8 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CaseStudyBody } from "@/components/CaseStudyBody";
 import { PortfolioPiece } from "@/components/PortfolioPiece";
-import { getCaseStudy } from "@/content/case-studies";
-import { getPortfolioShot, isStandaloneShot } from "@/content/portfolio";
+import { getCaseStudy, getPortfolioShot } from "@/lib/vault/load";
+import { isStandaloneShot } from "@/lib/vault/portfolio-utils";
 import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/metadata";
 import { getWorkSlugs } from "@/lib/work";
@@ -58,7 +58,7 @@ export default async function WorkPage({ params }: Props) {
   if (!study) notFound();
 
   return (
-    <article className="mx-auto max-w-2xl px-6 py-16 md:py-24">
+    <article className="mx-auto max-w-5xl px-6 py-16 md:py-24">
       <Link
         href={`/${locale}#case-studies`}
         className="text-[13px] text-muted transition-colors hover:text-foreground"

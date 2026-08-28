@@ -1,29 +1,49 @@
 import Link from "next/link";
 import { AsciiNoise } from "@/components/AsciiNoise";
 import { ProjectLogo } from "@/components/ProjectLogo";
-import { getSortedProjects } from "@/content/projects";
+import type { Project } from "@/lib/vault/types";
 import type { Dictionary, Locale } from "@/lib/i18n";
+
+type HeadingTag = "h1" | "h2";
 
 type Props = {
   locale: Locale;
   dict: Dictionary;
+  items: Project[];
+  heading: string;
+  headingAs?: HeadingTag;
+  id?: string;
+  seeAllHref?: string;
+  seeAllLabel?: string;
 };
 
-export function ProjectsGrid({ locale, dict }: Props) {
-  const projects = getSortedProjects();
+export function ProjectsGrid({
+  locale,
+  dict,
+  items,
+  heading,
+  headingAs = "h2",
+  id,
+  seeAllHref,
+  seeAllLabel,
+}: Props) {
+  const Heading = headingAs;
 
   return (
-    <section id="projects" className="mx-auto max-w-5xl scroll-mt-20 px-6 py-24">
-      <h2 className="mb-12 text-3xl tracking-tight text-foreground md:text-4xl">
-        {dict.projects.heading}
-      </h2>
+    <section id={id} className="mx-auto max-w-5xl scroll-mt-20 px-6 py-24">
+      <Heading className="mb-12 text-3xl tracking-tight text-foreground md:text-4xl">
+        {heading}
+      </Heading>
 
       <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project, index) => {
+        {items.map((project, index) => {
           const isNda = project.stage === "nda";
           const shellClass =
             "flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-5";
-          const ndaTitle = dict.projects.ndaPrivateTitle.replace("{name}", project.name);
+          const ndaTitle = dict.projects.ndaPrivateTitle.replace(
+            "{name}",
+            project.name,
+          );
 
           return (
             <li
@@ -52,6 +72,7 @@ export function ProjectsGrid({ locale, dict }: Props) {
                     <ProjectLogo
                       slug={project.slug}
                       name={project.name}
+                      logoSrc={project.logo}
                       className="h-11 w-11 transition-colors group-hover:border-border-strong group-hover:text-accent"
                     />
                     {project.status === "active" && (
@@ -91,6 +112,15 @@ export function ProjectsGrid({ locale, dict }: Props) {
           );
         })}
       </ul>
+
+      {seeAllHref && seeAllLabel ? (
+        <Link
+          href={seeAllHref}
+          className="mt-8 inline-flex text-[13px] text-muted transition-colors hover:text-foreground"
+        >
+          {seeAllLabel} →
+        </Link>
+      ) : null}
     </section>
   );
 }

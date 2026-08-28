@@ -1,7 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        source: "/:locale(en|by)/work/game-thumbnails",
+        destination: "/:locale/work/streaming-thumbnails",
+        permanent: true,
+      },
+    ];
+  },
+  outputFileTracingIncludes: {
+    "/media/*": ["./content/vault/**/*"],
+    "/media/**": ["./content/vault/**/*"],
+    "/*": ["./content/vault/**/*.md"],
+  },
 };
 
 export default nextConfig;

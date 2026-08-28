@@ -58,6 +58,7 @@ export type Dictionary = {
   };
   experience: {
     heading: string;
+    earlier: string;
     downloadCv: string;
     caseStudies: string;
     caseStudyBack: string;
@@ -69,6 +70,9 @@ export type Dictionary = {
   };
   portfolio: {
     heading: string;
+    seeAll: string;
+    archiveTitle: string;
+    archiveDescription: string;
     back: string;
     viewOnDribbble: string;
     viewOnYouTube: string;
@@ -79,16 +83,48 @@ export type Dictionary = {
     heading: string;
     back: string;
     context: string;
+    effort: string;
+    duration: string;
+    role: string;
+    team: string;
+    constraints: string;
+    hard: string;
     process: string;
     solution: string;
     impact: string;
+    diagram: string;
     related: string;
+  };
+  widgets: {
+    thumbnailPipeline: {
+      title: string;
+      titleOriginal: string;
+      titleCommon: string;
+      gradient: string;
+      gradientNone: string;
+      gradientDark: string;
+      gradientOriginal: string;
+      gradientBright: string;
+      size: string;
+      sizeTiny: string;
+      sizeSmall: string;
+      sizeMedium: string;
+      sizeLarge: string;
+      aspect: string;
+      aspectThin: string;
+      aspectWide: string;
+      posters: string;
+      caption: string;
+    };
   };
   footer: {
     contact: string;
   };
   projects: {
     heading: string;
+    seeAll: string;
+    archiveTitle: string;
+    archiveDescription: string;
     active: string;
     stage: Record<string, string>;
     status: Record<string, string>;
@@ -98,6 +134,8 @@ export type Dictionary = {
     instagram: string;
     telegram: string;
     dribbble: string;
+    x: string;
+    viewOnX: string;
     ndaNote: string;
     ndaPrivateTitle: string;
   };

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Siaroža — Design Engineer",
-    "description": "Партфоліа Сяргея Пехцерава — Design Engineer. Досвед, кейсы, пет-праекты, кантакты."
+    "description": "Design Engineer. Складаныя дызайн-задачы. Будую пайплайны — і падціскаю тыя, што ўжо ў працы."
   },
   "nav": {
     "experience": "Досвед",
@@ -16,13 +16,14 @@
     "name": "Сяргей Пехцераў",
     "shortName": "Siaroža",
     "title": "Design Engineer",
-    "tagline": "Моўшн, візуальныя сістэмы і прадуктовы крафт — з ухілам у яснасць.",
+    "tagline": "Складаныя дызайн-задачы. Будую пайплайны — і падціскаю тыя, што ўжо ў працы.",
     "email": "Email",
     "telegram": "Telegram",
     "linkedin": "LinkedIn"
   },
   "experience": {
     "heading": "Досвед",
+    "earlier": "Раней",
     "downloadCv": "Спампаваць CV",
     "caseStudies": "Кейсы",
     "caseStudyBack": "Назад да досведу",
@@ -34,6 +35,9 @@
   },
   "portfolio": {
     "heading": "Партфоліа",
+    "seeAll": "Усё партфоліа",
+    "archiveTitle": "Усё партфоліа",
+    "archiveDescription": "Ідэнтычнасць, моўшн і прадуктовы UI.",
     "back": "Назад",
     "viewOnDribbble": "Адкрыць на Dribbble",
     "viewOnYouTube": "Глядзець на YouTube",
@@ -44,16 +48,48 @@
     "heading": "Кейсы",
     "back": "Назад да кейсаў",
     "context": "Кантекст",
+    "effort": "Намаганні",
+    "duration": "Працягласць",
+    "role": "Роля",
+    "team": "Каманда",
+    "constraints": "Абмежаванні",
+    "hard": "Што было складана",
     "process": "Працэс",
     "solution": "Рашэнне",
     "impact": "Вынік",
+    "diagram": "Пайплайн",
     "related": "Таксама"
+  },
+  "widgets": {
+    "thumbnailPipeline": {
+      "title": "Тытр",
+      "titleOriginal": "Арыгінал",
+      "titleCommon": "Агульны",
+      "gradient": "Градыент",
+      "gradientNone": "Няма",
+      "gradientDark": "Цёмны",
+      "gradientOriginal": "Арыгінал",
+      "gradientBright": "Яркі",
+      "size": "Памер",
+      "sizeTiny": "Дробны",
+      "sizeSmall": "Малы",
+      "sizeMedium": "Сярэдні",
+      "sizeLarge": "Вялікі",
+      "aspect": "Прапорцыі",
+      "aspectThin": "Вузкі",
+      "aspectWide": "Шырокі",
+      "posters": "Скіны тамбнейлаў",
+      "caption": "Тытулы з каталога агрэгатара. Змяніце тытр, градыент, памер і прапорцыі."
+    }
   },
   "footer": {
     "contact": "Звязацца"
   },
   "projects": {
     "heading": "Пет-праекты",
+    "seeAll": "Усе пет-праекты",
+    "archiveTitle": "Усе пет-праекты",
+    "archiveDescription": "Выпушчаныя прадукты, эксперыменты і гарадскія інструменты.",
     "active": "Актыўны",
     "stage": {
       "release": "Release",
@@ -72,6 +108,8 @@
     "instagram": "Instagram",
     "telegram": "Telegram",
     "dribbble": "Глядзець на Dribbble",
+    "x": "X",
+    "viewOnX": "Глядзець на X",
     "ndaNote": "Дэталі пад NDA.",
     "ndaPrivateTitle": "Праект {name} не публічны"
   }
