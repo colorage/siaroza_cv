@@ -205,7 +205,7 @@ export default async function ProjectPage({ params }: Props) {
             </span>
           </div>
 
-          <p className="mt-8 max-w-2xl text-[16px] leading-relaxed text-muted">
+          <p className="mt-8 text-[16px] leading-relaxed text-muted">
             {project.description[locale]}
           </p>
         </div>

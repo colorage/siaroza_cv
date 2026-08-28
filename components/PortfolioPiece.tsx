@@ -119,7 +119,7 @@ export function PortfolioPiece({ shot, locale, dict }: Props) {
 
         {shot.description ? (
           <div className="mx-auto mt-8 max-w-5xl px-6">
-            <p className="max-w-2xl text-[16px] leading-relaxed text-muted">
+            <p className="text-[16px] leading-relaxed text-muted">
               {shot.description[locale]}
             </p>
           </div>

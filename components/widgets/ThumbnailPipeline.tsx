@@ -246,7 +246,7 @@ export function ThumbnailPipeline(props: Record<string, unknown>) {
   const lastVisible = TITLES.length - 1 - layout.hide;
 
   return (
-    <figure className="relative left-1/2 my-8 w-[min(100vw-3rem,64rem)] -translate-x-1/2">
+    <figure className="my-8 w-full">
       <ul
         ref={rowRef}
         aria-label={copy.posters}

@@ -58,7 +58,7 @@ export default async function WorkPage({ params }: Props) {
   if (!study) notFound();
 
   return (
-    <article className="mx-auto max-w-2xl px-6 py-16 md:py-24">
+    <article className="mx-auto max-w-5xl px-6 py-16 md:py-24">
       <Link
         href={`/${locale}#case-studies`}
         className="text-[13px] text-muted transition-colors hover:text-foreground"

@@ -31,17 +31,10 @@ function languageOf(node: ReactNode): { lang?: string; text: string } | null {
   return { lang, text };
 }
 
-function MarkdownImage({ src, alt, title }: ComponentPropsWithoutRef<"img">) {
+function MarkdownImage({ src, alt }: ComponentPropsWithoutRef<"img">) {
   if (typeof src !== "string" || !src) return null;
-  const fit = title?.trim().toLowerCase() === "fit";
   return (
-    <figure
-      className={
-        fit
-          ? "my-8 w-full"
-          : "relative left-1/2 my-8 w-[min(100vw-3rem,64rem)] -translate-x-1/2"
-      }
-    >
+    <figure className="my-8 w-full">
       <div className="overflow-hidden rounded-2xl">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={src} alt={alt ?? ""} className="h-auto w-full" />
@@ -68,7 +61,7 @@ export function MarkdownBody({ markdown, locale, slideIndexTemplate }: Props) {
   if (!markdown.trim()) return null;
 
   return (
-    <div className="max-w-2xl [&_a]:text-foreground [&_a]:underline-offset-4 [&_a]:hover:opacity-70">
+    <div className="[&_a]:text-foreground [&_a]:underline-offset-4 [&_a]:hover:opacity-70">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{

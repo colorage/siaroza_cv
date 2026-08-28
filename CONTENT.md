@@ -65,7 +65,7 @@ Slugs: lowercase kebab-case, ASCII, stable. Reuse an existing pet-project slug w
 - **Media lives in the vault note folder.** Download images next to the note. The site serves them at `/media/...`. Do not hotlink Dribbble, OG images, or CDNs. YouTube is the only embed exception (privacy-enhanced iframe). Do not put editorial media in `public/` (CV PDF and hero stills stay there).
 - **NDA:** if `stage === "nda"` (or the user says it is confidential), no public detail route, no extracted media, no quotes from the source, no public widgets. Grid card stays private (ASCII noise pattern).
 - **Pet projects** stay preview-only until [`lib/site-url.ts`](lib/site-url.ts) changes. Do not leak them onto production.
-- **Visual language:** `max-w-5xl` for site chrome and portfolio media; `max-w-2xl` for case-study prose and Mermaid wells. Case-study body images and widgets break out to `w-[min(100vw-3rem,64rem)]` (same well as the thumbnail widget). Opt into the text column with a CommonMark title: `![alt](file.png "fit")`. `rounded-2xl`, `border-border`, Geist, `text-muted` / `text-foreground`. Prefer scroll-snap over a carousel library.
+- **Visual language:** `max-w-5xl` for site chrome, reading columns, and media wells (case studies, portfolio, pet projects). Body images, galleries, widgets, and Mermaid share that column. `rounded-2xl`, `border-border`, Geist, `text-muted` / `text-foreground`. Prefer scroll-snap over a carousel library.
 - **Missing UI:** implement the primitive in the same PR. Do not leave “TODO: add carousel later.”
 
 ## File map
@@ -161,7 +161,7 @@ Required sections in the markdown body:
 Edit in Obsidian (` ```mermaid ` fences). The site renders them with [`MermaidDiagram`](components/MermaidDiagram.tsx).
 
 - Prefer `flowchart TD`. Split a fat graph into stacked figures rather than going LR or stretching the page. Short node labels; wrapping is for overflow, not layout.
-- Case-study diagrams share the **text column** (`max-w-2xl`). Do not widen a chart. Body images and widgets default to the same breakout as the thumbnail widget (`w-[min(100vw-3rem,64rem)]`); `![alt](file.png "fit")` keeps a figure at the text column. YouTube/PDF wells on portfolio stay `max-w-5xl`.
+- Case-study diagrams share the **text column** (`max-w-5xl`). Do not widen a chart past that. Body images, galleries, and widgets sit in the same column. YouTube/PDF wells on portfolio stay `max-w-5xl`.
 - Prefer flowchart / sequence / timeline.
 - Node IDs: camelCase, no spaces; quote labels that contain punctuation.
 - No extra colors — the renderer uses site dark tokens.
@@ -180,7 +180,7 @@ Register the React component in [`components/widgets/registry.ts`](components/wi
 
 ### Gallery
 
-Several stills in one scroll-snap slider (case-study body). Same breakout well as body images. Relative `src` values are rewritten at load time.
+Several stills in one scroll-snap slider (case-study body). Same `max-w-5xl` column as body copy. Relative `src` values are rewritten at load time.
 
 ````md
 ```gallery
