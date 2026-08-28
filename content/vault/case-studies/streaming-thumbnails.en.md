@@ -12,11 +12,11 @@ stack:
   - Obsidian
   - Ollama
 locale: en
-title: Streaming thumbnails pipeline
+title: Streaming thumbnail pipeline
 cover: streaming-thumbnails/different-aspect-ratio.png
 summary: >-
-  Thumbnail system for a B2B movie aggregator — one geometry, several skins and ratios, four sizes, three formats. About
-  30,000 titles; 864 files each.
+  A design system and rendering pipeline for a B2B streaming aggregator: about 30,000 titles, eight skins, nine aspect
+  ratios, four sizes, and three formats — 864 outputs per title from reusable layers.
 ---
 
 ```widget
@@ -25,15 +25,15 @@ id: thumbnail-pipeline
 
 ## Context
 
-The platform was a B2B streaming aggregator. Every title needed posters that could land in any layout: the same geometry so the grid held together, several skins, nine aspect ratios, and png, webp, or progressive jpeg at large, medium, small, and tiny — so each surface could trade quality for speed. A skin is a title treatment plus an underlay. Original keeps the film's type; common uses one treatment across a customer's catalog.
+The platform needed posters that behaved like one system across different surfaces, not a collection of one-off illustrations. Each title could appear in nine aspect ratios and four file sizes, with either an original title treatment or one common treatment across a customer's catalog. The problem was not making one poster; it was defining rules that survived every format.
 
-Wednesday, Stranger Things, BoJack Horseman and the rest here are catalog titles from that aggregator, not a Netflix product.
+The examples below are catalog titles from the aggregator, not a Netflix product.
 
-The catalog never stood still. New providers joined; ones already on the pipe dropped premieres. The chain had to watch production first and the pre-release dump second: work on raw data early is what stops missing posters when a title goes live.
+I built the system around catalog changes. New providers joined and existing ones added premieres, so the pipeline checked production first and the pre-release source second. Keeping the raw source current prevented a title from going live without a poster.
 
-![n8n canvas — hourly generate, manual render and upload, daily QA](streaming-thumbnails/n8n-workflow.png)
+![n8n canvas — hourly generation, manual render and upload, daily QA](streaming-thumbnails/n8n-workflow.png)
 
-*n8n runs the chain: hourly fetch and generate when titles land, a manual render-and-upload hop, and daily QA.*
+*n8n runs the repeatable steps: hourly fetch and generation, a manual render-and-upload checkpoint, and daily QA.*
 
 ## Effort
 
@@ -49,60 +49,52 @@ The catalog never stood still. New providers joined; ones already on the pipe dr
 - Provider originals arrived slowly, in mixed formats
 - Early image models drifted in style and had no native transparency
 
-### What was hard
+### What required judgment
 
-- Model layers do not share a coordinate system, so a mixed grid looks drunk unless every foreground follows the same rules
-- One common title treatment that still reads in a one- to three-line pocket
-- White type on bright art
-- Where to keep a human: a pass on layers, then QA on renders
+- AI-generated layers arrived without a shared coordinate system; inconsistent anchors made the grid feel unstable
+- A common title treatment had to remain legible in a one- to three-line area across ratios
+- White type needed contrast without flattening the artwork
+- Automation had to preserve human review for visual decisions and edge cases
 
 ## Process
 
 fetch → parse → generate → crop → render → QA → upload
 
-### Fetch the catalog
+### Detect missing titles
 
-n8n fires on a database change and runs the design chain. Production is the priority; the raw provider dump is secondary. The fetch polls both and retries until new titles land in Workspace / RAW — keeping that raw base current is what prevents a title from shipping without a poster.
+I connected the pipeline to catalog updates with n8n. It checked production first, then the pre-release source, and retried until new titles landed in Workspace / RAW. A catalog diff produced the queue of titles without posters. When provider files were slow or inconsistent, public stills filled the gap and references lived in Obsidian.
 
-### Parse references
+### Generate reusable layers
 
-Diff the catalog against the local store and the to-do list appears: titles with no poster. Provider files were a poor automation source — slow, a different format every time. Public stills cover most of the catalog: IMDb and Rotten Tomatoes first; region-specific and niche films from the official site or image search. References lived in Obsidian.
+I treated each poster as the same three-part composition: background, foreground, and title. Separate prompts made the layers reusable. Gemini was an early attempt; style drift and missing transparency made it brittle, so I moved to GPT Images 2.0 when the API shipped. Three layer requests ran in parallel, with outputs landing in Workspace / Raw.
 
-### Generate layers
+### Separate title logic from rendering
 
-Consistency is the same deconstruction on every poster: foreground (person, animal, object), background, unique title. Each layer has its own prompt on the reference — background without type or a large subject; foreground uncropped on transparent; title at 2:1, also transparent. Gemini was first. It drifted, hallucinated, and had no alpha. Transparency can be faked in a script or a Photoshop batch, but edges are cleaner when the model emits it. Switched to GPT Images 2.0 when the API shipped. GPT runs the three prompts in parallel; outputs land in Workspace / Raw.
+Some customers needed the original title art; others needed one common treatment across the catalog. OCR preserved a readable title split across one to three lines. When the read failed or the name ran longer, a Python fallback split it before the common title was generated. Title extraction stayed separate from layout.
 
-### Common titles
+### Normalize composition
 
-Some customers wanted one title treatment across the catalog — more contrast, the character does the talking. The hard part is filling negative space and splitting the name across one, two, or three lines so it reads. If the original title art is readable and already in one to three lines, OCR keeps that split. If the read fails or the name runs past three lines, a Python splitter does the job, then the common title is generated into Workspace / Raw.
+To stop foregrounds from drifting, I detected mouths in human subjects, aligned their bounding box to a shared horizontal axis, cropped transparent padding from that mouth anchor, and then centered each layer. Already-cropped subjects without people skipped the vertical alignment step. One face-size parameter controlled the character's perceived scale.
 
-### Crop and align
+![Foreground alignment across titles — shared mouth anchor, then horizontal centering](streaming-thumbnails/face-align.png)
 
-Background and title are light work: crop (models sometimes leave a white border), add title margin, resize. Foreground needs a point of interest. If there are people, detect mouths, take their bounding box, and sit that box on one horizontal axis. Crop transparent padding with the mouth as the anchor. No people: skip the vertical step if the subject is already cropped; otherwise align it on the same horizon. Then every layer is centered horizontally. A minimum face-size variable still controls how large the character sits.
+*One anchor rule across different foregrounds: mouths share a horizon, then the layer is centered.*
 
-![Foregrounds across titles — mouths on one horizon, then center](streaming-thumbnails/face-align.png)
+### Render the output matrix
 
-*Same crop on every title. Cropped subjects skip the vertical step; then everything centers.*
+Pillow composed eight skins × nine ratios × four sizes × three formats from the same layers. The background filled the frame; the foreground stayed centered and unscaled; the original or common title sat bottom-center and reduced on narrow ratios. Underlays and contrast-safe hue selection kept white type readable on bright art.
 
-### Render
+### QA and delivery
 
-Composite every required ratio, size, format, skin, and filename. Background always fills. Character pastes in the center, never resized. Unique or common title sits bottom-center, and scales down when the frame is thinner than 1:1. Some skins get an underlay — a colored or black gradient for title contrast. Hue comes from the background: scale to 9×9 and read the center pixel. Bright art still fails white-on-light, so the pipeline picks among 16 hues on a full cycle that keep the same white-on-color contrast. Pillow does the rest.
-
-### Local AI QA
-
-Two checks: leftover transparent pixels in the title, and whether the render still matches the reference. Match means character, title, and crop — not a facsimile of the marketing still. Pixel counting is cheap. Image compare does not need to be fast — Gemma 4 via Ollama ran overnight, so the workstation never sat idle. Obsidian showed original vs render plus both scores. Sort the score column and the queue orders itself. A plugin runs a shell script from the vault, so the same board is the control panel.
+Two checks covered the fragile parts: transparent pixels left in the title, and a comparison against the reference for character, title, and crop — not a pixel-perfect copy of the marketing still. Gemma 4 via Ollama could run overnight, while Obsidian showed the queue and both scores. A plugin launched the shell script, and a watchfolder uploaded, notified the team in Slack, synced, and backed up the result. Human review stayed focused on layers, visual decisions, and edge cases.
 
 ![BoJack Horseman — catalog reference next to the pipeline render](streaming-thumbnails/reference-vs-render.png "fit")
 
-*Original vs render. Same character, title, and crop; the pipeline drops Netflix chrome. The catalog skin is louder on purpose.*
+*Reference versus render. The same character, title, and crop — without copying the Netflix branding. The catalog skin is louder on purpose.*
 
-### Watchfolder delivery
+## Outcome
 
-The last hop is the easy one, and it can still be automatic. A watchfolder on the working directory uploads, notifies the team in Slack, syncs, and backs up.
-
-## Impact
-
-- About 30,000 original titles in a year. Each title is 864 files — 8 skins × 9 ratios × 4 sizes × 3 formats (png, webp, progressive jpeg) — about 26 million files
-- A freelancer splitting stills into layers and setting common titles did about 1,000 titles a month. Title consistency was already failing. At that rate, 30,000 titles is roughly two and a half years of one person, before anyone composites a skin
-- Compositing was never timed. A junior assembling even a small set of ratios by hand is minutes per title; 864 outputs per title is not a staffing plan. The matrix exists because render is a script
-- Against that freelancer baseline plus a junior on compositing, designer time sits in the low hundreds of thousands of euros. The 26 million files only exist because the last steps are automatic
+- About 30,000 original titles processed in one year
+- 864 deliverables per title — 8 skins × 9 ratios × 4 sizes × 3 formats — roughly 26 million files across the catalog
+- Catalog changes started the pipeline automatically; human attention moved to layer decisions, visual QA, and exceptions
+- The result was a reusable system for new titles, not a one-off batch of artwork
