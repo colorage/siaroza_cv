@@ -1,0 +1,1354 @@
+{
+  "settings": {
+    "collapse-filter": true,
+    "search": "",
+    "showTags": false,
+    "showAttachments": false,
+    "hideUnresolved": false,
+    "showOrphans": true,
+    "collapse-color-groups": true,
+    "colorGroups": [],
+    "collapse-display": true,
+    "showArrow": false,
+    "textFadeMultiplier": 0,
+    "nodeSizeMultiplier": 1,
+    "lineSizeMultiplier": 1,
+    "collapse-forces": false,
+    "centerStrength": 0.510835567470956,
+    "repelStrength": 14.7681726550457,
+    "linkStrength": 1,
+    "linkDistance": 160,
+    "scale": 0.4590377221522735,
+    "close": true
+  },
+  "nodes": [
+    {
+      "id": "API Catalog",
+      "label": "API Catalog",
+      "resolved": true,
+      "body": "[[Game Thumbnails]]",
+      "links": [
+        "Game Thumbnails"
+      ],
+      "degree": 2,
+      "size": 7.771236166328253
+    },
+    {
+      "id": "Avatars",
+      "label": "Avatars",
+      "resolved": true,
+      "body": "[[Avatars pack 1]]\n[[Avatars pack 2]]\n[[Avatars pack 3]]\n[[Avatars pack 4]]\n[[Avatars pack 5]]\n[[Avatars pack 6]]\n[[Avatars pack 7]]\n[[Avatars pack 8]]",
+      "links": [
+        "Avatars pack 1",
+        "Avatars pack 2",
+        "Avatars pack 3",
+        "Avatars pack 4",
+        "Avatars pack 5",
+        "Avatars pack 6",
+        "Avatars pack 7",
+        "Avatars pack 8"
+      ],
+      "degree": 9,
+      "size": 12
+    },
+    {
+      "id": "Avatars pack 1",
+      "label": "Avatars pack 1",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Avatars pack 2",
+      "label": "Avatars pack 2",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Avatars pack 3",
+      "label": "Avatars pack 3",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Avatars pack 4",
+      "label": "Avatars pack 4",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Avatars pack 5",
+      "label": "Avatars pack 5",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Avatars pack 6",
+      "label": "Avatars pack 6",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Avatars pack 7",
+      "label": "Avatars pack 7",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Avatars pack 8",
+      "label": "Avatars pack 8",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "B2B Platform",
+      "label": "B2B Platform",
+      "resolved": true,
+      "body": "[[Website]]\n[[BackOffice]]\n[[Common]]\n[[Clients]]",
+      "links": [
+        "Website",
+        "BackOffice",
+        "Common",
+        "Clients"
+      ],
+      "degree": 5,
+      "size": 9.962847939999438
+    },
+    {
+      "id": "Backgrounds",
+      "label": "Backgrounds",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 2,
+      "size": 7.771236166328253
+    },
+    {
+      "id": "BackOffice",
+      "label": "BackOffice",
+      "resolved": true,
+      "body": "[[BO Icons]]\n[[BO Illustrations]]",
+      "links": [
+        "BO Icons",
+        "BO Illustrations"
+      ],
+      "degree": 3,
+      "size": 8.618802153517006
+    },
+    {
+      "id": "Banger Icons",
+      "label": "Banger Icons",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Blockchain",
+      "label": "Blockchain",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "BO Icons",
+      "label": "BO Icons",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "BO Illustrations",
+      "label": "BO Illustrations",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Bonuses",
+      "label": "Bonuses",
+      "resolved": true,
+      "body": "[[Bonuses Pack 1]]\n[[Bonuses Pack 2]]\n[[Bonuses Pack 3]]",
+      "links": [
+        "Bonuses Pack 1",
+        "Bonuses Pack 2",
+        "Bonuses Pack 3"
+      ],
+      "degree": 4,
+      "size": 9.333333333333332
+    },
+    {
+      "id": "Bonuses Pack 1",
+      "label": "Bonuses Pack 1",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Bonuses Pack 2",
+      "label": "Bonuses Pack 2",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Bonuses Pack 3",
+      "label": "Bonuses Pack 3",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Brand",
+      "label": "Brand",
+      "resolved": true,
+      "body": "[[Brand books]]\n[[Photos]]\n[[Marketing]]",
+      "links": [
+        "Brand books",
+        "Photos",
+        "Marketing"
+      ],
+      "degree": 4,
+      "size": 9.333333333333332
+    },
+    {
+      "id": "Brand books",
+      "label": "Brand books",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Challenges",
+      "label": "Challenges",
+      "resolved": true,
+      "body": "[[Challenges pack 1]]\n[[Challenges pack 2]]\n[[Challenges pack 3]]",
+      "links": [
+        "Challenges pack 1",
+        "Challenges pack 2",
+        "Challenges pack 3"
+      ],
+      "degree": 4,
+      "size": 9.333333333333332
+    },
+    {
+      "id": "Challenges pack 1",
+      "label": "Challenges pack 1",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Challenges pack 2",
+      "label": "Challenges pack 2",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Challenges pack 3",
+      "label": "Challenges pack 3",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Characters",
+      "label": "Characters",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 2,
+      "size": 7.771236166328253
+    },
+    {
+      "id": "Clients",
+      "label": "Clients",
+      "resolved": true,
+      "body": "[[Clients logotypes]]\n[[Clients favicons]]\n[[Clients emails]]",
+      "links": [
+        "Clients logotypes",
+        "Clients favicons",
+        "Clients emails"
+      ],
+      "degree": 4,
+      "size": 9.333333333333332
+    },
+    {
+      "id": "Clients emails",
+      "label": "Clients emails",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Clients favicons",
+      "label": "Clients favicons",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Clients logotypes",
+      "label": "Clients logotypes",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Common",
+      "label": "Common",
+      "resolved": true,
+      "body": "[[Providers Logotypes]]\n[[Game Thumbnails]]\n[[Payment Providers]]\n[[Payment Method]]\n[[Currencies]]\n[[Countries]]\n[[MISC]]",
+      "links": [
+        "Providers Logotypes",
+        "Game Thumbnails",
+        "Payment Providers",
+        "Payment Method",
+        "Currencies",
+        "Countries",
+        "MISC"
+      ],
+      "degree": 8,
+      "size": 11.542472332656507
+    },
+    {
+      "id": "Company",
+      "label": "Company",
+      "resolved": true,
+      "body": "[[B2B Platform]]\n[[API Catalog]]\n[[Games]]\n[[Gaming Platform]]\n[[Site]]\n[[Brand]]",
+      "links": [
+        "B2B Platform",
+        "API Catalog",
+        "Games",
+        "Gaming Platform",
+        "Site",
+        "Brand"
+      ],
+      "degree": 6,
+      "size": 10.531972647421808
+    },
+    {
+      "id": "Countries",
+      "label": "Countries",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Crypto",
+      "label": "Crypto",
+      "resolved": true,
+      "body": "[[Blockchain]]\n[[Crypto coin]]",
+      "links": [
+        "Blockchain",
+        "Crypto coin"
+      ],
+      "degree": 3,
+      "size": 8.618802153517006
+    },
+    {
+      "id": "Crypto coin",
+      "label": "Crypto coin",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Currencies",
+      "label": "Currencies",
+      "resolved": true,
+      "body": "[[Fiat]]\n[[Crypto]]",
+      "links": [
+        "Fiat",
+        "Crypto"
+      ],
+      "degree": 3,
+      "size": 8.618802153517006
+    },
+    {
+      "id": "Dark Theme Logotypes",
+      "label": "Dark Theme Logotypes",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Feather Icons",
+      "label": "Feather Icons",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Fiat",
+      "label": "Fiat",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Flat icons",
+      "label": "Flat icons",
+      "resolved": true,
+      "body": "[[Material Icons]]\n[[Feather Icons]]\n[[Banger Icons]]",
+      "links": [
+        "Material Icons",
+        "Feather Icons",
+        "Banger Icons"
+      ],
+      "degree": 4,
+      "size": 9.333333333333332
+    },
+    {
+      "id": "Game logotypes",
+      "label": "Game logotypes",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 2,
+      "size": 7.771236166328253
+    },
+    {
+      "id": "Game Thumbnails",
+      "label": "Game Thumbnails",
+      "resolved": true,
+      "body": "[[Thumbnails Assets]]\n[[Thumbnails Renders]]",
+      "links": [
+        "Thumbnails Assets",
+        "Thumbnails Renders"
+      ],
+      "degree": 4,
+      "size": 9.333333333333332
+    },
+    {
+      "id": "Game Thumbnails skin a",
+      "label": "Game Thumbnails skin a",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Game Thumbnails skin b",
+      "label": "Game Thumbnails skin b",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Game Thumbnails skin c",
+      "label": "Game Thumbnails skin c",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Game Thumbnails skin d",
+      "label": "Game Thumbnails skin d",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Game Thumbnails skin e",
+      "label": "Game Thumbnails skin e",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Game Thumbnails skin f",
+      "label": "Game Thumbnails skin f",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Game Thumbnails skin g",
+      "label": "Game Thumbnails skin g",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Game Thumbnails skin h",
+      "label": "Game Thumbnails skin h",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Games",
+      "label": "Games",
+      "resolved": true,
+      "body": "[[Turbo games]]\n[[Slot games]]",
+      "links": [
+        "Turbo games",
+        "Slot games"
+      ],
+      "degree": 3,
+      "size": 8.618802153517006
+    },
+    {
+      "id": "Games kit",
+      "label": "Games kit",
+      "resolved": true,
+      "body": "[[Slot games]]\n[[Turbo games]]",
+      "links": [
+        "Slot games",
+        "Turbo games"
+      ],
+      "degree": 3,
+      "size": 8.618802153517006
+    },
+    {
+      "id": "Gamifications",
+      "label": "Gamifications",
+      "resolved": true,
+      "body": "[[Ranks]]\n[[Bonuses]]\n[[Challenges]]",
+      "links": [
+        "Ranks",
+        "Bonuses",
+        "Challenges"
+      ],
+      "degree": 4,
+      "size": 9.333333333333332
+    },
+    {
+      "id": "Gaming Platform",
+      "label": "Gaming Platform",
+      "resolved": true,
+      "body": "[[Turbo games]]\n[[Slot games]]",
+      "links": [
+        "Turbo games",
+        "Slot games"
+      ],
+      "degree": 3,
+      "size": 8.618802153517006
+    },
+    {
+      "id": "Icons",
+      "label": "Icons",
+      "resolved": true,
+      "body": "[[Flat icons]]\n[[Siderbar icons]]",
+      "links": [
+        "Flat icons",
+        "Siderbar icons"
+      ],
+      "degree": 3,
+      "size": 8.618802153517006
+    },
+    {
+      "id": "Illustrations",
+      "label": "Illustrations",
+      "resolved": true,
+      "body": "[[System images]]\n[[Gamifications]]",
+      "links": [
+        "System images",
+        "Gamifications"
+      ],
+      "degree": 3,
+      "size": 8.618802153517006
+    },
+    {
+      "id": "Illustrations pack 1",
+      "label": "Illustrations pack 1",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Illustrations pack 2",
+      "label": "Illustrations pack 2",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Illustrations pack 3",
+      "label": "Illustrations pack 3",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Illustrations pack 4",
+      "label": "Illustrations pack 4",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Light Theme Logotypes",
+      "label": "Light Theme Logotypes",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Marketing",
+      "label": "Marketing",
+      "resolved": true,
+      "body": "[[Social Media Templates]]\n[[Games kit]]",
+      "links": [
+        "Social Media Templates",
+        "Games kit"
+      ],
+      "degree": 3,
+      "size": 8.618802153517006
+    },
+    {
+      "id": "Material Icons",
+      "label": "Material Icons",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "MISC",
+      "label": "MISC",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Monochrome Logotypes",
+      "label": "Monochrome Logotypes",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Payment Method",
+      "label": "Payment Method",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Payment Providers",
+      "label": "Payment Providers",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Photos",
+      "label": "Photos",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 2,
+      "size": 7.771236166328253
+    },
+    {
+      "id": "Providers Logotypes",
+      "label": "Providers Logotypes",
+      "resolved": true,
+      "body": "[[Monochrome Logotypes]]\n[[Dark Theme Logotypes]]\n[[Light Theme Logotypes]]",
+      "links": [
+        "Monochrome Logotypes",
+        "Dark Theme Logotypes",
+        "Light Theme Logotypes"
+      ],
+      "degree": 4,
+      "size": 9.333333333333332
+    },
+    {
+      "id": "Ranks",
+      "label": "Ranks",
+      "resolved": true,
+      "body": "[[Ranks Pack 1]]\n[[Ranks Pack 2]]\n[[Ranks Pack 3]]\n[[Ranks Pack 4]]",
+      "links": [
+        "Ranks Pack 1",
+        "Ranks Pack 2",
+        "Ranks Pack 3",
+        "Ranks Pack 4"
+      ],
+      "degree": 5,
+      "size": 9.962847939999438
+    },
+    {
+      "id": "Ranks Pack 1",
+      "label": "Ranks Pack 1",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Ranks Pack 2",
+      "label": "Ranks Pack 2",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Ranks Pack 3",
+      "label": "Ranks Pack 3",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Ranks Pack 4",
+      "label": "Ranks Pack 4",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Sidebar Icons pack 1",
+      "label": "Sidebar Icons pack 1",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Sidebar Icons pack 2",
+      "label": "Sidebar Icons pack 2",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Sidebar Icons pack 3",
+      "label": "Sidebar Icons pack 3",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Sidebar Icons pack 4",
+      "label": "Sidebar Icons pack 4",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "Siderbar icons",
+      "label": "Siderbar icons",
+      "resolved": true,
+      "body": "[[Sidebar Icons pack 1]]\n[[Sidebar Icons pack 2]]\n[[Sidebar Icons pack 3]]\n[[Sidebar Icons pack 4]]",
+      "links": [
+        "Sidebar Icons pack 1",
+        "Sidebar Icons pack 2",
+        "Sidebar Icons pack 3",
+        "Sidebar Icons pack 4"
+      ],
+      "degree": 5,
+      "size": 9.962847939999438
+    },
+    {
+      "id": "Site",
+      "label": "Site",
+      "resolved": true,
+      "body": "[[Slot games]]\n[[Turbo games]]\n[[Photos]]",
+      "links": [
+        "Slot games",
+        "Turbo games",
+        "Photos"
+      ],
+      "degree": 4,
+      "size": 9.333333333333332
+    },
+    {
+      "id": "Slot games",
+      "label": "Slot games",
+      "resolved": true,
+      "body": "[[Backgrounds]]\n[[Characters]]\n[[Game logotypes]]",
+      "links": [
+        "Backgrounds",
+        "Characters",
+        "Game logotypes"
+      ],
+      "degree": 7,
+      "size": 11.055336829505574
+    },
+    {
+      "id": "Social Media Templates",
+      "label": "Social Media Templates",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 1,
+      "size": 6.666666666666666
+    },
+    {
+      "id": "System images",
+      "label": "System images",
+      "resolved": true,
+      "body": "[[Illustrations pack 1]]\n[[Illustrations pack 2]]\n[[Illustrations pack 3]]\n[[Illustrations pack 4]]",
+      "links": [
+        "Illustrations pack 1",
+        "Illustrations pack 2",
+        "Illustrations pack 3",
+        "Illustrations pack 4"
+      ],
+      "degree": 5,
+      "size": 9.962847939999438
+    },
+    {
+      "id": "Thumbnails Assets",
+      "label": "Thumbnails Assets",
+      "resolved": true,
+      "body": "[[Backgrounds]]\n[[Characters]]\n[[Game logotypes]]",
+      "links": [
+        "Backgrounds",
+        "Characters",
+        "Game logotypes"
+      ],
+      "degree": 4,
+      "size": 9.333333333333332
+    },
+    {
+      "id": "Thumbnails Renders",
+      "label": "Thumbnails Renders",
+      "resolved": true,
+      "body": "[[Game Thumbnails skin a]]\n[[Game Thumbnails skin b]]\n[[Game Thumbnails skin c]]\n[[Game Thumbnails skin d]]\n[[Game Thumbnails skin e]]\n[[Game Thumbnails skin f]]\n[[Game Thumbnails skin g]]\n[[Game Thumbnails skin h]]",
+      "links": [
+        "Game Thumbnails skin a",
+        "Game Thumbnails skin b",
+        "Game Thumbnails skin c",
+        "Game Thumbnails skin d",
+        "Game Thumbnails skin e",
+        "Game Thumbnails skin f",
+        "Game Thumbnails skin g",
+        "Game Thumbnails skin h"
+      ],
+      "degree": 9,
+      "size": 12
+    },
+    {
+      "id": "Turbo games",
+      "label": "Turbo games",
+      "resolved": false,
+      "body": "",
+      "links": [],
+      "degree": 4,
+      "size": 9.333333333333332
+    },
+    {
+      "id": "Website",
+      "label": "Website",
+      "resolved": true,
+      "body": "[[Icons]]\n[[Illustrations]]\n[[Avatars]]",
+      "links": [
+        "Icons",
+        "Illustrations",
+        "Avatars"
+      ],
+      "degree": 4,
+      "size": 9.333333333333332
+    }
+  ],
+  "links": [
+    {
+      "source": "API Catalog",
+      "target": "Game Thumbnails"
+    },
+    {
+      "source": "Avatars",
+      "target": "Avatars pack 1"
+    },
+    {
+      "source": "Avatars",
+      "target": "Avatars pack 2"
+    },
+    {
+      "source": "Avatars",
+      "target": "Avatars pack 3"
+    },
+    {
+      "source": "Avatars",
+      "target": "Avatars pack 4"
+    },
+    {
+      "source": "Avatars",
+      "target": "Avatars pack 5"
+    },
+    {
+      "source": "Avatars",
+      "target": "Avatars pack 6"
+    },
+    {
+      "source": "Avatars",
+      "target": "Avatars pack 7"
+    },
+    {
+      "source": "Avatars",
+      "target": "Avatars pack 8"
+    },
+    {
+      "source": "B2B Platform",
+      "target": "Website"
+    },
+    {
+      "source": "B2B Platform",
+      "target": "BackOffice"
+    },
+    {
+      "source": "B2B Platform",
+      "target": "Common"
+    },
+    {
+      "source": "B2B Platform",
+      "target": "Clients"
+    },
+    {
+      "source": "BackOffice",
+      "target": "BO Icons"
+    },
+    {
+      "source": "BackOffice",
+      "target": "BO Illustrations"
+    },
+    {
+      "source": "Bonuses",
+      "target": "Bonuses Pack 1"
+    },
+    {
+      "source": "Bonuses",
+      "target": "Bonuses Pack 2"
+    },
+    {
+      "source": "Bonuses",
+      "target": "Bonuses Pack 3"
+    },
+    {
+      "source": "Brand",
+      "target": "Brand books"
+    },
+    {
+      "source": "Brand",
+      "target": "Photos"
+    },
+    {
+      "source": "Brand",
+      "target": "Marketing"
+    },
+    {
+      "source": "Challenges",
+      "target": "Challenges pack 1"
+    },
+    {
+      "source": "Challenges",
+      "target": "Challenges pack 2"
+    },
+    {
+      "source": "Challenges",
+      "target": "Challenges pack 3"
+    },
+    {
+      "source": "Clients",
+      "target": "Clients logotypes"
+    },
+    {
+      "source": "Clients",
+      "target": "Clients favicons"
+    },
+    {
+      "source": "Clients",
+      "target": "Clients emails"
+    },
+    {
+      "source": "Common",
+      "target": "Providers Logotypes"
+    },
+    {
+      "source": "Common",
+      "target": "Game Thumbnails"
+    },
+    {
+      "source": "Common",
+      "target": "Payment Providers"
+    },
+    {
+      "source": "Common",
+      "target": "Payment Method"
+    },
+    {
+      "source": "Common",
+      "target": "Currencies"
+    },
+    {
+      "source": "Common",
+      "target": "Countries"
+    },
+    {
+      "source": "Common",
+      "target": "MISC"
+    },
+    {
+      "source": "Company",
+      "target": "B2B Platform"
+    },
+    {
+      "source": "Company",
+      "target": "API Catalog"
+    },
+    {
+      "source": "Company",
+      "target": "Games"
+    },
+    {
+      "source": "Company",
+      "target": "Gaming Platform"
+    },
+    {
+      "source": "Company",
+      "target": "Site"
+    },
+    {
+      "source": "Company",
+      "target": "Brand"
+    },
+    {
+      "source": "Crypto",
+      "target": "Blockchain"
+    },
+    {
+      "source": "Crypto",
+      "target": "Crypto coin"
+    },
+    {
+      "source": "Currencies",
+      "target": "Fiat"
+    },
+    {
+      "source": "Currencies",
+      "target": "Crypto"
+    },
+    {
+      "source": "Flat icons",
+      "target": "Material Icons"
+    },
+    {
+      "source": "Flat icons",
+      "target": "Feather Icons"
+    },
+    {
+      "source": "Flat icons",
+      "target": "Banger Icons"
+    },
+    {
+      "source": "Game Thumbnails",
+      "target": "Thumbnails Assets"
+    },
+    {
+      "source": "Game Thumbnails",
+      "target": "Thumbnails Renders"
+    },
+    {
+      "source": "Games kit",
+      "target": "Slot games"
+    },
+    {
+      "source": "Games kit",
+      "target": "Turbo games"
+    },
+    {
+      "source": "Games",
+      "target": "Turbo games"
+    },
+    {
+      "source": "Games",
+      "target": "Slot games"
+    },
+    {
+      "source": "Gamifications",
+      "target": "Ranks"
+    },
+    {
+      "source": "Gamifications",
+      "target": "Bonuses"
+    },
+    {
+      "source": "Gamifications",
+      "target": "Challenges"
+    },
+    {
+      "source": "Gaming Platform",
+      "target": "Turbo games"
+    },
+    {
+      "source": "Gaming Platform",
+      "target": "Slot games"
+    },
+    {
+      "source": "Icons",
+      "target": "Flat icons"
+    },
+    {
+      "source": "Icons",
+      "target": "Siderbar icons"
+    },
+    {
+      "source": "Illustrations",
+      "target": "System images"
+    },
+    {
+      "source": "Illustrations",
+      "target": "Gamifications"
+    },
+    {
+      "source": "Marketing",
+      "target": "Social Media Templates"
+    },
+    {
+      "source": "Marketing",
+      "target": "Games kit"
+    },
+    {
+      "source": "Providers Logotypes",
+      "target": "Monochrome Logotypes"
+    },
+    {
+      "source": "Providers Logotypes",
+      "target": "Dark Theme Logotypes"
+    },
+    {
+      "source": "Providers Logotypes",
+      "target": "Light Theme Logotypes"
+    },
+    {
+      "source": "Ranks",
+      "target": "Ranks Pack 1"
+    },
+    {
+      "source": "Ranks",
+      "target": "Ranks Pack 2"
+    },
+    {
+      "source": "Ranks",
+      "target": "Ranks Pack 3"
+    },
+    {
+      "source": "Ranks",
+      "target": "Ranks Pack 4"
+    },
+    {
+      "source": "Siderbar icons",
+      "target": "Sidebar Icons pack 1"
+    },
+    {
+      "source": "Siderbar icons",
+      "target": "Sidebar Icons pack 2"
+    },
+    {
+      "source": "Siderbar icons",
+      "target": "Sidebar Icons pack 3"
+    },
+    {
+      "source": "Siderbar icons",
+      "target": "Sidebar Icons pack 4"
+    },
+    {
+      "source": "Site",
+      "target": "Slot games"
+    },
+    {
+      "source": "Site",
+      "target": "Turbo games"
+    },
+    {
+      "source": "Site",
+      "target": "Photos"
+    },
+    {
+      "source": "Slot games",
+      "target": "Backgrounds"
+    },
+    {
+      "source": "Slot games",
+      "target": "Characters"
+    },
+    {
+      "source": "Slot games",
+      "target": "Game logotypes"
+    },
+    {
+      "source": "System images",
+      "target": "Illustrations pack 1"
+    },
+    {
+      "source": "System images",
+      "target": "Illustrations pack 2"
+    },
+    {
+      "source": "System images",
+      "target": "Illustrations pack 3"
+    },
+    {
+      "source": "System images",
+      "target": "Illustrations pack 4"
+    },
+    {
+      "source": "Thumbnails Assets",
+      "target": "Backgrounds"
+    },
+    {
+      "source": "Thumbnails Assets",
+      "target": "Characters"
+    },
+    {
+      "source": "Thumbnails Assets",
+      "target": "Game logotypes"
+    },
+    {
+      "source": "Thumbnails Renders",
+      "target": "Game Thumbnails skin a"
+    },
+    {
+      "source": "Thumbnails Renders",
+      "target": "Game Thumbnails skin b"
+    },
+    {
+      "source": "Thumbnails Renders",
+      "target": "Game Thumbnails skin c"
+    },
+    {
+      "source": "Thumbnails Renders",
+      "target": "Game Thumbnails skin d"
+    },
+    {
+      "source": "Thumbnails Renders",
+      "target": "Game Thumbnails skin e"
+    },
+    {
+      "source": "Thumbnails Renders",
+      "target": "Game Thumbnails skin f"
+    },
+    {
+      "source": "Thumbnails Renders",
+      "target": "Game Thumbnails skin g"
+    },
+    {
+      "source": "Thumbnails Renders",
+      "target": "Game Thumbnails skin h"
+    },
+    {
+      "source": "Website",
+      "target": "Icons"
+    },
+    {
+      "source": "Website",
+      "target": "Illustrations"
+    },
+    {
+      "source": "Website",
+      "target": "Avatars"
+    }
+  ]
+}

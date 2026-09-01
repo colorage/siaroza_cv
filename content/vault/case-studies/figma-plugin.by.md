@@ -11,6 +11,12 @@ summary: >-
   Уласны Figma-плагін для ўнутраных дызайн-працэсаў — менш паўторнай працы ў прадуктовым пайплайне.
 ---
 
+<<<<<<< HEAD
 ![Pan Eksportowicz — спіс экспарту і панэль налад](figma-plugin/export-ui.png)
 
 *Укладка Export: экспарт па актывах. Налады: маскі папак і файлаў, фарматы і мапінг стыляў.*
+=======
+```widget
+id: design-system-graph
+```
+>>>>>>> origin/cursor/obsidian-graph-widget-e756

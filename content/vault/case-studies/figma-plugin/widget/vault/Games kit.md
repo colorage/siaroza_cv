@@ -1,0 +1,2 @@
+[[Slot games]]
+[[Turbo games]]
