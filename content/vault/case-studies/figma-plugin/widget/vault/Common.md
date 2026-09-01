@@ -1,0 +1,7 @@
+[[Providers Logotypes]]
+[[Game Thumbnails]]
+[[Payment Providers]]
+[[Payment Method]]
+[[Currencies]]
+[[Countries]]
+[[MISC]]

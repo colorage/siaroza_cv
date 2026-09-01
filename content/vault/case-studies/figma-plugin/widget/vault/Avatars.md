@@ -1,0 +1,8 @@
+[[Avatars pack 1]]
+[[Avatars pack 2]]
+[[Avatars pack 3]]
+[[Avatars pack 4]]
+[[Avatars pack 5]]
+[[Avatars pack 6]]
+[[Avatars pack 7]]
+[[Avatars pack 8]]

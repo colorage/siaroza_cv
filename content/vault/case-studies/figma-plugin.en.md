@@ -14,6 +14,10 @@ summary: >-
   and a Figma export pipeline that replaced designer–developer handoffs.
 ---
 
+```widget
+id: design-system-graph
+```
+
 ## Context
 
 The platform was a complex B2B product. A solid UX and Design System were not enough — it also needed a **Graphic Design System**. Every customer wanted to adapt the platform to their own brand: unique combinations of colors, typography, icons, illustrations, and other visual assets.
