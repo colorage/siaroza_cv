@@ -9,3 +9,7 @@ title: Figma Plugin
 summary: >-
   Custom Figma plugin for internal design processes — less repetitive work in the product workflow.
 ---
+
+```widget
+id: design-system-graph
+```

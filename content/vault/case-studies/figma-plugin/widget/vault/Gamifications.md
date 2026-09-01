@@ -1,0 +1,3 @@
+[[Ranks]]
+[[Bonuses]]
+[[Challenges]]

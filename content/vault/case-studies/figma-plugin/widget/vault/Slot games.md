@@ -1,0 +1,3 @@
+[[Backgrounds]]
+[[Characters]]
+[[Game logotypes]]
