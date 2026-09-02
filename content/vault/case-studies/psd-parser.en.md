@@ -11,6 +11,7 @@ stack:
 locale: en
 title: Photoshop-first level design
 subtitle: Later titles in half the time
+cover: psd-parser/magic-encyclopedia-moon-light.jpg
 summary: >-
   PSD-to-Lua pipeline for hidden-object iOS ports. Layer names carried function; the engine read position and bounds.
   Cycle dropped from six months to three or four.
@@ -19,6 +20,10 @@ summary: >-
 ## Context
 
 Early 2010s, mobile games were a growing market. The fast way for a studio to lead was to port PC titles to iOS: art already existed, but mechanics had to be rewritten from cursor click to finger touch. This was before Unity and Unreal were the default. The studio shipped on an in-house engine. A publisher supplied original art as PSD files — casual games, mostly hidden object, with mini-games and cutscenes. Those files held hundreds of layers with chaotic names.
+
+![Magic Encyclopedia: Moon Light — hidden-object study with walkthrough marks on fragments](psd-parser/magic-encyclopedia-moon-light.jpg)
+
+*Magic Encyclopedia: Moon Light. One publisher scene — stacked objects and inventory chrome.*
 
 The first port took six months. Every item was exported by hand, placed in a text editor, and wired into a state machine. PSD is an old format, not meant to be parsed from outside. University C++ was the only coding background; this was the first production tooling.
 ## Effort
