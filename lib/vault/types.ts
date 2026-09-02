@@ -60,6 +60,7 @@ export type CaseStudy = {
   slug: string;
   experienceId: string;
   title: LocalizedString;
+  subtitle?: LocalizedString;
   summary: LocalizedString;
   cover?: string;
   stack?: string[];

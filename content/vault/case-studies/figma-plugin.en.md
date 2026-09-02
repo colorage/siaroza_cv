@@ -7,7 +7,8 @@ needs_translation: false
 stack:
   - Figma
 locale: en
-title: Graphic design system for a B2B platform
+title: Graphic design system
+subtitle: Cut designer–developer handoffs
 cover: figma-plugin/export-ui.png
 summary: >-
   Graphic Design System for a multi-tenant B2B platform — per-customer brand combinations, shared assets across projects,

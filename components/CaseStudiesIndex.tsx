@@ -30,9 +30,11 @@ export function CaseStudiesIndex({ locale, dict }: Props) {
                 <h3 className="text-2xl leading-tight tracking-tight text-foreground transition-opacity group-hover:opacity-70 md:text-3xl">
                   {study.title[locale]}
                 </h3>
-                <p className="mt-3 line-clamp-2 text-[16px] leading-relaxed text-muted">
-                  {study.summary[locale]}
-                </p>
+                {study.subtitle ? (
+                  <p className="mt-3 text-[16px] leading-relaxed text-foreground transition-opacity group-hover:opacity-70 md:text-[18px]">
+                    {study.subtitle[locale]}
+                  </p>
+                ) : null}
               </div>
               <div
                 className="h-20 w-28 shrink-0 overflow-hidden rounded-xl bg-surface md:h-28 md:w-40"

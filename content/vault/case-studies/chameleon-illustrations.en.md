@@ -7,7 +7,8 @@ needs_translation: false
 stack:
   - Blender
 locale: en
-title: Chameleon illustrations for Shopify themes
+title: Theme-based illustrations
+subtitle: 256 colorways, no hand-export
 summary: >-
   Theme builder for Shopify: merchants set primary and secondary colors, and pick an illustration style. Vectors recolor
   with variables. 3D needed a 16×16 render matrix and a hex postfix so the store loaded the matching pair.

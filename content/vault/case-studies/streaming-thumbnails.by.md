@@ -13,6 +13,7 @@ stack:
   - Ollama
 locale: by
 title: Пайплайн стрымінгавых тамбнейлаў
+subtitle: Сотні тысяч еўра дызайнерскага часу
 cover: streaming-thumbnails/different-aspect-ratio.png
 summary: >-
   Сістэма тамбнейлаў для B2B-агрэгатара фільмаў — адна геаметрыя, некалькі скінаў і прапорцый, чатыры памеры, тры фарматы.

@@ -13,6 +13,7 @@ stack:
   - Ollama
 locale: en
 title: Streaming thumbnails pipeline
+subtitle: Hundreds of thousands of euros in designer time
 cover: streaming-thumbnails/different-aspect-ratio.png
 summary: >-
   Thumbnail system for a B2B movie aggregator — one geometry, several skins and ratios, four sizes, three formats. About

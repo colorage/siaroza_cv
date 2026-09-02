@@ -9,7 +9,8 @@ stack:
   - Lua
   - Photoshop
 locale: by
-title: Левел-дызайн на базе Photoshop
+title: Левел-дызайн ад Photoshop
+subtitle: Пазнейшыя тытулы — удвая хутчэй
 summary: >-
   Пайплайн PSD → Lua для hidden-object портаў на iOS. Імя слоя несла функцыю; рухавік чытаў пазіцыю і межы. Цыкл
   скараціўся з шасці месяцаў да трох–чатырох.

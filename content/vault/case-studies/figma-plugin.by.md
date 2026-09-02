@@ -7,7 +7,8 @@ needs_translation: false
 stack:
   - Figma
 locale: by
-title: Графічная дызайн-сістэма для B2B-платформы
+title: Графічная дызайн-сістэма
+subtitle: Без ручных перадач дызайнер–распрацоўнік
 cover: figma-plugin/export-ui.png
 summary: >-
   Graphic Design System для шматкліентнай B2B-платформы — брэнд-камбінацыі пад кліента, агульная бібліятэка актываў

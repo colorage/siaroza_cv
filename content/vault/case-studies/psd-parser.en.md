@@ -9,7 +9,8 @@ stack:
   - Lua
   - Photoshop
 locale: en
-title: Photoshop-based level design
+title: Photoshop-first level design
+subtitle: Later titles in half the time
 summary: >-
   PSD-to-Lua pipeline for hidden-object iOS ports. Layer names carried function; the engine read position and bounds.
   Cycle dropped from six months to three or four.
