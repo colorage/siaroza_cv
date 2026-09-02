@@ -39,7 +39,7 @@ function MarkdownImage({ src, alt, title }: ComponentPropsWithoutRef<"img">) {
       <div
         className={
           fit
-            ? "w-full max-w-full overflow-hidden rounded-2xl md:w-fit"
+            ? "mx-auto w-full max-w-full overflow-hidden rounded-2xl md:w-fit"
             : "overflow-hidden rounded-2xl"
         }
       >
