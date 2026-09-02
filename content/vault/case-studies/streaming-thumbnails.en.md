@@ -79,11 +79,7 @@ Some customers wanted one title treatment across the catalog — more contrast, 
 
 ### Crop and align
 
-Background and title are light work: crop (models sometimes leave a white border), add title margin, resize. Foreground needs a point of interest. If there are people, detect mouths, take their bounding box, and sit that box on one horizontal axis. Crop transparent padding with the mouth as the anchor. No people: skip the vertical step if the subject is already cropped; otherwise align it on the same horizon. Then every layer is centered horizontally. A minimum face-size variable still controls how large the character sits.
-
-![Foregrounds across titles — mouths on one horizon, then center](streaming-thumbnails/face-align.png)
-
-*Same crop on every title. Cropped subjects skip the vertical step; then everything centers.*
+Background and title are light work: crop (models sometimes leave a white border), add title margin, resize. Foreground needs a point of interest. The crop classifies the subject as a person or a face. A person stays at full scale, waist-up; a face gets a tighter frame. Crop and alignment follow that call — different box, different horizon — then every layer is centered horizontally. No person and no face: skip the vertical step if the subject is already cropped; otherwise sit it on the same horizon.
 
 ### Render
 
