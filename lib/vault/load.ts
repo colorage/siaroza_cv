@@ -622,7 +622,7 @@ export function getSortedProjects(): Project[] {
   });
 }
 
-export const featuredExperienceIds = ["spribe", "ptchr", "hiveon"] as const;
+export const featuredExperienceIds = ["spribe", "hiveon"] as const;
 export const featuredPortfolioSlugs = [
   "showreel-23",
   "brandbook",
