@@ -81,6 +81,10 @@ Some customers wanted one title treatment across the catalog — more contrast, 
 
 Background and title are light work: crop (models sometimes leave a white border), add title margin, resize. Foreground needs a point of interest. The crop classifies the subject as a person or a face. A person stays at full scale, waist-up; a face gets a tighter frame. Crop and alignment follow that call — different box, different horizon — then every layer is centered horizontally. No person and no face: skip the vertical step if the subject is already cropped; otherwise sit it on the same horizon.
 
+![Framing types of shots in film — nested crop boxes from extreme close-up to full shot](streaming-thumbnails/shot-framing-guide.png)
+
+*Shot scale is the crop: how much of the figure sits in the frame. [Types of shots in film](https://murphy.inc/types-of-shots-in-film-storyboarding/).*
+
 ### Render
 
 Composite every required ratio, size, format, skin, and filename. Background always fills. Character pastes in the center, never resized. Unique or common title sits bottom-center, and scales down when the frame is thinner than 1:1. Some skins get an underlay — a colored or black gradient for title contrast. Hue comes from the background: scale to 9×9 and read the center pixel. Bright art still fails white-on-light, so the pipeline picks among 16 hues on a full cycle that keep the same white-on-color contrast. Pillow does the rest.
