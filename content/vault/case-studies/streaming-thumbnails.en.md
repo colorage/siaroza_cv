@@ -74,7 +74,11 @@ Some customers needed the original title art; others needed one common treatment
 
 ### Normalize composition
 
-To stop foregrounds from drifting, I detected mouths in human subjects, aligned their bounding box to a shared horizontal axis, cropped transparent padding from that mouth anchor, and then centered each layer. Already-cropped subjects without people skipped the vertical alignment step. One face-size parameter controlled the character's perceived scale.
+To stop foregrounds from drifting, I detected mouths in human subjects, aligned their bounding box to a shared horizontal axis, cropped transparent padding from that mouth anchor, and then centered each layer. Already-cropped subjects without people skipped the vertical alignment step. One face-size parameter controlled the character's perceived scale — the same decision as shot scale, from a face close-up to a full figure.
+
+![Framing types of shots in film — nested crop boxes from extreme close-up to full shot](streaming-thumbnails/shot-framing-guide.png)
+
+*Shot scale is the crop: how much of the figure sits in the frame. [Types of shots in film](https://murphy.inc/types-of-shots-in-film-storyboarding/).*
 
 ![Foreground alignment across titles — shared mouth anchor, then horizontal centering](streaming-thumbnails/face-align.png)
 
