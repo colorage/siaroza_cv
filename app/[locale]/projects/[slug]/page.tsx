@@ -211,14 +211,6 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </div>
 
-      {gallery?.length ? (
-        <ProjectGallery
-          images={gallery}
-          locale={locale}
-          label={dict.projects.gallery}
-        />
-      ) : null}
-
       {project.media?.length ? (
         <div className="mx-auto mt-10 max-w-5xl space-y-8 px-6">
           {project.media.map((item) => (
@@ -236,6 +228,14 @@ export default async function ProjectPage({ params }: Props) {
             />
           ))}
         </div>
+      ) : null}
+
+      {gallery?.length ? (
+        <ProjectGallery
+          images={gallery}
+          locale={locale}
+          label={dict.projects.gallery}
+        />
       ) : null}
 
       {project.url || project.links?.length ? (
