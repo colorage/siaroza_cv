@@ -10,6 +10,7 @@ stack:
   - Photoshop
 locale: en
 title: PSD-to-Lua level pipeline
+cover: psd-parser/magic-encyclopedia-moon-light.jpg
 summary: >-
   Photoshop-to-Lua pipeline for hidden-object games ported to iOS: layer names carried behavior, the engine read
   position and bounds, and the production cycle dropped from six months to three or four.
@@ -18,6 +19,10 @@ summary: >-
 ## Context
 
 In the early 2010s, CyberCradle ported casual PC games to iOS on an in-house engine. The art already existed in Photoshop; interaction had to be rebuilt for touch, and each level had to become Lua data. Publisher PSDs contained hundreds of layers with no reliable naming system.
+
+![Magic Encyclopedia: Moon Light — hidden-object study with walkthrough marks on fragments](psd-parser/magic-encyclopedia-moon-light.jpg)
+
+*Magic Encyclopedia: Moon Light. One publisher scene — stacked objects and inventory chrome.*
 
 The first port took six months. I exported items by hand, placed coordinates in a text editor, and wired them into a state machine. That repetition made the production handoff — not the game design — the bottleneck. PSD was also an old format with no straightforward external parsing path; I had C++ from university and was building my first production tool.
 ## Effort
