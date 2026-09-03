@@ -144,10 +144,6 @@ function GalleryThumbnail({
   const pausedRef = useRef(false);
   const timingRef = useRef<ReturnType<typeof randomGalleryTiming> | null>(null);
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  indexRef.current = index;
-  pausedRef.current = paused;
 
   const settleLoop = useCallback(() => {
     const el = scrollerRef.current;
@@ -159,6 +155,7 @@ function GalleryThumbnail({
     loopingRef.current = false;
     window.clearTimeout(loopTimerRef.current);
     el.scrollTo({ left: 0, behavior: "auto" });
+    indexRef.current = 0;
     setIndex(0);
   }, [srcs.length]);
 
@@ -174,8 +171,12 @@ function GalleryThumbnail({
     }
 
     if (loopingRef.current) return;
-    const next = Math.round(el.scrollLeft / width);
-    setIndex(Math.min(Math.max(next, 0), srcs.length - 1));
+    const next = Math.min(
+      Math.max(Math.round(el.scrollLeft / width), 0),
+      srcs.length - 1,
+    );
+    indexRef.current = next;
+    setIndex(next);
   }, [settleLoop, srcs.length]);
 
   const goTo = useCallback(
@@ -201,6 +202,7 @@ function GalleryThumbnail({
           if (!loopingRef.current) return;
           loopingRef.current = false;
           el.scrollTo({ left: 0, behavior: "auto" });
+          indexRef.current = 0;
           setIndex(0);
         }, 1200);
         return;
@@ -256,12 +258,18 @@ function GalleryThumbnail({
   return (
     <div
       className={shotClass}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
+      onMouseEnter={() => {
+        pausedRef.current = true;
+      }}
+      onMouseLeave={() => {
+        pausedRef.current = false;
+      }}
+      onFocusCapture={() => {
+        pausedRef.current = true;
+      }}
       onBlurCapture={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-          setPaused(false);
+          pausedRef.current = false;
         }
       }}
     >
