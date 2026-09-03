@@ -78,6 +78,17 @@ export default async function Image({
           >
             {dict.hero.title}
           </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 24,
+              lineHeight: 1.35,
+              maxWidth: 920,
+              color: "rgba(200, 212, 208, 0.55)",
+            }}
+          >
+            {dict.hero.tagline}
+          </div>
         </div>
         <div
           style={{

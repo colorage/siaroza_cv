@@ -50,8 +50,7 @@ export function SkillCursorTrail({ children }: Props) {
     if (!host) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const coarsePointer = window.matchMedia("(pointer: coarse)");
-    if (reducedMotion.matches || coarsePointer.matches) return;
+    if (reducedMotion.matches) return;
 
     let lastX = 0;
     let lastY = 0;
@@ -84,10 +83,12 @@ export function SkillCursorTrail({ children }: Props) {
       timeouts.add(timeout);
     };
 
-    const onMove = (event: PointerEvent) => {
+    const onPoint = (clientX: number, clientY: number) => {
       const rect = host.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
+
       const now = performance.now();
 
       if (!hasSpawned) {
@@ -108,10 +109,29 @@ export function SkillCursorTrail({ children }: Props) {
       spawn(x, y);
     };
 
-    host.addEventListener("pointermove", onMove, { passive: true });
+    const onPointer = (event: PointerEvent) => {
+      // iOS Safari often withholds touch pointermove while panning.
+      // Finger movement is handled via touchmove so the page can still scroll.
+      if (event.pointerType === "touch" && event.type === "pointermove") return;
+      onPoint(event.clientX, event.clientY);
+    };
+
+    const onTouch = (event: TouchEvent) => {
+      const touch = event.touches[0] ?? event.changedTouches[0];
+      if (!touch) return;
+      onPoint(touch.clientX, touch.clientY);
+    };
+
+    host.addEventListener("pointerdown", onPointer, { passive: true });
+    host.addEventListener("pointermove", onPointer, { passive: true });
+    host.addEventListener("touchstart", onTouch, { passive: true });
+    host.addEventListener("touchmove", onTouch, { passive: true });
 
     return () => {
-      host.removeEventListener("pointermove", onMove);
+      host.removeEventListener("pointerdown", onPointer);
+      host.removeEventListener("pointermove", onPointer);
+      host.removeEventListener("touchstart", onTouch);
+      host.removeEventListener("touchmove", onTouch);
       for (const timeout of timeouts) {
         window.clearTimeout(timeout);
       }

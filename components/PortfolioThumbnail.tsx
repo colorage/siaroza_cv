@@ -12,6 +12,22 @@ import {
 import type { PortfolioShot } from "@/lib/vault/types";
 
 const GALLERY_INTERVAL_MS = 3500;
+const GALLERY_MIN_START_DELAY_MS = 400;
+const GALLERY_INTERVAL_JITTER_MS = 900;
+
+function randomGalleryTiming(): { delayMs: number; intervalMs: number } {
+  return {
+    delayMs:
+      GALLERY_MIN_START_DELAY_MS +
+      Math.floor(
+        Math.random() * (GALLERY_INTERVAL_MS - GALLERY_MIN_START_DELAY_MS),
+      ),
+    intervalMs:
+      GALLERY_INTERVAL_MS +
+      Math.floor(Math.random() * (GALLERY_INTERVAL_JITTER_MS + 1)) -
+      Math.floor(GALLERY_INTERVAL_JITTER_MS / 2),
+  };
+}
 
 const shotClass =
   "group absolute inset-0 overflow-hidden rounded-2xl bg-surface text-foreground";
@@ -124,8 +140,14 @@ function GalleryThumbnail({
   const scrollerRef = useRef<HTMLDivElement>(null);
   const loopingRef = useRef(false);
   const loopTimerRef = useRef<number>(0);
+  const indexRef = useRef(0);
+  const pausedRef = useRef(false);
+  const timingRef = useRef<ReturnType<typeof randomGalleryTiming> | null>(null);
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+
+  indexRef.current = index;
+  pausedRef.current = paused;
 
   const settleLoop = useCallback(() => {
     const el = scrollerRef.current;
@@ -163,8 +185,9 @@ function GalleryThumbnail({
       const reduced = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
+      const current = indexRef.current;
       const wrapForward =
-        !reduced && next === 0 && index === srcs.length - 1;
+        !reduced && next === 0 && current === srcs.length - 1;
 
       window.clearTimeout(loopTimerRef.current);
 
@@ -189,7 +212,7 @@ function GalleryThumbnail({
         behavior: reduced ? "auto" : "smooth",
       });
     },
-    [index, srcs.length],
+    [srcs.length],
   );
 
   useEffect(() => {
@@ -204,18 +227,29 @@ function GalleryThumbnail({
   }, [settleLoop]);
 
   useEffect(() => {
-    if (paused || srcs.length < 2) return;
+    if (srcs.length < 2) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
 
-    const id = window.setInterval(() => {
-      if (document.hidden) return;
-      goTo((index + 1) % srcs.length);
-    }, GALLERY_INTERVAL_MS);
+    const tick = () => {
+      if (document.hidden || pausedRef.current || loopingRef.current) return;
+      goTo((indexRef.current + 1) % srcs.length);
+    };
 
-    return () => window.clearInterval(id);
-  }, [goTo, index, paused, srcs.length]);
+    timingRef.current ??= randomGalleryTiming();
+    const { delayMs, intervalMs } = timingRef.current;
+    let intervalId = 0;
+    const timeoutId = window.setTimeout(() => {
+      tick();
+      intervalId = window.setInterval(tick, intervalMs);
+    }, delayMs);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      window.clearInterval(intervalId);
+    };
+  }, [goTo, srcs.length]);
 
   const slides = srcs.length > 1 ? [...srcs, srcs[0]] : srcs;
 
