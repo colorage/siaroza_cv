@@ -16,8 +16,8 @@ title: Streaming thumbnail pipeline
 subtitle: Hundreds of thousands of euros in designer time
 cover: streaming-thumbnails/different-aspect-ratio.png
 summary: >-
-  A design system and rendering pipeline for a B2B streaming aggregator: about 30,000 titles, eight skins, nine aspect
-  ratios, four sizes, and three formats — 864 outputs per title from reusable layers.
+  A design system and rendering pipeline for a B2B streaming aggregator: one geometry mapped across about 30,000
+  titles — eight skins, nine aspect ratios, four sizes, and three formats — 864 outputs per title from reusable layers.
 ---
 
 ```widget
@@ -26,11 +26,11 @@ id: thumbnail-pipeline
 
 ## Context
 
-The platform needed posters that behaved like one system across different surfaces, not a collection of one-off illustrations. Each title could appear in nine aspect ratios and four file sizes, with either an original title treatment or one common treatment across a customer's catalog. The problem was not making one poster; it was defining rules that survived every format.
+The platform needed posters that behaved like one system across surfaces, not a collection of one-off illustrations. Each title shipped eight skins, nine aspect ratios, four sizes (large through tiny), and three formats — PNG, WebP, and progressive JPEG — with either the original title treatment or one common treatment across a customer's catalog. The problem was not making one poster; it was defining a geometry that survived every combination.
 
-The examples below are catalog titles from the aggregator, not a Netflix product.
+Wednesday, Stranger Things, and BoJack Horseman below are catalog titles from this aggregator, not a Netflix product.
 
-I built the system around catalog changes. New providers joined and existing ones added premieres, so the pipeline checked production first and the pre-release source second. Keeping the raw source current prevented a title from going live without a poster.
+The catalog moved constantly. New providers joined and existing ones added premieres, so the pipeline preferred production data and still had to parse pre-release dumps. A title going live without artwork was the failure mode.
 
 ![n8n canvas — hourly generation, manual render and upload, daily QA](streaming-thumbnails/n8n-workflow.png)
 
@@ -46,38 +46,49 @@ I built the system around catalog changes. New providers joined and existing one
 
 ### Constraints
 
-- Catalog grew from new providers and premieres
 - Provider originals arrived slowly, in mixed formats
 - Early image models drifted in style and had no native transparency
+- Generated layers shared no coordinate system
+- Common titles had to stay legible in a one- to three-line pocket; white type needed contrast on bright art
 
 ### What required judgment
 
-- AI-generated layers arrived without a shared coordinate system; inconsistent anchors made the grid feel unstable
-- A common title treatment had to remain legible in a one- to three-line area across ratios
-- White type needed contrast without flattening the artwork
-- Automation had to preserve human review for visual decisions and edge cases
+- Where to pause for humans: layer review and final QA, not the render matrix
+- Shared anchors so mixed-aspect grids held together
+
+*From catalog change to a delivered poster.*
+
+```mermaid
+flowchart TD
+  fetch["Fetch"]
+  parse["Parse"]
+  generate["Generate layers"]
+  crop["Crop and align"]
+  render["Render matrix"]
+  qa["Local QA"]
+  upload["Watchfolder upload"]
+  fetch --> parse --> generate --> crop --> render --> qa --> upload
+```
 
 ## Process
 
-fetch → parse → generate → crop → render → QA → upload
-
 ### Detect missing titles
 
-I connected the pipeline to catalog updates with n8n. It checked production first, then the pre-release source, and retried until new titles landed in Workspace / RAW. A catalog diff produced the queue of titles without posters. When provider files were slow or inconsistent, public stills filled the gap and references lived in Obsidian.
+n8n listened for catalog changes and fired the chain when titles landed in Workspace / RAW. A diff against the local store produced the queue of missing posters. Production first, pre-release dumps second. When provider files were slow or inconsistent, public stills from IMDb, Rotten Tomatoes, and official sites filled the gap; references lived in Obsidian.
 
 ### Generate reusable layers
 
-I treated each poster as the same three-part composition: background, foreground, and title. Separate prompts made the layers reusable. Gemini was an early attempt; style drift and missing transparency made it brittle, so I moved to GPT Images 2.0 when the API shipped. Three layer requests ran in parallel, with outputs landing in Workspace / Raw.
+Each poster was the same three layers: background, foreground, and a transparent title at 2:1. Separate prompts made the layers reusable. Gemini drifted and had no native alpha — post-process masks were messier than asking the model. I moved to GPT Images 2.0 when the API shipped native transparency. Three layer requests ran in parallel into Workspace / Raw.
 
 ### Separate title logic from rendering
 
-Some customers needed the original title art; others needed one common treatment across the catalog. OCR preserved a readable title split across one to three lines. When the read failed or the name ran longer, a Python fallback split it before the common title was generated. Title extraction stayed separate from layout.
+Some customers needed original title art; others needed one common treatment. Character art stayed center; the title filled negative space. If the original treatment already read across one to three lines, OCR kept that split. When the read failed or the name ran longer, a Python splitter broke the string before the common title was generated. Title extraction stayed separate from layout.
 
 ### Normalize composition
 
-To stop foregrounds from drifting, I detected mouths in human subjects, aligned their bounding box to a shared horizontal axis, cropped transparent padding from that mouth anchor, and then centered each layer. Already-cropped subjects without people skipped the vertical alignment step. One face-size parameter controlled the character's perceived scale — the same decision as shot scale, from a face close-up to a full figure.
+Background and title are light work: crop a leftover white border, add title margin, resize. Foreground needs a point of interest. The crop classifies the subject as a person or a face. A person stays at full scale, waist-up; a face gets a tighter frame.
 
-Background and title are light work: crop (models sometimes leave a white border), add title margin, resize. Foreground needs a point of interest. The crop classifies the subject as a person or a face. A person stays at full scale, waist-up; a face gets a tighter frame. Crop and alignment follow that call — different box, different horizon — then every layer is centered horizontally. No person and no face: skip the vertical step if the subject is already cropped; otherwise sit it on the same horizon.
+To stop foregrounds from drifting, I detected mouths in human subjects, aligned their bounding box to a shared horizon, cropped transparent padding from that mouth anchor, then centered each layer horizontally. Already-cropped subjects without people skipped the vertical step. One face-size parameter controlled perceived scale — the same decision as shot scale, from a face close-up to a full figure.
 
 ![Framing types of shots in film — nested crop boxes from extreme close-up to full shot](streaming-thumbnails/shot-framing-guide.png)
 
@@ -89,11 +100,11 @@ Background and title are light work: crop (models sometimes leave a white border
 
 ### Render the output matrix
 
-Pillow composed eight skins × nine ratios × four sizes × three formats from the same layers. The background filled the frame; the foreground stayed centered and unscaled; the original or common title sat bottom-center and reduced on narrow ratios. Underlays and contrast-safe hue selection kept white type readable on bright art.
+Pillow composed eight skins × nine ratios × four sizes × three formats from the same layers. The background filled the canvas; the character stayed centered; the title sat bottom-center and scaled on narrow ratios. To keep white type readable, the script sampled the center pixel of a 9×9 downscaled background and picked among 16 hues for a contrasting underlay gradient.
 
 ### QA and delivery
 
-Two checks covered the fragile parts: transparent pixels left in the title, and a comparison against the reference for character, title, and crop — not a pixel-perfect copy of the marketing still. Gemma 4 via Ollama could run overnight, while Obsidian showed the queue and both scores. A plugin launched the shell script, and a watchfolder uploaded, notified the team in Slack, synced, and backed up the result. Human review stayed focused on layers, visual decisions, and edge cases.
+Two checks: leftover transparent pixels in the title, and a semantic match against the reference for character, title, and crop — not a pixel copy of the marketing still. Gemma 4 via Ollama ran the vision pass overnight on local memory. Obsidian showed the original, the render, and both scores side by side; a vault plugin launched the shell script. A watchfolder uploaded approved files, notified Slack, and triggered the backup sync. Human review stayed on layers, visual decisions, and edge cases.
 
 ![BoJack Horseman — catalog reference next to the pipeline render](streaming-thumbnails/reference-vs-render.png "fit")
 
@@ -102,6 +113,6 @@ Two checks covered the fragile parts: transparent pixels left in the title, and 
 ## Outcome
 
 - About 30,000 original titles processed in one year
-- 864 deliverables per title — 8 skins × 9 ratios × 4 sizes × 3 formats — roughly 26 million files across the catalog
-- Catalog changes started the pipeline automatically; human attention moved to layer decisions, visual QA, and exceptions
-- The result was a reusable system for new titles, not a one-off batch of artwork
+- 864 deliverables per title — 8 skins × 9 ratios × 4 sizes × 3 formats — roughly 26 million files
+- A freelancer splitting stills and setting type by hand averaged about 1,000 titles a month; 30,000 titles would have taken two and a half years before any skin compositing
+- Human attention moved to art direction, layer decisions, and exceptions — not manual scaling
