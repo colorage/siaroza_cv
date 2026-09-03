@@ -10,6 +10,7 @@ stack:
   - Photoshop
 locale: en
 title: PSD-to-Lua level pipeline
+subtitle: Later titles in half the time
 cover: psd-parser/magic-encyclopedia-moon-light.jpg
 summary: >-
   Photoshop-to-Lua pipeline for hidden-object games ported to iOS: layer names carried behavior, the engine read

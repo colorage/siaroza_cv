@@ -31,13 +31,24 @@ function languageOf(node: ReactNode): { lang?: string; text: string } | null {
   return { lang, text };
 }
 
-function MarkdownImage({ src, alt }: ComponentPropsWithoutRef<"img">) {
+function MarkdownImage({ src, alt, title }: ComponentPropsWithoutRef<"img">) {
   if (typeof src !== "string" || !src) return null;
+  const fit = title?.trim().toLowerCase() === "fit";
   return (
     <figure className="my-8 w-full">
-      <div className="overflow-hidden rounded-2xl">
+      <div
+        className={
+          fit
+            ? "mx-auto w-full max-w-full overflow-hidden rounded-2xl md:w-fit"
+            : "overflow-hidden rounded-2xl"
+        }
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={alt ?? ""} className="h-auto w-full" />
+        <img
+          src={src}
+          alt={alt ?? ""}
+          className={fit ? "h-auto w-full md:w-auto" : "h-auto w-full"}
+        />
       </div>
     </figure>
   );

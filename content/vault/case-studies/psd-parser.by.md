@@ -10,6 +10,7 @@ stack:
   - Photoshop
 locale: by
 title: Пайплайн узроўняў PSD → Lua
+subtitle: Пазнейшыя тытулы — удвая хутчэй
 cover: psd-parser/magic-encyclopedia-moon-light.jpg
 summary: >-
   Пайплайн Photoshop → Lua для hidden-object-гульняў, якія пераносіліся на iOS: імёны слаёў неслі паводзіны,

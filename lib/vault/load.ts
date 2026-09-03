@@ -335,10 +335,14 @@ function loadCaseStudies(): CaseStudy[] {
     const stack = strList(en.data.stack);
     const relatedSlugs = strList(en.data.related);
     const cover = detectCaseStudyCover(en, slug);
+    const subtitleEn = str(en.data.subtitle);
     const item: CaseStudy = {
       slug,
       experienceId: str(en.data.experienceId) ?? "",
       title: localized(str(en.data.title), str(by?.data.title)),
+      ...(subtitleEn
+        ? { subtitle: localized(subtitleEn, str(by?.data.subtitle)) }
+        : {}),
       summary: localized(str(en.data.summary), str(by?.data.summary)),
       ...(cover ? { cover } : {}),
       ...(stack ? { stack } : {}),

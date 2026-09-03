@@ -13,6 +13,7 @@ stack:
   - Ollama
 locale: en
 title: Streaming thumbnail pipeline
+subtitle: Hundreds of thousands of euros in designer time
 cover: streaming-thumbnails/different-aspect-ratio.png
 summary: >-
   A design system and rendering pipeline for a B2B streaming aggregator: about 30,000 titles, eight skins, nine aspect
@@ -75,6 +76,8 @@ Some customers needed the original title art; others needed one common treatment
 ### Normalize composition
 
 To stop foregrounds from drifting, I detected mouths in human subjects, aligned their bounding box to a shared horizontal axis, cropped transparent padding from that mouth anchor, and then centered each layer. Already-cropped subjects without people skipped the vertical alignment step. One face-size parameter controlled the character's perceived scale — the same decision as shot scale, from a face close-up to a full figure.
+
+Background and title are light work: crop (models sometimes leave a white border), add title margin, resize. Foreground needs a point of interest. The crop classifies the subject as a person or a face. A person stays at full scale, waist-up; a face gets a tighter frame. Crop and alignment follow that call — different box, different horizon — then every layer is centered horizontally. No person and no face: skip the vertical step if the subject is already cropped; otherwise sit it on the same horizon.
 
 ![Framing types of shots in film — nested crop boxes from extreme close-up to full shot](streaming-thumbnails/shot-framing-guide.png)
 

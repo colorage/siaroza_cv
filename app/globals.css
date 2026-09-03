@@ -240,6 +240,25 @@ body {
     opacity 280ms ease;
 }
 
+.obsidian-graph-canvas {
+  cursor: grab;
+  outline: none;
+}
+
+.obsidian-graph-canvas:active {
+  cursor: grabbing;
+}
+
+.obsidian-graph-canvas:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.obsidian-graph-preview-close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-up-delay,

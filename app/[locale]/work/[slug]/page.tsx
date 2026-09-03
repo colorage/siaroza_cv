@@ -70,6 +70,11 @@ export default async function WorkPage({ params }: Props) {
         <h1 className="text-[clamp(2rem,5vw,3rem)] leading-[1.1] tracking-[-0.03em] text-foreground">
           {study.title[locale]}
         </h1>
+        {study.subtitle ? (
+          <p className="mt-4 text-[clamp(1.25rem,3vw,1.75rem)] leading-snug tracking-[-0.02em] text-foreground">
+            {study.subtitle[locale]}
+          </p>
+        ) : null}
         {study.stack?.length ? (
           <ul className="mt-5 flex flex-wrap gap-2">
             {study.stack.map((item) => (

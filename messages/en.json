@@ -80,6 +80,17 @@
       "aspectWide": "Wide",
       "posters": "Thumbnail skins",
       "caption": "Catalog titles from the aggregator. Change title treatment, gradient, size, and aspect ratio."
+    },
+    "designSystemGraph": {
+      "canvasLabel": "Design system graph — hover to highlight connections, click to preview a note",
+      "caption": "Platform Graphic Design System vault — 89 nodes, 99 links. Scroll to zoom, drag to pan, arrow keys to move.",
+      "previewLabel": "Note preview",
+      "noteLabel": "Note",
+      "unresolvedLabel": "Unresolved link",
+      "noFile": "This node is referenced but has no note file in the vault.",
+      "linksLabel": "Links",
+      "noLinks": "No outbound links.",
+      "closePreview": "Close preview"
     }
   },
   "footer": {
