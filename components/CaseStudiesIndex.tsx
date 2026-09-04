@@ -48,7 +48,9 @@ export function CaseStudiesIndex({ locale, dict }: Props) {
                   <img
                     src={study.cover}
                     alt=""
-                    className="h-full w-full object-cover"
+                    width={160}
+                    height={112}
+                    className="h-full w-full object-contain"
                   />
                 ) : null}
               </div>

@@ -9,7 +9,7 @@ stack:
 locale: en
 title: Graphic design system
 subtitle: Cut designer–developer handoffs
-cover: figma-plugin/export-ui.png
+cover: figma-plugin/cover.png
 summary: >-
   Graphic Design System for a multi-tenant B2B platform — per-customer brand combinations, shared assets across projects,
   and a Figma export pipeline that replaced designer–developer handoffs.

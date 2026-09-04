@@ -14,7 +14,7 @@ stack:
 locale: en
 title: Streaming thumbnail pipeline
 subtitle: Hundreds of thousands of euros in designer time
-cover: streaming-thumbnails/different-aspect-ratio.png
+cover: streaming-thumbnails/cover.png
 summary: >-
   A design system and rendering pipeline for a B2B streaming aggregator: one geometry mapped across about 30,000
   titles — eight skins, nine aspect ratios, four sizes, and three formats — 864 outputs per title from reusable layers.

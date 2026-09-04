@@ -9,7 +9,7 @@ stack:
 locale: by
 title: Графічная дызайн-сістэма
 subtitle: Без ручных перадач дызайнер–распрацоўнік
-cover: figma-plugin/export-ui.png
+cover: figma-plugin/cover.png
 summary: >-
   Graphic Design System для шматкліентнай B2B-платформы — брэнд-камбінацыі пад кліента, агульная бібліятэка актываў
   і Figma-экспарт, які замяніў ручныя перадачы паміж дызайнерамі і распрацоўнікамі.

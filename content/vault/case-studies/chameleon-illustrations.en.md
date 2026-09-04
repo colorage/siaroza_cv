@@ -9,6 +9,7 @@ stack:
 locale: en
 title: Chameleon illustration system for Shopify
 subtitle: 256 colorways, no hand-export
+cover: chameleon-illustrations/cover.png
 summary: >-
   Theme-aware illustration system for a Shopify builder: vector art recolored at runtime, 3D art served from a
   generated 16×16 matrix and resolved by filename.
