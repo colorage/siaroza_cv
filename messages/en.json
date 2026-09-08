@@ -81,6 +81,33 @@
       "posters": "Thumbnail skins",
       "caption": "Catalog titles from the aggregator. Change title treatment, gradient, size, and aspect ratio."
     },
+    "chameleonColorways": {
+      "primary": "Primary",
+      "secondary": "Secondary",
+      "illustrations": "Illustration",
+      "caption": "Primary and secondary hues pick the matching 3D render. The pair is the filename.",
+      "hues": {
+        "0": "Red",
+        "1": "Orange",
+        "2": "Amber",
+        "3": "Yellow",
+        "4": "Lime",
+        "5": "Green",
+        "6": "Teal",
+        "7": "Turquoise",
+        "8": "Cyan",
+        "9": "Aqua",
+        "a": "Blue",
+        "b": "Indigo",
+        "c": "Purple",
+        "d": "Magenta",
+        "e": "Pink",
+        "f": "Fuchsia"
+      },
+      "previewAlt": {
+        "scooter": "Scooter illustration"
+      }
+    },
     "designSystemGraph": {
       "canvasLabel": "Design system graph — hover to highlight connections, click to preview a note",
       "caption": "Platform Graphic Design System vault — 89 nodes, 99 links. Scroll to zoom, drag to pan, arrow keys to move.",

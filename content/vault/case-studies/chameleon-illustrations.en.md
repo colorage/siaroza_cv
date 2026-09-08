@@ -15,6 +15,10 @@ summary: >-
   generated 16×16 matrix and resolved by filename.
 ---
 
+```widget
+id: chameleon-colorways
+```
+
 ## Context
 
 The Shopify theme builder let merchants choose a primary and secondary color, then pick an illustration style. The visual system needed those choices to feel intentional, not like a generic asset with a tint applied.
