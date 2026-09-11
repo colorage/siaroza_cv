@@ -8,7 +8,7 @@ import by from "@/messages/by.json";
 import en from "@/messages/en.json";
 
 const MEDIA_DIR = "/media/case-studies/chameleon-illustrations/widget";
-const PREVIEW_SIZES = "(max-width: 64rem) calc(100vw - 3rem), 64rem";
+const PREVIEW_SIZES = "(max-width: 48rem) calc(100vw - 3rem), 32rem";
 
 const HUE_IDS = [
   "0",
@@ -147,9 +147,9 @@ export function ChameleonColorways(props: Record<string, unknown>) {
 
   return (
     <figure className="my-8 w-full">
-      <MediaFrame className="bg-card">
-        <div className="p-4 md:p-8">
-          <div className="relative aspect-square w-full">
+      <MediaFrame className="mx-auto w-full max-w-md bg-card md:max-w-lg">
+        <div className="p-4 md:p-6">
+          <div className="relative mx-auto aspect-square w-full">
             <Image
               src={previewSrc}
               alt={copy.previewAlt[stem]}
