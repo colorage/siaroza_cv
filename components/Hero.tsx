@@ -53,7 +53,10 @@ export function Hero({ dict }: Props) {
         <p className="animate-fade-up-delay-2 mt-3 max-w-xl text-[15px] leading-relaxed text-muted md:mt-4">
           {dict.hero.tagline}
         </p>
-        <div className="animate-fade-up-delay-2 mt-8 md:mt-10">
+        <div
+          data-hero-cta
+          className="animate-fade-up-delay-2 relative z-20 mt-8 md:mt-10"
+        >
           <ContactActions dict={dict} />
         </div>
       </div>

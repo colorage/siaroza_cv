@@ -18,6 +18,9 @@ const SPAWN_DISTANCE = 70;
 const SPAWN_INTERVAL_MS = 100;
 const MAX_BUBBLES = 24;
 const LIFETIME_MS = 6000;
+/** Bubbles grow down-right from the cursor; keep them clear of the hero CTA. */
+const BUBBLE_COLLISION_W = 160;
+const BUBBLE_COLLISION_H = 36;
 
 type Bubble = {
   id: number;
@@ -59,7 +62,28 @@ export function SkillCursorTrail({ children }: Props) {
     let nextId = 0;
     const timeouts = new Set<number>();
 
+    const hitsHeroCta = (x: number, y: number) => {
+      const hostRect = host.getBoundingClientRect();
+      const bubbleLeft = hostRect.left + x;
+      const bubbleTop = hostRect.top + y;
+      const bubbleRight = bubbleLeft + BUBBLE_COLLISION_W;
+      const bubbleBottom = bubbleTop + BUBBLE_COLLISION_H;
+
+      for (const el of host.querySelectorAll("[data-hero-cta]")) {
+        const cta = el.getBoundingClientRect();
+        const overlaps =
+          bubbleLeft < cta.right &&
+          bubbleRight > cta.left &&
+          bubbleTop < cta.bottom &&
+          bubbleBottom > cta.top;
+        if (overlaps) return true;
+      }
+      return false;
+    };
+
     const spawn = (x: number, y: number) => {
+      if (hitsHeroCta(x, y)) return;
+
       const id = nextId++;
       const skill = pickSkill(lastSkillRef.current);
       lastSkillRef.current = skill;
@@ -88,6 +112,7 @@ export function SkillCursorTrail({ children }: Props) {
       const x = clientX - rect.left;
       const y = clientY - rect.top;
       if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
+      if (hitsHeroCta(x, y)) return;
 
       const now = performance.now();
 
