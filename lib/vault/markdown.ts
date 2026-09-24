@@ -34,10 +34,10 @@ function isRemoteOrAbsolute(src: string): boolean {
   );
 }
 
-function rewriteGalleryFences(source: string, noteDir: string): string {
-  return source.replace(/```gallery\r?\n([\s\S]*?)```/g, (_, body: string) => {
+function rewriteMediaFences(source: string, noteDir: string): string {
+  return source.replace(/```(gallery|video)\r?\n([\s\S]*?)```/g, (_, kind: string, body: string) => {
     const rewritten = body.replace(
-      /^(\s*(?:-\s+)?src:\s*)(.+)$/gm,
+      /^(\s*(?:-\s+)?(?:src|poster):\s*)(.+)$/gm,
       (_match, prefix: string, raw: string) => {
         const trimmed = raw.trim().replace(/^['"]|['"]$/g, "");
         if (!trimmed || isRemoteOrAbsolute(trimmed)) {
@@ -46,7 +46,7 @@ function rewriteGalleryFences(source: string, noteDir: string): string {
         return `${prefix}${resolveNoteAsset(noteDir, trimmed)}`;
       },
     );
-    return `\`\`\`gallery\n${rewritten}\`\`\``;
+    return `\`\`\`${kind}\n${rewritten}\`\`\``;
   });
 }
 
@@ -71,7 +71,30 @@ export function preprocessMarkdown(source: string, noteDir: string): string {
     },
   );
 
-  return rewriteGalleryFences(out, noteDir);
+  return rewriteMediaFences(out, noteDir);
+}
+
+export function parseVideoFence(source: string): {
+  src: string;
+  title: string;
+  poster?: string;
+  caption?: string;
+} | null {
+  try {
+    const data = yamlLoad(source, { schema: JSON_SCHEMA });
+    if (!data || typeof data !== "object") return null;
+    const video = data as Record<string, unknown>;
+    if (typeof video.src !== "string" || !video.src.startsWith("/media/") ||
+        typeof video.title !== "string" || !video.title.trim()) return null;
+    return {
+      src: video.src,
+      title: video.title,
+      ...(typeof video.poster === "string" ? { poster: video.poster } : {}),
+      ...(typeof video.caption === "string" ? { caption: video.caption } : {}),
+    };
+  } catch {
+    return null;
+  }
 }
 
 export type GalleryFenceImage = {

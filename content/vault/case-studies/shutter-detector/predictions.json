@@ -1,0 +1,187 @@
+{
+  "checkpoint": "runs/shutters/best.pt",
+  "epoch": 18,
+  "note": "Curated qualitative examples; not a new evaluation. Boxes and confidence are unmodified model outputs on resized images.",
+  "images": [
+    {
+      "asset": "2-sections.jpg",
+      "source": "photo__R0001777.jpg",
+      "split": "test",
+      "threshold": 0.5,
+      "detections": [
+        {
+          "box": [
+            400.18,
+            316.02,
+            509.21,
+            578.1
+          ],
+          "label": "2-sections",
+          "score": 0.9961
+        },
+        {
+          "box": [
+            706.01,
+            321.75,
+            808.95,
+            569.93
+          ],
+          "label": "2-sections",
+          "score": 0.9931
+        }
+      ]
+    },
+    {
+      "asset": "3-sections.jpg",
+      "source": "photo__R0002726.jpg",
+      "split": "test",
+      "threshold": 0.5,
+      "detections": [
+        {
+          "box": [
+            758.87,
+            405.77,
+            858.63,
+            644.26
+          ],
+          "label": "3-sections",
+          "score": 0.9998
+        },
+        {
+          "box": [
+            487.97,
+            409.23,
+            594.85,
+            641.54
+          ],
+          "label": "3-sections",
+          "score": 0.9998
+        },
+        {
+          "box": [
+            1069.51,
+            412.82,
+            1180.54,
+            653.7
+          ],
+          "label": "3-sections",
+          "score": 0.9997
+        }
+      ]
+    },
+    {
+      "asset": "horizontal.jpg",
+      "source": "photo__R0002066.jpg",
+      "split": "test",
+      "threshold": 0.5,
+      "detections": [
+        {
+          "box": [
+            932.79,
+            168.9,
+            1093.29,
+            628.26
+          ],
+          "label": "horizontal",
+          "score": 0.9984
+        },
+        {
+          "box": [
+            421.71,
+            182.69,
+            570.57,
+            602.36
+          ],
+          "label": "horizontal",
+          "score": 0.9973
+        },
+        {
+          "box": [
+            38.19,
+            169.57,
+            205.43,
+            628.15
+          ],
+          "label": "horizontal",
+          "score": 0.9906
+        }
+      ]
+    },
+    {
+      "asset": "vertical.jpg",
+      "source": "street_view__Pasted image 20260409171850.png",
+      "split": "test",
+      "threshold": 0.5,
+      "detections": [
+        {
+          "box": [
+            507.56,
+            74.57,
+            629.55,
+            425.44
+          ],
+          "label": "vertical",
+          "score": 0.9982
+        },
+        {
+          "box": [
+            137.39,
+            72.84,
+            261.01,
+            427.65
+          ],
+          "label": "vertical",
+          "score": 0.9927
+        },
+        {
+          "box": [
+            192.55,
+            84.03,
+            263.91,
+            406.83
+          ],
+          "label": "vertical",
+          "score": 0.5047
+        }
+      ]
+    },
+    {
+      "asset": "classic.jpg",
+      "source": "photo__R0002092.jpg",
+      "split": "test",
+      "threshold": 0.5,
+      "detections": [
+        {
+          "box": [
+            457.41,
+            395.44,
+            559.98,
+            649.51
+          ],
+          "label": "classic",
+          "score": 0.9995
+        },
+        {
+          "box": [
+            67.72,
+            392.75,
+            169.75,
+            644.24
+          ],
+          "label": "classic",
+          "score": 0.9993
+        },
+        {
+          "box": [
+            751.09,
+            390.0,
+            855.79,
+            663.63
+          ],
+          "label": "classic",
+          "score": 0.9993
+        }
+      ]
+    }
+  ]
+}
