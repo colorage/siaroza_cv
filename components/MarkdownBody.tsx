@@ -10,7 +10,8 @@ import remarkGfm from "remark-gfm";
 import { GalleryEmbed } from "@/components/GalleryEmbed";
 import { MermaidDiagram } from "@/components/MermaidDiagram";
 import { WidgetEmbed } from "@/components/WidgetEmbed";
-import { parseWidgetFence } from "@/lib/vault/markdown";
+import { VideoEmbed } from "@/components/VideoEmbed";
+import { parseVideoFence, parseWidgetFence } from "@/lib/vault/markdown";
 import type { Locale } from "@/lib/i18n";
 
 type Props = {
@@ -113,6 +114,10 @@ export function MarkdownBody({ markdown, locale, slideIndexTemplate }: Props) {
             const code = languageOf(children);
             if (code?.lang === "mermaid") {
               return <MermaidDiagram source={code.text} />;
+            }
+            if (code?.lang === "video") {
+              const video = parseVideoFence(code.text);
+              return video ? <div className="my-8"><VideoEmbed {...video} /></div> : null;
             }
             if (code?.lang === "gallery") {
               return (

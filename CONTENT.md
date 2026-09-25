@@ -178,6 +178,19 @@ id: thumbnail-pipeline
 
 Register the React component in [`components/widgets/registry.ts`](components/widgets/registry.ts). Unknown ids render a placeholder. First real widget is a first-use primitive: component + register + fence in the same PR. Vault stores only `id` + props. NDA studies must not embed public widgets that leak the work.
 
+### Case-study video
+
+Use a `video` fence in the article body. `src` and `poster` resolve relative to the note folder. Videos use the shared `VideoEmbed` with controls and no automatic preload.
+
+````md
+```video
+src: shutter-detector/demo.mp4
+poster: shutter-detector/demo-poster.jpg
+title: Live shutter detection
+caption: A webcam demonstration with a printed photograph.
+```
+````
+
 ### Gallery
 
 Several stills in one scroll-snap slider (case-study body). Same `max-w-5xl` column as body copy. Relative `src` values are rewritten at load time.
