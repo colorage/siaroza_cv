@@ -6,6 +6,7 @@ import { MediaFrame } from "@/components/MediaFrame";
 import { isLocale, type Locale } from "@/lib/i18n";
 import by from "@/messages/by.json";
 import en from "@/messages/en.json";
+import pl from "@/messages/pl.json";
 
 const MEDIA_DIR = "/media/case-studies/chameleon-illustrations/widget";
 const PREVIEW_SIZES = "(max-width: 48rem) calc(100vw - 3rem), 32rem";
@@ -61,7 +62,9 @@ function hueColor(index: number): string {
 }
 
 function copyFor(locale: Locale) {
-  return (locale === "by" ? by : en).widgets.chameleonColorways;
+  if (locale === "pl") return pl.widgets.chameleonColorways;
+  if (locale === "by") return by.widgets.chameleonColorways;
+  return en.widgets.chameleonColorways;
 }
 
 function HueSlider({

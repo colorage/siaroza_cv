@@ -1,0 +1,154 @@
+{
+  "meta": {
+    "title": "Siaroža — Design Engineer",
+    "description": "Design Engineer. Złożone problemy projektowe. Buduję potoki wizualne i prototypy wizji komputerowej z wykorzystaniem OpenCV i PyTorch — oraz usprawniam działające już systemy."
+  },
+  "nav": {
+    "experience": "Doświadczenie",
+    "portfolio": "Portfolio",
+    "caseStudies": "Case studies",
+    "projects": "Projekty poboczne"
+  },
+  "a11y": {
+    "skipToContent": "Przejdź do treści"
+  },
+  "hero": {
+    "name": "Siarhiej Piechcieraǔ",
+    "shortName": "Siaroža",
+    "title": "Design Engineer",
+    "tagline": "Złożone problemy projektowe. Buduję potoki wizualne i prototypy wizji komputerowej z wykorzystaniem OpenCV i PyTorch — oraz usprawniam działające już systemy.",
+    "email": "Email",
+    "telegram": "Telegram",
+    "linkedin": "LinkedIn"
+  },
+  "experience": {
+    "heading": "Doświadczenie",
+    "earlier": "Wcześniej",
+    "downloadCv": "Pobierz CV",
+    "caseStudies": "Case studies",
+    "caseStudyBack": "Wróć do doświadczenia",
+    "caseStudyContext": "Kontekst",
+    "caseStudyProcess": "Proces",
+    "caseStudySolution": "Rozwiązanie",
+    "caseStudyImpact": "Wpływ",
+    "caseStudyRelated": "Powiązane"
+  },
+  "portfolio": {
+    "heading": "Portfolio",
+    "seeAll": "Całe portfolio",
+    "archiveTitle": "Całe portfolio",
+    "archiveDescription": "Identyfikacja wizualna, motion i UI produktów.",
+    "back": "Wróć",
+    "viewOnDribbble": "Zobacz na Dribbble",
+    "viewOnYouTube": "Zobacz na YouTube",
+    "slide": "{current} / {total}",
+    "goToImage": "Przejdź do obrazu {n} z {total}"
+  },
+  "caseStudies": {
+    "heading": "Case studies",
+    "back": "Wróć do case studies",
+    "context": "Kontekst",
+    "effort": "Wkład",
+    "duration": "Czas trwania",
+    "role": "Rola",
+    "team": "Zespół",
+    "constraints": "Ograniczenia",
+    "hard": "Co było trudne",
+    "process": "Proces",
+    "solution": "Rozwiązanie",
+    "impact": "Wpływ",
+    "diagram": "Schemat pracy",
+    "related": "Powiązane"
+  },
+  "widgets": {
+    "thumbnailPipeline": {
+      "title": "Tytuł",
+      "titleOriginal": "Oryginalny",
+      "titleCommon": "Wspólny",
+      "gradient": "Gradient",
+      "gradientNone": "Brak",
+      "gradientDark": "Ciemny",
+      "gradientOriginal": "Oryginalny",
+      "gradientBright": "Jasny",
+      "size": "Rozmiar",
+      "sizeTiny": "Bardzo mały",
+      "sizeSmall": "Mały",
+      "sizeMedium": "Średni",
+      "sizeLarge": "Duży",
+      "aspect": "Proporcje",
+      "aspectThin": "Wąski",
+      "aspectWide": "Szeroki",
+      "posters": "Warianty miniatur",
+      "caption": "Tytuły z katalogu agregatora. Zmień styl tytułu, gradient, rozmiar i proporcje."
+    },
+    "chameleonColorways": {
+      "primary": "Podstawowy",
+      "secondary": "Dodatkowy",
+      "illustrations": "Ilustracja",
+      "caption": "Podstawowy i dodatkowy odcień wybierają pasujący render 3D. Para tworzy nazwę pliku.",
+      "hues": {
+        "0": "Czerwony",
+        "1": "Pomarańczowy",
+        "2": "Bursztynowy",
+        "3": "Żółty",
+        "4": "Limonkowy",
+        "5": "Zielony",
+        "6": "Morski",
+        "7": "Turkusowy",
+        "8": "Cyjan",
+        "9": "Akwamaryna",
+        "a": "Niebieski",
+        "b": "Indygo",
+        "c": "Fioletowy",
+        "d": "Magenta",
+        "e": "Różowy",
+        "f": "Fuksja"
+      },
+      "previewAlt": {
+        "scooter": "Ilustracja skutera"
+      }
+    },
+    "designSystemGraph": {
+      "canvasLabel": "Graf systemu projektowania — najedź, aby podświetlić połączenia, kliknij, aby podejrzeć notatkę",
+      "caption": "Baza Platform Graphic Design System — 89 węzłów, 99 połączeń. Przewijaj, aby powiększyć, przeciągaj, aby przesuwać, używaj strzałek do nawigacji.",
+      "previewLabel": "Podgląd notatki",
+      "noteLabel": "Notatka",
+      "unresolvedLabel": "Niepowiązany odnośnik",
+      "noFile": "Ten węzeł posiada odniesienie, ale brak pliku notatki w bazie.",
+      "linksLabel": "Linki",
+      "noLinks": "Brak linków wychodzących.",
+      "closePreview": "Zamknij podgląd"
+    }
+  },
+  "footer": {
+    "contact": "Skontaktuj się ze mną"
+  },
+  "projects": {
+    "heading": "Projekty poboczne",
+    "seeAll": "Wszystkie projekty poboczne",
+    "archiveTitle": "Wszystkie projekty poboczne",
+    "archiveDescription": "Wdrożone produkty, eksperymenty i narzędzia miejskie.",
+    "active": "Aktywne",
+    "stage": {
+      "release": "Release",
+      "mvp": "MVP",
+      "poc": "PoC",
+      "nda": "NDA"
+    },
+    "status": {
+      "finished": "Ukończony",
+      "active": "Aktywny",
+      "prototype": "Prototyp"
+    },
+    "back": "Wróć",
+    "visit": "Odwiedź projekt",
+    "gallery": "Zrzuty ekranu",
+    "instagram": "Instagram",
+    "telegram": "Telegram",
+    "dribbble": "Zobacz na Dribbble",
+    "x": "X",
+    "viewOnX": "Zobacz na X",
+    "ndaNote": "Szczegóły objęte NDA.",
+    "ndaPrivateTitle": "Projekt {name} nie jest publiczny"
+  }
+}

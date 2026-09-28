@@ -6,6 +6,12 @@ import {
   type Locale,
 } from "@/lib/i18n";
 
+function toOgLocale(item: Locale): string {
+  if (item === "by") return "be_BY";
+  if (item === "pl") return "pl_PL";
+  return "en_US";
+}
+
 export function pageMetadata({
   locale,
   title,
@@ -18,10 +24,10 @@ export function pageMetadata({
   path?: string;
 }): Metadata {
   const canonical = localePath(locale, path);
-  const openGraphLocale = locale === "by" ? "be_BY" : "en_US";
+  const openGraphLocale = toOgLocale(locale);
   const alternateLocale = locales
     .filter((item) => item !== locale)
-    .map((item) => (item === "by" ? "be_BY" : "en_US"));
+    .map(toOgLocale);
 
   return {
     title,

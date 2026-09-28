@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
-import { htmlLang, type Dictionary, type Locale } from "@/lib/i18n";
+import { htmlLang, locales, type Dictionary, type Locale } from "@/lib/i18n";
 import { isPetProjectsEnabled } from "@/lib/site-url";
 
 type Props = {
@@ -10,15 +10,27 @@ type Props = {
 };
 
 function LocaleSwitcherFallback({ locale }: { locale: Locale }) {
-  const other: Locale = locale === "en" ? "by" : "en";
   return (
-    <Link
-      href={`/${other}`}
-      className="shrink-0 rounded-full border border-border-strong px-3 py-1 text-foreground transition-colors hover:bg-surface"
-      hrefLang={htmlLang(other)}
-    >
-      {other.toUpperCase()}
-    </Link>
+    <div className="flex shrink-0 items-center rounded-full border border-border-strong p-0.5 text-[11px] sm:text-[12px]">
+      {locales.map((target) => {
+        const isActive = target === locale;
+        return (
+          <Link
+            key={target}
+            href={`/${target}`}
+            className={`shrink-0 rounded-full px-2.5 py-0.5 transition-colors ${
+              isActive
+                ? "bg-surface font-medium text-foreground"
+                : "text-muted hover:text-foreground"
+            }`}
+            hrefLang={htmlLang(target)}
+            aria-current={isActive ? "page" : undefined}
+          >
+            {target.toUpperCase()}
+          </Link>
+        );
+      })}
+    </div>
   );
 }
 

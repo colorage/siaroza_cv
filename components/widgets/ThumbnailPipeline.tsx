@@ -5,6 +5,7 @@ import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "re
 import { isLocale, type Locale } from "@/lib/i18n";
 import by from "@/messages/by.json";
 import en from "@/messages/en.json";
+import pl from "@/messages/pl.json";
 
 const MEDIA_DIR = "/media/case-studies/streaming-thumbnails/widget";
 
@@ -54,7 +55,9 @@ function posterSrc(
 }
 
 function copyFor(locale: Locale) {
-  return (locale === "by" ? by : en).widgets.thumbnailPipeline;
+  if (locale === "pl") return pl.widgets.thumbnailPipeline;
+  if (locale === "by") return by.widgets.thumbnailPipeline;
+  return en.widgets.thumbnailPipeline;
 }
 
 function layoutFor(containerWidth: number, ratioW: number, ratioH: number) {

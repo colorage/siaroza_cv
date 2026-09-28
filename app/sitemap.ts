@@ -13,6 +13,7 @@ function sitemapEntry(path = ""): MetadataRoute.Sitemap[number] {
       languages: {
         en: `${base}${languages.en}`,
         be: `${base}${languages.be}`,
+        pl: `${base}${languages.pl}`,
       },
     },
   };

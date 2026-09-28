@@ -25,6 +25,7 @@ import type {
 import { isLocale, type Locale } from "@/lib/i18n";
 import by from "@/messages/by.json";
 import en from "@/messages/en.json";
+import pl from "@/messages/pl.json";
 
 const ForceGraph2D = dynamic(() => import("react-force-graph-2d"), {
   ssr: false,
@@ -44,7 +45,9 @@ type ForceGraphRef = {
 };
 
 function copyFor(locale: Locale) {
-  return (locale === "by" ? by : en).widgets.designSystemGraph;
+  if (locale === "pl") return pl.widgets.designSystemGraph;
+  if (locale === "by") return by.widgets.designSystemGraph;
+  return en.widgets.designSystemGraph;
 }
 
 function linkEndpointId(value: string | SimNode): string {

@@ -5,9 +5,14 @@ import { resolveNoteAsset } from "@/lib/vault/paths";
 export function localized(
   en: string | undefined,
   by: string | undefined,
+  pl?: string | undefined,
 ): Record<Locale, string> {
   const english = en ?? "";
-  return { en: english, by: by ?? english };
+  return {
+    en: english,
+    by: by ?? english,
+    pl: pl ?? english,
+  };
 }
 
 export function markdownBullets(body: string): string[] {

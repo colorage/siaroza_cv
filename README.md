@@ -27,7 +27,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) — redirects to `/en`. Belarusian: `/by`.
+Open [http://localhost:3000](http://localhost:3000) — redirects to `/en`. Belarusian: `/by`, Polish: `/pl`.
 
 ## Content
 
@@ -37,6 +37,6 @@ Source of truth is the Obsidian vault at [`content/vault/`](content/vault/) — 
 - Portfolio: `content/vault/work/{slug}/`
 - Case studies: `content/vault/case-studies/`
 - Pet projects: `content/vault/projects/{slug}/`
-- UI strings: `messages/en.json`, `messages/by.json`
+- UI strings: `messages/en.json`, `messages/by.json`, `messages/pl.json`
 - CV PDF: `public/cv/siaroza-cv.pdf`
 

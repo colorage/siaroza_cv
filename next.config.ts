@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/:locale(en|by)/work/game-thumbnails",
+        source: "/:locale(en|by|pl)/work/game-thumbnails",
         destination: "/:locale/work/streaming-thumbnails",
         permanent: true,
       },

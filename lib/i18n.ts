@@ -1,4 +1,4 @@
-export const locales = ["en", "by"] as const;
+export const locales = ["en", "by", "pl"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "en";
 
@@ -6,8 +6,10 @@ export function isLocale(value: string): value is Locale {
   return locales.includes(value as Locale);
 }
 
-export function htmlLang(locale: Locale): "en" | "be" {
-  return locale === "by" ? "be" : "en";
+export function htmlLang(locale: Locale): "en" | "be" | "pl" {
+  if (locale === "by") return "be";
+  if (locale === "pl") return "pl";
+  return "en";
 }
 
 export function localePath(locale: Locale, path = ""): string {
@@ -20,6 +22,7 @@ export function languageAlternates(path = ""): Record<string, string> {
   return {
     en: localePath("en", path),
     be: localePath("by", path),
+    pl: localePath("pl", path),
     "x-default": localePath(defaultLocale, path),
   };
 }
@@ -144,6 +147,9 @@ export type Dictionary = {
 export async function getDictionary(locale: Locale): Promise<Dictionary> {
   if (locale === "by") {
     return (await import("@/messages/by.json")).default as Dictionary;
+  }
+  if (locale === "pl") {
+    return (await import("@/messages/pl.json")).default as Dictionary;
   }
   return (await import("@/messages/en.json")).default as Dictionary;
 }
