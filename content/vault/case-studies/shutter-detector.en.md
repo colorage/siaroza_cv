@@ -73,7 +73,7 @@ The pipeline supports resumable checkpoints and automatic CUDA, Apple MPS, or CP
 
 ## What the model sees
 
-These five curated examples come from the real test split. PyTorch predicts the boxes, classes, and scores; OpenCV draws the overlays. All predictions at confidence **0.50 or above** are shown, including imperfect or overlapping detections. These are illustrative examples, not a replacement for the full test results.
+These four curated examples come from the real test split. PyTorch predicts the boxes, classes, and scores; OpenCV draws the overlays. All predictions at confidence **0.50 or above** are shown, including imperfect or overlapping detections. These are illustrative examples, not a replacement for the full test results.
 
 ### Classic shutters
 
@@ -90,10 +90,6 @@ These five curated examples come from the real test split. PyTorch predicts the 
 ### Horizontal shutters
 
 ![Horizontal slatted shutters with individual OpenCV detection overlays](shutter-detector/horizontal.jpg)
-
-### Vertical shutters
-
-![Green vertical shutters with model predictions, including overlapping detections](shutter-detector/vertical.jpg)
 
 ## Outcome
 
