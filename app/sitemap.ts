@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getProjects } from "@/lib/vault/load";
 import { languageAlternates, localePath } from "@/lib/i18n";
-import { getSiteUrl, isPetProjectsEnabled } from "@/lib/site-url";
+import { getSiteUrl } from "@/lib/site-url";
 import { getWorkSlugs } from "@/lib/work";
 
 function sitemapEntry(path = ""): MetadataRoute.Sitemap[number] {
@@ -24,15 +24,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     sitemapEntry(),
     sitemapEntry("/work"),
     ...getWorkSlugs().map((slug) => sitemapEntry(`/work/${slug}`)),
+    sitemapEntry("/projects"),
+    ...getProjects()
+      .filter((project) => project.stage !== "nda")
+      .map((project) => sitemapEntry(`/projects/${project.slug}`)),
   ];
-
-  if (isPetProjectsEnabled()) {
-    entries.push(sitemapEntry("/projects"));
-    for (const project of getProjects()) {
-      if (project.stage === "nda") continue;
-      entries.push(sitemapEntry(`/projects/${project.slug}`));
-    }
-  }
 
   return entries;
 }

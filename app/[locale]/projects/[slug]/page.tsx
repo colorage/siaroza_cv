@@ -16,7 +16,6 @@ import {
   type Dictionary,
   type Locale,
 } from "@/lib/i18n";
-import { isPetProjectsEnabled } from "@/lib/site-url";
 import { pageMetadata } from "@/lib/metadata";
 
 type Props = {
@@ -125,7 +124,6 @@ function ProjectMediaBlock({
 }
 
 export function generateStaticParams() {
-  if (!isPetProjectsEnabled()) return [];
   return locales.flatMap((locale) =>
     getProjects()
       .filter((project) => project.stage !== "nda")
@@ -134,7 +132,6 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  if (!isPetProjectsEnabled()) return {};
   const { locale: localeParam, slug } = await params;
   if (!isLocale(localeParam)) return {};
   const locale = localeParam as Locale;
@@ -149,7 +146,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProjectPage({ params }: Props) {
-  if (!isPetProjectsEnabled()) notFound();
   const { locale: localeParam, slug } = await params;
   if (!isLocale(localeParam)) notFound();
   const locale = localeParam as Locale;

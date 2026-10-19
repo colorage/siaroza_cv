@@ -6,7 +6,6 @@ import { PortfolioGrid } from "@/components/PortfolioGrid";
 import { ProjectsGrid } from "@/components/ProjectsGrid";
 import { getFeaturedPortfolio, getFeaturedProjects } from "@/lib/vault/load";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
-import { isPetProjectsEnabled } from "@/lib/site-url";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -22,17 +21,15 @@ export default async function HomePage({ params }: Props) {
     <>
       <Hero dict={dict} />
       <CaseStudiesIndex locale={locale} dict={dict} />
-      {isPetProjectsEnabled() ? (
-        <ProjectsGrid
-          locale={locale}
-          dict={dict}
-          items={getFeaturedProjects()}
-          heading={dict.projects.heading}
-          id="projects"
-          seeAllHref={`/${locale}/projects`}
-          seeAllLabel={dict.projects.seeAll}
-        />
-      ) : null}
+      <ProjectsGrid
+        locale={locale}
+        dict={dict}
+        items={getFeaturedProjects()}
+        heading={dict.projects.heading}
+        id="projects"
+        seeAllHref={`/${locale}/projects`}
+        seeAllLabel={dict.projects.seeAll}
+      />
       <ExperienceTimeline locale={locale} dict={dict} />
       <PortfolioGrid
         locale={locale}

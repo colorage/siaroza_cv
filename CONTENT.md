@@ -18,7 +18,7 @@ Prefer the type the user named. Otherwise:
 | Deep process, constraints, outcomes, “how we got there” | **Case study** |
 | Personal / side product, existing pet-project slug | **Pet project** |
 
-Home is five blocks: Hero, Case studies, three featured pet projects, collapsed Experience, three featured portfolio shots. Full grids live at `/{locale}/work` and `/{locale}/projects`. Pet projects stay preview-gated.
+Home is five blocks: Hero, Case studies, three featured pet projects, collapsed Experience, three featured portfolio shots. Full grids live at `/{locale}/work` and `/{locale}/projects`.
 
 Featured lists: [`featuredPortfolioSlugs`](lib/vault/load.ts), [`featuredProjectSlugs`](lib/vault/load.ts), [`featuredExperienceIds`](lib/vault/load.ts). New items go in the vault; only add them to a featured list when they should appear on home.
 
@@ -64,7 +64,6 @@ Slugs: lowercase kebab-case, ASCII, stable. Reuse an existing pet-project slug w
 - **Summarize.** Do not dump source text onto the page. Keep original article URLs as citations / further reading.
 - **Media lives in the vault note folder.** Download images next to the note. The site serves them at `/media/...`. Do not hotlink Dribbble, OG images, or CDNs. YouTube is the only embed exception (privacy-enhanced iframe). Do not put editorial media in `public/` (CV PDF and hero stills stay there).
 - **NDA:** if `stage === "nda"` (or the user says it is confidential), no public detail route, no extracted media, no quotes from the source, no public widgets. Grid card stays private (ASCII noise pattern).
-- **Pet projects** stay preview-only until [`lib/site-url.ts`](lib/site-url.ts) changes. Do not leak them onto production.
 - **Visual language:** `max-w-5xl` for site chrome, reading columns, and media wells (case studies, portfolio, pet projects). Body images, galleries, widgets, and Mermaid share that column. Default body images fill the column (`w-full`). A markdown title of `"fit"` (`![alt](file.png "fit")`) keeps the asset at its intrinsic size on desktop, centered in the reading column — it still shrinks on narrow viewports, never upscales. `rounded-2xl`, `border-border`, Geist, `text-muted` / `text-foreground`. Prefer scroll-snap over a carousel library.
 - **Missing UI:** implement the primitive in the same PR. Do not leave “TODO: add carousel later.”
 
@@ -81,7 +80,7 @@ Slugs: lowercase kebab-case, ASCII, stable. Reuse an existing pet-project slug w
 | [`public/cv/`](public/cv/) | CV PDF |
 | [`app/[locale]/work/page.tsx`](app/[locale]/work/page.tsx) | Full portfolio archive |
 | [`app/[locale]/work/[slug]/page.tsx`](app/[locale]/work/[slug]/page.tsx) | Shared portfolio + case-study detail |
-| [`app/[locale]/projects/page.tsx`](app/[locale]/projects/page.tsx) | Full pet-project archive (preview-gated) |
+| [`app/[locale]/projects/page.tsx`](app/[locale]/projects/page.tsx) | Full pet-project archive |
 | [`app/[locale]/projects/[slug]/page.tsx`](app/[locale]/projects/[slug]/page.tsx) | Pet-project detail |
 | [`app/media/[...path]/route.ts`](app/media/[...path]/route.ts) | Vault binary serving |
 
@@ -275,5 +274,5 @@ Match [`ProjectsGrid`](components/ProjectsGrid.tsx) and the pet-project detail p
 4. Agent-improve EN, then write `{slug}.by.md`. Fill effort + Mermaid for case studies.
 5. Implement any missing media/route/nav/widget primitive in this change.
 6. Confirm the loader picks it up (home grid + detail). Add a logo for pet projects. Leave featured lists unchanged unless the item should appear on home.
-7. Honor NDA and preview-only pet projects. Do not commit secrets or confidential PDFs.
+7. Honor NDA. Do not commit secrets or confidential PDFs.
 8. Scan the page against existing spacing, type, and chrome before finishing.

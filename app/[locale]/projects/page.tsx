@@ -4,7 +4,6 @@ import { ProjectsGrid } from "@/components/ProjectsGrid";
 import { getSortedProjects } from "@/lib/vault/load";
 import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/metadata";
-import { isPetProjectsEnabled } from "@/lib/site-url";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -15,7 +14,6 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  if (!isPetProjectsEnabled()) return {};
   const { locale: localeParam } = await params;
   if (!isLocale(localeParam)) return {};
   const locale = localeParam as Locale;
@@ -29,7 +27,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProjectsIndexPage({ params }: Props) {
-  if (!isPetProjectsEnabled()) notFound();
   const { locale: localeParam } = await params;
   if (!isLocale(localeParam)) notFound();
   const locale = localeParam as Locale;

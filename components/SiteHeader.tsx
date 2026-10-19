@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { htmlLang, locales, type Dictionary, type Locale } from "@/lib/i18n";
-import { isPetProjectsEnabled } from "@/lib/site-url";
 
 type Props = {
   locale: Locale;
@@ -51,14 +50,12 @@ export function SiteHeader({ locale, dict }: Props) {
           >
             {dict.nav.caseStudies}
           </Link>
-          {isPetProjectsEnabled() ? (
-            <Link
-              href={`/${locale}/projects`}
-              className="shrink-0 whitespace-nowrap transition-colors hover:text-foreground"
-            >
-              {dict.nav.projects}
-            </Link>
-          ) : null}
+          <Link
+            href={`/${locale}/projects`}
+            className="shrink-0 whitespace-nowrap transition-colors hover:text-foreground"
+          >
+            {dict.nav.projects}
+          </Link>
           <Link
             href={`/${locale}#experience`}
             className="shrink-0 transition-colors hover:text-foreground"
