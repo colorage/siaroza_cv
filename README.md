@@ -1,6 +1,6 @@
 # Siaroža CV
 
-Personal CV / portfolio site for Siarhiej Piechcieraǔ (Siaroža) — Design Engineer.
+Personal CV / portfolio site for Siarhiej Piechcieraǔ (Siaroža) — Creative Generalist.
 
 **Live:** [siaroza.com](https://siaroza.com)  
 **Preview:** [preview.siaroza.com](https://preview.siaroza.com)

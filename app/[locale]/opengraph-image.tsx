@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
 
-export const alt = "Siaroža — Design Engineer";
+export const alt = "Siaroža — Creative Generalist";
 export const size = {
   width: 1200,
   height: 630,
