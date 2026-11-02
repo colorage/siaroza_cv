@@ -3,7 +3,7 @@ type: experience
 id: spribe
 order: 0
 start: Apr 2024
-end: Now
+end: Sep 2026
 company: SPRIBE
 needs_translation: false
 locale: by
